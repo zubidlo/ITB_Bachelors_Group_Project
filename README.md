@@ -1,6 +1,8 @@
 Fantasy_Hurling
 ===============
 
-Fantasy Hurling Application for project skills
+Group Project
 
-Project skills stuff for Davi Kelly, Michael  James & Martin Zubar
+Davi Kelly, Michael James & Martin Zubar
+
+There are some README!.txt files around the directories
