@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Data_Admin</title>
+	<link rel="stylesheet" href="../css/data_admin.css">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/data_admin.js"></script>
+</head>
+<body>
+	
+	<!-- here got messages and tables injected -->
+	<div id="output_div"></div>
+
+	<!-- get all users form -->
+	<p>
+		<form action="#">
+			<input id="get_all_users" type="button" value="get all users">
+		</form>
+	</p>
+
+	<!-- get a user form -->
+	<p>
+		<form action="#">
+			<label for="get_user_id">ID:</label>
+			<input id="get_user_id" type="number" name="user id" value="0">
+			<input id="get_user_by_id" type="button" value="get user by id">
+			
+			<label for="get_user_username">Username:</label>
+			<input id="get_user_username" type="text" name="user name" value="">
+			<input id="get_a_user_username" type="button" value="get user by username">
+		</form>
+	</p>
+
+	<p>
+		<form action="#">
+			<!--<label for="id_input">Id:</label>
+			<input id="id_input" type="text" name="Id" readonly />-->
+			<label for="first_name_input">First Name:</label>
+			<input id="first_name_input" type="text" name="First Name" />
+			<label for="last_name_input">Last Name:</label>
+			<input id="last_name_input" type="text" name="Last Name" />
+			<label for="username_input">Username:</label>
+			<input id="username_input" type="text" name="Username" />
+			<label for="password_input">Password:</label>
+			<input id="password_input" type="text" name="Password" />
+			<label for="email_input">Email:</label>
+			<input id="email_input" type="text" name="Email" />
+			<input id="post_new_user" type="button" value="create new user">
+			<input id="edit_a_user" type="button" value="update this user">
+			<input id="delete_a_user" type="button" value="delete this user">
+		</form>
+	</p>
+</body>
+</html>
