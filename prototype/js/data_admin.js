@@ -127,9 +127,8 @@ $(document).ready(function() {
         	error : function (request, textStatus, errorThrown) {
         		
         		printError(textStatus, errorThrown);
-        		clearUserTextFields
-        ();
-        	}
+        		clearUserTextFields();
+           	}
 		});
 	}
 
@@ -137,8 +136,7 @@ $(document).ready(function() {
 	$('#get_all_users').on('click', function(event){
 		
 		getAllUsers();
-		clearUserTextFields
-();
+		clearUserTextFields();
 
 	});
 
@@ -160,9 +158,8 @@ $(document).ready(function() {
         	error : function (request, textStatus, errorThrown) {
         		
         		printError(textStatus, errorThrown);
-        		clearUserTextFields
-        ();
-        	}
+        		clearUserTextFields();
+           	}
 		});
 
 	});
@@ -182,14 +179,12 @@ $(document).ready(function() {
             success: function (data) {
             	
             	getAllUsers();
-            	clearUserTextFields
-           ();
+            	clearUserTextFields();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
         		printError(textStatus, errorThrown);
-        		clearUserTextFields
-        ();
+        		clearUserTextFields();
         	}
 		});
 
@@ -216,8 +211,7 @@ $(document).ready(function() {
         	error : function (request, textStatus, errorThrown) {
         		
         		printError(textStatus, errorThrown);
-        		clearUserTextFields
-        ();
+        		clearUserTextFields();
         	}
 		});
 
@@ -237,13 +231,11 @@ $(document).ready(function() {
             success: function (data) {
             	
             	getAllUsers();
-            	clearUserTextFields
-           ();
+            	clearUserTextFields();
         	},
         	error : function (request, textStatus, errorThrown) {
         		printError(textStatus, errorThrown);
-        		clearUserTextFields
-        ();
+        		clearUserTextFields();
         	}
 		});
 
@@ -266,8 +258,7 @@ $(document).ready(function() {
         	},
         	error : function (request, textStatus, errorThrown) {
         		printError(textStatus, errorThrown);
-        		clearUserTextFields
-        ();
+        		clearUserTextFields();
         	}
 		});
 
