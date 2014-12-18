@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<!-- here got user messages and tables injected -->
+	<!-- here got user tables injected -->
 	<div id="user_output_div"></div>
 	
 	<p>
@@ -42,7 +42,7 @@
 		</form>
 	</p>
 
-	<!-- here got team messages and tables injected -->
+	<!-- here got team tables injected -->
 	<div id="team_output_div"></div>
 	
 	<p>
@@ -62,6 +62,27 @@
 			<input id="post_new_team" type="button" value="create new team">
 			<input id="edit_a_team" type="button" value="update this team">
 			<input id="delete_a_team" type="button" value="delete this team">
+		</form>
+	</p>
+
+	<!-- here got player type tables injected -->
+	<div id="player_type_output_div"></div>
+	
+	<p>
+		<form action="#">
+			<label for="get_player_type_id">Player Type Id:</label>
+			<input id="get_player_type_id" type="number" name="player_type id" value="0">
+			<input id="get_player_type_by_id" type="button" value="get player type by id">
+		</form>
+	</p>
+
+	<p>
+		<form action="#">
+			<label for="player_type_name_input">Player Type Name:</label>
+			<input id="player_type_name_input" type="text" name="Player Type Name" />
+			<input id="post_new_player_type" type="button" value="create new player type">
+			<input id="edit_a_player_type" type="button" value="update this player type">
+			<input id="delete_a_player_type" type="button" value="delete this player type">
 		</form>
 	</p>
 

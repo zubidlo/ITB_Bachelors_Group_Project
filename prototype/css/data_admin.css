@@ -1,10 +1,14 @@
+body {
+	background-color: #fafaaa;
+}
+
 td, th {
 	border: 1px solid #999;
   	padding: 0.5rem;
 }
 
 th {
-	background-color: lightblue;
+	background-color: #888888;
     color: white;
 }
 
@@ -12,7 +16,8 @@ td {
 	text-align: right;
 }
 
-table, form, input  {
+table, form, input {
+	background-color: white;
 	background: -webkit-gradient(linear, bottom, left 175px, from(#CCCCCC), to(#EEEEEE));
 	background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
 	margin:auto;
@@ -41,5 +46,5 @@ input {
 }
 
 form {
-	width: 60%;
+	width: 80%;
 }
