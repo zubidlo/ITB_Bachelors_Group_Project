@@ -8,6 +8,7 @@
 	<script src="../js/data_admin.js"></script>
 </head>
 <body>
+	<p>Users</p>
 	<!-- here got user tables injected -->
 	<div id="user_output_div"></div>
 	<form action="#">
@@ -34,6 +35,7 @@
 		<input id="edit_a_user" type="button" value="update this user">
 		<input id="delete_a_user" type="button" value="delete this user">
 	</form>
+	<p>Teams</p>
 	<!-- here got team tables injected -->
 	<div id="team_output_div"></div>
 	<form action="#">
@@ -50,6 +52,7 @@
 		<input id="edit_a_team" type="button" value="update this team">
 		<input id="delete_a_team" type="button" value="delete this team">
 	</form>
+	<p>Player Types</p>
 	<!-- here got player type tables injected -->
 	<div id="player_type_output_div"></div>
 	<form action="#">
@@ -64,7 +67,8 @@
 		<input id="edit_a_player_type" type="button" value="update this player type">
 		<input id="delete_a_player_type" type="button" value="delete this player type">
 	</form>
-		<!-- here got statistics tables injected -->
+	<p>Statistics</p>
+	<!-- here got statistics tables injected -->
 	<div id="statistics_output_div"></div>
 	<form action="#">
 		<label for="get_statistics_id">Statistics Id:</label>
@@ -80,6 +84,7 @@
 		<input id="edit_a_statistics" type="button" value="update this statistics">
 		<input id="delete_a_statistics" type="button" value="delete this statistics">
 	</form>
+	<p>Players</p>
 	<!-- here got player tables injected -->
 	<div id="players_output_div"></div>
 	<form action="#">
@@ -105,6 +110,23 @@
 		<input id="post_new_player" type="button" value="create new player">
 		<input id="edit_a_player" type="button" value="update this player">
 		<input id="delete_a_player" type="button" value="delete this player">
+	</form>
+	<p>Players in Teams</p>
+	<!-- here got player in team tables injected -->
+	<div id="playerInTeam_output_div"></div>
+	<form action="#">
+		<label for="get_playerInTeam_id">Player in Team Id:</label>
+		<input id="get_playerInTeam_id" type="number" name="playerInTeam id" value="0">
+		<input id="get_playerInTeam_by_id" type="button" value="get Player In Team by id">
+	</form>
+	<form action="#">
+		<label for="playerId_input">Player Id:</label>
+		<input id="playerId_input" type="number" name="Player Id" value="0" />
+		<label for="teamId_input">Team Id:</label>
+		<input id="teamId_input" type="number" name="Team Id" value="0" />
+		<input id="post_new_playerInTeam" type="button" value="create new player in team">
+		<input id="edit_a_playerInTeam" type="button" value="update this player in team">
+		<input id="delete_a_playerInTeam" type="button" value="delete this player in team">
 	</form>
 </body>
 </html>

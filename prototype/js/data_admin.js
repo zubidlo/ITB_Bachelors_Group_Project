@@ -216,13 +216,14 @@ $(document).ready(function() {
 
 	function buildTeamTableRow(object) {
 	
+		//console.dir(object);
 		var row = '<tr>';
 		row += '<td>' + object.Id + '</td>';
 		row += '<td>' + object.Name + '</td>';
 		row += '<td>' + object.UserId + '</td>';
 		row += '<td>' + object.User.Username + '</td>';
 		row += '<td>';
-		for (var i = 0; i< object.PlayerInTeams.length; row += object.PlayerInTeams[i++].Name + '<br>');
+		for (var i = 0; i< object.PlayerInTeams.length; row += object.PlayerInTeams[i++].Player.LastName + '<br>');
 		row += '</td>';
 		row += '</tr>';
 		return row;
@@ -520,7 +521,7 @@ $(document).ready(function() {
 
 	function buildStatisticsTableRow(object) {
 
-		console.dir(object);
+		//console.dir(object);
 		var row = '<tr>';
 		row += '<td>' + object.Id + '</td>';
 		row += '<td>' + object.Goals + '</td>';
@@ -761,8 +762,10 @@ $(document).ready(function() {
             success: function (data) {
             	
             	getAllPlayers();
+            	getAllTeams();
             	getAllPlayerTypes();
             	getAllStatistics();
+            	getAllPlayerInTeam();
             	clearPlayersTextFields();
         	},
         	error : function (request, textStatus, errorThrown) {
@@ -811,8 +814,10 @@ $(document).ready(function() {
             success: function (data) {
             	
             	getAllPlayers();
+            	getAllTeams();
             	getAllPlayerTypes();
             	getAllStatistics();
+            	getAllPlayerInTeam();
             	clearStatisticsTextFields();
         	},
         	error : function (request, textStatus, errorThrown) {
@@ -831,8 +836,10 @@ $(document).ready(function() {
             success: function (data) {
             	
             	getAllPlayers();
+            	getAllTeams();
             	getAllPlayerTypes();
             	getAllStatistics();
+            	getAllPlayerInTeam();
             	clearStatisticsTextFields();
         	},
         	error : function (request, textStatus, errorThrown) {
@@ -842,4 +849,156 @@ $(document).ready(function() {
 		});
 	});
 
+	function buildPlayerInTeamRow(object) {
+
+		var row = '<tr>';
+		row += '<td>' + object.Id + '</td>';
+		row += '<td>' + object.PlayerId + '</td>';
+		row += '<td>' + object.Player.LastName + '</td>';
+		row += '<td>' + object.TeamId + '</td>';
+		row += '<td>' + object.Team.Name + '</td>';
+		row += '</tr>';
+		return row;
+	}
+
+	function putPlayerInTeamInTable(data) {
+
+		var table = '<table>';
+		table += buildTableHeaders(['Id', 'Player Id','Player Last Name', 'Team Id','Team Name']);
+		if($.isArray(data)) {
+
+			$.each(data, function(index, value) {
+				
+				table += buildPlayerInTeamRow(value);
+			});
+		}
+		else {
+			table += buildPlayerInTeamRow(value);
+		}
+		
+		table += '</table>';
+		$('#playerInTeam_output_div').empty().append(table);
+	}
+
+	function getAllPlayerInTeam() {
+
+		$.ajax({
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/PlayerInTeams',
+            dataType: 'json',
+            success: function (data) {
+            	
+            	putPlayerInTeamInTable(data);
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+           	}
+		});
+	}
+
+	getAllPlayerInTeam();
+
+	function readPlayerInTeamFromInputFields() {
+
+		var playerInTeam = {
+			Id : $('#get_playerInTeam_id').val(),
+			PlayerId : $('#playerId_input').val(),
+			TeamId : $('#teamId_input').val()
+		}
+		return playerInTeam;
+	}
+
+	function clearPlayerInTeamTextFields() {
+
+		$('#get_playerInTeam_id').val(0);
+		$('#playerId_input').val(0);
+		$('#teamId_input').val(0);
+	}
+
+	$('#post_new_playerInTeam').on('click', function(event){
+		
+		$.ajax({
+            type: 'POST',
+            url: 'http://fantasyhurling.azurewebsites.net/api/PlayerInTeams',
+            data: readPlayerInTeamFromInputFields(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllPlayerInTeam();
+            	getAllPlayers();
+            	getAllTeams();
+            	clearPlayerInTeamTextFields();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}
+		});
+	});
+
+	function fillPlayerInTeamTextFields(object) {
+
+		$('#get_playerInTeam_id').val(object.Id);
+		$('#playerId_input').val(object.PlayerId);
+		$('#teamId_input').val(object.TeamId);
+	}
+
+	$('#get_playerInTeam_by_id').on('click', function(event) {
+		
+		$.ajax({
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/PlayerInTeams/' + $('#get_playerInTeam_id').val(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	fillPlayerInTeamTextFields(data);
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+           	}
+		});
+	});
+
+	$('#edit_a_playerInTeam').on('click', function(event){
+		
+		$.ajax({
+            type: 'PUT',
+            url: 'http://fantasyhurling.azurewebsites.net/api/PlayerInTeams/' + $('#get_playerInTeam_id').val(),
+            data: readPlayerInTeamFromInputFields(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllPlayerInTeam();
+            	getAllPlayers();
+            	getAllTeams();
+            	clearPlayerInTeamTextFields();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}
+		});
+	});
+
+	$('#delete_a_playerInTeam').on('click', function(event){
+		
+		$.ajax({
+            type: 'DELETE',
+            url: 'http://fantasyhurling.azurewebsites.net/api/PlayerInTeams/' + $('#get_playerInTeam_id').val(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllPlayerInTeam();
+            	getAllPlayers();
+            	getAllTeams();
+            	clearPlayerInTeamTextFields();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}	
+		});
+	});
 });
