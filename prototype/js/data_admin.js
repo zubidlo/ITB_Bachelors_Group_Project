@@ -1,14 +1,5 @@
 $(document).ready(function() {
 
-	function printError(status, errorMessage) {
-		//console.log(status);
-		//console.log(errorMessage);
-
-		//empty output div and append error message to it
-		$("#output_div").empty().append(status + ": " + errorMessage);
-
-	}
-	
 	function buildUserTableHeaders() {
 
 		var headers = "<tr>";
@@ -32,7 +23,11 @@ $(document).ready(function() {
 		row += '<td>' + object.Username + '</td>';
 		row += '<td>' + object.Password + '</td>';
 		row += '<td>' + object.Email + '</td>';
-		row += '<td>' + object.Teams + '</td>';
+		row += '<td>';
+		for (var i = 0; i< object.Teams.length; i++) {
+			row += object.Teams[i].Name + '<br>';
+		}
+		row += '</td>';
 		row += '</tr>';
 		return row;
 	}
@@ -66,7 +61,7 @@ $(document).ready(function() {
 		table += '</table>';
 
 		//empty output div and append a new table to it
-		$('#output_div').empty().append(table);
+		$('#user_output_div').empty().append(table);
 
 	}
 
@@ -110,55 +105,42 @@ $(document).ready(function() {
 		return user;
 	}
 
-
 	function getAllUsers() {
 
-		var _type = 'GET';
-		var _url = 'http://fantasyhurling.azurewebsites.net/api/Users';
-
 		$.ajax({
-            type: _type,
-            url: _url,
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Users',
             dataType: 'json',
             success: function (data) {
             	
             	putUsersInTable(data);
+            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		printError(textStatus, errorThrown);
-        		clearUserTextFields();
+        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
            	}
 		});
 	}
 
 	//get all users request
-	$('#get_all_users').on('click', function(event){
-		
-		getAllUsers();
-		clearUserTextFields();
-
-	});
+	getAllUsers();
 
 	//get user by id request
-	$('#get_user_by_id').on('click', function(event){
+	$('#get_user_by_id').on('click', function(event) {
 		
-		var _type = 'GET';
-		var user_id = $('#get_user_id').val();
-		var _url = 'http://fantasyhurling.azurewebsites.net/api/Users/' + user_id;
-
 		$.ajax({
-            type: _type,
-            url: _url,
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Users/' + $('#get_user_id').val(),
             dataType: 'json',
             success: function (data) {
             	
             	fillUserTextFields(data);
+            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
-        		
-        		printError(textStatus, errorThrown);
-        		clearUserTextFields();
+
+        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown);
            	}
 		});
 
@@ -167,51 +149,43 @@ $(document).ready(function() {
 	//insert new user request
 	$('#post_new_user').on('click', function(event){
 		
-		var _type = 'POST';
-		var _user = readUserFromInputFields();
-		var _url = 'http://fantasyhurling.azurewebsites.net/api/Users/';
-
 		$.ajax({
-            type: _type,
-            url: _url,
-            data: _user,
+            type: 'POST',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Users',
+            data: readUserFromInputFields(),
             dataType: 'json',
             success: function (data) {
             	
             	getAllUsers();
             	clearUserTextFields();
+            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		printError(textStatus, errorThrown);
-        		clearUserTextFields();
+        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
 	});
 
 
-	//edit a user
+	//edit a user request
 	$('#edit_a_user').on('click', function(event){
 		
-		var _type = 'PUT';
-		var user_id = $('#get_user_id').val();
-		var _user = readUserFromInputFields();
-		var _url = 'http://fantasyhurling.azurewebsites.net/api/Users/' + user_id;
-
 		$.ajax({
-            type: _type,
-            url: _url,
-            data: _user,
+            type: 'PUT',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Users/' + $('#get_user_id').val(),
+            data: readUserFromInputFields(),
             dataType: 'json',
             success: function (data) {
             	
             	getAllUsers();
+            	clearUserTextFields();
+            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		printError(textStatus, errorThrown);
-        		clearUserTextFields();
+        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
@@ -220,22 +194,19 @@ $(document).ready(function() {
 	//delete a user request
 	$('#delete_a_user').on('click', function(event){
 		
-		var _type = 'DELETE';
-		var user_id = $('#get_user_id').val();
-		var _url = 'http://fantasyhurling.azurewebsites.net/api/Users/' + user_id;
-
 		$.ajax({
-            type: _type,
-            url: _url,
+            type: 'DELETE',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Users/' + $('#get_user_id').val(),
             dataType: 'json',
             success: function (data) {
             	
             	getAllUsers();
             	clearUserTextFields();
+            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
-        		printError(textStatus, errorThrown);
-        		clearUserTextFields();
+        		
+        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
@@ -244,21 +215,200 @@ $(document).ready(function() {
 	//get a user by username
 	$('#get_a_user_username').on('click', function(event){
 		
-		var _type = 'GET';
-		var user_name = $('#get_user_username').val();
-		var _url = 'http://fantasyhurling.azurewebsites.net/api/Users/Username/' + user_name;
-
 		$.ajax({
-            type: _type,
-            url: _url,
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Users/Username/' + $('#get_user_username').val(),
             dataType: 'json',
             success: function (data) {
             	
             	fillUserTextFields(data);
+            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
-        		printError(textStatus, errorThrown);
-        		clearUserTextFields();
+        		
+        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}
+		});
+
+	});
+
+	function buildTeamTableHeaders() {
+
+		var headers = "<tr>";
+		headers += "<th>Id</th>";
+		headers += "<th>Name</th>";
+		headers += "<th>User Id</th>";
+		headers += "<th>Usename</th>";
+		headers += "<th>Players in team</th>";
+		headers += "</tr>";
+		return headers;
+	}
+
+	function buildTeamTableRow(object) {
+	
+		var row = '<tr>';
+		row += '<td>' + object.Id + '</td>';
+		row += '<td>' + object.Name + '</td>';
+		row += '<td>' + object.UserId + '</td>';
+		row += '<td>' + object.User.Username + '</td>';
+		row += '<td>';
+		for (var i = 0; i< object.PlayerInTeams.length; i++) {
+			row += object.PlayerInTeams[i].Name + '<br>';
+		}
+		row += '</td>';
+		row += '</tr>';
+		return row;
+	}
+
+	function readTeamFromInputFields() {
+
+		var team = {
+			Id : $('#get_team_id').val(),
+			Name : $('#team_name_input').val(),
+			UserId : $('#team_user_id_input').val()
+		};
+
+		return team;
+	}
+
+	function putTeamsInTable(data) {
+		
+		var table = '<table>';
+		table += buildTeamTableHeaders();
+		if($.isArray(data)) {
+
+			$.each(data, function(index, value) {
+				
+				//console.dir(value);
+				table += buildTeamTableRow(value);
+			});
+		}
+		else {
+			table += buildTeamTableRow(data);
+		}
+		
+		table += '</table>';
+		$('#team_output_div').empty().append(table);
+	}
+
+	function clearTeamTextFields() {
+
+		$('#get_team_id').val(0);
+		$('#team_name_input').val('');
+		$('#team_user_id_input').val(0);
+	}
+
+	function fillTeamTextFields(object) {
+
+		$('#get_team_id').val(object.Id);
+		$('#team_name_input').val(object.Name);
+		$('#team_user_id_input').val(object.UserId);
+	}
+
+	function getAllTeams() {
+
+		$.ajax({
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Teams',
+            dataType: 'json',
+            success: function (data) {
+            	
+            	putTeamsInTable(data);
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+           	}
+		});
+	}
+
+	//get all teams request
+	getAllTeams();
+
+	//insert new team request
+	$('#post_new_team').on('click', function(event){
+		
+		$.ajax({
+            type: 'POST',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Teams',
+            data: readTeamFromInputFields(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllTeams();
+            	getAllUsers();
+            	clearTeamTextFields();
+            	$("#Team_error_div").empty();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}
+		});
+
+	});
+
+	//get team by id request
+	$('#get_team_by_id').on('click', function(event) {
+		
+		$.ajax({
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Teams/' + $('#get_team_id').val(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	fillTeamTextFields(data);
+            	$("#Team_error_div").empty();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+           	}
+		});
+
+	});
+
+	//delete a team request
+	$('#delete_a_team').on('click', function(event){
+		
+		$.ajax({
+            type: 'DELETE',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Teams/' + $('#get_team_id').val(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllTeams();
+            	getAllUsers();
+            	clearUserTextFields();
+            	$("#Team_error_div").empty()
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}	
+		});
+
+	});
+
+
+	//edit a team request
+	$('#edit_a_team').on('click', function(event){
+		
+		$.ajax({
+            type: 'PUT',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Teams/' + $('#get_team_id').val(),
+            data: readTeamFromInputFields(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllTeams();
+            	getAllUsers();
+            	clearTeamTextFields();
+            	$("#Team_error_div").empty();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+
+        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 

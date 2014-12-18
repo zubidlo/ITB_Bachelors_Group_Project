@@ -9,19 +9,13 @@
 </head>
 <body>
 	
-	<!-- here got messages and tables injected -->
-	<div id="output_div"></div>
-
-	<!-- get all users form -->
-	<p>
-		<form action="#">
-			<input id="get_all_users" type="button" value="get all users">
-		</form>
-	</p>
+	<!-- here got user messages and tables injected -->
+	<div id="user_output_div"></div>
+	<div id="user_error_div"></div>
 
 	<p>
 		<form action="#">
-			<label for="get_user_id">ID:</label>
+			<label for="get_user_id">User Id:</label>
 			<input id="get_user_id" type="number" name="user id" value="0">
 			<input id="get_user_by_id" type="button" value="get user by id">
 			
@@ -33,8 +27,6 @@
 
 	<p>
 		<form action="#">
-			<!--<label for="id_input">Id:</label>
-			<input id="id_input" type="text" name="Id" readonly />-->
 			<label for="first_name_input">First Name:</label>
 			<input id="first_name_input" type="text" name="First Name" />
 			<label for="last_name_input">Last Name:</label>
@@ -50,5 +42,30 @@
 			<input id="delete_a_user" type="button" value="delete this user">
 		</form>
 	</p>
+
+	<!-- here got team messages and tables injected -->
+	<div id="team_output_div"></div>
+	<div id="team_error_div"></div>
+
+	<p>
+		<form action="#">
+			<label for="get_team_id">Team Id:</label>
+			<input id="get_team_id" type="number" name="team id" value="0">
+			<input id="get_team_by_id" type="button" value="get team by id">
+		</form>
+	</p>
+
+	<p>
+		<form action="#">
+			<label for="team_name_input">Team Name:</label>
+			<input id="team_name_input" type="text" name="Team Name" />
+			<label for="team_user_id_input">User Id:</label>
+			<input id="team_user_id_input" type="number" name="User Id" value="0"/>
+			<input id="post_new_team" type="button" value="create new team">
+			<input id="edit_a_team" type="button" value="update this team">
+			<input id="delete_a_team" type="button" value="delete this team">
+		</form>
+	</p>
+
 </body>
 </html>
