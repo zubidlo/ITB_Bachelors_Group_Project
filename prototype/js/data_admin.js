@@ -378,7 +378,7 @@ $(document).ready(function() {
 		row += '<td>' + object.Id + '</td>';
 		row += '<td>' + object.Name + '</td>';
 		row += '<td>';
-		for (var i = 0; i < object.Players.length; row += object.Players[i++].Name + '<br>');
+		for (var i = 0; i < object.Players.length; row += object.Players[i++].LastName + '<br>');
 		row += '</td>';
 		row += '</tr>';
 		return row;
@@ -518,5 +518,156 @@ $(document).ready(function() {
 		});
 	});
 
+	function buildStatisticsTableRow(object) {
+
+		//console.dir(object);
+		var row = '<tr>';
+		row += '<td>' + object.Id + '</td>';
+		row += '<td>' + object.Goals + '</td>';
+		row += '<td>' + object.Assists + '</td>';
+		row += '<td>';
+		for (var i = 0; i < object.Players.length; row += object.Players[i++].LastName + '<br>');
+		row += '</td>';
+		row += '</tr>';
+		return row;
+	}
+
+	function putStatisticsInTable(data) {
+
+		//console.dir(data);
+		var table = '<table>';
+		table += buildTableHeaders(['Id', 'Goals', 'Assists', 'Players Name']);
+		if($.isArray(data)) {
+
+			$.each(data, function(index, value) {
+				
+				//console.dir(value);
+				table += buildStatisticsTableRow(value);
+			});
+		}
+		else {
+			table += buildStatisticsTableRow(value);
+		}
+		
+		table += '</table>';
+		$('#statistics_output_div').empty().append(table);
+	}
+
+	function getAllStatistics() {
+
+		$.ajax({
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Statistics',
+            dataType: 'json',
+            success: function (data) {
+            	
+            	putStatisticsInTable(data);
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+           	}
+		});
+	}
+
+	getAllStatistics();
+
+	function readStatisticsFromInputFields() {
+
+		var statistics = {
+			Id : $('#get_statistics_id').val(),
+			Goals : $('#statistics_goals_input').val(),
+			Assists : $('#statistics_assists_input').val()
+		};
+		return statistics;
+	}
+
+
+	function clearStatisticsTextFields() {
+
+		$('#get_statistics_id').val(0);
+		$('#statistics_goals_input').val(0);
+		$('#statistics_assists_input').val('');
+	}
+
+	$('#post_new_statistics').on('click', function(event){
+		
+		$.ajax({
+            type: 'POST',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Statistics',
+            data: readStatisticsFromInputFields(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllStatistics();
+            	clearStatisticsTextFields();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}
+		});
+	});
+
+	function fillStatisticsTextFields(object) {
+
+		$('#get_statistics_id').val(object.Id);
+		$('#statistics_goals_input').val(object.Goals);
+		$('#statistics_assists_input').val(object.Assists);
+	}
+
+	$('#get_statistics_by_id').on('click', function(event) {
+		
+		$.ajax({
+            type: 'GET',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Statistics/' + $('#get_statistics_id').val(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	fillStatisticsTextFields(data);
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+           	}
+		});
+	});
+
+	$('#delete_a_statistics').on('click', function(event){
+		
+		$.ajax({
+            type: 'DELETE',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Statistics/' + $('#get_statistics_id').val(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllStatistics();
+            	clearStatisticsTextFields();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}	
+		});
+	});
+
+	$('#edit_a_statistics').on('click', function(event){
+		
+		$.ajax({
+            type: 'PUT',
+            url: 'http://fantasyhurling.azurewebsites.net/api/Statistics/' + $('#get_statistics_id').val(),
+            data: readStatisticsFromInputFields(),
+            dataType: 'json',
+            success: function (data) {
+            	
+            	getAllStatistics();
+            	clearStatisticsTextFields();
+        	},
+        	error : function (request, textStatus, errorThrown) {
+
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}
+		});
+	});
 
 });
