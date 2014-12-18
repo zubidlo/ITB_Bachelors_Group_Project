@@ -114,11 +114,10 @@ $(document).ready(function() {
             success: function (data) {
             	
             	putUsersInTable(data);
-            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
            	}
 		});
 	}
@@ -136,11 +135,10 @@ $(document).ready(function() {
             success: function (data) {
             	
             	fillUserTextFields(data);
-            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
 
-        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown);
+        		window.alert(textStatus + ": " + errorThrown);
            	}
 		});
 
@@ -158,11 +156,10 @@ $(document).ready(function() {
             	
             	getAllUsers();
             	clearUserTextFields();
-            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
@@ -181,11 +178,10 @@ $(document).ready(function() {
             	
             	getAllUsers();
             	clearUserTextFields();
-            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
@@ -202,11 +198,10 @@ $(document).ready(function() {
             	
             	getAllUsers();
             	clearUserTextFields();
-            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
@@ -222,11 +217,10 @@ $(document).ready(function() {
             success: function (data) {
             	
             	fillUserTextFields(data);
-            	$("#user_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#user_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
@@ -317,7 +311,7 @@ $(document).ready(function() {
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
            	}
 		});
 	}
@@ -338,11 +332,10 @@ $(document).ready(function() {
             	getAllTeams();
             	getAllUsers();
             	clearTeamTextFields();
-            	$("#Team_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
@@ -358,11 +351,10 @@ $(document).ready(function() {
             success: function (data) {
             	
             	fillTeamTextFields(data);
-            	$("#Team_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
            	}
 		});
 
@@ -380,11 +372,10 @@ $(document).ready(function() {
             	getAllTeams();
             	getAllUsers();
             	clearUserTextFields();
-            	$("#Team_error_div").empty()
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}	
 		});
 
@@ -404,11 +395,10 @@ $(document).ready(function() {
             	getAllTeams();
             	getAllUsers();
             	clearTeamTextFields();
-            	$("#Team_error_div").empty();
         	},
         	error : function (request, textStatus, errorThrown) {
 
-        		$("#team_error_div").empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
 
