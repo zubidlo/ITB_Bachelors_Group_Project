@@ -1,16 +1,11 @@
 $(document).ready(function() {
 
-	function buildUserTableHeaders() {
+	//return table row filled with headers from given array
+	function buildTableHeaders(headersNamesArray) {
 
-		var headers = "<tr>";
-		headers += "<th>Id</th>";
-		headers += "<th>First Name</th>";
-		headers += "<th>Last Name</th>";
-		headers += "<th>Username</th>";
-		headers += "<th>Password</th>";
-		headers += "<th>Email</th>";
-		headers += "<th>Teams</th>";
-		headers += "</tr>";
+		var headers = '<tr>';
+		for(var i = 0; i < headersNamesArray.length; headers += '<th>' + headersNamesArray[i++] + '</th>');
+		headers += '</tr>';
 		return headers;
 	}
 
@@ -24,9 +19,7 @@ $(document).ready(function() {
 		row += '<td>' + object.Password + '</td>';
 		row += '<td>' + object.Email + '</td>';
 		row += '<td>';
-		for (var i = 0; i< object.Teams.length; i++) {
-			row += object.Teams[i].Name + '<br>';
-		}
+		for (var i = 0; i< object.Teams.length; row += object.Teams[i++].Name + '<br>');
 		row += '</td>';
 		row += '</tr>';
 		return row;
@@ -38,7 +31,7 @@ $(document).ready(function() {
 
 		//make table with first table row with headers
 		var table = '<table>';
-		table += buildUserTableHeaders();
+		table += buildTableHeaders(['Id', 'First Name', 'Last Name', 'Username', 'Password', 'Email', 'Teams']);
 		
 		//if given data is an array:
 		if($.isArray(data)) {
@@ -105,6 +98,7 @@ $(document).ready(function() {
 		return user;
 	}
 
+	//get all users request
 	function getAllUsers() {
 
 		$.ajax({
@@ -122,7 +116,6 @@ $(document).ready(function() {
 		});
 	}
 
-	//get all users request
 	getAllUsers();
 
 	//get user by id request
@@ -141,7 +134,6 @@ $(document).ready(function() {
         		window.alert(textStatus + ": " + errorThrown);
            	}
 		});
-
 	});
 
 	//insert new user request
@@ -162,7 +154,6 @@ $(document).ready(function() {
         		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
-
 	});
 
 
@@ -184,7 +175,6 @@ $(document).ready(function() {
         		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
-
 	});
 
 	//delete a user request
@@ -204,7 +194,6 @@ $(document).ready(function() {
         		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
-
 	});
 
 	//get a user by username
@@ -223,20 +212,7 @@ $(document).ready(function() {
         		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
-
 	});
-
-	function buildTeamTableHeaders() {
-
-		var headers = "<tr>";
-		headers += "<th>Id</th>";
-		headers += "<th>Name</th>";
-		headers += "<th>User Id</th>";
-		headers += "<th>Usename</th>";
-		headers += "<th>Players in team</th>";
-		headers += "</tr>";
-		return headers;
-	}
 
 	function buildTeamTableRow(object) {
 	
@@ -246,9 +222,7 @@ $(document).ready(function() {
 		row += '<td>' + object.UserId + '</td>';
 		row += '<td>' + object.User.Username + '</td>';
 		row += '<td>';
-		for (var i = 0; i< object.PlayerInTeams.length; i++) {
-			row += object.PlayerInTeams[i].Name + '<br>';
-		}
+		for (var i = 0; i< object.PlayerInTeams.length; row += object.PlayerInTeams[i++].Name + '<br>');
 		row += '</td>';
 		row += '</tr>';
 		return row;
@@ -261,14 +235,13 @@ $(document).ready(function() {
 			Name : $('#team_name_input').val(),
 			UserId : $('#team_user_id_input').val()
 		};
-
 		return team;
 	}
 
 	function putTeamsInTable(data) {
 		
 		var table = '<table>';
-		table += buildTeamTableHeaders();
+		table += buildTableHeaders(['Id', 'Name', 'User Id', 'Username', 'Players in this Team']);
 		if($.isArray(data)) {
 
 			$.each(data, function(index, value) {
@@ -316,10 +289,8 @@ $(document).ready(function() {
 		});
 	}
 
-	//get all teams request
 	getAllTeams();
 
-	//insert new team request
 	$('#post_new_team').on('click', function(event){
 		
 		$.ajax({
@@ -338,7 +309,6 @@ $(document).ready(function() {
         		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         	}
 		});
-
 	});
 
 	//get team by id request
@@ -401,16 +371,6 @@ $(document).ready(function() {
 		});
 	});
 
-	function buildPlayerTypeTableHeaders() {
-
-		var headers = "<tr>";
-		headers += "<th>Id</th>";
-		headers += "<th>Name</th>";
-		headers += "<th>Players of this type</th>";
-		headers += "</tr>";
-		return headers;
-	}
-
 	function buildPlayerTypeTableRow(object) {
 
 		//console.dir(object);
@@ -418,9 +378,7 @@ $(document).ready(function() {
 		row += '<td>' + object.Id + '</td>';
 		row += '<td>' + object.Name + '</td>';
 		row += '<td>';
-		for (var i = 0; i< object.Players.length; i++) {
-			row += object.Players[i].Name + '<br>';
-		}
+		for (var i = 0; i < object.Players.length; row += object.Players[i++].Name + '<br>');
 		row += '</td>';
 		row += '</tr>';
 		return row;
@@ -430,7 +388,7 @@ $(document).ready(function() {
 
 		//console.dir(data);
 		var table = '<table>';
-		table += buildPlayerTypeTableHeaders();
+		table += buildTableHeaders(['Id', 'Name', 'Players of this Type']);
 		if($.isArray(data)) {
 
 			$.each(data, function(index, value) {
