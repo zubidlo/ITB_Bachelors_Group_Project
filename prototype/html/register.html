@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="../css/normalize.css">
 <link rel="stylesheet" href="../css/login.css">
 <script src="../js/jquery.min.js"></script>
-<script src="../js/custom.js"></script>
+<script src="../js/register.js"></script>
 
 
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
@@ -37,22 +37,23 @@
   </div>
 <!-- wrapper -->
 <div id="container">
+
      	<form id="user_edit_form" action="#">
-		<span>User</span>
+		
 		<br>
-		<label for="user_id_edit">Id:</label>
-		<input id="user_id_edit" type="number" value="0" readonly/>
+		<input id="user_id_edit" type="hidden" value="0" readonly/>
 		<label for="user_username_edit">Username:</label>
 		<input id="user_username_edit" type="text" placeholder="enter a username" required/>
 		<label for="user_password_edit">Password:</label>
 		<input id="user_password_edit" type="text" placeholder="enter a password" required/>
 		<label for="user_email_edit">Email:</label>
 		<input id="user_email_edit" type="email" placeholder="enter a valid email" required/>
-		<input id="post_new_user_button" type="submit" value="submit create new user request">
+		<input id="post_new_user_button" type="submit" value="Create  New User">
 <!--
 		<input id="edit_a_user" type="button" value="update this user">
 		<input id="delete_a_user" type="button" value="delete this user">
 	</form>
+
 
   <div style="clear:both; height: 40px"></div>
   </div>

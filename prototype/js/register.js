@@ -29,6 +29,34 @@ $(document).ready(function() {
 		return row;
 	}
 
+
+		function add_user() {
+	
+			$.ajax({
+            type: "POST",
+            url: "http://hurlingapi.azurewebsites.net/api/users",
+            data: readUserFromInputFields(),
+            dataType: "json",
+            success: function (data) {
+            	
+            	getAllUsers();
+            	clearUserTextFields();
+
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        	}
+		});
+	}
+
+
+	
+	
+	
+	
+
+
 	function putUsersInTable(data) {
 		
 		//console.dir(data);
@@ -73,7 +101,7 @@ $(document).ready(function() {
 
 	function fillUserTextFields(object) {
 
-		$_user_id_edit.val(object.Id);
+		//$_user_id_edit.val(object.Id);
 		$_user_username_edit.val(object.Username);
 		$_user_password_edit.val(object.Password);
 		$_user_email_edit.val(object.Email);
@@ -146,35 +174,54 @@ $(document).ready(function() {
             dataType: "json",
             success: function (data) {
             	
-            	fillUserTextFields(data);
+            	alert("found user");
+            	
         	},
         	error : function (request, textStatus, errorThrown) {
 
-        		window.alert(textStatus + ": " + errorThrown);
+        		alert("No User found");
         		clearUserTextFields();
+        		
            	}
 		});
 	});
 
-
-
-	//create new user POST request
+//create new user POST request
 	$("#post_new_user_button").on("click", function(event){
 		
-		$.ajax({
-            type: "POST",
-            url: "http://hurlingapi.azurewebsites.net/api/users",
-            data: readUserFromInputFields(),
+		find_duplicates();
+	
+	});
+
+
+
+function find_duplicates ()
+{
+
+
+	$.ajax({
+            type: "GET",
+            url: "http://hurlingapi.azurewebsites.net/api/users/username/" + $_user_username_field.val(),
             dataType: "json",
             success: function (data) {
+            	// i want this to say if the user if found, then just alert the user name is taken
             	
-            	getAllUsers();
-            	clearUserTextFields();
+            	alert("found user");
+
+            	
         	},
         	error : function (request, textStatus, errorThrown) {
+
+        		// user not found, then add user method runs
+        		alert("No User found");
+        		add_user();
         		
-        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-        	}
+           	}
 		});
-	});
+
+
+}
+
+
 });
+
