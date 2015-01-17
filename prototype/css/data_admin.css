@@ -22,7 +22,7 @@ table, form, input {
 	position:relative;
 	color: #09C;
 	padding: 2px;
-	font-size: 10px;
+	font-size: 12px;
 	text-decoration: none;
 	border: 1px solid #999;
 	border: inset 1px solid #333;
@@ -49,5 +49,9 @@ form {
 
 p {
 	text-align: center;
-	font-size: 10px;
+	font-size: 12px;
+}
+
+span {
+	font-size: 14px;
 }

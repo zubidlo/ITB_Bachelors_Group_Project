@@ -9,34 +9,39 @@
 </head>
 <body>
 	<p>Users</p>
-	<!-- here got user tables injected -->
 	<div id="user_output_div"></div>
-	<form action="#">
-		<label for="get_user_id">User Id:</label>
-		<input id="get_user_id" type="number" name="user id" value="0">
-		<input id="get_user_by_id" type="button" value="get user by id">
-		
-		<label for="get_user_username">Username:</label>
-		<input id="get_user_username" type="text" name="user name" value="">
-		<input id="get_a_user_username" type="button" value="get user by username">
+	<form id="get_user_by_id_form" action="#">
+		<span>Get user by id</span>
+		<br>
+		<input id="get_user_id_input" type="number" placeholder="enter a user id" required>
+		<input id="get_user_by_id_button" type="submit" value="submit request">
 	</form>
-	<form action="#">
-		<label for="first_name_input">First Name:</label>
-		<input id="first_name_input" type="text" name="First Name" />
-		<label for="last_name_input">Last Name:</label>
-		<input id="last_name_input" type="text" name="Last Name" />
-		<label for="username_input">Username:</label>
-		<input id="username_input" type="text" name="Username" />
-		<label for="password_input">Password:</label>
-		<input id="password_input" type="text" name="Password" />
-		<label for="email_input">Email:</label>
-		<input id="email_input" type="text" name="Email" />
-		<input id="post_new_user" type="button" value="create new user">
+	<form id="get_user_by_username_form" action="#">
+		<span>Get user by username</span>
+		<br>
+		<input id="get_user_username_input" type="text" value="" placeholder="enter a user username" required>
+		<input id="get_user_by_username_button" type="submit" value="submit request">
+	</form>
+	</form>
+	<form id="user_edit_form" action="#">
+		<span>User</span>
+		<br>
+		<label for="user_id_edit">Id:</label>
+		<input id="user_id_edit" type="number" value="0" readonly/>
+		<label for="user_username_edit">Username:</label>
+		<input id="user_username_edit" type="text" placeholder="enter a username" required/>
+		<label for="user_password_edit">Password:</label>
+		<input id="user_password_edit" type="text" placeholder="enter a password" required/>
+		<label for="user_email_edit">Email:</label>
+		<input id="user_email_edit" type="email" placeholder="enter a valid email" required/>
+		<input id="post_new_user_button" type="submit" value="submit create new user request">
+<!--
 		<input id="edit_a_user" type="button" value="update this user">
 		<input id="delete_a_user" type="button" value="delete this user">
 	</form>
+
+
 	<p>Teams</p>
-	<!-- here got team tables injected -->
 	<div id="team_output_div"></div>
 	<form action="#">
 		<label for="get_team_id">Team Id:</label>
@@ -53,7 +58,7 @@
 		<input id="delete_a_team" type="button" value="delete this team">
 	</form>
 	<p>Player Types</p>
-	<!-- here got player type tables injected -->
+	
 	<div id="player_type_output_div"></div>
 	<form action="#">
 		<label for="get_player_type_id">Player Type Id:</label>
@@ -68,7 +73,7 @@
 		<input id="delete_a_player_type" type="button" value="delete this player type">
 	</form>
 	<p>Statistics</p>
-	<!-- here got statistics tables injected -->
+	
 	<div id="statistics_output_div"></div>
 	<form action="#">
 		<label for="get_statistics_id">Statistics Id:</label>
@@ -85,7 +90,7 @@
 		<input id="delete_a_statistics" type="button" value="delete this statistics">
 	</form>
 	<p>Players</p>
-	<!-- here got player tables injected -->
+	
 	<div id="players_output_div"></div>
 	<form action="#">
 		<label for="get_player_id">player Id:</label>
@@ -112,7 +117,7 @@
 		<input id="delete_a_player" type="button" value="delete this player">
 	</form>
 	<p>Players in Teams</p>
-	<!-- here got player in team tables injected -->
+	
 	<div id="playerInTeam_output_div"></div>
 	<form action="#">
 		<label for="get_playerInTeam_id">Player in Team Id:</label>
@@ -128,5 +133,6 @@
 		<input id="edit_a_playerInTeam" type="button" value="update this player in team">
 		<input id="delete_a_playerInTeam" type="button" value="delete this player in team">
 	</form>
+-->
 </body>
 </html>
