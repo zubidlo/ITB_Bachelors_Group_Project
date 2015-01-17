@@ -1,6 +1,85 @@
+//general utility functions
+//they don't manipulate DOM so it's doesn't need to be ready just yet
+
+//returns a table header row string built from given array of strings
+var buildTableHeaders = function (headersNamesArray) {
+
+	var headers = "<tr><th>#</th>";
+	for(var i = 0; i < headersNamesArray.length; headers += "<th>" + headersNamesArray[i++] + "</th>");
+	headers += "</tr>";
+	return headers;
+}
+
+//returns one table row string built from given javascript object
+//number of the row
+//properties : array object properties to put in the row
+//given javasctipt object
+var buildTableRow = function(counter, properties, object) {
+
+	var i;
+	var row = "<tr><td>" + counter + "</td>";
+	for(i = 0; i < properties.length; i++) {
+		row += "<td>" + object[properties[i]] + "</td>";
+	}	
+	row += "</tr>";
+	return row;
+}
+
+//everything inside this function is somehow manipulating DOM (document)
+//so document must be ready first for all this code to work
 $(document).ready(function() {
 
-	//dom elements
+	//returns table html string
+	//what number first table row starts with
+	//headers : array of strings you want to make table headers from example: headers = ['name', 'address', 'email']
+	//
+	//properties : array of strings you want to put in table row
+	//example : properties = ['Name', 'Address', 'Email'] 
+	//data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
+	//objcects id data array could have more properties than just those listed in properties array
+	//
+	//data : array of javasctipt objects you want to put in the table
+	//
+	//output_id : id attribute value of element you want to append table to
+	var putUsersInTable = function (counter_start, headers, properties, data, output_id) {
+		
+		var counter = counter_start;
+		var table = "<table>";
+		table += buildTableHeaders(headers);
+		if($.isArray(data)) {
+			$.each(data, function(index, object) {
+				table += buildTableRow(++counter, properties, object);
+			});
+		}
+		else {
+			table += buildTableRow(++counter, properties, data);
+		}
+		table += "</table>";
+		$("#" + output_id + "").empty().append(table);
+	}
+
+
+	//clears given form input fields to default values
+	//form_id is value of id attribute of given html form
+	var clearFormInputFields = function (form_id) {
+		
+		$.each($("#"+form_id+" input"), function() {
+			
+			switch (this.type) {
+				case "number": 
+					this.value = "0";
+					break;
+				case "text":
+					this.value = "";
+					break;
+				case "email":
+					this.value = "";
+					break;
+			}
+		});
+	}
+
+	//needed user form dom elements
 	var $_user_id_field = $("#get_user_id_input");
 	var $_user_username_field = $("#get_user_username_input");
 	var $_user_id_edit = $("#user_id_edit");
@@ -8,84 +87,12 @@ $(document).ready(function() {
 	var $_user_password_edit = $("#user_password_edit");
 	var $_user_email_edit = $("#user_email_edit");
 
-	
-	//return table row filled with headers from given array
-	function buildTableHeaders(headersNamesArray) {
-
-		var headers = '<tr>';
-		for(var i = 0; i < headersNamesArray.length; headers += '<th>' + headersNamesArray[i++] + '</th>');
-		headers += '</tr>';
-		return headers;
-	}
-
-	function buildUserTableRow(object) {
-	
-		var row = '<tr>';
-		row += '<td>' + object.Id + '</td>';
-		row += '<td>' + object.Username + '</td>';
-		row += '<td>' + object.Password + '</td>';
-		row += '<td>' + object.Email + '</td>';
-		row += '</tr>';
-		return row;
-	}
-
-	function putUsersInTable(data) {
-		
-		//console.dir(data);
-
-		//make table with first table row with headers
-		var table = '<table>';
-		table += buildTableHeaders(['Id', 'Username', 'Password', 'Email']);
-		
-		//if given data is an array:
-		if($.isArray(data)) {
-
-			//traverse the array
-			$.each(data, function(index, value) {
-				//console.log(index);
-				//console.dir(value);
-
-				//build each table row
-				table += buildUserTableRow(value);
-			});
-		}
-		//if response data is object:
-		else {
-			table += buildUserTableRow(data);
-		}
-		
-		//close table element
-		table += '</table>';
-
-		//empty output div and append a new table to it
-		$('#user_output_div').empty().append(table);
-
-	}
-
-
-	function clearUserTextFields() {
-
-		$_user_id_edit.val("0");
-		$_user_username_edit.val('');
-		$_user_password_edit.val('');
-		$_user_email_edit.val('');
-	}
-
-	function fillUserTextFields(object) {
-
-		$_user_id_edit.val(object.Id);
-		$_user_username_edit.val(object.Username);
-		$_user_password_edit.val(object.Password);
-		$_user_email_edit.val(object.Email);
-
-	}
-
 	//this method returns new user object build from web form fields
 	//if new user is posted the user id is ignored (database server makes new id)
-	//, but id still must be inclued (any value) so make sure there is some numerical value in input 
+	//but id still must be inclued (any value) so make sure there is some numerical value in input 
 	//field when parsed to user.Id variable
 	//if a user is edited id must be valid (only existing user can be edited)
-	function readUserFromInputFields() {
+	var readUserFromInputFields = function () {
 		
 		var user = {
 			Id : $_user_id_edit.val(),
@@ -93,32 +100,80 @@ $(document).ready(function() {
 			Password : $_user_password_edit.val(),
 			Email : $_user_email_edit.val()
 		};
-
 		return user;
 	}
 
-	//get all users GET request
-	function getAllUsers() {
+	//fills some form input fields with user object properties
+	var fillUserTextFields = function (user) {
+
+		$_user_id_edit.val(user.Id);
+		$_user_username_edit.val(user.Username);
+		$_user_password_edit.val(user.Password);
+		$_user_email_edit.val(user.Email);
+
+	}
+
+	//all users GET request
+	//injects table of top items into DOM
+	//top : how many rows the table will have
+	//skip: how many rows to skip
+	//example: top=10 and skip=0 --> table with first 10 items
+	//top=10 and skip=10 --> table with from 11 to 20 items
+	//top=10 and skip=20 --> table with from 21 to 30 items
+	var getAllUsers = function(top, skip) {
 
 		$.ajax({
             type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users",
+            url: "http://hurlingapi.azurewebsites.net/api/users?$top=" + top + "&$skip=" + skip,
             dataType: "json",
             success: function (data) {
 
-            	putUsersInTable(data);
+            	var counter_start = skip;
+				var headers = ['id', 'username', 'password', 'e-mail'];
+				var properties = ['Id', 'Username', 'Password', 'Email'];
+				var output_id = "user_output_div";
+            	putUsersInTable(counter_start, headers, properties, data, output_id);
         	},
         	error : function (request, textStatus, errorThrown) {
         		
         		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-        		clearUserTextFields();
+        		clearFormInputFields("user_edit_form");
            	}
 		});
 	}
 
-	getAllUsers();
+	//get all the users
+	var top = 6;
+	var skip = 0;
+	var users_count = 0;
 
-	//get user by id GET request
+	//get user count
+	$.ajax({
+		type: "GET",
+        url: "http://hurlingapi.azurewebsites.net/api/users",
+        dataType: "json",
+        success: function (data) { users_count = data.length; }
+    });
+
+	getAllUsers(top, skip);
+
+	//previous table page load
+	$("#user_previous_page_button").on("click", function(event) {
+		if (skip > 0) {
+			skip = skip - top;
+			getAllUsers(top, skip);
+		}
+	});
+
+	//next table page load
+	$("#user_next_page_button").on("click", function(event) {
+		if (skip + top < users_count) {
+			skip = skip + top;
+			getAllUsers(top, skip);
+		}
+	});
+
+	//user by id GET request on click on button with id="get_user_by_id_button"
 	$("#get_user_by_id_button").on("click", function(event) {
 
 		$.ajax({
@@ -132,12 +187,12 @@ $(document).ready(function() {
         	error : function (request, textStatus, errorThrown) {
 
         		window.alert(textStatus + ": " + errorThrown);
-        		clearUserTextFields();
+        		clearFormInputFields("user_edit_form");
            	}
 		});
 	});
 
-	//get user by username GET request
+	//user by username GET request on button with id="get_user_by_username_button"
 	$("#get_user_by_username_button").on("click", function(event) {
 
 		$.ajax({
@@ -151,14 +206,12 @@ $(document).ready(function() {
         	error : function (request, textStatus, errorThrown) {
 
         		window.alert(textStatus + ": " + errorThrown);
-        		clearUserTextFields();
+        		clearFormInputFields("user_edit_form");
            	}
 		});
 	});
 
-
-
-	//create new user POST request
+	//new user POST request on button with id="post_new_user_button"
 	$("#post_new_user_button").on("click", function(event){
 		
 		$.ajax({
@@ -174,6 +227,7 @@ $(document).ready(function() {
         	error : function (request, textStatus, errorThrown) {
         		
         		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		clearFormInputFields("user_edit_form");
         	}
 		});
 	});

@@ -41,17 +41,19 @@ input {
 	color: black;
 }
 
-form {
+form, p, div {
 	width: 80%;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	font-size: 12px;
+	text-align: left;
 }
 
-p {
+p, div {
 	text-align: center;
-	font-size: 12px;
 }
 
 span {
 	font-size: 14px;
 }
+
