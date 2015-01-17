@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="../css/normalize.css">
 <link rel="stylesheet" href="../css/login.css">
 <script src="../js/jquery.min.js"></script>
-<script src="../js/data_admin.js"></script>
+<script src="../js/custom.js"></script>
+
+
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
 </head>
 <body>
@@ -35,22 +37,24 @@
   </div>
 <!-- wrapper -->
 <div id="container">
-    
-   <form action="#">
-     
-    <label for="email_input">Email:</label>
-    <input id="email_input" type="text" name="Email" />
-
-    <label for="username_input">Username:</label>
-    <input id="username_input" type="text" name="Username" />
-    
-    <label for="password_input">Password:</label>
-    <input id="password_input" type="text" name="Password" />
-    
-    <input id="post_new_user" type="button" value="create new user">
-  
-  </form>
-
+      <section class="loginform cf">
+    <form name="login" action="#" method="get" accept-charset="utf-8">
+      <ul>
+        <li>
+          <label>Choose a Username</label>
+           <input type="text" name="user"><br>
+        </li>
+        <li>
+          <label>Choose a Password</label>
+           <input type="text" name="user"><br>
+        
+        
+        
+        </li> 
+       <input type="submit" value="Submit Details">
+      </ul>
+    </form>
+  </section>
 
   <div style="clear:both; height: 40px"></div>
   </div>
