@@ -1,83 +1,10 @@
-//general utility functions
-//they don't manipulate DOM so it's doesn't need to be ready just yet
-
-//returns a table header row string built from given array of strings
-var buildTableHeaders = function (headersNamesArray) {
-
-	var headers = "<tr><th>#</th>";
-	for(var i = 0; i < headersNamesArray.length; headers += "<th>" + headersNamesArray[i++] + "</th>");
-	headers += "</tr>";
-	return headers;
-}
-
-//returns one table row string built from given javascript object
-//number of the row
-//properties : array object properties to put in the row
-//given javasctipt object
-var buildTableRow = function(counter, properties, object) {
-
-	var i;
-	var row = "<tr><td>" + counter + "</td>";
-	for(i = 0; i < properties.length; i++) {
-		row += "<td>" + object[properties[i]] + "</td>";
-	}	
-	row += "</tr>";
-	return row;
-}
-
 //everything inside this function is somehow manipulating DOM (document)
 //so document must be ready first for all this code to work
 $(document).ready(function() {
 
-	//returns table html string
-	//what number first table row starts with
-	//headers : array of strings you want to make table headers from example: headers = ['name', 'address', 'email']
-	//
-	//properties : array of strings you want to put in table row
-	//example : properties = ['Name', 'Address', 'Email'] 
-	//data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
-	//objcects id data array could have more properties than just those listed in properties array
-	//
-	//data : array of javasctipt objects you want to put in the table
-	//
-	//output_id : id attribute value of element you want to append table to
-	var putUsersInTable = function (counter_start, headers, properties, data, output_id) {
-		
-		var counter = counter_start;
-		var table = "<table>";
-		table += buildTableHeaders(headers);
-		if($.isArray(data)) {
-			$.each(data, function(index, object) {
-				table += buildTableRow(++counter, properties, object);
-			});
-		}
-		else {
-			table += buildTableRow(++counter, properties, data);
-		}
-		table += "</table>";
-		$("#" + output_id + "").empty().append(table);
-	}
-
-
-	//clears given form input fields to default values
-	//form_id is value of id attribute of given html form
-	var clearFormInputFields = function (form_id) {
-		
-		$.each($("#"+form_id+" input"), function() {
-			
-			switch (this.type) {
-				case "number": 
-					this.value = "0";
-					break;
-				case "text":
-					this.value = "";
-					break;
-				case "email":
-					this.value = "";
-					break;
-			}
-		});
-	}
+	//constants
+	//var _url = "http://hurlingapi.azurewebsites.net/api/users";
+	var _url = "http://localhost:51642/api/users";
 
 	//needed user form dom elements
 	var $_user_id_field = $("#get_user_id_input");
@@ -124,36 +51,33 @@ $(document).ready(function() {
 
 		$.ajax({
             type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users?$top=" + top + "&$skip=" + skip,
-            dataType: "json",
+            url: _url + "?$top=" + top + "&$skip=" + skip,
             success: function (data) {
-
+            	
             	var counter_start = skip;
 				var headers = ['id', 'username', 'password', 'e-mail'];
 				var properties = ['Id', 'Username', 'Password', 'Email'];
 				var output_id = "user_output_div";
-            	putUsersInTable(counter_start, headers, properties, data, output_id);
+            	buildTable(counter_start, headers, properties, data, output_id);
         	},
         	error : function (request, textStatus, errorThrown) {
         		
-        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		console.dir(request);
+        		console.dir(textStatus);
+        		console.dir(errorThrown);
+        		//window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         		clearFormInputFields("user_edit_form");
            	}
 		});
 	}
 
 	//get all the users
-	var top = 6;
+	var top = 12;
 	var skip = 0;
 	var users_count = 0;
 
 	//get user count
-	$.ajax({
-		type: "GET",
-        url: "http://hurlingapi.azurewebsites.net/api/users",
-        dataType: "json",
-        success: function (data) { users_count = data.length; }
-    });
+	$.ajax({ type: "GET", url: _url, success: function (data) { users_count = data.length; }});
 
 	getAllUsers(top, skip);
 
@@ -173,12 +97,13 @@ $(document).ready(function() {
 		}
 	});
 
-	//user by id GET request on click on button with id="get_user_by_id_button"
-	$("#get_user_by_id_button").on("click", function(event) {
+	//user by id GET request
+	$("#get_user_by_id_form").submit(function(event) {
 
+		event.preventDefault();
 		$.ajax({
             type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users/id/" + $_user_id_field.val(),
+            url: _url + "/id/" + $_user_id_field.val(),
             dataType: "json",
             success: function (data) {
             	
@@ -186,18 +111,22 @@ $(document).ready(function() {
         	},
         	error : function (request, textStatus, errorThrown) {
 
-        		window.alert(textStatus + ": " + errorThrown);
+        		console.dir(request);
+        		console.log(textStatus);
+        		console.log(errorThrown);
+        		//window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         		clearFormInputFields("user_edit_form");
            	}
 		});
 	});
 
-	//user by username GET request on button with id="get_user_by_username_button"
-	$("#get_user_by_username_button").on("click", function(event) {
+	//user by username GET request
+	$("#get_user_by_username_form").submit(function(event) {
 
+		event.preventDefault();
 		$.ajax({
             type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users/username/" + $_user_username_field.val(),
+            url: _url + "/username/" + $_user_username_field.val(),
             dataType: "json",
             success: function (data) {
             	
@@ -205,31 +134,62 @@ $(document).ready(function() {
         	},
         	error : function (request, textStatus, errorThrown) {
 
-        		window.alert(textStatus + ": " + errorThrown);
+        		console.dir(request);
+        		console.dir(textStatus);
+        		console.dir(errorThrown);
+        		//window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
         		clearFormInputFields("user_edit_form");
            	}
 		});
 	});
 
-	//new user POST request on button with id="post_new_user_button"
-	$("#post_new_user_button").on("click", function(event){
+	//new user POST request
+	$("#user_edit_form").submit(function(event){
+
+			event.preventDefault();
+			var reqMeth = $("option:checked").val();
+			var user = readUserFromInputFields();
+			var url = _url;
+			var resultMessage;
+
+			switch(reqMeth) {
+				case "PUT" :
+					url = url + "/id/" + user.Id;
+					resultMessage = "You edited the user:" + JSON.stringify(user);
+					break;
+				case "DELETE" :
+					resultMessage = "You deleted the user with Id:" + user.Id;
+					break;
+				case "POST" : 
+					resultMessage = "You created new user:" + JSON.stringify(user);
+					break;
+			}
+
+			console.log(url);
+			console.dir(user);
+	        console.log(reqMeth);
 		
-		$.ajax({
-            type: "POST",
-            url: "http://hurlingapi.azurewebsites.net/api/users",
-            data: readUserFromInputFields(),
-            dataType: "json",
-            success: function (data) {
-            	
-            	getAllUsers();
-            	clearUserTextFields();
-        	},
-        	error : function (request, textStatus, errorThrown) {
-        		
-        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-        		clearFormInputFields("user_edit_form");
-        	}
-		});
+			$.ajax({
+	            type: reqMeth,
+	            url: url,
+	            data: user,
+	            dataType: "json",
+	            success: function (data) {
+	            	
+	            	clearFormInputFields();
+	            	getAllUsers(top, skip);
+	            	window.alert(resultMessage);
+	        	},
+	        	error : function (request, textStatus, errorThrown) {
+	        		
+	        		console.dir(request);
+	        		console.dir(textStatus);
+	        		console.dir(errorThrown);
+	        		//window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        		clearFormInputFields("user_edit_form");
+	        	}
+			});
+		
 	});
 });
 
