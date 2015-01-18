@@ -1,5 +1,9 @@
 //everything inside this function is somehow manipulating DOM (document)
 //so document must be ready first for all this code to work
+//this code users jquery so that must be already loaded
+//this code uses functions from "data_admin_functions.js" so that must be already loaded
+
+//this anonymous function (all code of this script is inside this function) is executed after DOM is ready
 $(document).ready(function() {
 
 	//constants
@@ -56,7 +60,6 @@ $(document).ready(function() {
 	var getAllUsers = function(top, skip) {
 
 		$.ajax({
-            type: "GET",
             url: _url + "?$top=" + top + "&$skip=" + skip,
             success: function (data) {
             	
@@ -65,12 +68,7 @@ $(document).ready(function() {
 				var properties = ['Id', 'Username', 'Password', 'Email'];
 				var output_id = "table_output";
             	buildTable(counter_start, headers, properties, data, output_id);
-            	$_text_output.empty();
-        	},
-        	error : function (request, textStatus, errorThrown) {
-        		
-        		$_text_output.empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
-           	}
+        	}
 		});
 	}
 
@@ -80,7 +78,7 @@ $(document).ready(function() {
 	var users_count = 0;
 
 	//get user count
-	$.ajax({ type: "GET", url: _url, success: function (data) { users_count = data.length; }});
+	$.ajax({ url: _url, success: function (data) { users_count = data.length; }});
 
 	getAllUsers(top, skip);
 
@@ -105,17 +103,15 @@ $(document).ready(function() {
 
 		event.preventDefault();
 		$.ajax({
-            type: "GET",
             url: _url + "/id/" + $_user_id_field.val(),
-            dataType: "json",
-            success: function (data) {
+            success: function (data, textStatus, request) {
             	
             	fillUserTextFields(data);
-            	$_text_output.empty();
+            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
         	},
         	error : function (request, textStatus, errorThrown) {
 
-        		$_text_output.empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
            	}
 		});
 	});
@@ -125,17 +121,15 @@ $(document).ready(function() {
 
 		event.preventDefault();
 		$.ajax({
-            type: "GET",
             url: _url + "/username/" + $_user_username_field.val(),
-            dataType: "json",
-            success: function (data) {
+            success: function (data, textStatus, request) {
             	
             	fillUserTextFields(data);
-            	$_text_output.empty();
+            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
         	},
         	error : function (request, textStatus, errorThrown) {
 
-        		$_text_output.empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
            	}
 		});
 	});
@@ -168,15 +162,15 @@ $(document).ready(function() {
 	            url: url,
 	            data: user,
 	            dataType: "json",
-	            success: function (data) {
-	            	
+	            success: function (data, textStatus, request) {
+	            
 	            	clearFormInputFields();
 	            	getAllUsers(top, skip);
-	            	window.alert(resultMessage);
+	            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
-	        		
-	        		$_text_output.empty().append(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        		console.dir(request);
+	        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
 	        	}
 			});
 		
