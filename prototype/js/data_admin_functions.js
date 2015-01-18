@@ -27,7 +27,7 @@ var buildTableRow = function(counter, properties, object) {
 }
 
 //returns table html string
-//what number first table row starts with
+//counter_start: what number first table row starts with
 //headers : array of strings you want to make table headers from example: headers = ['name', 'address', 'email']
 //
 //properties : array of strings you want to put in table row
