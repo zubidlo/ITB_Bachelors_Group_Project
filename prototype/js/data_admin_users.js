@@ -134,16 +134,16 @@ $(document).ready(function() {
 		});
 	});
 
-	//new user POST request
+	//POST PUT DELETE request
 	$("#user_edit_form").submit(function(event){
 
 			event.preventDefault();
-			var reqMeth = $("option:checked").val();
+			var requestMethod = $("option:checked").val();
 			var user = readUserFromInputFields();
 			var url = _url;
 			var resultMessage;
 
-			switch(reqMeth) {
+			switch(requestMethod) {
 				case "PUT" :
 					resultMessage = "You edited the user:" + JSON.stringify(user);
 					url = url + "/id/" + user.Id;
@@ -158,7 +158,7 @@ $(document).ready(function() {
 			}
 
 			$.ajax({
-	            type: reqMeth,
+	            type: requestMethod,
 	            url: url,
 	            data: user,
 	            dataType: "json",
