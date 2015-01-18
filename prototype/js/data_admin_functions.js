@@ -1,5 +1,6 @@
 //general utility functions
 //they don't manipulate DOM so it's doesn't need to be ready just yet
+//they use jquery so it must be loaded
 
 //returns a table header row string built from given array of strings
 var buildTableHeaders = function (headersNamesArray) {

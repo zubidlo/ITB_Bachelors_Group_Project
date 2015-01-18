@@ -7,7 +7,7 @@
 body {
 	margin-top: 40px;
 	margin-bottom: 40px;
-	background-color: white;
+	//background-color: white;
 }
 
 nav {
@@ -16,7 +16,7 @@ nav {
 	left: 0;
 	height: 40px;
 	width: 100%;
-	background-color: beige;
+	//background-color: beige;
 }
 
 footer {
@@ -25,7 +25,7 @@ footer {
   left: 0;
   height: 40px;
   width: 100%;
-  background-color: bisque;
+  //background-color: bisque;
 }
 
 section {
@@ -38,16 +38,16 @@ article {
   float: right;
   margin-top: 40px;
   width: 50%;
-  background-color: peachpuff;
+  //background-color: peachpuff;
 }
 
 table {
 	border-collapse: collapse;
-	background-color: linen;
+	//background-color: linen;
 }
 
 form {
-	background-color: lavender;
+	//background-color: lavender;
 }
 
 th {
@@ -60,4 +60,8 @@ table, th, td {
 
 label {
 	display: block;
+}
+
+header, footer {
+  text-align: center;
 }

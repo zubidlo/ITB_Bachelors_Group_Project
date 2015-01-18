@@ -10,23 +10,24 @@
 </head>
 <body>
 	<header>
-		<h3>Users</h3>
+		<h3>Users Repository Admininstration</h3>
 		<nav>
-		<a href="data_admin_users.html">Users</a>
-		<a href="">U</a>
-		<a href="">U</a>
-		<a href="">U</a>
-		<a href="">U</a>
-		<a href="">U</a>
-		<a href="">U</a>
-		<a href="">U</a>
-	</nav>
+			<a href="data_admin_users.html">Reload</a>
+			<a href=""></a>
+			<a href=""></a>
+			<a href=""></a>
+			<a href=""></a>
+			<a href=""></a>
+			<a href=""></a>
+			<a href=""></a>
+		</nav>
 	</header>
 	<section>
 		<article>
-			<input id="user_previous_page_button" type="button" value="previous page">
-			<div id="user_output_div"></div>
-			<input id="user_next_page_button" type="button" value="next page">
+			<input id="previous_page_button" type="button" value="previous page">
+			<div id="table_output"></div>
+			<input id="next_page_button" type="button" value="next page">
+			<div id="text_output"></div>
 		</article>
 		<article>
 			<form id="get_user_by_id_form" method="get" action="#">
@@ -53,112 +54,12 @@
 				<select name="Request" id="user_request_select">
 					<option value="PUT" checked>Change this user(PUT)</option>
 					<option value="POST">Create new user(POST)</option>
-					<option value="DELETE">Delete this user(DELETE)</option>
+					<!--<option value="DELETE">Delete this user(DELETE)</option>-->
 				</select>
 				<input type="submit" value="submit request">
 			</form>
 		</article>			
 	</section>
-	
-<!--
-		<input id="edit_a_user" type="button" value="update this user">
-		<input id="delete_a_user" type="button" value="delete this user">
-	</form>
-
-
-	<p>Teams</p>
-	<div id="team_output_div"></div>
-	<form action="#">
-		<label for="get_team_id">Team Id:</label>
-		<input id="get_team_id" type="number" name="team id" value="0">
-		<input id="get_team_by_id" type="button" value="get team by id">
-	</form>
-	<form action="#">
-		<label for="team_name_input">Team Name:</label>
-		<input id="team_name_input" type="text" name="Team Name" />
-		<label for="team_user_id_input">User Id:</label>
-		<input id="team_user_id_input" type="number" name="User Id" value="0"/>
-		<input id="post_new_team" type="button" value="create new team">
-		<input id="edit_a_team" type="button" value="update this team">
-		<input id="delete_a_team" type="button" value="delete this team">
-	</form>
-	<p>Player Types</p>
-	
-	<div id="player_type_output_div"></div>
-	<form action="#">
-		<label for="get_player_type_id">Player Type Id:</label>
-		<input id="get_player_type_id" type="number" name="player_type id" value="0">
-		<input id="get_player_type_by_id" type="button" value="get player type by id">
-	</form>
-	<form action="#">
-		<label for="player_type_name_input">Player Type Name:</label>
-		<input id="player_type_name_input" type="text" name="Player Type Name" />
-		<input id="post_new_player_type" type="button" value="create new player type">
-		<input id="edit_a_player_type" type="button" value="update this player type">
-		<input id="delete_a_player_type" type="button" value="delete this player type">
-	</form>
-	<p>Statistics</p>
-	
-	<div id="statistics_output_div"></div>
-	<form action="#">
-		<label for="get_statistics_id">Statistics Id:</label>
-		<input id="get_statistics_id" type="number" name="statistics id" value="0">
-		<input id="get_statistics_by_id" type="button" value="get statistics by id">
-	</form>
-	<form action="#">
-		<label for="statistics_goals_input">Goals:</label>
-		<input id="statistics_goals_input" type="number" name="Goals" value="0" />
-		<label for="statistics_assists_input">Assists:</label>
-		<input id="statistics_assists_input" type="text" name="Assists" value="" />
-		<input id="post_new_statistics" type="button" value="create new statistics">
-		<input id="edit_a_statistics" type="button" value="update this statistics">
-		<input id="delete_a_statistics" type="button" value="delete this statistics">
-	</form>
-	<p>Players</p>
-	
-	<div id="players_output_div"></div>
-	<form action="#">
-		<label for="get_player_id">player Id:</label>
-		<input id="get_player_id" type="number" name="player id" value="0">
-		<input id="get_player_by_id" type="button" value="get player by id">
-	</form>
-	<form action="#">
-		<label for="player_first_name_input">First Name:</label>
-		<input id="player_first_name_input" type="text" name="First Name" value="" />
-		<label for="player_last_name_input">Last Name:</label>
-		<input id="player_last_name_input" type="text" name="Last Name" value="" />
-		<label for="player_agility_input">Agility:</label>
-		<input id="player_agility_input" type="number" name="Agility" value="0" />
-		<label for="player_speed_input">Speed:</label>
-		<input id="player_speed_input" type="number" name="Speed" value="0" />
-		<label for="player_perception_input">Perception:</label>
-		<input id="player_perception_input" type="number" name="Perception" value="0" />
-		<label for="player_player_type_id_input">Player Type Id:</label>
-		<input id="player_player_type_id_input" type="number" name="Player Type Id" value="0" />
-		<label for="player_statistics_id_input">Statistics Id:</label>
-		<input id="player_statistics_id_input" type="number" name="Statistics Id" value="0" />
-		<input id="post_new_player" type="button" value="create new player">
-		<input id="edit_a_player" type="button" value="update this player">
-		<input id="delete_a_player" type="button" value="delete this player">
-	</form>
-	<p>Players in Teams</p>
-	
-	<div id="playerInTeam_output_div"></div>
-	<form action="#">
-		<label for="get_playerInTeam_id">Player in Team Id:</label>
-		<input id="get_playerInTeam_id" type="number" name="playerInTeam id" value="0">
-		<input id="get_playerInTeam_by_id" type="button" value="get Player In Team by id">
-	</form>
-	<form action="#">
-		<label for="playerId_input">Player Id:</label>
-		<input id="playerId_input" type="number" name="Player Id" value="0" />
-		<label for="teamId_input">Team Id:</label>
-		<input id="teamId_input" type="number" name="Team Id" value="0" />
-		<input id="post_new_playerInTeam" type="button" value="create new player in team">
-		<input id="edit_a_playerInTeam" type="button" value="update this player in team">
-		<input id="delete_a_playerInTeam" type="button" value="delete this player in team">
-	</form>
--->
 <footer>
 	<p>Martin Zuber 2014</p>
 </footer>
