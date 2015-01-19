@@ -37,8 +37,8 @@ var buildTableRow = function(counter, properties, object) {
 //
 //data : array of javasctipt objects you want to put in the table
 //
-//output_id : id attribute value of element you want to append table to
-var buildTable = function (counter_start, headers, properties, data, output_id) {
+//output : jquery object to append the table to
+var buildTable = function (counter_start, headers, properties, data, $_output) {
 	
 	var counter = counter_start;
 	var table = "<table>";
@@ -52,25 +52,25 @@ var buildTable = function (counter_start, headers, properties, data, output_id) 
 		table += buildTableRow(++counter, properties, data);
 	}
 	table += "</table>";
-	$("#" + output_id + "").empty().append(table);
+	$_output.empty().append(table);
 }
 
-//clears given form input fields to default values
-//form_id is value of id attribute of given html form
-var clearFormInputFields = function (form_id) {
+// //clears given form input fields to default values
+// //$_form is jquery object
+// var clearFormInputFields = function ($_form) {
 	
-	$.each($("#"+form_id+" input"), function() {
+// 	$.each($("#" + $_form.attr("id") + " input"), function() {
 		
-		switch (this.type) {
-			case "number": 
-				this.value = "0";
-				break;
-			case "text":
-				this.value = "";
-				break;
-			case "email":
-				this.value = "";
-				break;
-		}
-	});
-}
+// 		switch (this.type) {
+// 			case "number": 
+// 				this.value = "0";
+// 				break;
+// 			case "text":
+// 				this.value = "";
+// 				break;
+// 			case "email":
+// 				this.value = "";
+// 				break;
+// 		}
+// 	});
+// }
