@@ -8,7 +8,7 @@ function retrieve_username() {
     var user_cookie = document.getElementById('get_user_username_input').value;
     if (user_cookie !=null) {
         alert("Value retireved to home page from index " +user_cookie);
-        checkCookie();
+        checkCookie(user_cookie);
      
        
     }
@@ -40,11 +40,11 @@ function getCookie(cname) {
     return "";
 }
 
-function checkCookie() {
+function checkCookie(user_cookie) {
     var user=getCookie("username");
-  
+    var name = user_cookie;
    
-    if (user ==$_user_username_field.val()) {
+    if (user == name) {
         alert("Home page cookie " + user);
 
 
