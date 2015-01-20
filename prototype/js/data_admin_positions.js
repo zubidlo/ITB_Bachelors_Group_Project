@@ -50,8 +50,8 @@ $(document).ready(function() {
             success: function (data) {
             	
             	var counter_start = 1;
-				var headers = ['Id', 'Field position'];
-				var properties = ['Id', 'Name'];
+				var headers = ["Id<span>PK</span>", "Field position<span>R</span>"];
+				var properties = ["Id", "Name"];
 				buildTable(counter_start, headers, properties, data, $_table_output);
         	}
 		});
@@ -95,6 +95,48 @@ $(document).ready(function() {
         		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
            	}
 		});
+	});
+
+	//POST PUT DELETE request
+	$_position_edit_form.submit(function(event){
+
+			event.preventDefault();
+			var requestMethod = $("option:checked").val();
+			var position = readPositionFromFields();
+			var url = _url;
+			var resultMessage;
+
+			switch(requestMethod) {
+				case "PUT" :
+					url = url + "/id/" + position.Id;
+					resultMessage = "You edited the position:" + JSON.stringify(position);
+					break;
+				// case "DELETE" :
+				// 	url = url + "/id/" + user.Id;
+				// 	resultMessage = "You deleted the user with Id:" + user.Id;
+				// 	user = undefined;
+				// 	break;
+				// case "POST" : 
+				// 	resultMessage = "You created new user:" + JSON.stringify(user);
+				// 	break;
+			}
+
+			$.ajax({
+	            type: requestMethod,
+	            url: url,
+	            data: position,
+	            dataType: "json",
+	            success: function (data, textStatus, request) {
+	            
+	            	getAllPositions();
+	            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
+	        	},
+	        	error : function (request, textStatus, errorThrown) {
+	        		
+	        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+	        	}
+			});
+		
 	});
 	
 });

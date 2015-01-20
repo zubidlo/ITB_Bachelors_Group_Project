@@ -12,13 +12,16 @@
 <body>
 	<header></header>
 	<section>
+		<h2>User Admin Page</h2>
 		<article>
+			<h3>Table</h3>
 			<input id="previous_page_button" type="button" value="previous page">
 			<div id="table_output"></div>
 			<input id="next_page_button" type="button" value="next page">
-			<div id="text_output"></div>
+			<p><span id="text_output"></span></p>
 		</article>
 		<article>
+			<h3>Forms</h3>
 			<form id="get_user_by_id_form" method="get" action="#">
 				<label for="get_user_id_input">Get User by Id</label>
 				<input id="get_user_id_input" type="number" placeholder="enter a user id" value="0" required>
@@ -30,7 +33,7 @@
 				<input id="get_user_by_username_button" type="submit" value="submit request">
 			</form>
 			<form id="user_edit_form"  method="post" action="#">
-				<h4>User</h4>
+				<h4>User Edit Form</h4>
 				<label for="user_id_edit">Id:</label>
 				<input id="user_id_edit" type="number" value="0" readonly/>
 				<label for="user_username_edit">Username:</label>
@@ -41,9 +44,9 @@
 				<input id="user_email_edit" type="email" placeholder="enter a valid email" required/>
 				<label for="user_request_select">Select the Request</label>
 				<select name="Request" id="user_request_select">
-					<option value="PUT" checked>Change this user(PUT)</option>
+					<option value="PUT">Change this user(PUT)</option>
 					<option value="POST">Create new user(POST)</option>
-					<!--<option value="DELETE">Delete this user(DELETE)</option>-->
+					<option value="DELETE">Delete this user(DELETE)</option>
 				</select>
 				<input type="submit" value="submit request">
 			</form>

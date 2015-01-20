@@ -84,8 +84,8 @@ $(document).ready(function() {
             success: function (data) {
             	
             	var counter_start = skip;
-				var headers = ['id', 'username', 'password', 'e-mail'];
-				var properties = ['Id', 'Username', 'Password', 'Email'];
+				var headers = ["id<span>(PK)</span>", "username<span>(R)</span>", "password<span>(R)</span>", "e-mail<span>(R)</span>"];
+				var properties = ["Id", "Username", "Password", "Email"];
 				buildTable(counter_start, headers, properties, data, $_table_output);
         	}
 		});
@@ -159,10 +159,11 @@ $(document).ready(function() {
 
 			switch(requestMethod) {
 				case "PUT" :
-					resultMessage = "You edited the user:" + JSON.stringify(user);
 					url = url + "/id/" + user.Id;
+					resultMessage = "You edited the user:" + JSON.stringify(user);
 					break;
 				case "DELETE" :
+					url = url + "/id/" + user.Id;
 					resultMessage = "You deleted the user with Id:" + user.Id;
 					user = undefined;
 					break;

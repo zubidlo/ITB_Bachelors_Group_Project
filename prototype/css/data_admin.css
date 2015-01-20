@@ -51,7 +51,7 @@ form {
 }
 
 th {
-	background-color: palegreen;
+	//background-color: palegreen;
 }
 
 table, th, td {
@@ -64,4 +64,12 @@ label {
 
 header, footer {
   text-align: center;
+}
+
+span {
+  color : red;
+}
+
+#footer_list li {
+  display : inline;
 }
