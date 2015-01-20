@@ -157,6 +157,20 @@ $(document).ready(function() {
 			var url = _url;
 			var resultMessage;
 
+			switch(requestMethod) {
+				case "PUT" :
+					resultMessage = "You edited the user:" + JSON.stringify(user);
+					url = url + "/id/" + user.Id;
+					break;
+				case "DELETE" :
+					resultMessage = "You deleted the user with Id:" + user.Id;
+					user = undefined;
+					break;
+				case "POST" : 
+					resultMessage = "You created new user:" + JSON.stringify(user);
+					break;
+			}
+
 			$.ajax({
 	            type: requestMethod,
 	            url: url,
@@ -168,19 +182,7 @@ $(document).ready(function() {
 	            	if (requestMethod !== "PUT") {
 	            		updateUserCount();
 	            	}
-	            	switch(requestMethod) {
-						case "PUT" :
-							resultMessage = "You edited the user:" + JSON.stringify(user);
-							url = url + "/id/" + user.Id;
-							break;
-						case "DELETE" :
-							resultMessage = "You deleted the user with Id:" + user.Id;
-							user = undefined;
-							break;
-						case "POST" : 
-							resultMessage = "You created new user:" + JSON.stringify(user);
-							break;
-					}
+	            	
 	            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
