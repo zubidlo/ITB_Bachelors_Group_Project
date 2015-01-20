@@ -44,7 +44,7 @@ function checkCookie() {
     var user=getCookie("username");
   
    
-    if (user != "") {
+    if (user ==$_user_username_field.val()) {
         alert("Home page cookie " + user);
 
 
