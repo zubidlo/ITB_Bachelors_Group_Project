@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/login.css">
 <script src="js/jquery.min.js"></script>
-
+<script src="js/home.js"></script>
 <script src="js/login.js"></script>
 
 
@@ -44,11 +44,11 @@
  
 			<form id="get_user_by_username_form" method="get" action="#">
 				<label for="get_user_username_input">Get User by Username</label>
-				<input id="get_user_username_input" type="text" value="" placeholder="enter a user username" required>
-				<input id="get_user_by_username_button" type="submit" value="submit request">
+				<input id="get_user_username_input" type="text"  placeholder="enter a user username" required>
+				<input id="get_user_by_username_button" type="submit" onclick="retrieve_username()" value="submit request">
 				<label>Password</label>
            		<label for="user_password_edit">Password:</label>
-				<input id="user_password_edit" type="text" placeholder="enter a password" required/>
+				<input id="user_password_edit" type="text"  placeholder="enter a password" required/>
 			</form>
 			
 
