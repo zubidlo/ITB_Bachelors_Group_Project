@@ -84,7 +84,7 @@ $(document).ready(function() {
             success: function (data) {
             	
             	var counter_start = skip;
-				var headers = ["id<span>(PK)</span>", "username<span>(R)</span>", "password<span>(R)</span>", "e-mail<span>(R)</span>"];
+				var headers = ["Id<span>(PK)</span>", "Username<span>(R)</span>", "Password<span>(R)</span>", "Email<span>(R)</span>"];
 				var properties = ["Id", "Username", "Password", "Email"];
 				buildTable(counter_start, headers, properties, data, $_table_output);
         	}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Data_Admin_Players</title>
+	<link rel="stylesheet" href="../css/data_admin.css">
+	<!-- order of loading the scripts is important! See comments in each of those -->
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/data_admin_functions.js"></script>
+	<script src="../js/data_admin_players.js"></script>
+</head>
+<body>
+	<header></header>
+	<section>
+		<h2>Player Admin Page</h2>
+		<article>
+			<h3>Table</h3>
+			<input id="previous_page_button" type="button" value="previous page">
+			<div id="table_output"></div>
+			<input id="next_page_button" type="button" value="next page">
+			<p><span id="text_output"></span></p>
+		</article>
+		<article>
+<!--    	<h3>Forms</h3>
+			<form id="get_user_by_id_form" method="get" action="#">
+				<label for="get_user_id_input">Get User by Id</label>
+				<input id="get_user_id_input" type="number" placeholder="enter a user id" value="0" required>
+				<input id="get_user_by_id_button" type="submit" value="submit request">
+			</form>
+			<form id="get_user_by_username_form" method="get" action="#">
+				<label for="get_user_username_input">Get User by Username</label>
+				<input id="get_user_username_input" type="text" value="" placeholder="enter a user username" required>
+				<input id="get_user_by_username_button" type="submit" value="submit request">
+			</form>
+			<form id="user_edit_form"  method="post" action="#">
+				<h4>Player Edit Form</h4>
+				<label for="user_id_edit">Id:</label>
+				<input id="user_id_edit" type="number" value="0" readonly/>
+				<label for="user_username_edit">Username:</label>
+				<input id="user_username_edit" type="text" placeholder="enter a username" required/>
+				<label for="user_password_edit">Password:</label>
+				<input id="user_password_edit" type="text" placeholder="enter a password" required/>
+				<label for="user_email_edit">Email:</label>
+				<input id="user_email_edit" type="email" placeholder="enter a valid email" required/>
+				<label for="user_request_select">Select the Request</label>
+				<select name="Request" id="user_request_select">
+					<option value="PUT">Change this user(PUT)</option>
+					<option value="POST">Create new user(POST)</option>
+					<option value="DELETE">Delete this user(DELETE)</option>
+				</select>
+				<input type="submit" value="submit request">
+			</form>
+-->		</article>			
+	</section>
+	<footer></footer>
+	<script>
+	    $("header").load("data_admin_header.html");
+	    $("footer").load("data_admin_footer.html");
+	</script>
+</body>
+</html>

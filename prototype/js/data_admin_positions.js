@@ -50,7 +50,7 @@ $(document).ready(function() {
             success: function (data) {
             	
             	var counter_start = 1;
-				var headers = ["Id<span>PK</span>", "Field position<span>R</span>"];
+				var headers = ["Id<span>PK</span>", "Field Position<span>R</span>"];
 				var properties = ["Id", "Name"];
 				buildTable(counter_start, headers, properties, data, $_table_output);
         	}
