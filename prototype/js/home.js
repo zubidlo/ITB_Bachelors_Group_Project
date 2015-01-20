@@ -38,7 +38,7 @@ function checkCookie(user_cookie) {
    
     if (user == name) {
         alert("Home page cookie " + user);
-         document.getElementById('boldStuff').innerHTML = "dsfsdff";
+         
 
     } else {
        user = $_user_username_field.val();
@@ -50,10 +50,14 @@ function checkCookie(user_cookie) {
 }
 
 
-function myFunction() {
+function setStorage() {
+
+
 
 var user=getCookie("username");
-    document.getElementById("demo").innerHTML = "Welcome back "+user;
+localStorage.setItem("username", user);
+    
+   document.getElementById("demo").innerHTML = localStorage.getItem("username");
 }
 
 
