@@ -1,19 +1,11 @@
 
-
-
-
-
-
-function retrieve_username() {
-    var user_cookie = document.getElementById('get_user_username_input').value;
-    if (user_cookie !=null) {
-        alert("Value retireved to home page from index " +user_cookie);
-        checkCookie(user_cookie);
-     
-       
-    }
    
-}
+
+
+
+
+
+
 
 
 
@@ -46,7 +38,7 @@ function checkCookie(user_cookie) {
    
     if (user == name) {
         alert("Home page cookie " + user);
-
+         document.getElementById('boldStuff').innerHTML = "dsfsdff";
 
     } else {
        user = $_user_username_field.val();
@@ -55,6 +47,13 @@ function checkCookie(user_cookie) {
            setCookie("username", user, 5);
        }
     }
+}
+
+
+function myFunction() {
+
+var user=getCookie("username");
+    document.getElementById("demo").innerHTML = "Welcome back "+user;
 }
 
 
