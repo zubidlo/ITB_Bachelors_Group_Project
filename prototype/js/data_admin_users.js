@@ -6,6 +6,9 @@
 //this anonymous function (all code of this script is inside this function) is executed after DOM is ready
 $(document).ready(function() {
 
+	//url
+	_url += "/api/users";
+
 	//needed DOM elements
 	var $_user_id_field = $("#get_user_id_input");
 	var $_user_username_field = $("#get_user_username_input");
@@ -20,10 +23,6 @@ $(document).ready(function() {
 	var $_get_user_by_id_form = $("#get_user_by_id_form");
 	var $_get_user_by_username_form = $("#get_user_by_username_form");
 	var $_user_edit_form = $("#user_edit_form");
-
-	//constants
-	var _url = "http://hurlingapi.azurewebsites.net/api/users";
-	//var _url = "http://localhost:51642/api/users";
 
 	//global variables
 	var top = 10;

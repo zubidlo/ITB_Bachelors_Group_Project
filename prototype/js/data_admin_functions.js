@@ -2,6 +2,12 @@
 //they don't manipulate DOM so it's doesn't need to be ready just yet
 //they use jquery so it must be loaded
 
+//constants
+
+//url for development and production
+//var _url = "http://localhost:51642";
+var _url = "http://hurlingapi.azurewebsites.net";
+
 //returns a table header row string built from given array of strings
 var buildTableHeaders = function (headersNamesArray) {
 

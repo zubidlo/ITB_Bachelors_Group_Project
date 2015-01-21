@@ -6,9 +6,8 @@
 //this anonymous function (all code of this script is inside this function) is executed after DOM is ready
 $(document).ready(function() {
 
-	//constants
-	var _url = "http://hurlingapi.azurewebsites.net/api/positions";
-	//var _url = "http://localhost:51642/api/positions";
+	//url
+	_url += "/api/positions";
 
 	//needed DOM elements
 	var $_position_id_field = $("#get_position_id_input");
@@ -111,14 +110,14 @@ $(document).ready(function() {
 					url = url + "/id/" + position.Id;
 					resultMessage = "You edited the position:" + JSON.stringify(position);
 					break;
-				// case "DELETE" :
-				// 	url = url + "/id/" + user.Id;
-				// 	resultMessage = "You deleted the user with Id:" + user.Id;
-				// 	user = undefined;
-				// 	break;
-				// case "POST" : 
-				// 	resultMessage = "You created new user:" + JSON.stringify(user);
-				// 	break;
+				case "DELETE" :
+					url = url + "/id/" + position.Id;
+					resultMessage = "You deleted the position with Id:" + position.Id;
+					position = undefined;
+					break;
+				case "POST" : 
+					resultMessage = "You created new position:" + JSON.stringify(position);
+					break;
 			}
 
 			$.ajax({
