@@ -62,3 +62,11 @@ function checkSession_see_rankings()
 }
 
 
+function logout_user()
+{
+
+
+sessionStorage.clear();
+alert("Session done");
+
+}
