@@ -9,23 +9,23 @@ $(document).ready(function() {
 	//url
 	_url += "/api/positions";
 
-	//needed DOM elements
-	var $_position_id_field = $("#get_position_id_input");
-	var $_position_name_field = $("#get_position_name_input");
-	var $_position_id_edit = $("#position_id_edit");
-	var $_position_name_edit = $("#position_name_edit");
+	//needed DOM elements into jquery objects
+	var $_id_field = $("#get_id_input");
+	var $_name_field = $("#get_name_input");
+	var $_id_edit = $("#id_edit");
+	var $_name_edit = $("#name_edit");
 	var $_table_output = $("#table_output");
 	var $_text_output = $("#text_output");
-	var $_get_position_by_id_form = $("#get_position_by_id_form");
-	var $_get_position_by_name_form = $("#get_position_by_name_form");
-	var $_position_edit_form = $("#position_edit_form");
+	var $_get_by_id_form = $("#get_by_id_form");
+	var $_get_by_name_form = $("#get_by_name_form");
+	var $_edit_form = $("#edit_form");
 
 	//this method returns new position object build from web form fields
 	var readPositionFromFields = function () {
 		
 		var position = {
-			Id : $_position_id_edit.val(),
-			Name : $_position_name_edit.val()
+			Id : $_id_edit.val(),
+			Name : $_name_edit.val()
 		};
 		return position;
 	}
@@ -33,8 +33,8 @@ $(document).ready(function() {
 	//fills user edit form input fields with user object properties
 	var fillPositionFields = function (position) {
 
-		$_position_id_edit.val(position.Id);
-		$_position_name_edit.val(position.Name);
+		$_id_edit.val(position.Id);
+		$_name_edit.val(position.Name);
 	}
 
 	//all positions GET request (support oData queries)
@@ -60,11 +60,11 @@ $(document).ready(function() {
 	getAllPositions();
 
 	//position by id GET request
-	$_get_position_by_id_form.submit(function(event) {
+	$_get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
 		$.ajax({
-            url: _url + "/id/" + $_position_id_field.val(),
+            url: _url + "/id/" + $_id_field.val(),
             success: function (data, textStatus, request) {
             	
             	fillPositionFields(data);
@@ -79,11 +79,11 @@ $(document).ready(function() {
 
 
 	//position by name GET request
-	$_get_position_by_name_form.submit(function(event) {
+	$_get_by_name_form.submit(function(event) {
 
 		event.preventDefault();
 		$.ajax({
-            url: _url + "/name/" + $_position_name_field.val(),
+            url: _url + "/name/" + $_name_field.val(),
             success: function (data, textStatus, request) {
             	
             	fillPositionFields(data);
@@ -97,7 +97,7 @@ $(document).ready(function() {
 	});
 
 	//POST PUT DELETE request
-	$_position_edit_form.submit(function(event){
+	$_edit_form.submit(function(event){
 
 			event.preventDefault();
 			var requestMethod = $("option:checked").val();

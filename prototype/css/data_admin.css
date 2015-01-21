@@ -5,16 +5,21 @@
 }
 
 body {
-	margin-top: 40px;
+	margin-top: 20px;
 	margin-bottom: 40px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
-nav {
+header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 40px;
+	height: 20px;
 	width: 100%;
+  
+}
+
+nav {
   margin-top: 10px;
 }
 
@@ -34,15 +39,7 @@ article {
   /* position is static by default */
   display: inline;
   float: right;
-  margin-top: 40px;
-}
-
-#table_article {
-  width: 75%;
-}
-
-#forms_article {
-  width: 25%;
+  margin-top: 20px;
 }
 
 table {
@@ -57,7 +54,7 @@ label {
 	display: block;
 }
 
-header, footer, h1, h2 {
+header, footer {
   text-align: center;
 }
 
@@ -67,4 +64,21 @@ span {
 
 ul li {
   display : inline;
+}
+
+legend {
+  font-weight: bold;
+}
+
+input[type="button"] {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#table_article {
+  width: 75%;
+}
+
+#forms_article {
+  width: 25%;
 }

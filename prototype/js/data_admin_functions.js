@@ -5,8 +5,8 @@
 //constants
 
 //url for development and production
-//var _url = "http://localhost:51642";
-var _url = "http://hurlingapi.azurewebsites.net";
+var _url = "http://localhost:51642";
+//var _url = "http://hurlingapi.azurewebsites.net";
 
 //returns a table header row string built from given array of strings
 var buildTableHeaders = function (headersNamesArray) {

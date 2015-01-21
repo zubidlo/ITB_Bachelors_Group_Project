@@ -9,25 +9,25 @@ $(document).ready(function() {
 	//url
 	_url += "/api/users";
 
-	//needed DOM elements
-	var $_user_id_field = $("#get_user_id_input");
-	var $_user_username_field = $("#get_user_username_input");
-	var $_user_id_edit = $("#user_id_edit");
-	var $_user_username_edit = $("#user_username_edit");
-	var $_user_password_edit = $("#user_password_edit");
-	var $_user_email_edit = $("#user_email_edit");
+	//needed DOM elements into jquery objects
+	var $_get_by_id_form = $("#get_by_id_form");
+	var $_id_field = $("#get_id_input");
+	var $_username_field = $("#get_username_input");
+	var $_id_edit = $("#id_edit");
+	var $_username_edit = $("#username_edit");
+	var $_password_edit = $("#password_edit");
+	var $_email_edit = $("#email_edit");
 	var $_table_output = $("#table_output");
 	var $_text_output = $("#text_output");
 	var $_previous_page_button = $("#previous_page_button");
 	var $_next_page_button = $("#next_page_button");
-	var $_get_user_by_id_form = $("#get_user_by_id_form");
-	var $_get_user_by_username_form = $("#get_user_by_username_form");
-	var $_user_edit_form = $("#user_edit_form");
+	var $_get_by_username_form = $("#get_by_username_form");
+	var $_edit_form = $("#edit_form");
 
 	//global variables
 	var top = 10;
 	var skip = 0;
-	var user_count;
+	var count;
 
 	//gets user count
 	var updateUserCount = function() {
@@ -35,7 +35,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: _url, 
 			success: function(data) {
-				user_count = data.length;
+				count = data.length;
 			}
 		});
 	}
@@ -46,10 +46,10 @@ $(document).ready(function() {
 	var readUserFromInputFields = function () {
 		
 		var user = {
-			Id : $_user_id_edit.val(),
-			Username : $_user_username_edit.val(),
-			Password : $_user_password_edit.val(),
-			Email : $_user_email_edit.val()
+			Id : $_id_edit.val(),
+			Username : $_username_edit.val(),
+			Password : $_password_edit.val(),
+			Email : $_email_edit.val()
 		};
 		return user;
 	}
@@ -57,10 +57,10 @@ $(document).ready(function() {
 	//fills user edit form input fields with user object properties
 	var fillUserTextFields = function (user) {
 
-		$_user_id_edit.val(user.Id);
-		$_user_username_edit.val(user.Username);
-		$_user_password_edit.val(user.Password);
-		$_user_email_edit.val(user.Email);
+		$_id_edit.val(user.Id);
+		$_username_edit.val(user.Username);
+		$_password_edit.val(user.Password);
+		$_email_edit.val(user.Email);
 
 	}
 
@@ -105,18 +105,18 @@ $(document).ready(function() {
 	//next table page load
 	$_next_page_button.on("click", function(event) {
 
-		if (skip + top <= user_count) {
+		if (skip + top <= count) {
 			skip = skip + top;
 			getUsers(top, skip);
 		}
 	});
 
 	//user by id GET request
-	$_get_user_by_id_form.submit(function(event) {
+	$_get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
 		$.ajax({
-            url: _url + "/id/" + $_user_id_field.val(),
+            url: _url + "/id/" + $_id_field.val(),
             success: function (data, textStatus, request) {
             	
             	fillUserTextFields(data);
@@ -130,11 +130,11 @@ $(document).ready(function() {
 	});
 
 	//user by username GET request
-	$_get_user_by_username_form.submit(function(event) {
+	$_get_by_username_form.submit(function(event) {
 
 		event.preventDefault();
 		$.ajax({
-            url: _url + "/username/" + $_user_username_field.val(),
+            url: _url + "/username/" + $_username_field.val(),
             success: function (data, textStatus, request) {
             	
             	fillUserTextFields(data);
@@ -148,7 +148,7 @@ $(document).ready(function() {
 	});
 
 	//POST PUT DELETE request
-	$_user_edit_form.submit(function(event){
+	$_edit_form.submit(function(event){
 
 			event.preventDefault();
 			var requestMethod = $("option:checked").val();
