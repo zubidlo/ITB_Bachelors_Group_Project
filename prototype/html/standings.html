@@ -7,21 +7,24 @@
 <link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
 <link rel="stylesheet" type="text/css" href="../css/standings_page.css">
 <script src="../js/jquery.min.js"></script>
+<script src="../js/standings.js"></script>
 <script src="../js/custom.js"></script>
+
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
 
 </head>
-<body>
+<body onload="set_user()">
 <div class="header">
   <div id="site_title"><a href="../index.html"><img src="../img/icons/logo.png" alt=""></a></div>
   <!-- Dynamic Menu -->
   <ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-    <li><a href="home.html">Home</a></li>
+    <li><a href="javascript:;" onclick="checkSession_home()">Home</a></li>
     <li><a href="http://www.gaa.ie/">GAA Official Site</a></li>
     <li><a href="http://www.gaa.ie/fixtures-and-results/club-results/">Recent Results</a></li>
     <li class="last"><a href="#">Forum</a></li>
   </ol>
   <div class="clr"></div>
+   <p id="demo">.</p>
   <!-- menu 2 -->
  
   <div class="clr"></div>
@@ -64,28 +67,28 @@
     </div>
             
 
-  <ul class="ca-menu" style="margin: 40px 0">
-    <li> <a href="my_team.html"> <span class="ca-icon">A</span>
+ <ul class="ca-menu" style="margin: 40px 0">
+    <li> <a href="javascript:;"> <span class="ca-icon">A</span>
       <div class="ca-content">
-        <h2 class="ca-main">View my Team</h2>
+        <h2 class="ca-main" onclick="checkSession_view_team()">View my Team</h2>
         <h3 class="ca-sub">Take a look at how you're doing</h3>
       </div>
       </a> </li>
-    <li> <a href="#"> <span class="ca-icon">I</span>
+    <li> <a href="javascript:;"> <span class="ca-icon">I</span>
       <div class="ca-content">
-        <h2 class="ca-main">Make transfers</h2>
+        <h2 class="ca-main" onclick="">Make transfers</h2>
         <h3 class="ca-sub">Use your transfers to optimise team</h3>
       </div>
       </a> </li>
-    <li> <a href="#"> <span class="ca-icon">C</span>
+    <li> <a href="http://www.gaa.ie/gaa-news-and-videos/daily-news/1/0910142311-2014-football-and-hurling-championship-draws/"> <span class="ca-icon">C</span>
       <div class="ca-content">
         <h2 class="ca-main">See fixtures</h2>
         <h3 class="ca-sub">View upcoming hurling fixtures</h3>
       </div>
       </a> </li>
-    <li> <a href="#"> <span class="ca-icon">S</span>
+    <li> <a href="javascript:;"> <span class="ca-icon">S</span>
       <div class="ca-content">
-        <h2 class="ca-main">See Rankings</h2>
+        <h2 class="ca-main" onclick="">See Rankings</h2>
         <h3 class="ca-sub">View the top 10 players overall</h3>
       </div>
       </a> </li>
