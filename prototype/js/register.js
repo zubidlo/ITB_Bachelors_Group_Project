@@ -1,227 +1,117 @@
-$(document).ready(function() {
 
-	//dom elements
-	var $_user_id_field = $("#get_user_id_input");
-	var $_user_username_field = $("#get_user_username_input");
-	var $_user_id_edit = $("#user_id_edit");
-	var $_user_username_edit = $("#user_username_edit");
-	var $_user_password_edit = $("#user_password_edit");
-	var $_user_email_edit = $("#user_email_edit");
-
-	
-	//return table row filled with headers from given array
-	function buildTableHeaders(headersNamesArray) {
-
-		var headers = '<tr>';
-		for(var i = 0; i < headersNamesArray.length; headers += '<th>' + headersNamesArray[i++] + '</th>');
-		headers += '</tr>';
-		return headers;
-	}
-
-	function buildUserTableRow(object) {
-	
-		var row = '<tr>';
-		row += '<td>' + object.Id + '</td>';
-		row += '<td>' + object.Username + '</td>';
-		row += '<td>' + object.Password + '</td>';
-		row += '<td>' + object.Email + '</td>';
-		row += '</tr>';
-		return row;
-	}
+	/*
+	.
+	This is the register page script , it is used to register
+	a user if he clicks the register button on the login page
+	It simply takes the users username, password and email
+	from the form fields he has filled in and enters the new
+	user into the database, the database will not accept duplicate
+	user names
 
 
-		function add_user() {
-	
-			$.ajax({
-            type: "POST",
-            url: "http://hurlingapi.azurewebsites.net/api/users",
-            data: readUserFromInputFields(),
-            dataType: "json",
-            success: function (data) {
-            	
-            	getAllUsers();
-            	clearUserTextFields();
+	 HTML files used in:
+	register.html
 
-        	},
-        	error : function (request, textStatus, errorThrown) {
-        		
-        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-        	}
-		});
-	}
+	*/
 
 
-	
-	
-	
-	
+	$(document).ready(function() {
 
+		//dom elements
+		var $_user_id_field = $("#get_user_id_input");
+		var $_user_username_field = $("#get_user_username_input");
+		var $_user_id_edit = $("#user_id_edit");
+		var $_user_username_edit = $("#user_username_edit");
+		var $_user_password_edit = $("#user_password_edit");
+		var $_user_email_edit = $("#user_email_edit");
 
-	function putUsersInTable(data) {
 		
-		//console.dir(data);
 
-		//make table with first table row with headers
-		var table = '<table>';
-		table += buildTableHeaders(['Id', 'Username', 'Password', 'Email']);
+
+			function add_user() {
 		
-		//if given data is an array:
-		if($.isArray(data)) {
+				$.ajax({
+	            type: "POST",
+	            url: "http://hurlingapi.azurewebsites.net/api/users",
+	            data: readUserFromInputFields(),
+	            dataType: "json",
+	            success: function (data) {
+	            	
+	            	getAllUsers();
+	            	clearUserTextFields();
 
-			//traverse the array
-			$.each(data, function(index, value) {
-				//console.log(index);
-				//console.dir(value);
-
-				//build each table row
-				table += buildUserTableRow(value);
+	        	},
+	        	error : function (request, textStatus, errorThrown) {
+	        		
+	        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        	}
 			});
 		}
-		//if response data is object:
-		else {
-			table += buildUserTableRow(data);
+
+
+		function clearUserTextFields() {
+
+			$_user_id_edit.val("0");
+			$_user_username_edit.val('');
+			$_user_password_edit.val('');
+			$_user_email_edit.val('');
 		}
+
+		function fillUserTextFields(object) {
+
+			//$_user_id_edit.val(object.Id);
+			$_user_username_edit.val(object.Username);
+			$_user_password_edit.val(object.Password);
+			$_user_email_edit.val(object.Email);
+
+		}
+
 		
-		//close table element
-		table += '</table>';
+		function readUserFromInputFields() {
+			
+			var user = {
+				Id : $_user_id_edit.val(),
+				Username : $_user_username_edit.val(),
+				Password : $_user_password_edit.val(),
+				Email : $_user_email_edit.val()
+			};
 
-		//empty output div and append a new table to it
-		$('#user_output_div').empty().append(table);
+			return user;
+		}
 
-	}
-
-
-	function clearUserTextFields() {
-
-		$_user_id_edit.val("0");
-		$_user_username_edit.val('');
-		$_user_password_edit.val('');
-		$_user_email_edit.val('');
-	}
-
-	function fillUserTextFields(object) {
-
-		//$_user_id_edit.val(object.Id);
-		$_user_username_edit.val(object.Username);
-		$_user_password_edit.val(object.Password);
-		$_user_email_edit.val(object.Email);
-
-	}
-
-	//this method returns new user object build from web form fields
-	//if new user is posted the user id is ignored (database server makes new id)
-	//, but id still must be inclued (any value) so make sure there is some numerical value in input 
-	//field when parsed to user.Id variable
-	//if a user is edited id must be valid (only existing user can be edited)
-	function readUserFromInputFields() {
 		
-		var user = {
-			Id : $_user_id_edit.val(),
-			Username : $_user_username_edit.val(),
-			Password : $_user_password_edit.val(),
-			Email : $_user_email_edit.val()
-		};
+		//get all users GET request
+		function getAllUsers() {
 
-		return user;
-	}
+			$.ajax({
+	            type: "GET",
+	            url: "http://hurlingapi.azurewebsites.net/api/users",
+	            dataType: "json",
+	            success: function (data) {
 
-	//get all users GET request
-	function getAllUsers() {
+	            	putUsersInTable(data);
+	        	},
+	        	error : function (request, textStatus, errorThrown) {
+	        		
+	        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        		clearUserTextFields();
+	           	}
+			});
+		}
 
-		$.ajax({
-            type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users",
-            dataType: "json",
-            success: function (data) {
+		getAllUsers();
 
-            	putUsersInTable(data);
-        	},
-        	error : function (request, textStatus, errorThrown) {
-        		
-        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-        		clearUserTextFields();
-           	}
-		});
-	}
-
-	getAllUsers();
-
-	//get user by id GET request
-	$("#get_user_by_id_button").on("click", function(event) {
-
-		$.ajax({
-            type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users/id/" + $_user_id_field.val(),
-            dataType: "json",
-            success: function (data) {
-            	
-            	fillUserTextFields(data);
-        	},
-        	error : function (request, textStatus, errorThrown) {
-
-        		window.alert(textStatus + ": " + errorThrown);
-        		clearUserTextFields();
-           	}
-		});
-	});
-
-	//get user by username GET request
-	$("#get_user_by_username_button").on("click", function(event) {
-
-		$.ajax({
-            type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users/username/" + $_user_username_field.val(),
-            dataType: "json",
-            success: function (data) {
-            	
-            	alert("found user");
-            	
-        	},
-        	error : function (request, textStatus, errorThrown) {
-
-        		alert("No User found");
-        		clearUserTextFields();
-        		
-           	}
-		});
-	});
-
-//create new user POST request
-	$("#post_new_user_button").on("click", function(event){
 		
-		find_duplicates();
-	
-	});
 
 
-
-function find_duplicates ()
-{
-
-
-	$.ajax({
-            type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users/username/" + $_user_username_field.val(),
-            dataType: "json",
-            success: function (data) {
-            	// i want this to say if the user if found, then just alert the user name is taken
-            	
-            	alert("found user");
-
-            	
-        	},
-        	error : function (request, textStatus, errorThrown) {
-
-        		// user not found, then add user method runs
-        		alert("No User found");
-        		add_user();
-        		
-           	}
+	//create new user POST request
+		$("#post_new_user_button").on("click", function(event){
+			
+			add_user();
+		
 		});
 
 
-}
 
-
-});
+	});
 
