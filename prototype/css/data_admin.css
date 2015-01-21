@@ -7,7 +7,6 @@
 body {
 	margin-top: 40px;
 	margin-bottom: 40px;
-	//background-color: white;
 }
 
 nav {
@@ -16,7 +15,7 @@ nav {
 	left: 0;
 	height: 40px;
 	width: 100%;
-	//background-color: beige;
+  margin-top: 10px;
 }
 
 footer {
@@ -25,7 +24,6 @@ footer {
   left: 0;
   height: 40px;
   width: 100%;
-  //background-color: bisque;
 }
 
 section {
@@ -37,21 +35,18 @@ article {
   display: inline;
   float: right;
   margin-top: 40px;
-  width: 50%;
-  //background-color: peachpuff;
+}
+
+#table_article {
+  width: 75%;
+}
+
+#forms_article {
+  width: 25%;
 }
 
 table {
 	border-collapse: collapse;
-	//background-color: linen;
-}
-
-form {
-	//background-color: lavender;
-}
-
-th {
-	//background-color: palegreen;
 }
 
 table, th, td {
@@ -62,7 +57,7 @@ label {
 	display: block;
 }
 
-header, footer {
+header, footer, h1, h2 {
   text-align: center;
 }
 
@@ -70,6 +65,6 @@ span {
   color : red;
 }
 
-#footer_list li {
+ul li {
   display : inline;
 }
