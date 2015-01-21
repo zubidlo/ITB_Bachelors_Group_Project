@@ -14,7 +14,7 @@
 
 function setStorage() 
 {
-   document.getElementById("demo").innerHTML = localStorage.getItem("username");
+   document.getElementById("demo").innerHTML = sessionStorage.getItem("username");
 }
 
 

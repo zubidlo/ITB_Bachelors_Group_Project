@@ -112,7 +112,7 @@
 
 
 	var user= $("#get_user_username_input").val();
-	localStorage.setItem("username", user);
+	sessionStorage.setItem("username", user);
 	  
 	}
 
