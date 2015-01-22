@@ -15,15 +15,37 @@ var _skip = 0;
 //items in the table
 var _count = 0;
 
-//gets a resource count
-var updateCount = function(url, callback) {
+var printOutput = function($output, textStatus, request) {
+
+	$output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
+}
+
+var printError = function($output, request, textStatus, errorThrown) {
+
+	$output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+}
+
+//general ajaxRequest
+var ajaxRequest = function(url, successCallback, errorCallback, type, dataType, data ) {
 	
+	type = typeof type === "undefined" ? "GET" : type;
+	dataType = typeof dataType === "undefined" ? "json" : dataType;
+	data = typeof data === "undefined" ? "undefined" : data;
+	errorCallback = typeof errorCallback === "undefined" ? function() {} : errorCallback;
+
 	$.ajax({
-		url: url, 
-		success: function(data) {
-			_count = parseInt(data.length);
-			callback();
-		}
+        type : type,
+        url : url,
+        data : data,
+        dataType : dataType,
+        success : function (data, textStatus, request) {
+        
+        	successCallback(data, textStatus, request);
+    	},
+    	error : function (request, textStatus, errorThrown) {
+    		
+    		errorCallback(request, textStatus, errorThrown);
+    	}
 	});
 }
 

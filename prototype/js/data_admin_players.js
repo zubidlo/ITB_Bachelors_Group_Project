@@ -33,7 +33,7 @@ $(document).ready(function() {
 	//this method returns new player object build from web form fields
 	var readPlayerFromInputFields = function () {
 		
-		var player = {
+		return {
 			Id : $_id_edit.val(),
 			FirstName : $_firstname_edit.val(),
 			LastName : $_lastname_edit.val(),
@@ -45,7 +45,6 @@ $(document).ready(function() {
 			Injured : $_injured_checkbox.val("checked") === "checked" ? "true" : "false",
 			PositionId : $_position_id_edit.val()
 		};
-		return player;
 	}
 
 	//fills player edit form input fields with player object properties
@@ -59,13 +58,11 @@ $(document).ready(function() {
 		$_overallpoints_edit.val(player.OverallPoints);
 		$_price_edit.val(player.Price);
 		$_rating_edit.val(player.Rating);
-		
 		if (player.Injured === "true") {
 			$_injured_checkbox.val("checked", "checked");
 		} else {
 			$_injured_checkbox.removeAttr("checked");
 		}
-		
 		$_position_id_edit.val(player.PositionId);
 	}
 
@@ -83,40 +80,27 @@ $(document).ready(function() {
 	//top=10 and skip=20 --> table with from 21 to 30 items
 	var getPlayers = function(top, skip) {
 
-		$.ajax({
-            url: _url + "?$orderby=LastName&$top=" + top + "&$skip=" + skip,
-            success: function (data) {
+		var url = _url + "?$orderby=LastName&$top=" + top + "&$skip=" + skip;
+		var successCallback = function (data, textStatus, request) {
             	
-            	var counter_start = skip;
-				var headers = ["Id<span>(PK)</span>",
-								 "FirstName<span>(R)</span>",
-								 "LastName<span>(R)</span>",
-								 "GaaTeam<span>(R)</span>",
-								 "Last Week Points<span>(R)</span>",
-								 "OverallPoints<span>(R)</span>",
-								 "Price<span>(R)</span>",
-								 "Rating<span>(R)</span>",
-								 "Injured<span>(R)</span>",
-								 "Position Id<span>(FK)</span>"];
-				var properties = ["Id", 
-								"FirstName",
-								"LastName",
-								"GaaTeam",
-								"LastWeekPoints",
-								"OverallPoints",
-								"Price",
-								"Rating",
-								"Injured",
-								"PositionId"];
-				buildTable(counter_start, headers, properties, data, $_table_output);
-        	}
-		});
+	    	var counter_start = skip;
+			var headers = ["Id<span>(PK)</span>", "FirstName<span>(R)</span>", "LastName<span>(R)</span>",
+							 "GaaTeam<span>(R)</span>", "Last Week Points<span>(R)</span>", "OverallPoints<span>(R)</span>",
+							 "Price<span>(R)</span>", "Rating<span>(R)</span>", "Injured<span>(R)</span>",
+							 "Position Id<span>(FK)</span>"];
+			var properties = ["Id", "FirstName", "LastName", "GaaTeam",	"LastWeekPoints",
+								"OverallPoints", "Price", "Rating", "Injured", "PositionId"];
+			buildTable(counter_start, headers, properties, data, $_table_output);
+		}
+		ajaxRequest(url, successCallback);
 	}
 
 	_top = $_table_rows_input.val();
 
 	//set global variable count
-	updateCount(_url, function() {
+	ajaxRequest(_url, function(data, textStatus, request) {
+
+		_count = parseInt(data.length);
 		getPlayers(_top, _skip);
 	});
 
@@ -146,61 +130,51 @@ $(document).ready(function() {
 	$_get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		$.ajax({
-            url: _url + "/id/" + $_id_field.val(),
-            success: function (data, textStatus, request) {
+		var url = _url + "/id/" + $_id_field.val();
+		var successCallback = function(data, textStatus, request) {
+			
+			fillPlayerTextFields(data);
+            printOutput($_text_output, textStatus, request);
+		}
+		var errorCallback = function (request, textStatus, errorThrown) {
 
-            	fillPlayerTextFields(data);
-            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-        	},
-        	error : function (request, textStatus, errorThrown) {
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
 
-        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-           	}
-		});
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
 	$_edit_form.submit(function(event){
 
 		event.preventDefault();
-		var requestMethod = $("option:checked").val();
-		var player = readPlayerFromInputFields();
+
 		var url = _url;
-		var resultMessage;
-
-		switch(requestMethod) {
-			case "PUT" :
-				url = url + "/id/" + player.Id;
-				resultMessage = "You edited the player:" + JSON.stringify(player);
-				break;
-			case "DELETE" :
-				url = url + "/id/" + player.Id;
-				resultMessage = "You deleted the player with Id:" + player.Id;
-				player = undefined;
-				break;
-			case "POST" : 
-				resultMessage = "You created new player:" + JSON.stringify(player);
-				break;
-		}
-
-		$.ajax({
-            type: requestMethod,
-            url: url,
-            data: player,
-            dataType: "json",
-            success: function (data, textStatus, request) {
+		var player = readPlayerFromInputFields();
+		var successCallback = function (data, textStatus, request) {
             
-            	updateCount(_url, function() {
-					getPlayers(_top, _skip);
-				});
-            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-        	},
-        	error : function (request, textStatus, errorThrown) {
-        		
-        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-        	}
-		});
+        	ajaxRequest(_url, function(data, textStatus, request) {
+
+				_count = parseInt(data.length);
+				getPlayers(_top, _skip);
+			});
+        	printOutput($_text_output, textStatus, request);
+    	}
+    	var errorCallback = function (request, textStatus, errorThrown) {
+
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
+		var type = $("option:checked").val();
+		if (type === "PUT") {
+			url = url + "/id/" + player.Id;
+		}
+		else if (type === "DELETE") {
+			url = url + "/id/" + player.Id;
+			player = "undefined";
+		}
+		var dataType = "json";
+
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, player );
 	});
 });
 
