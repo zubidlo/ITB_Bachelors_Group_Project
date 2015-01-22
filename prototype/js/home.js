@@ -88,5 +88,6 @@ function logout_user()
 
 sessionStorage.clear();
 alert("Session done");
+ 
 
 }

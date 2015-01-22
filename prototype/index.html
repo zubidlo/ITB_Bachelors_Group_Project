@@ -43,16 +43,17 @@
 
  
 			<form id="get_user_by_username_form" method="get" action="#">
-				<label for="get_user_username_input">Get User by Username</label>
-				<input id="get_user_username_input" type="text"  placeholder="enter a user username" required>
-				<input id="get_user_by_username_button" type="submit" onclick="retrieve_username()" value="submit request">
-				<label>Password</label>
-           		<label for="user_password_edit">Password:</label>
-				<input id="user_password_edit" type="text"  placeholder="enter a password" required/>
+				<label for="get_user_username_input">Enter Username</label>
+				<input id="get_user_username_input" type="text"  placeholder="Enter your username here" required>
+				<br>
+		   		<label for="user_password_edit">Enter Password</label>
+				<input id="user_password_edit" type="text"  placeholder="Enter your password here" required/>
+				<input id="get_user_by_username_button" type="submit" onclick="retrieve_username()" value="Login">
 			</form>
 			
-
+				<br><br>
 			  <form action="html/register.html">
+			  <label for="register_button">Not Registered? Click Here!</label>
     <input type="submit" value="Register">
 </form>
  
