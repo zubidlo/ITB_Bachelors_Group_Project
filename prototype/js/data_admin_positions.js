@@ -48,23 +48,24 @@ $(document).ready(function() {
 	//injects table of top items into DOM
 	var getPositions = function(top, skip) {
 
-		$.ajax({
-            url: _url + "?$orderby=Name&$top=" + top + "&$skip=" + skip,
-            success: function (data) {
+		var url = _url + "?$orderby=Name&$top=" + top + "&$skip=" + skip;
+		var successCallback = function (data, textStatus, request) {
             	
-            	var counter_start = skip;
-				var headers = ["Id<span>(PK)</span>", "Field Position<span>(R)</span>"];
-				var properties = ["Id", "Name"];
-				buildTable(counter_start, headers, properties, data, $_table_output);
-        	}
-		});
+        	var counter_start = skip;
+			var headers = ["Id<span>(PK)</span>", "Field Position<span>(R)</span>"];
+			var properties = ["Id", "Name"];
+			buildTable(counter_start, headers, properties, data, $_table_output);
+    	}
+		ajaxRequest(url, successCallback);
 	}
 
 	//set table page rows
 	_top = $_table_rows_input.val();
 
 	//set global variable count
-	updateCount(_url, function() {
+	ajaxRequest(_url, function(data, textStatus, request) {
+
+		_count = parseInt(data.length);
 		getPositions(_top, _skip);
 	});
 
@@ -94,79 +95,67 @@ $(document).ready(function() {
 	$_get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		$.ajax({
-            url: _url + "/id/" + $_id_field.val(),
-            success: function (data, textStatus, request) {
-            	
-            	fillPositionFields(data);
-            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-        	},
-        	error : function (request, textStatus, errorThrown) {
+		var url = _url + "/id/" + $_id_field.val();
+		var successCallback = function(data, textStatus, request) {
+			
+			fillPositionFields(data);
+            printOutput($_text_output, textStatus, request);
+		}
+		var errorCallback = function (request, textStatus, errorThrown) {
 
-        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-           	}
-		});
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//position by name GET request
 	$_get_by_name_form.submit(function(event) {
 
 		event.preventDefault();
-		$.ajax({
-            url: _url + "/name/" + $_name_field.val(),
-            success: function (data, textStatus, request) {
+		var url = _url + "/name/" + $_name_field.val();
+		var successCallback = function (data, textStatus, request) {
             	
-            	fillPositionFields(data);
-            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-        	},
-        	error : function (request, textStatus, errorThrown) {
+        	fillPositionFields(data);
+        	printOutput($_text_output, textStatus, request);
+    	}
+    	var errorCallback = function (request, textStatus, errorThrown) {
 
-        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-           	}
-		});
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
 	$_edit_form.submit(function(event){
 
 		event.preventDefault();
-		var requestMethod = $("option:checked").val();
-		var position = readPositionFromFields();
+
 		var url = _url;
-		var resultMessage;
-
-		switch(requestMethod) {
-			case "PUT" :
-				url = url + "/id/" + position.Id;
-				resultMessage = "You edited the position:" + JSON.stringify(position);
-				break;
-			case "DELETE" :
-				url = url + "/id/" + position.Id;
-				resultMessage = "You deleted the position with Id:" + position.Id;
-				position = undefined;
-				break;
-			case "POST" : 
-				resultMessage = "You created new position:" + JSON.stringify(position);
-				break;
-		}
-
-		$.ajax({
-            type: requestMethod,
-            url: url,
-            data: position,
-            dataType: "json",
-            success: function (data, textStatus, request) {
+		var position = readPositionFromFields();
+		var successCallback = function (data, textStatus, request) {
             
-            	updateCount(_url, function() {
-					getPositions(_top, _skip);
-				});
-            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-        	},
-        	error : function (request, textStatus, errorThrown) {
-        		
-        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-        	}
-		});
+        	ajaxRequest(_url, function(data, textStatus, request) {
+
+				_count = parseInt(data.length);
+				getPositions(_top, _skip);
+			});
+        	printOutput($_text_output, textStatus, request);
+    	}
+    	var errorCallback = function (request, textStatus, errorThrown) {
+
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
+		var type = $("option:checked").val();
+		if (type === "PUT") {
+			url = url + "/id/" + position.Id;
+		}
+		else if (type === "DELETE") {
+			url = url + "/id/" + position.Id;
+			position = "undefined";
+		}
+		var dataType = "json";
+
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, position);
 	});
 });
 

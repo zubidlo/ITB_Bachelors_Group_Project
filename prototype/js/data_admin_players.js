@@ -126,7 +126,7 @@ $(document).ready(function() {
 		getPlayers(_top, _skip);
 	});
 
-	// //user by id GET request
+	//user by id GET request
 	$_get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
