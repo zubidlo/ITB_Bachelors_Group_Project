@@ -7,6 +7,39 @@
 //url for development and production
 //var _url = "http://localhost:51642";
 var _url = "http://hurlingapi.azurewebsites.net";
+//how many rows will table have
+var _top;
+//starting point in the table (0)
+var _skip = 0;
+//items in the table
+var _count = 0;
+
+//gets a resource count
+var updateCount = function(url) {
+	
+	$.ajax({
+		url: url, 
+		success: function(data) {
+			_count = parseInt(data.length);
+		}
+	});
+}
+
+var tablePreviousPage = function(skip, top) {
+
+	if (parseInt(skip) > 0) {
+		return parseInt(skip) - parseInt(top);
+	}
+	return skip;
+}
+
+var tableNextPage = function(skip, top, count) {
+	
+	if (parseInt(skip) + parseInt(top) < parseInt(count)) {
+		return parseInt(skip) + parseInt(top);
+	}
+	return skip;
+}
 
 //returns a table header row string built from given array of strings
 var buildTableHeaders = function (headersNamesArray) {
@@ -60,23 +93,3 @@ var buildTable = function (counter_start, headers, properties, data, $_output) {
 	table += "</table>";
 	$_output.empty().append(table);
 }
-
-// //clears given form input fields to default values
-// //$_form is jquery object
-// var clearFormInputFields = function ($_form) {
-	
-// 	$.each($("#" + $_form.attr("id") + " input"), function() {
-		
-// 		switch (this.type) {
-// 			case "number": 
-// 				this.value = "0";
-// 				break;
-// 			case "text":
-// 				this.value = "";
-// 				break;
-// 			case "email":
-// 				this.value = "";
-// 				break;
-// 		}
-// 	});
-// }

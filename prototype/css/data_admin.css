@@ -5,7 +5,7 @@
 }
 
 body {
-	margin-top: 20px;
+	margin-top: 40px;
 	margin-bottom: 40px;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
@@ -14,7 +14,7 @@ header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 20px;
+	height: 40px;
 	width: 100%;
   
 }
@@ -39,7 +39,7 @@ article {
   /* position is static by default */
   display: inline;
   float: right;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 table {

@@ -10,6 +10,8 @@ $(document).ready(function() {
 	_url += "/api/users";
 
 	//needed DOM elements into jquery objects
+	var $_table_rows_form = $("#table_rows_form");
+	var $_table_rows_input = $("#table_rows_input");
 	var $_get_by_id_form = $("#get_by_id_form");
 	var $_id_field = $("#get_id_input");
 	var $_username_field = $("#get_username_input");
@@ -24,23 +26,11 @@ $(document).ready(function() {
 	var $_get_by_username_form = $("#get_by_username_form");
 	var $_edit_form = $("#edit_form");
 
-	//global variables
-	var top = 10;
-	var skip = 0;
-	var count;
+	//set table page rows
+	_top = $_table_rows_input.val();
 
-	//gets user count
-	var updateUserCount = function() {
-		
-		$.ajax({
-			url: _url, 
-			success: function(data) {
-				count = data.length;
-			}
-		});
-	}
-
-	updateUserCount();
+	//set global variable count
+	updateCount(_url);
 
 	//this method returns new user object build from web form fields
 	var readUserFromInputFields = function () {
@@ -78,6 +68,9 @@ $(document).ready(function() {
 	//top=10 and skip=20 --> table with from 21 to 30 items
 	var getUsers = function(top, skip) {
 
+		// console.lot(top);
+		// console.log(skip);
+		// console.log(_count);
 		$.ajax({
             url: _url + "?$orderby=Username&$top=" + top + "&$skip=" + skip,
             success: function (data) {
@@ -91,24 +84,28 @@ $(document).ready(function() {
 	}
 
 	//load the table at start
-	getUsers(top, skip);
+	getUsers(_top, _skip);
 
-	//previous table page load
-	$_previous_page_button.on("click", function(event) {
-		
-		if (skip > 0) {
-			skip = skip - top;
-			getUsers(top, skip);
-		}
+	$_table_rows_form.submit(function(event) {
+
+		event.preventDefault();
+		_top = $_table_rows_input.val();
+		_skip = 0;
+		getUsers(_top, _skip);
 	});
 
-	//next table page load
-	$_next_page_button.on("click", function(event) {
+	$_previous_page_button.on("click", function() {
 
-		if (skip + top <= count) {
-			skip = skip + top;
-			getUsers(top, skip);
-		}
+		event.preventDefault();
+		_skip = tablePreviousPage(_top, _skip);
+		getUsers(_top, _skip);
+	});
+
+	$_next_page_button.on("click", function() {
+
+		event.preventDefault();
+		_skip = tableNextPage(_top, _skip, _count);
+		getUsers(_top, _skip);
 	});
 
 	//user by id GET request

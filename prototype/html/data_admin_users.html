@@ -6,26 +6,35 @@
 	<link rel="stylesheet" href="../css/data_admin.css">
 	<!-- order of loading the scripts is important! See comments in each of those -->
 	<script src="../js/jquery.min.js"></script>
-	<script src="../js/data_admin_functions.js"></script>
+	<script src="../js/data_admin_constatns_and_functions.js"></script>
 	<script src="../js/data_admin_users.js"></script>
 </head>
 <body>
 	<header></header>
 	<section>
 		<article id="table_article">
-			<fieldset>
-				<legend>User Repository</legend>
-				<input id="previous_page_button" type="button" value="previous page">
-				<div id="table_output"></div>
-				<input id="next_page_button" type="button" value="next page">
-				<p><span id="text_output"></span></p>
-			</fieldset>
+			<form id="table_rows_form" action="#">
+				<fieldset>
+					<legend>Number of rows in table page</legend>
+					<input id="table_rows_input" type="number" value="5" min="1" max="20">
+					<input type="submit" value="submit">
+				</fieldset>
+			</form>
+			<form action="#">
+				<fieldset>
+					<legend>User Repository</legend>
+					<input id="previous_page_button" type="button" value="previous page">
+					<div id="table_output"></div>
+					<input id="next_page_button" type="button" value="next page">
+					<p><span id="text_output"></span></p>
+				</fieldset>
+			</form>
 		</article>
 		<article id="forms_article">
 			<form id="get_by_id_form" action="#">
 				<fieldset>
 					<legend>Get User by Id</legend>
-					<input id="get_id_input" type="number" placeholder="enter a number" required/>
+					<input id="get_id_input" type="number" placeholder="enter a number" value="1" min="1" required/>
 					<input type="submit" value="submit"/>
 				</fieldset>
 			</form>

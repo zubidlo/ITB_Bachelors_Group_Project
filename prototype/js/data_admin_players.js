@@ -10,6 +10,8 @@ $(document).ready(function() {
 	_url += "/api/players";
 
 	//needed DOM elements into jquery objets
+	var $_table_rows_form = $("#table_rows_form");
+	var $_table_rows_input = $("#table_rows_input");
 	var $_table_output = $("#table_output");
 	var $_text_output = $("#text_output");
 	var $_previous_page_button = $("#previous_page_button");
@@ -28,23 +30,10 @@ $(document).ready(function() {
 	var $_injured_checkbox = $(":checkbox");
 	var $_position_id_edit = $("#position_id_edit");
 
-	//global variables
-	var top = 10;
-	var skip = 0;
-	var count;
+	_top = $_table_rows_input.val();
 
-	//gets player count
-	var updatePlayerCount = function() {
-		
-		$.ajax({
-			url: _url, 
-			success: function(data) {
-				count = data.length;
-			}
-		});
-	}
-
-	updatePlayerCount();
+	//set global variable count
+	updateCount(_url);
 
 	//this method returns new player object build from web form fields
 	// var readPlayerFromInputFields = function () {
@@ -91,6 +80,9 @@ $(document).ready(function() {
 	//top=10 and skip=20 --> table with from 21 to 30 items
 	var getPlayers = function(top, skip) {
 
+		// console.log(top);
+		// console.log(skip);
+		// console.log(_count);
 		$.ajax({
             url: _url + "?$orderby=LastName&$top=" + top + "&$skip=" + skip,
             success: function (data) {
@@ -100,8 +92,8 @@ $(document).ready(function() {
 								 "FirstName<span>(R)</span>",
 								 "LastName<span>(R)</span>",
 								 "GaaTeam<span>(R)</span>",
-								 "Last Week Points",
-								 "OverallPoints",
+								 "Last Week Points<span>(R)</span>",
+								 "OverallPoints<span>(R)</span>",
 								 "Price<span>(R)</span>",
 								 "Rating<span>(R)</span>",
 								 "Injured<span>(R)</span>",
@@ -122,24 +114,28 @@ $(document).ready(function() {
 	}
 
 	//load the table at start
-	getPlayers(top, skip);
+	getPlayers(_top, _skip);
 
-	//previous table page load
-	$_previous_page_button.on("click", function(event) {
-		
-		if (skip > 0) {
-			skip = skip - top;
-			getPlayers(top, skip);
-		}
+	$_table_rows_form.submit(function(event) {
+
+		event.preventDefault();
+		_top = $_table_rows_input.val();
+		_skip = 0;
+		getPlayers(_top, _skip);
 	});
 
-	//next table page load
-	$_next_page_button.on("click", function(event) {
+	$_previous_page_button.on("click", function() {
 
-		if (skip + top <= count) {
-			skip = skip + top;
-			getPlayers(top, skip);
-		}
+		event.preventDefault();
+		_skip = tablePreviousPage(_top, _skip);
+		getPlayers(_top, _skip);
+	});
+
+	$_next_page_button.on("click", function() {
+
+		event.preventDefault();
+		_skip = tableNextPage(_top, _skip, _count);
+		getPlayers(_top, _skip);
 	});
 
 	// //user by id GET request
