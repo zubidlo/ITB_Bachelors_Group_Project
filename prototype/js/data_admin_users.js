@@ -26,12 +26,6 @@ $(document).ready(function() {
 	var $_get_by_username_form = $("#get_by_username_form");
 	var $_edit_form = $("#edit_form");
 
-	//set table page rows
-	_top = $_table_rows_input.val();
-
-	//set global variable count
-	updateCount(_url);
-
 	//this method returns new user object build from web form fields
 	var readUserFromInputFields = function () {
 		
@@ -68,9 +62,9 @@ $(document).ready(function() {
 	//top=10 and skip=20 --> table with from 21 to 30 items
 	var getUsers = function(top, skip) {
 
-		// console.lot(top);
-		// console.log(skip);
-		// console.log(_count);
+		console.log(top);
+		console.log(skip);
+		console.log(_count);
 		$.ajax({
             url: _url + "?$orderby=Username&$top=" + top + "&$skip=" + skip,
             success: function (data) {
@@ -82,6 +76,12 @@ $(document).ready(function() {
         	}
 		});
 	}
+
+	//set global variable count
+	updateCount(_url);
+	
+	//set table page rows
+	_top = $_table_rows_input.val();
 
 	//load the table at start
 	getUsers(_top, _skip);

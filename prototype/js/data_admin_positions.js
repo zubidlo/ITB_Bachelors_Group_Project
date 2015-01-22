@@ -24,12 +24,6 @@ $(document).ready(function() {
 	var $_get_by_name_form = $("#get_by_name_form");
 	var $_edit_form = $("#edit_form");
 
-	//set table page rows
-	_top = $_table_rows_input.val();
-
-	//set global variable count
-	updateCount(_url);
-
 	//this method returns new position object build from web form fields
 	var readPositionFromFields = function () {
 		
@@ -68,6 +62,12 @@ $(document).ready(function() {
         	}
 		});
 	}
+
+	//set table page rows
+	_top = $_table_rows_input.val();
+
+	//set global variable count
+	updateCount(_url);
 
 	//laod table at start
 	getPositions(_top, _skip);
