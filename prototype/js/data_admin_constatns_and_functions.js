@@ -7,6 +7,7 @@
 //url for development and production
 //var _url = "http://localhost:51642";
 var _url = "http://hurlingapi.azurewebsites.net";
+
 //how many rows will table have
 var _top;
 //starting point in the table (0)
@@ -15,12 +16,13 @@ var _skip = 0;
 var _count = 0;
 
 //gets a resource count
-var updateCount = function(url) {
+var updateCount = function(url, callback) {
 	
 	$.ajax({
 		url: url, 
 		success: function(data) {
 			_count = parseInt(data.length);
+			callback();
 		}
 	});
 }

@@ -48,9 +48,6 @@ $(document).ready(function() {
 	//injects table of top items into DOM
 	var getPositions = function(top, skip) {
 
-		// console.log(top);
-		// console.log(skip);
-		// console.log(_count);
 		$.ajax({
             url: _url + "?$orderby=Name&$top=" + top + "&$skip=" + skip,
             success: function (data) {
@@ -67,10 +64,9 @@ $(document).ready(function() {
 	_top = $_table_rows_input.val();
 
 	//set global variable count
-	updateCount(_url);
-
-	//laod table at start
-	getPositions(_top, _skip);
+	updateCount(_url, function() {
+		getPositions(_top, _skip);
+	});
 
 	$_table_rows_form.submit(function(event) {
 
@@ -161,7 +157,9 @@ $(document).ready(function() {
             dataType: "json",
             success: function (data, textStatus, request) {
             
-            	getPositions(_top, _skip);
+            	updateCount(_url, function() {
+					getPositions(_top, _skip);
+				});
             	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
         	},
         	error : function (request, textStatus, errorThrown) {

@@ -31,18 +31,26 @@ $(document).ready(function() {
 	var $_position_id_edit = $("#position_id_edit");
 
 	//this method returns new player object build from web form fields
-	// var readPlayerFromInputFields = function () {
+	var readPlayerFromInputFields = function () {
 		
-	// 	var player = {
-			
-	// 	};
-	// 	return player;
-	// }
+		var player = {
+			Id : $_id_edit.val(),
+			FirstName : $_firstname_edit.val(),
+			LastName : $_lastname_edit.val(),
+			GaaTeam : $_gaateam_edit.val(),
+			LastWeekPoints : $_lastweekpoints_edit.val(),
+			OverallPoints : $_overallpoints_edit.val(),
+			Price : $_price_edit.val(),
+			Rating : $_rating_edit.val(),
+			Injured : $_injured_checkbox.val("checked") === "checked" ? "true" : "false",
+			PositionId : $_position_id_edit.val()
+		};
+		return player;
+	}
 
 	//fills player edit form input fields with player object properties
 	var fillPlayerTextFields = function (player) {
 
-		console.dir(player);
 		$_id_edit.val(player.Id);
 		$_firstname_edit.val(player.FirstName);
 		$_lastname_edit.val(player.LastName);
@@ -75,9 +83,6 @@ $(document).ready(function() {
 	//top=10 and skip=20 --> table with from 21 to 30 items
 	var getPlayers = function(top, skip) {
 
-		// console.log(top);
-		// console.log(skip);
-		// console.log(_count);
 		$.ajax({
             url: _url + "?$orderby=LastName&$top=" + top + "&$skip=" + skip,
             success: function (data) {
@@ -111,10 +116,9 @@ $(document).ready(function() {
 	_top = $_table_rows_input.val();
 
 	//set global variable count
-	updateCount(_url);
-	
-	//load the table at start
-	getPlayers(_top, _skip);
+	updateCount(_url, function() {
+		getPlayers(_top, _skip);
+	});
 
 	$_table_rows_form.submit(function(event) {
 
@@ -146,7 +150,6 @@ $(document).ready(function() {
             url: _url + "/id/" + $_id_field.val(),
             success: function (data, textStatus, request) {
 
-            	console.log("success");
             	fillPlayerTextFields(data);
             	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
         	},
@@ -157,68 +160,47 @@ $(document).ready(function() {
 		});
 	});
 
-	// //user by username GET request
-	// $_get_user_by_username_form.submit(function(event) {
+	//POST PUT DELETE request
+	$_edit_form.submit(function(event){
 
-	// 	event.preventDefault();
-	// 	$.ajax({
- //            url: _url + "/username/" + $_user_username_field.val(),
- //            success: function (data, textStatus, request) {
-            	
- //            	fillUserTextFields(data);
- //            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
- //        	},
- //        	error : function (request, textStatus, errorThrown) {
+		event.preventDefault();
+		var requestMethod = $("option:checked").val();
+		var player = readPlayerFromInputFields();
+		var url = _url;
+		var resultMessage;
 
- //        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
- //           	}
-	// 	});
-	// });
+		switch(requestMethod) {
+			case "PUT" :
+				url = url + "/id/" + player.Id;
+				resultMessage = "You edited the player:" + JSON.stringify(player);
+				break;
+			case "DELETE" :
+				url = url + "/id/" + player.Id;
+				resultMessage = "You deleted the player with Id:" + player.Id;
+				player = undefined;
+				break;
+			case "POST" : 
+				resultMessage = "You created new player:" + JSON.stringify(player);
+				break;
+		}
 
-	// //POST PUT DELETE request
-	// $_user_edit_form.submit(function(event){
-
-	// 		event.preventDefault();
-	// 		var requestMethod = $("option:checked").val();
-	// 		var user = readUserFromInputFields();
-	// 		var url = _url;
-	// 		var resultMessage;
-
-	// 		switch(requestMethod) {
-	// 			case "PUT" :
-	// 				url = url + "/id/" + user.Id;
-	// 				resultMessage = "You edited the user:" + JSON.stringify(user);
-	// 				break;
-	// 			case "DELETE" :
-	// 				url = url + "/id/" + user.Id;
-	// 				resultMessage = "You deleted the user with Id:" + user.Id;
-	// 				user = undefined;
-	// 				break;
-	// 			case "POST" : 
-	// 				resultMessage = "You created new user:" + JSON.stringify(user);
-	// 				break;
-	// 		}
-
-	// 		$.ajax({
-	//             type: requestMethod,
-	//             url: url,
-	//             data: user,
-	//             dataType: "json",
-	//             success: function (data, textStatus, request) {
-	            
-	//             	getUsers(top, skip);
-	//             	if (requestMethod !== "PUT") {
-	//             		updateUserCount();
-	//             	}
-	            	
-	//             	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-	//         	},
-	//         	error : function (request, textStatus, errorThrown) {
-	        		
-	//         		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-	//         	}
-	// 		});
-		
-	// });
+		$.ajax({
+            type: requestMethod,
+            url: url,
+            data: player,
+            dataType: "json",
+            success: function (data, textStatus, request) {
+            
+            	updateCount(_url, function() {
+					getPlayers(_top, _skip);
+				});
+            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
+        	},
+        	error : function (request, textStatus, errorThrown) {
+        		
+        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+        	}
+		});
+	});
 });
 
