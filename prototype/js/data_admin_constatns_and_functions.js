@@ -25,7 +25,7 @@ var updateCount = function(url) {
 	});
 }
 
-var tablePreviousPage = function(skip, top) {
+var tablePreviousPage = function(top, skip) {
 
 	if (parseInt(skip) > 0) {
 		return parseInt(skip) - parseInt(top);
@@ -33,7 +33,7 @@ var tablePreviousPage = function(skip, top) {
 	return skip;
 }
 
-var tableNextPage = function(skip, top, count) {
+var tableNextPage = function(top, skip, count) {
 	
 	if (parseInt(skip) + parseInt(top) < parseInt(count)) {
 		return parseInt(skip) + parseInt(top);

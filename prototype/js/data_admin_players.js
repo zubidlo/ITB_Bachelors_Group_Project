@@ -30,11 +30,6 @@ $(document).ready(function() {
 	var $_injured_checkbox = $(":checkbox");
 	var $_position_id_edit = $("#position_id_edit");
 
-	_top = $_table_rows_input.val();
-
-	//set global variable count
-	updateCount(_url);
-
 	//this method returns new player object build from web form fields
 	// var readPlayerFromInputFields = function () {
 		
@@ -113,6 +108,11 @@ $(document).ready(function() {
 		});
 	}
 
+	_top = $_table_rows_input.val();
+
+	//set global variable count
+	updateCount(_url);
+	
 	//load the table at start
 	getPlayers(_top, _skip);
 
