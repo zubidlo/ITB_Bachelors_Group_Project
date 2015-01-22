@@ -6,13 +6,20 @@
 	<link rel="stylesheet" href="../css/data_admin.css">
 	<!-- order of loading the scripts is important! See comments in each of those -->
 	<script src="../js/jquery.min.js"></script>
-	<script src="../js/data_admin_functions.js"></script>
+	<script src="../js/data_admin_constatns_and_functions.js"></script>
 	<script src="../js/data_admin_players.js"></script>
 </head>
 <body>
 	<header></header>
 	<section>
 		<article id="table_article">
+			<form id="table_rows_form" action="#">
+				<fieldset>
+					<legend>Number of rows in table page</legend>
+					<input id="table_rows_input" type="number" value="5" min="1" max="20">
+					<input type="submit" value="submit">
+				</fieldset>
+			</form>
 			<fieldset>
 				<legend>Player Repository</legend>
 				<input id="previous_page_button" type="button" value="previous page">
@@ -25,7 +32,7 @@
 			<form id="get_by_id_form" action="#">
 				<fieldset>
 					<legend>Get Player by Id</legend>
-					<input id="get_id_input" type="number" placeholder="enter a number" required/>
+					<input id="get_id_input" type="number" placeholder="enter a number" value="1" min="1" required/>
 					<input type="submit" value="submit"/>
 				</fieldset>
 			</form>
@@ -41,17 +48,17 @@
 					<label for="gaateam_edit">GAA Team Name:</label>
 					<input id="gaateam_edit" type="text" placeholder="enter GAA team name" required/>
 					<label for="lastweekpoints_edit">Last Week Points:</label>
-					<input id="lastweekpoints_edit" type="number" step="any" placeholder="enter a decimal number"/>
+					<input id="lastweekpoints_edit" type="number" step="any" value="0" placeholder="enter a decimal number"/>
 					<label for="overallpoints_edit">Overall Points:</label>
-					<input id="overallpoints_edit" type="number" step="any" placeholder="enter a decimal number"/>
+					<input id="overallpoints_edit" type="number" step="any" value="0" placeholder="enter a decimal number"/>
 					<label for="price_edit">Price:</label>
 					<input id="price_edit" type="number" step="any" placeholder="enter a decimal number" required/>
 					<label for="rating_edit">Price:</label>
-					<input id="rating_edit" type="number" step="any" placeholder="enter number" required/>
+					<input id="rating_edit" type="number" step="any" value="0" min="0" placeholder="enter number" required/>
 					<label>Injured:</label>
 					<input type="checkbox" name="injured" value="true"/>
 					<label for="position_id_edit">Position Id:</label>
-					<input id="position_id_edit" type="number" required/>
+					<input id="position_id_edit" type="number" value="1" min="1" required/>
 					<label for="request_select">Select the Request</label>
 					<select name="Request" id="request_select">
 						<option value="PUT">Change this player(PUT)</option>
