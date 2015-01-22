@@ -30,6 +30,24 @@ function set_user()
 
 
 
+function checkSession_transfers()
+{
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="transfers.html";
+		alert("checkSession ran and is ok");
+
+	}	
+
+}
+
+
 
 
 function checkSession_home()
