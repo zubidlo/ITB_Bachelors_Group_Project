@@ -15,14 +15,16 @@ var _skip = 0;
 var _count = 0;
 
 //gets a resource count
-var updateCount = function(url) {
+var updateCount = function(url, callback) {
 	
 	$.ajax({
 		url: url, 
 		success: function(data) {
 			_count = parseInt(data.length);
+			callback();
 		}
 	});
+
 }
 
 var tablePreviousPage = function(top, skip) {

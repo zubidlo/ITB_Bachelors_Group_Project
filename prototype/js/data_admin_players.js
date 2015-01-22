@@ -110,11 +110,10 @@ $(document).ready(function() {
 
 	_top = $_table_rows_input.val();
 
-	//set global variable count
-	updateCount(_url);
-	
-	//load the table at start
-	getPlayers(_top, _skip);
+	//set global variable count and load table
+	updateCount(_url, function() {
+		getPlayers(_top, _skip);
+	});
 
 	$_table_rows_form.submit(function(event) {
 
@@ -157,24 +156,6 @@ $(document).ready(function() {
 		});
 	});
 
-	// //user by username GET request
-	// $_get_user_by_username_form.submit(function(event) {
-
-	// 	event.preventDefault();
-	// 	$.ajax({
- //            url: _url + "/username/" + $_user_username_field.val(),
- //            success: function (data, textStatus, request) {
-            	
- //            	fillUserTextFields(data);
- //            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
- //        	},
- //        	error : function (request, textStatus, errorThrown) {
-
- //        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
- //           	}
-	// 	});
-	// });
-
 	// //POST PUT DELETE request
 	// $_user_edit_form.submit(function(event){
 
@@ -206,11 +187,9 @@ $(document).ready(function() {
 	//             dataType: "json",
 	//             success: function (data, textStatus, request) {
 	            
-	//             	getUsers(top, skip);
-	//             	if (requestMethod !== "PUT") {
-	//             		updateUserCount();
-	//             	}
-	            	
+	//             	updateCount(_url, function() {
+	//					getPlayers(_top, _skip);
+	//				});
 	//             	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 	//         	},
 	//         	error : function (request, textStatus, errorThrown) {

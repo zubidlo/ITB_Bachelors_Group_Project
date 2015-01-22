@@ -62,9 +62,6 @@ $(document).ready(function() {
 	//top=10 and skip=20 --> table with from 21 to 30 items
 	var getUsers = function(top, skip) {
 
-		console.log(top);
-		console.log(skip);
-		console.log(_count);
 		$.ajax({
             url: _url + "?$orderby=Username&$top=" + top + "&$skip=" + skip,
             success: function (data) {
@@ -77,15 +74,14 @@ $(document).ready(function() {
 		});
 	}
 
-	//set global variable count
-	updateCount(_url);
-	
 	//set table page rows
 	_top = $_table_rows_input.val();
 
-	//load the table at start
-	getUsers(_top, _skip);
-
+	//set global variable count and load table
+	updateCount(_url, function() {
+		getUsers(_top, _skip);
+	});
+	
 	$_table_rows_form.submit(function(event) {
 
 		event.preventDefault();
@@ -175,11 +171,9 @@ $(document).ready(function() {
 	            dataType: "json",
 	            success: function (data, textStatus, request) {
 	            
-	            	getUsers(top, skip);
-	            	if (requestMethod !== "PUT") {
-	            		updateUserCount();
-	            	}
-	            	
+	            	updateCount(_url, function() {
+						getUsers(_top, _skip);
+					});
 	            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
