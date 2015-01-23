@@ -12,6 +12,9 @@ $(document).ready(function() {
 	//needed DOM elements into jquery objects
 	var $_table_rows_form = $("#table_rows_form");
 	var $_table_rows_input = $("#table_rows_input");
+	var $_previous_page_form = $("#previous_page_form");
+	var $_next_page_form = $("#next_page_form");
+	var $_table_rows_count = $("#table_rows_count");
 	var $_get_by_id_form = $("#get_by_id_form");
 	var $_id_field = $("#get_id_input");
 	var $_username_field = $("#get_username_input");
@@ -21,21 +24,18 @@ $(document).ready(function() {
 	var $_email_edit = $("#email_edit");
 	var $_table_output = $("#table_output");
 	var $_text_output = $("#text_output");
-	var $_previous_page_button = $("#previous_page_button");
-	var $_next_page_button = $("#next_page_button");
 	var $_get_by_username_form = $("#get_by_username_form");
 	var $_edit_form = $("#edit_form");
 
 	//this method returns new user object build from web form fields
 	var readUserFromInputFields = function () {
 		
-		var user = {
+		return {
 			Id : $_id_edit.val(),
 			Username : $_username_edit.val(),
 			Password : $_password_edit.val(),
 			Email : $_email_edit.val()
 		};
-		return user;
 	}
 
 	//fills user edit form input fields with user object properties
@@ -60,14 +60,24 @@ $(document).ready(function() {
 	//example: top=10 and skip=0 --> table with first 10 items
 	//top=10 and skip=10 --> table with from 11 to 20 items
 	//top=10 and skip=20 --> table with from 21 to 30 items
-	var getUsers = function(top, skip) {
+	var getUsers = function(page) {
 
-		var url = _url + "?$orderby=Username&$top=" + top + "&$skip=" + skip;
+		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
 		var successCallback = function (data, textStatus, request) {
             	
-        	var counter_start = skip;
-			var headers = ["Id<span>(PK)</span>", "Username<span>(R)</span>", "Password<span>(R)</span>", "Email<span>(R)</span>"];
-			var properties = ["Id", "Username", "Password", "Email"];
+        	var counter_start = page.skip;
+			var headers = [
+				"Id<span>(PK)</span>",
+				"Username<span>(R)</span>",
+				"Password<span>(R)</span>",
+				"Email<span>(R)</span>"
+			];
+			var properties = [
+			"Id",
+				"Username",
+				"Password",
+				"Email"
+			];
 			buildTable(counter_start, headers, properties, data, $_table_output);
     	}
 		ajaxRequest(url, successCallback);
@@ -80,7 +90,8 @@ $(document).ready(function() {
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
-		getUsers(_top, _skip);
+		$_table_rows_count.val(_count);
+		getUsers(tableCurrentPage());
 	});
 	
 	$_table_rows_form.submit(function(event) {
@@ -88,21 +99,19 @@ $(document).ready(function() {
 		event.preventDefault();
 		_top = $_table_rows_input.val();
 		_skip = 0;
-		getUsers(_top, _skip);
+		getUsers(tableCurrentPage());
 	});
 
-	$_previous_page_button.on("click", function() {
+	$_previous_page_form.submit(function(event) {
 
 		event.preventDefault();
-		_skip = tablePreviousPage(_top, _skip);
-		getUsers(_top, _skip);
+		getUsers(tablePreviousPage());
 	});
 
-	$_next_page_button.on("click", function() {
+	$_next_page_form.submit(function(event) {
 
 		event.preventDefault();
-		_skip = tableNextPage(_top, _skip, _count);
-		getUsers(_top, _skip);
+		getUsers(tableNextPage());
 	});
 
 	//user by id GET request
@@ -151,7 +160,8 @@ $(document).ready(function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
-				getUsers(_top, _skip);
+				$_table_rows_count.val(_count);
+				getUsers(tableCurrentPage());
 			});
         	printOutput($_text_output, textStatus, request);
     	}

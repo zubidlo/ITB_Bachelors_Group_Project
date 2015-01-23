@@ -70,11 +70,6 @@ legend {
   font-weight: bold;
 }
 
-input[type="button"] {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
 #table_article {
   width: 75%;
 }

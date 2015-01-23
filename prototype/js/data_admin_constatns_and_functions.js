@@ -7,9 +7,8 @@
 //url for development and production
 //var _url = "http://localhost:51642";
 var _url = "http://hurlingapi.azurewebsites.net";
-
 //how many rows will table have
-var _top;
+var _top = 10;
 //starting point in the table (0)
 var _skip = 0;
 //items in the table
@@ -49,20 +48,23 @@ var ajaxRequest = function(url, successCallback, errorCallback, type, dataType, 
 	});
 }
 
-var tablePreviousPage = function(top, skip) {
-
-	if (parseInt(skip) > 0) {
-		return parseInt(skip) - parseInt(top);
-	}
-	return skip;
+var tableCurrentPage = function() {
+	return {
+		top : parseInt(_top),
+		skip : parseInt(_skip)
+	};
 }
 
-var tableNextPage = function(top, skip, count) {
-	
-	if (parseInt(skip) + parseInt(top) < parseInt(count)) {
-		return parseInt(skip) + parseInt(top);
-	}
-	return skip;
+var tablePreviousPage = function() {
+
+	_skip = parseInt(_skip) > 0 ? parseInt(_skip) - parseInt(_top) : _skip;
+	return tableCurrentPage();
+}
+
+var tableNextPage = function() {
+
+	_skip = parseInt(_skip) + parseInt(_top) < parseInt(_count) ? parseInt(_skip) + parseInt(_top) : _skip;
+	return tableCurrentPage();
 }
 
 //returns a table header row string built from given array of strings

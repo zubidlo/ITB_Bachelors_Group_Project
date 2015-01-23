@@ -14,8 +14,9 @@ $(document).ready(function() {
 	var $_table_rows_input = $("#table_rows_input");
 	var $_table_output = $("#table_output");
 	var $_text_output = $("#text_output");
-	var $_previous_page_button = $("#previous_page_button");
-	var $_next_page_button = $("#next_page_button");
+	var $_previous_page_form = $("#previous_page_form");
+	var $_next_page_form = $("#next_page_form");
+	var $_table_rows_count = $("#table_rows_count");
 	var $_get_by_id_form = $("#get_by_id_form");
 	var $_id_field = $("#get_id_input");
 	var $_edit_form = $("#edit_form");
@@ -78,18 +79,35 @@ $(document).ready(function() {
 	//example: top=10 and skip=0 --> table with first 10 items
 	//top=10 and skip=10 --> table with from 11 to 20 items
 	//top=10 and skip=20 --> table with from 21 to 30 items
-	var getPlayers = function(top, skip) {
+	var getPlayers = function(page) {
 
-		var url = _url + "?$orderby=LastName&$top=" + top + "&$skip=" + skip;
+		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
 		var successCallback = function (data, textStatus, request) {
             	
-	    	var counter_start = skip;
-			var headers = ["Id<span>(PK)</span>", "FirstName<span>(R)</span>", "LastName<span>(R)</span>",
-							 "GaaTeam<span>(R)</span>", "Last Week Points<span>(R)</span>", "OverallPoints<span>(R)</span>",
-							 "Price<span>(R)</span>", "Rating<span>(R)</span>", "Injured<span>(R)</span>",
-							 "Position Id<span>(FK)</span>"];
-			var properties = ["Id", "FirstName", "LastName", "GaaTeam",	"LastWeekPoints",
-								"OverallPoints", "Price", "Rating", "Injured", "PositionId"];
+	    	var counter_start = page.skip;
+			var headers = [
+				"Id<span>(PK)</span>",
+				"FirstName<span>(R)</span>",
+				"LastName<span>(R)</span>",
+				"GaaTeam<span>(R)</span>",
+				"Last Week Points<span>(R)</span>",
+				"OverallPoints<span>(R)</span>",
+				"Price<span>(R)</span>",
+				"Rating<span>(R)</span>",
+				"Injured<span>(R)</span>",
+				"Position Id<span>(FK)</span>"
+			];
+			var properties = [
+				"Id",
+				"FirstName",
+				"LastName",
+				"GaaTeam",
+				"LastWeekPoints",
+				"OverallPoints",
+				"Price", "Rating",
+				"Injured",
+				"PositionId"
+			];
 			buildTable(counter_start, headers, properties, data, $_table_output);
 		}
 		ajaxRequest(url, successCallback);
@@ -97,11 +115,11 @@ $(document).ready(function() {
 
 	_top = $_table_rows_input.val();
 
-	//set global variable count
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
-		getPlayers(_top, _skip);
+		$_table_rows_count.val(_count);
+		getPlayers(tableCurrentPage());
 	});
 
 	$_table_rows_form.submit(function(event) {
@@ -109,21 +127,19 @@ $(document).ready(function() {
 		event.preventDefault();
 		_top = $_table_rows_input.val();
 		_skip = 0;
-		getPlayers(_top, _skip);
+		getPlayers(tableCurrentPage());
 	});
 
-	$_previous_page_button.on("click", function() {
+	$_previous_page_form.submit(function(event) {
 
 		event.preventDefault();
-		_skip = tablePreviousPage(_top, _skip);
-		getPlayers(_top, _skip);
+		getPlayers(tablePreviousPage());
 	});
 
-	$_next_page_button.on("click", function() {
+	$_next_page_form.submit(function(event) {
 
 		event.preventDefault();
-		_skip = tableNextPage(_top, _skip, _count);
-		getPlayers(_top, _skip);
+		getPlayers(tableNextPage());
 	});
 
 	//user by id GET request
@@ -156,7 +172,8 @@ $(document).ready(function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
-				getPlayers(_top, _skip);
+				$_table_rows_count.val(_count);
+				getPlayers(tableCurrentPage());
 			});
         	printOutput($_text_output, textStatus, request);
     	}

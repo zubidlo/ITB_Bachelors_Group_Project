@@ -12,14 +12,15 @@ $(document).ready(function() {
 	//needed DOM elements into jquery objects
 	var $_table_rows_form = $("#table_rows_form");
 	var $_table_rows_input = $("#table_rows_input");
+	var $_table_output = $("#table_output");
+	var $_text_output = $("#text_output");
+	var $_previous_page_form = $("#previous_page_form");
+	var $_next_page_form = $("#next_page_form");
+	var $_table_rows_count = $("#table_rows_count");
 	var $_id_field = $("#get_id_input");
 	var $_name_field = $("#get_name_input");
 	var $_id_edit = $("#id_edit");
 	var $_name_edit = $("#name_edit");
-	var $_table_output = $("#table_output");
-	var $_text_output = $("#text_output");
-	var $_previous_page_button = $("#previous_page_button");
-	var $_next_page_button = $("#next_page_button");
 	var $_get_by_id_form = $("#get_by_id_form");
 	var $_get_by_name_form = $("#get_by_name_form");
 	var $_edit_form = $("#edit_form");
@@ -27,11 +28,10 @@ $(document).ready(function() {
 	//this method returns new position object build from web form fields
 	var readPositionFromFields = function () {
 		
-		var position = {
+		return {
 			Id : $_id_edit.val(),
 			Name : $_name_edit.val()
 		};
-		return position;
 	}
 
 	//fills user edit form input fields with user object properties
@@ -46,27 +46,32 @@ $(document).ready(function() {
 	//.../api/positions?$orderby=Name --> get all position ordered by name
 	//
 	//injects table of top items into DOM
-	var getPositions = function(top, skip) {
+	var getPositions = function(page) {
 
-		var url = _url + "?$orderby=Name&$top=" + top + "&$skip=" + skip;
+		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
 		var successCallback = function (data, textStatus, request) {
             	
-        	var counter_start = skip;
-			var headers = ["Id<span>(PK)</span>", "Field Position<span>(R)</span>"];
-			var properties = ["Id", "Name"];
+        	var counter_start = page.skip;
+			var headers = [
+				"Id<span>(PK)</span>",
+				"Field Position<span>(R)</span>"
+			 ];
+			var properties = [
+				"Id", 
+				"Name"
+			];
 			buildTable(counter_start, headers, properties, data, $_table_output);
     	}
 		ajaxRequest(url, successCallback);
 	}
 
-	//set table page rows
 	_top = $_table_rows_input.val();
 
-	//set global variable count
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
-		getPositions(_top, _skip);
+		$_table_rows_count.val(_count);
+		getPositions(tableCurrentPage());
 	});
 
 	$_table_rows_form.submit(function(event) {
@@ -74,21 +79,19 @@ $(document).ready(function() {
 		event.preventDefault();
 		_top = $_table_rows_input.val();
 		_skip = 0;
-		getPositions(_top, _skip);
+		getPositions(tableCurrentPage());
 	});
 
-	$_previous_page_button.on("click", function() {
+	$_previous_page_form.submit(function(event) {
 
 		event.preventDefault();
-		_skip = tablePreviousPage(_top, _skip);
-		getPositions(_top, _skip);
+		getPositions(tablePreviousPage());
 	});
 
-	$_next_page_button.on("click", function() {
+	$_next_page_form.submit(function(event) {
 
 		event.preventDefault();
-		_skip = tableNextPage(_top, _skip, _count);
-		getPositions(_top, _skip);
+		getPositions(tableNextPage());
 	});
 
 	//position by id GET request
@@ -129,7 +132,6 @@ $(document).ready(function() {
 	$_edit_form.submit(function(event){
 
 		event.preventDefault();
-
 		var url = _url;
 		var position = readPositionFromFields();
 		var successCallback = function (data, textStatus, request) {
@@ -137,7 +139,8 @@ $(document).ready(function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
-				getPositions(_top, _skip);
+				$_table_rows_count.val(_count);
+				getPositions(tableCurrentPage());
 			});
         	printOutput($_text_output, textStatus, request);
     	}
@@ -154,7 +157,6 @@ $(document).ready(function() {
 			position = "undefined";
 		}
 		var dataType = "json";
-
 		ajaxRequest(url, successCallback, errorCallback, type, dataType, position);
 	});
 });

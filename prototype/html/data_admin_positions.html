@@ -16,16 +16,24 @@
 			<form id="table_rows_form" action="#">
 				<fieldset>
 					<legend>Number of rows in table page</legend>
-					<input id="table_rows_input" type="number" value="5" min="1" max="20">
+					<input id="table_rows_input" type="number" value="10" min="1" max="20">
 					<input type="submit" value="submit">
 				</fieldset>
 			</form>
 			<fieldset>
 				<legend>Field Position Repository</legend>
-				<input id="previous_page_button" type="button" value="previous page">
+				<form id="previous_page_form" action="#">
+					<input type="submit" value="previous page">
+				</form>
 				<div id="table_output"></div>
-				<input id="next_page_button" type="button" value="next page">
+				<form id="next_page_form" action="#">
+					<input type="submit" value="next page">
+				</form>
 				<p><span id="text_output"></span></p>
+			</fieldset>
+			<fieldset>
+				<legend>Number of Positions</legend>
+				<input id="table_rows_count" type="number" readonly>
 			</fieldset>
 		</article>
 		<article id="forms_article">
