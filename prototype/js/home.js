@@ -19,6 +19,7 @@ function setStorage()
 
 
 
+
 function checkSession_view_team()
 {
 
@@ -62,11 +63,31 @@ function checkSession_see_rankings()
 }
 
 
+
+function checkSession_transfers()
+{
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="transfers.html";
+		alert("checkSession ran and is ok");
+
+	}	
+
+}
+
+
 function logout_user()
 {
 
 
 sessionStorage.clear();
 alert("Session done");
+ 
 
 }

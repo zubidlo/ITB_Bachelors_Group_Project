@@ -8,7 +8,7 @@ is stored in session storage
 If it is not, it brings you back to the login page
 
  HTML files used in:
- standings.html
+ transfers.html
 
 */
 
@@ -28,24 +28,6 @@ function set_user()
 
 }
 
-
-
-function checkSession_transfers()
-{
-
-  if(sessionStorage.getItem("username") === null)
- {
-
-  	window.location="../index.html";
-
- }
-	else {
-		window.location="transfers.html";
-		alert("checkSession ran and is ok");
-
-	}	
-
-}
 
 
 
@@ -69,6 +51,25 @@ function checkSession_home()
 	
 }
 
+
+function checkSession_see_rankings()
+{
+
+
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="standings.html";
+		alert("checkSession ran and is ok");
+
+	}	
+	
+}
 
 
 
@@ -97,6 +98,7 @@ function checkSession_view_team()
 
 function logout_user()
 {
+
 
 sessionStorage.clear();
 alert("Session done");
