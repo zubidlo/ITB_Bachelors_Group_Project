@@ -14,17 +14,32 @@ var _skip = 0;
 //items in the table
 var _count = 0;
 
+//prints a message when ajax request is successfull
+//$output : DOM element jquery object - to append the message to
+//textStatus : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
+//request : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
 var printOutput = function($output, textStatus, request) {
 
 	$output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 }
 
+//prints a message when ajax request is successfull
+//$output : DOM element jquery object - to append the message to
+//request : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
+//textStatus : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
+//errorThrown : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
 var printError = function($output, request, textStatus, errorThrown) {
 
 	$output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
 }
 
-//general ajaxRequest
+//general ajaxRequest, see http://api.jquery.com/jquery.ajax/
+//url : string - url of requested resource (mandatory)
+//successCallback : function (mandatory)
+//errorCallback : function
+//type : string - request type (default = "get")
+//dataType : string - data type (default = "json")
+//data : data passed in request body for "post" or "put " request (default = "undefined")
 var ajaxRequest = function(url, successCallback, errorCallback, type, dataType, data ) {
 	
 	type = typeof type === "undefined" ? "GET" : type;
@@ -37,17 +52,13 @@ var ajaxRequest = function(url, successCallback, errorCallback, type, dataType, 
         url : url,
         data : data,
         dataType : dataType,
-        success : function (data, textStatus, request) {
-        
-        	successCallback(data, textStatus, request);
-    	},
-    	error : function (request, textStatus, errorThrown) {
-    		
-    		errorCallback(request, textStatus, errorThrown);
-    	}
+        success : successCallback,
+    	error : errorCallback
 	});
 }
 
+//returns new object {top:_top, skip:_skip}
+//_top, _skip are global variables
 var tableCurrentPage = function() {
 	return {
 		top : parseInt(_top),
@@ -55,54 +66,50 @@ var tableCurrentPage = function() {
 	};
 }
 
+//calculates previous table page, manipulates _skip and returns new object {top:_top, skip:_skip}
+//_top, _skip are global variables
 var tablePreviousPage = function() {
 
 	_skip = parseInt(_skip) > 0 ? parseInt(_skip) - parseInt(_top) : _skip;
 	return tableCurrentPage();
 }
 
+//calculates next table page, manipulates _skip and returns new object {top:_top, skip:_skip}
+//_top, _skip, _count are global variables
 var tableNextPage = function() {
 
 	_skip = parseInt(_skip) + parseInt(_top) < parseInt(_count) ? parseInt(_skip) + parseInt(_top) : _skip;
 	return tableCurrentPage();
 }
 
-//returns a table header row string built from given array of strings
+//returns a table header row html string built from given array of strings
+//headersNamesArray : string array of headers
 var buildTableHeaders = function (headersNamesArray) {
 
 	var headers = "<tr><th>#</th>";
 	for(var i = 0; i < headersNamesArray.length; headers += "<th>" + headersNamesArray[i++] + "</th>");
-	headers += "</tr>";
-	return headers;
+	return headers + "</tr>";
 }
 
 //returns one table row string built from given javascript object
-//counter: number of the row
-//properties : array object properties to put in the row
-//given javasctipt object
-var buildTableRow = function(counter, properties, object) {
+//rowNumber: int - number of the row
+//properties : string array - object property names to put in the row
+//objcet : object
+var buildTableRow = function(rowNumber, properties, object) {
 
-	var i;
-	var row = "<tr><td>" + counter + "</td>";
-	for(i = 0; i < properties.length; i++) {
+	var row = "<tr><td>" + rowNumber + "</td>";
+	for(var i = 0; i < properties.length; i++) {
 		row += "<td>" + object[properties[i]] + "</td>";
 	}	
-	row += "</tr>";
-	return row;
+	return row + "</tr>";
 }
 
 //returns table html string
-//counter_start: what number first table row starts with
-//headers : array of strings you want to make table headers from example: headers = ['name', 'address', 'email']
-//
-//properties : array of strings you want to put in table row
-//example : properties = ['Name', 'Address', 'Email'] 
-//data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
-//objcects id data array could have more properties than just those listed in properties array
-//
-//data : array of javasctipt objects you want to put in the table
-//
-//output : jquery object to append the table to
+//counter_start: int - what number first table row starts with
+//headers : string array - example: ['name', 'address', 'email']
+//properties : string array - example: ['Name', 'Address', 'Email'] data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
+//data : objcet array - objects to put in the table
+//output : DOM element jquery object - to append the table to
 var buildTable = function (counter_start, headers, properties, data, $_output) {
 	
 	var counter = counter_start;

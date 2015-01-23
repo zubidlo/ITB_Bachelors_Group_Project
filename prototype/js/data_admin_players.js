@@ -1,15 +1,11 @@
-//everything inside this function is somehow manipulating DOM (document)
-//so document must be ready first for all this code to work
 //this code uses jquery so that must be already loaded
 //this code uses functions from "data_admin_functions.js" so that must be already loaded
 
 //this anonymous function (all code of this script is inside this function) is executed after DOM is ready
 $(document).ready(function() {
 
-	//url
 	_url += "/api/players";
 
-	//needed DOM elements into jquery objets
 	var $_table_rows_form = $("#table_rows_form");
 	var $_table_rows_input = $("#table_rows_input");
 	var $_table_output = $("#table_output");
@@ -31,7 +27,6 @@ $(document).ready(function() {
 	var $_injured_checkbox = $(":checkbox");
 	var $_position_id_edit = $("#position_id_edit");
 
-	//this method returns new player object build from web form fields
 	var readPlayerFromInputFields = function () {
 		
 		return {
@@ -48,7 +43,6 @@ $(document).ready(function() {
 		};
 	}
 
-	//fills player edit form input fields with player object properties
 	var fillPlayerTextFields = function (player) {
 
 		$_id_edit.val(player.Id);
@@ -67,18 +61,16 @@ $(document).ready(function() {
 		$_position_id_edit.val(player.PositionId);
 	}
 
-	//all players GET request (support oData queries)
 	//examples:
 	//.../api/players?$orderby=OverallPoints --> get all players ordered by OverallPoints
 	//.../api/players?$filter=PositionId eq 1 --> get all GoalKeepers
 	//.../api/players??$filter=Price lt 100000 --> get all players cheaper then 100000
-	//
 	//injects table of top items into DOM
-	//top : how many rows the table will have
-	//skip: how many rows to skip
-	//example: top=10 and skip=0 --> table with first 10 items
-	//top=10 and skip=10 --> table with from 11 to 20 items
-	//top=10 and skip=20 --> table with from 21 to 30 items
+	//page.top : how many rows the table will have
+	//page.skip: how many rows to skip
+	//example: page.top=10 and page.skip=0 --> table with first 10 items
+	//page.top=10 and page.skip=10 --> table with from 11 to 20 items
+	//page.top=10 and page.skip=20 --> table with from 21 to 30 items
 	var getPlayers = function(page) {
 
 		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;

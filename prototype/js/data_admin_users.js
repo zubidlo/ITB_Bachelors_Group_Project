@@ -1,15 +1,11 @@
-//everything inside this function is somehow manipulating DOM (document)
-//so document must be ready first for all this code to work
 //this code uses jquery so that must be already loaded
 //this code uses functions from "data_admin_functions.js" so that must be already loaded
 
 //this anonymous function (all code of this script is inside this function) is executed after DOM is ready
 $(document).ready(function() {
 
-	//url
 	_url += "/api/users";
 
-	//needed DOM elements into jquery objects
 	var $_table_rows_form = $("#table_rows_form");
 	var $_table_rows_input = $("#table_rows_input");
 	var $_previous_page_form = $("#previous_page_form");
@@ -27,7 +23,6 @@ $(document).ready(function() {
 	var $_get_by_username_form = $("#get_by_username_form");
 	var $_edit_form = $("#edit_form");
 
-	//this method returns new user object build from web form fields
 	var readUserFromInputFields = function () {
 		
 		return {
@@ -38,28 +33,24 @@ $(document).ready(function() {
 		};
 	}
 
-	//fills user edit form input fields with user object properties
 	var fillUserTextFields = function (user) {
 
 		$_id_edit.val(user.Id);
 		$_username_edit.val(user.Username);
 		$_password_edit.val(user.Password);
 		$_email_edit.val(user.Email);
-
 	}
 
-	//all users GET request (support oData queries)
 	//examples:
 	//.../api/users?$orderby=Username --> get all user ordered by username
 	//.../api/users?$filter=Email eq 'zubidlo'gmail.com' --> get all users which Email equals 'zubidlo'gmail.com'
 	//.../api/users?$top=10&$skip=30 --> get 10 users but skip first 30 (31,32.....,40)
-	//
 	//injects table of top items into DOM
-	//top : how many rows the table will have
-	//skip: how many rows to skip
-	//example: top=10 and skip=0 --> table with first 10 items
-	//top=10 and skip=10 --> table with from 11 to 20 items
-	//top=10 and skip=20 --> table with from 21 to 30 items
+	//page.top : how many rows the table will have
+	//page.skip: how many rows to skip
+	//example: page.top=10 and page.skip=0 --> table with first 10 items
+	//page.top=10 and page.skip=10 --> table with from 11 to 20 items
+	//page.top=10 and page.skip=20 --> table with from 21 to 30 items
 	var getUsers = function(page) {
 
 		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
@@ -83,10 +74,8 @@ $(document).ready(function() {
 		ajaxRequest(url, successCallback);
 	}
 
-	//set table page rows
 	_top = $_table_rows_input.val();
 
-	//set global variable count
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
