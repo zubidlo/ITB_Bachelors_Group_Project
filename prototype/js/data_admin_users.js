@@ -62,23 +62,24 @@ $(document).ready(function() {
 	//top=10 and skip=20 --> table with from 21 to 30 items
 	var getUsers = function(top, skip) {
 
-		$.ajax({
-            url: _url + "?$orderby=Username&$top=" + top + "&$skip=" + skip,
-            success: function (data) {
+		var url = _url + "?$orderby=Username&$top=" + top + "&$skip=" + skip;
+		var successCallback = function (data, textStatus, request) {
             	
-            	var counter_start = skip;
-				var headers = ["Id<span>(PK)</span>", "Username<span>(R)</span>", "Password<span>(R)</span>", "Email<span>(R)</span>"];
-				var properties = ["Id", "Username", "Password", "Email"];
-				buildTable(counter_start, headers, properties, data, $_table_output);
-        	}
-		});
+        	var counter_start = skip;
+			var headers = ["Id<span>(PK)</span>", "Username<span>(R)</span>", "Password<span>(R)</span>", "Email<span>(R)</span>"];
+			var properties = ["Id", "Username", "Password", "Email"];
+			buildTable(counter_start, headers, properties, data, $_table_output);
+    	}
+		ajaxRequest(url, successCallback);
 	}
 
 	//set table page rows
 	_top = $_table_rows_input.val();
 
 	//set global variable count
-	updateCount(_url , function() {
+	ajaxRequest(_url, function(data, textStatus, request) {
+
+		_count = parseInt(data.length);
 		getUsers(_top, _skip);
 	});
 	
@@ -108,81 +109,67 @@ $(document).ready(function() {
 	$_get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		$.ajax({
-            url: _url + "/id/" + $_id_field.val(),
-            success: function (data, textStatus, request) {
-            	
-            	fillUserTextFields(data);
-            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-        	},
-        	error : function (request, textStatus, errorThrown) {
+		var url = _url + "/id/" + $_id_field.val();
+		var successCallback = function(data, textStatus, request) {
+			
+			fillUserTextFields(data);
+            printOutput($_text_output, textStatus, request);
+		}
+		var errorCallback = function (request, textStatus, errorThrown) {
 
-        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-           	}
-		});
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//user by username GET request
 	$_get_by_username_form.submit(function(event) {
 
 		event.preventDefault();
-		$.ajax({
-            url: _url + "/username/" + $_username_field.val(),
-            success: function (data, textStatus, request) {
+		var url = _url + "/username/" + $_username_field.val();
+		var successCallback = function(data, textStatus, request) {
             	
-            	fillUserTextFields(data);
-            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-        	},
-        	error : function (request, textStatus, errorThrown) {
+        	fillUserTextFields(data);
+        	printOutput($_text_output, textStatus, request);
+    	}
+    	var errorCallback = function (request, textStatus, errorThrown) {
 
-        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-           	}
-		});
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
 	$_edit_form.submit(function(event){
 
-			event.preventDefault();
-			var requestMethod = $("option:checked").val();
-			var user = readUserFromInputFields();
-			var url = _url;
-			var resultMessage;
+		event.preventDefault();
 
-			switch(requestMethod) {
-				case "PUT" :
-					url = url + "/id/" + user.Id;
-					resultMessage = "You edited the user:" + JSON.stringify(user);
-					break;
-				case "DELETE" :
-					url = url + "/id/" + user.Id;
-					resultMessage = "You deleted the user with Id:" + user.Id;
-					user = undefined;
-					break;
-				case "POST" : 
-					resultMessage = "You created new user:" + JSON.stringify(user);
-					break;
-			}
+		var url = _url;
+		var user = readUserFromInputFields();
+		var successCallback = function (data, textStatus, request) {
+            
+        	ajaxRequest(_url, function(data, textStatus, request) {
 
-			$.ajax({
-	            type: requestMethod,
-	            url: url,
-	            data: user,
-	            dataType: "json",
-	            success: function (data, textStatus, request) {
-	            
-	            	updateCount(_url , function() {
-						getUsers(_top, _skip);
-					});
-	            	
-	            	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
-	        	},
-	        	error : function (request, textStatus, errorThrown) {
-	        		
-	        		$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
-	        	}
+				_count = parseInt(data.length);
+				getUsers(_top, _skip);
 			});
-		
+        	printOutput($_text_output, textStatus, request);
+    	}
+    	var errorCallback = function (request, textStatus, errorThrown) {
+
+    		printError($_text_output, request, textStatus, errorThrown);
+       	}
+		var type = $("option:checked").val();
+		if (type === "PUT") {
+			url = url + "/id/" + user.Id;
+		}
+		else if (type === "DELETE") {
+			url = url + "/id/" + user.Id;
+			user = "undefined";
+		}
+		var dataType = "json";
+
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, user);
 	});
 });
 
