@@ -6,19 +6,14 @@ $(document).ready(function() {
 
 	_url += "/api/positions";
 
-	var $_table_rows_form = $("#table_rows_form");
-	var $_table_rows_input = $("#table_rows_input");
-	var $_table_output = $("#table_output");
-	var $_text_output = $("#text_output");
-	var $_previous_page_form = $("#previous_page_form");
-	var $_next_page_form = $("#next_page_form");
-	var $_table_rows_count = $("#table_rows_count");
+	setTableDOMElements();
+
+	var $_get_by_id_form = $("#get_by_id_form");
 	var $_id_field = $("#get_id_input");
+	var $_get_by_name_form = $("#get_by_name_form");
 	var $_name_field = $("#get_name_input");
 	var $_id_edit = $("#id_edit");
 	var $_name_edit = $("#name_edit");
-	var $_get_by_id_form = $("#get_by_id_form");
-	var $_get_by_name_form = $("#get_by_name_form");
 	var $_edit_form = $("#edit_form");
 
 	var readPositionFromFields = function () {

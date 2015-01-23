@@ -6,11 +6,8 @@ $(document).ready(function() {
 
 	_url += "/api/users";
 
-	var $_table_rows_form = $("#table_rows_form");
-	var $_table_rows_input = $("#table_rows_input");
-	var $_previous_page_form = $("#previous_page_form");
-	var $_next_page_form = $("#next_page_form");
-	var $_table_rows_count = $("#table_rows_count");
+	setTableDOMElements();
+	
 	var $_get_by_id_form = $("#get_by_id_form");
 	var $_id_field = $("#get_id_input");
 	var $_username_field = $("#get_username_input");
@@ -18,8 +15,6 @@ $(document).ready(function() {
 	var $_username_edit = $("#username_edit");
 	var $_password_edit = $("#password_edit");
 	var $_email_edit = $("#email_edit");
-	var $_table_output = $("#table_output");
-	var $_text_output = $("#text_output");
 	var $_get_by_username_form = $("#get_by_username_form");
 	var $_edit_form = $("#edit_form");
 

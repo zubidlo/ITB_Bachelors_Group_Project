@@ -6,13 +6,8 @@ $(document).ready(function() {
 
 	_url += "/api/players";
 
-	var $_table_rows_form = $("#table_rows_form");
-	var $_table_rows_input = $("#table_rows_input");
-	var $_table_output = $("#table_output");
-	var $_text_output = $("#text_output");
-	var $_previous_page_form = $("#previous_page_form");
-	var $_next_page_form = $("#next_page_form");
-	var $_table_rows_count = $("#table_rows_count");
+	setTableDOMElements();
+
 	var $_get_by_id_form = $("#get_by_id_form");
 	var $_id_field = $("#get_id_input");
 	var $_edit_form = $("#edit_form");

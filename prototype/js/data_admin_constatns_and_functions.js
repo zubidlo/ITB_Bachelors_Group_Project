@@ -1,9 +1,4 @@
-//general utility functions
-//they don't manipulate DOM so it's doesn't need to be ready just yet
-//they use jquery so it must be loaded
-
 //constants
-
 //url for development and production
 //var _url = "http://localhost:51642";
 var _url = "http://hurlingapi.azurewebsites.net";
@@ -13,6 +8,25 @@ var _top = 10;
 var _skip = 0;
 //items in the table
 var _count = 0;
+
+//DOM element jquery objcets
+var $_table_rows_form;
+var $_table_rows_input;
+var $_previous_page_form;
+var $_next_page_form;
+var $_table_rows_count;
+var $_table_output;
+var $_text_output;
+
+var setTableDOMElements = function() {
+	$_table_rows_form = $("#table_rows_form");
+	$_table_rows_input = $("#table_rows_input");
+	$_previous_page_form = $("#previous_page_form");
+	$_next_page_form = $("#next_page_form");
+	$_table_rows_count = $("#table_rows_count");
+	$_table_output = $("#table_output");
+	$_text_output = $("#text_output");
+}
 
 //prints a message when ajax request is successfull
 //$output : DOM element jquery object - to append the message to
