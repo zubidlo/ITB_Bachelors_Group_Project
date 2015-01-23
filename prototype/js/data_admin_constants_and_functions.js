@@ -18,7 +18,7 @@ var $_table_rows_count;
 var $_table_output;
 var $_text_output;
 
-//this need to be called when document is ready
+//this can be called only after document is ready
 var setTableDOMElements = function() {
 	$_table_rows_form = $("#table_rows_form");
 	$_table_rows_input = $("#table_rows_input");
@@ -29,23 +29,33 @@ var setTableDOMElements = function() {
 	$_text_output = $("#text_output");
 }
 
+//this can be called only after document is ready
 //prints a message when ajax request is successfull
-//$output : DOM element jquery object - to append the message to
 //textStatus : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
 //request : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
-var printOutput = function($output, textStatus, request) {
+var printOutput = function(textStatus, request) {
 
-	$output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
+	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 }
 
+//this can be called only after document is ready
 //prints a message when ajax request is successfull
-//$output : DOM element jquery object - to append the message to
 //request : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
 //textStatus : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
 //errorThrown : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
-var printError = function($output, request, textStatus, errorThrown) {
+var printError = function(request, textStatus, errorThrown) {
 
-	$output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+	$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+}
+
+//this can be called only after document is ready
+//general errror callback
+//request : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
+//textStatus : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
+//errorThrown : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
+var generalErrorCallback = function (request, textStatus, errorThrown) {
+
+	printError(request, textStatus, errorThrown);
 }
 
 //general ajaxRequest, see http://api.jquery.com/jquery.ajax/
@@ -119,13 +129,14 @@ var buildTableRow = function(rowNumber, properties, object) {
 	return row + "</tr>";
 }
 
+//this can be called only after document is ready
 //returns table html string
 //counter_start: int - what number first table row starts with
 //headers : string array - example: ['name', 'address', 'email']
 //properties : string array - example: ['Name', 'Address', 'Email'] data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
 //data : objcet array - objects to put in the table
 //output : DOM element jquery object - to append the table to
-var buildTable = function (counter_start, headers, properties, data, $_output) {
+var buildTable = function (counter_start, headers, properties, data) {
 	
 	var counter = counter_start;
 	var table = "<table>";
@@ -139,5 +150,5 @@ var buildTable = function (counter_start, headers, properties, data, $_output) {
 		table += buildTableRow(++counter, properties, data);
 	}
 	table += "</table>";
-	$_output.empty().append(table);
+	$_table_output.empty().append(table);
 }

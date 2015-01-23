@@ -95,7 +95,7 @@ $(document).ready(function() {
 				"Injured",
 				"PositionId"
 			];
-			buildTable(counter_start, headers, properties, data, $_table_output);
+			buildTable(counter_start, headers, properties, data);
 		}
 		ajaxRequest(url, successCallback);
 	}
@@ -137,14 +137,9 @@ $(document).ready(function() {
 		var successCallback = function(data, textStatus, request) {
 			
 			fillPlayerTextFields(data);
-            printOutput($_text_output, textStatus, request);
+            printOutput(textStatus, request);
 		}
-		var errorCallback = function (request, textStatus, errorThrown) {
-
-    		printError($_text_output, request, textStatus, errorThrown);
-       	}
-
-		ajaxRequest(url, successCallback, errorCallback);
+		ajaxRequest(url, successCallback, generalErrorCallback);
 	});
 
 	//POST PUT DELETE request
@@ -162,12 +157,8 @@ $(document).ready(function() {
 				$_table_rows_count.val(_count);
 				getPlayers(tableCurrentPage());
 			});
-        	printOutput($_text_output, textStatus, request);
+        	printOutput(textStatus, request);
     	}
-    	var errorCallback = function (request, textStatus, errorThrown) {
-
-    		printError($_text_output, request, textStatus, errorThrown);
-       	}
 		var type = $("option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + player.Id;
@@ -178,7 +169,7 @@ $(document).ready(function() {
 		}
 		var dataType = "json";
 
-		ajaxRequest(url, successCallback, errorCallback, type, dataType, player );
+		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, player );
 	});
 });
 

@@ -64,7 +64,7 @@ $(document).ready(function() {
 				"Password",
 				"Email"
 			];
-			buildTable(counter_start, headers, properties, data, $_table_output);
+			buildTable(counter_start, headers, properties, data);
     	}
 		ajaxRequest(url, successCallback);
 	}
@@ -106,13 +106,9 @@ $(document).ready(function() {
 		var successCallback = function(data, textStatus, request) {
 			
 			fillUserTextFields(data);
-            printOutput($_text_output, textStatus, request);
+            printOutput(textStatus, request);
 		}
-		var errorCallback = function (request, textStatus, errorThrown) {
-
-    		printError($_text_output, request, textStatus, errorThrown);
-       	}
-		ajaxRequest(url, successCallback, errorCallback);
+		ajaxRequest(url, successCallback, generalErrorCallback);
 	});
 
 	//user by username GET request
@@ -123,13 +119,9 @@ $(document).ready(function() {
 		var successCallback = function(data, textStatus, request) {
             	
         	fillUserTextFields(data);
-        	printOutput($_text_output, textStatus, request);
+        	printOutput(textStatus, request);
     	}
-    	var errorCallback = function (request, textStatus, errorThrown) {
-
-    		printError($_text_output, request, textStatus, errorThrown);
-       	}
-		ajaxRequest(url, successCallback, errorCallback);
+		ajaxRequest(url, successCallback, generalErrorCallback);
 	});
 
 	//POST PUT DELETE request
@@ -147,12 +139,8 @@ $(document).ready(function() {
 				$_table_rows_count.val(_count);
 				getUsers(tableCurrentPage());
 			});
-        	printOutput($_text_output, textStatus, request);
+        	printOutput(textStatus, request);
     	}
-    	var errorCallback = function (request, textStatus, errorThrown) {
-
-    		printError($_text_output, request, textStatus, errorThrown);
-       	}
 		var type = $("option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + user.Id;
@@ -163,7 +151,7 @@ $(document).ready(function() {
 		}
 		var dataType = "json";
 
-		ajaxRequest(url, successCallback, errorCallback, type, dataType, user);
+		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
 	});
 });
 
