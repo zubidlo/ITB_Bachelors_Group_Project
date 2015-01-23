@@ -1,8 +1,8 @@
 //this code uses jquery so that must be already loaded
 //this code uses functions from "data_admin_functions.js" so that must be already loaded
 
-//this anonymous function (all code of this script is inside this function) is executed after DOM is ready
-$(document).ready(function() {
+//execute only after DOM is ready
+var dataAdminPlayersCode = function() {
 
 	_url += "/api/players";
 
@@ -171,5 +171,5 @@ $(document).ready(function() {
 
 		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, player );
 	});
-});
+}
 

@@ -2,43 +2,51 @@
 //this code uses functions from "data_admin_functions.js" so that must be already loaded
 
 //execute only after DOM is ready
-var dataAdminPositionsCode = function() {
+var dataAdminLeaguesCode = function() {
 
-	_url += "/api/positions";
+	_url += "/api/leagues";
 
 	setTableDOMElements();
-
+	
 	var $_get_by_id_form = $("#get_by_id_form");
 	var $_id_field = $("#get_id_input");
-	var $_get_by_name_form = $("#get_by_name_form");
-	var $_name_field = $("#get_name_input");
+	var $_username_field = $("#get_username_input");
 	var $_id_edit = $("#id_edit");
-	var $_name_edit = $("#name_edit");
+	var $_username_edit = $("#username_edit");
+	var $_password_edit = $("#password_edit");
+	var $_email_edit = $("#email_edit");
+	var $_get_by_username_form = $("#get_by_username_form");
 	var $_edit_form = $("#edit_form");
 
-	var readPositionFromFields = function () {
+	var readUserFromInputFields = function () {
 		
 		return {
 			Id : $_id_edit.val(),
-			Name : $_name_edit.val()
+			Username : $_username_edit.val(),
+			Password : $_password_edit.val(),
+			Email : $_email_edit.val()
 		};
 	}
 
-	var fillPositionFields = function (position) {
+	var fillUserTextFields = function (user) {
 
-		$_id_edit.val(position.Id);
-		$_name_edit.val(position.Name);
+		$_id_edit.val(user.Id);
+		$_username_edit.val(user.Username);
+		$_password_edit.val(user.Password);
+		$_email_edit.val(user.Email);
 	}
 
 	//examples:
-	//.../api/positions?$orderby=Name --> get all position ordered by name
+	//.../api/users?$orderby=Username --> get all user ordered by username
+	//.../api/users?$filter=Email eq 'zubidlo'gmail.com' --> get all users which Email equals 'zubidlo'gmail.com'
+	//.../api/users?$top=10&$skip=30 --> get 10 users but skip first 30 (31,32.....,40)
 	//injects table of top items into DOM
 	//page.top : how many rows the table will have
 	//page.skip: how many rows to skip
 	//example: page.top=10 and page.skip=0 --> table with first 10 items
 	//page.top=10 and page.skip=10 --> table with from 11 to 20 items
 	//page.top=10 and page.skip=20 --> table with from 21 to 30 items
-	var getPositions = function(page) {
+	var getUsers = function(page) {
 
 		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
 		var successCallback = function (data, textStatus, request) {
@@ -46,11 +54,15 @@ var dataAdminPositionsCode = function() {
         	var counter_start = page.skip;
 			var headers = [
 				"Id<span>(PK)</span>",
-				"Field Position<span>(R)</span>"
-			 ];
+				"Username<span>(R)</span>",
+				"Password<span>(R)</span>",
+				"Email<span>(R)</span>"
+			];
 			var properties = [
-				"Id", 
-				"Name"
+			"Id",
+				"Username",
+				"Password",
+				"Email"
 			];
 			buildTable(counter_start, headers, properties, data);
     	}
@@ -63,50 +75,50 @@ var dataAdminPositionsCode = function() {
 
 		_count = parseInt(data.length);
 		$_table_rows_count.val(_count);
-		getPositions(tableCurrentPage());
+		getUsers(tableCurrentPage());
 	});
-
+	
 	$_table_rows_form.submit(function(event) {
 
 		event.preventDefault();
 		_top = $_table_rows_input.val();
 		_skip = 0;
-		getPositions(tableCurrentPage());
+		getUsers(tableCurrentPage());
 	});
 
 	$_previous_page_form.submit(function(event) {
 
 		event.preventDefault();
-		getPositions(tablePreviousPage());
+		getUsers(tablePreviousPage());
 	});
 
 	$_next_page_form.submit(function(event) {
 
 		event.preventDefault();
-		getPositions(tableNextPage());
+		getUsers(tableNextPage());
 	});
 
-	//position by id GET request
+	//user by id GET request
 	$_get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
 		var url = _url + "/id/" + $_id_field.val();
 		var successCallback = function(data, textStatus, request) {
 			
-			fillPositionFields(data);
+			fillUserTextFields(data);
             printOutput(textStatus, request);
 		}
 		ajaxRequest(url, successCallback, generalErrorCallback);
 	});
 
-	//position by name GET request
-	$_get_by_name_form.submit(function(event) {
+	//user by username GET request
+	$_get_by_username_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/name/" + $_name_field.val();
-		var successCallback = function (data, textStatus, request) {
+		var url = _url + "/username/" + $_username_field.val();
+		var successCallback = function(data, textStatus, request) {
             	
-        	fillPositionFields(data);
+        	fillUserTextFields(data);
         	printOutput(textStatus, request);
     	}
 		ajaxRequest(url, successCallback, generalErrorCallback);
@@ -116,28 +128,30 @@ var dataAdminPositionsCode = function() {
 	$_edit_form.submit(function(event){
 
 		event.preventDefault();
+
 		var url = _url;
-		var position = readPositionFromFields();
+		var user = readUserFromInputFields();
 		var successCallback = function (data, textStatus, request) {
             
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
 				$_table_rows_count.val(_count);
-				getPositions(tableCurrentPage());
+				getUsers(tableCurrentPage());
 			});
-        	printOutput($_text_output, textStatus, request);
+        	printOutput(textStatus, request);
     	}
 		var type = $("option:checked").val();
 		if (type === "PUT") {
-			url = url + "/id/" + position.Id;
+			url = url + "/id/" + user.Id;
 		}
 		else if (type === "DELETE") {
-			url = url + "/id/" + position.Id;
-			position = "undefined";
+			url = url + "/id/" + user.Id;
+			user = "undefined";
 		}
 		var dataType = "json";
-		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, position);
+
+		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
 	});
 }
 
