@@ -18,6 +18,7 @@ var $_table_rows_count;
 var $_table_output;
 var $_text_output;
 
+//this need to be called when document is ready
 var setTableDOMElements = function() {
 	$_table_rows_form = $("#table_rows_form");
 	$_table_rows_input = $("#table_rows_input");
