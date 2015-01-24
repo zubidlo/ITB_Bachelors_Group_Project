@@ -18,11 +18,11 @@ var dataAdminPlayersCode = function() {
 	var $overallpoints = $("#overallpoints");
 	var $price = $("#price");
 	var $rating = $("#rating");
-	var $injured_checkbox = $(":checkbox");
+	var $injured_checkbox = $("#injured");
 	var $position_id = $("#position_id");
 
 	var readPlayerFromInputFields = function () {
-		
+
 		return {
 			Id : $id.val(),
 			FirstName : $firstname.val(),
@@ -32,7 +32,7 @@ var dataAdminPlayersCode = function() {
 			OverallPoints : $overallpoints.val(),
 			Price : $price.val(),
 			Rating : $rating.val(),
-			Injured : $injured_checkbox.val("checked") === "checked" ? "true" : "false",
+			Injured : $injured_checkbox.attr("checked") === "checked" ? "true" : "false",
 			PositionId : $position_id.val()
 		};
 	}
@@ -48,7 +48,7 @@ var dataAdminPlayersCode = function() {
 		$price.val(player.Price);
 		$rating.val(player.Rating);
 		if (player.Injured === "true") {
-			$injured_checkbox.val("checked", "checked");
+			$injured_checkbox.attr("checked", "checked");
 		} else {
 			$injured_checkbox.removeAttr("checked");
 		}

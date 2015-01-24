@@ -23,23 +23,23 @@
 						<legend>Player</legend>
 						<input id="id" type="hidden" value="0"/>
 						<label for="firstname">First Name:</label>
-						<input id="firstname" type="text" placeholder="first name" required/>
+						<input id="firstname" type="text" placeholder="a string" required/>
 						<label for="lastname">Last Name:</label>
-						<input id="lastname" type="text" placeholder="last name" required/>
+						<input id="lastname" type="text" placeholder="a string" required/>
 						<label for="gaateam">GAA Team Name:</label>
-						<input id="gaateam" type="text" placeholder="name" required/>
+						<input id="gaateam" type="text" placeholder="a string" required/>
 						<label for="lastweekpoints">Last Week Points:</label>
-						<input id="lastweekpoints" type="number" step="any" value="0" placeholder="decimal"/>
+						<input id="lastweekpoints" type="number" step="any" placeholder="a decimal"/>
 						<label for="overallpoints">Overall Points:</label>
-						<input id="overallpoints" type="number" step="any" value="0" placeholder="decimal"/>
+						<input id="overallpoints" type="number" step="any" placeholder="a decimal"/>
 						<label for="price">Price:</label>
-						<input id="price" type="number" step="any" value="0" placeholder="decimal" required/>
+						<input id="price" type="number" step="any" placeholder="a decimal" required/>
 						<label for="rating">Rating:</label>
-						<input id="rating" type="number" value="0" min="0" max="255" placeholder="<0 - 255>" required/>
+						<input id="rating" type="number" min="0" max="255" placeholder="<0 - 255>" required/>
 						<label>Injured:</label>
-						<input type="checkbox" name="injured" value="true"/>
+						<input id="injured" type="checkbox" value="false" />
 						<label for="position_id">Position Id:</label>
-						<input id="position_id" type="number" value="1" min="1" placeholder="greater then 0" required/>
+						<input id="position_id" type="number" min="1" placeholder="integer > 0" required/>
 						<label for="request">Select the Request</label>
 						<select name="Request" id="request">
 							<option value="PUT">Change this player(PUT)</option>

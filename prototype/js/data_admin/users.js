@@ -20,7 +20,7 @@ var dataAdminUsersCode = function() {
 	var readUserFromInputFields = function () {
 		
 		return {
-			Id : parseInt($id.val()),
+			Id : $id.val(),
 			Username : $username.val(),
 			Password : $password.val(),
 			Email : $email.val()

@@ -19,7 +19,7 @@ var dataAdminLeaguesCode = function() {
 	var readLeagueFromInputFields = function () {
 		
 		return {
-			Id : parseInt($id.val()),
+			Id : $id.val(),
 			Name : $name.val(),
 			NextFixtures : $nextfixtures.val(),
 			Week : $week.val()
