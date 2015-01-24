@@ -1,6 +1,7 @@
 
 
 
+        
 
 
 
@@ -8,8 +9,7 @@
 function set_user()
 {
 
-
-	
+$("#myTable").tablesorter(); 
 	 
 	var user = sessionStorage.getItem("username");
 	document.getElementById("demo").innerHTML = ("You are logged in as "+user);
@@ -92,3 +92,4 @@ sessionStorage.clear();
 alert("Session done");
 
 }
+

@@ -21,13 +21,13 @@ function set_user()
 {
 
 
-	
+	set_table(1);
 	 
 	var user = sessionStorage.getItem("username");
 	document.getElementById("demo").innerHTML = ("You are logged in as "+user);
+	
 
 }
-
 
 
 function checkSession_transfers()
@@ -102,3 +102,58 @@ sessionStorage.clear();
 alert("Session done");
 
 }
+
+
+
+function set_table(i)
+{
+
+  var _url = "http://hurlingapi.azurewebsites.net/api/users";
+
+$.ajax({
+        url: _url + "/Id/" + i,
+        async: true,
+       
+        success:function(data)
+        {
+
+
+
+   
+              var tr;
+       
+            tr = $('<tr/>');
+            tr.append("<td>" + data.Id + "</td>");
+            tr.append("<td>" + data.Username + "</td>");
+             tr.append("<td>" + data.Username + "</td>");
+              tr.append("<td>" + data.Username + "</td>");
+               tr.append("<td>" + data.Username + "</td>");
+        
+            $('table').append(tr);
+        
+                         	 i++;
+
+                         	 if(i <4)
+                         	 {
+                          set_table(i);
+}
+        $("#myTable").tablesorter(); 	
+            
+           
+          
+           
+        
+
+
+            }
+
+                    
+                
+    });
+
+		}
+
+
+
+
+	

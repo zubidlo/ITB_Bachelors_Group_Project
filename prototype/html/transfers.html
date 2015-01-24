@@ -5,9 +5,10 @@
 <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
 <link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
-<link rel="stylesheet" type="text/css" href="../css/standings_page.css">
+
 <script src="../js/jquery.min.js"></script>
 
+<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
 <script src="../js/transfers.js"></script>
 
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
@@ -37,7 +38,48 @@
   </div>
 <!-- wrapper -->
 <div id="container">
-
+<table id="myTable" class="tablesorter"> 
+<thead> 
+<tr> 
+    <th>Last Name</th> 
+    <th>First Name</th> 
+    <th>Email</th> 
+    <th>Due</th> 
+    <th>Web Site</th> 
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+    <td>Smith</td> 
+    <td>John</td> 
+    <td>jsmith@gmail.com</td> 
+    <td>$50.00</td> 
+    <td>http://www.jsmith.com</td> 
+</tr> 
+<tr> 
+    <td>Bach</td> 
+    <td>Frank</td> 
+    <td>fbach@yahoo.com</td> 
+    <td>$50.00</td> 
+    <td>http://www.frank.com</td> 
+</tr> 
+<tr> 
+    <td>Doe</td> 
+    <td>Jason</td> 
+    <td>jdoe@hotmail.com</td> 
+    <td>$100.00</td> 
+    <td>http://www.jdoe.com</td> 
+</tr> 
+<tr> 
+    <td>Conway</td> 
+    <td>Tim</td> 
+    <td>tconway@earthlink.net</td> 
+    <td>$50.00</td> 
+    <td>http://www.timconway.com</td> 
+</tr> 
+</tbody> 
+</table> 
+    
  <ul class="ca-menu" style="margin: 40px 0">
     <li> <a href="javascript:;"> <span class="ca-icon">A</span>
       <div class="ca-content">
