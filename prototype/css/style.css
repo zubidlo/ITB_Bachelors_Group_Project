@@ -182,41 +182,31 @@ dt {font-size: 1.4em;}
 dd {margin-bottom: 30px; font-size: 1em; color: gray; border-bottom: 1px dotted gray; padding-bottom: 30px;}
 
 /**************************** Tables *****************************/
-
 table {
-	background:#ccc;
-	font-family: Arial, Helvetica, sans-serif;
-	width: 640px;
-	font-size: 12px;
-	margin:20px 0;
-	border-collapse: separate;
-	border:#ccc 1px solid;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-	-moz-box-shadow:0 3px 6px rgba(0, 0, 0, 0.4);}
-	
-table th {padding:14px 20px}
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
 
-table td {
-	background-image: -o-linear-gradient(rgb(242,242,242),rgb(222,222,222));
-	background:-moz-linear-gradient(center top , #f2f2f2, #dedede) repeat scroll 0 0 transparent;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#dedede));
-	padding: 14px 20px}
+table td, #customers th {
+    font-size: 1em;
+    border: 1px solid #98bf21;
+    padding: 3px 7px 2px 7px;
+}
 
-.featured-column {}
+table th {
+    font-size: 1.1em;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #A7C942;
+    color: #ffffff;
+}
 
-
-table tr:last-child td:first-child {
-	-moz-border-radius-bottomleft:10px;
-	-webkit-border-bottom-left-radius:10px;
-	border-bottom-left-radius:10px}
-	
-table tr:last-child td:last-child {
-	-moz-border-radius-bottomright:10px;
-	-webkit-border-bottom-right-radius:10px;
-	border-bottom-right-radius:10px}
-
+table tr.alt td {
+    color: #000000;
+    background-color: #EAF2D3;
+}
 /**************************** Forms *****************************/
 
 .p_forms {margin: 0;}
