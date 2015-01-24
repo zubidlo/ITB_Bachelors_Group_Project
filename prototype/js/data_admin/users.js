@@ -1,39 +1,38 @@
 //this code uses jquery so that must be already loaded
 //this code uses functions from "data_admin_functions.js" so that must be already loaded
 
-//this anonymous function (all code of this script is inside this function) is executed after DOM is ready
-$(document).ready(function() {
+//execute only after DOM is ready
+var dataAdminUsersCode = function() {
 
+	//add path to URL prefix
 	_url += "/api/users";
 
+	//set common DOM element jquery objects
 	setTableDOMElements();
 	
-	var $_get_by_id_form = $("#get_by_id_form");
-	var $_id_field = $("#get_id_input");
-	var $_username_field = $("#get_username_input");
-	var $_id_edit = $("#id_edit");
-	var $_username_edit = $("#username_edit");
-	var $_password_edit = $("#password_edit");
-	var $_email_edit = $("#email_edit");
-	var $_get_by_username_form = $("#get_by_username_form");
-	var $_edit_form = $("#edit_form");
-
+	//set specific DOM element jquery objects
+	var $get_by_username_form = $("#get_by_username_form");
+	var $get_username = $("#get_username");
+	var $username = $("#username");
+	var $password = $("#password");
+	var $email = $("#email");
+	
 	var readUserFromInputFields = function () {
 		
 		return {
-			Id : $_id_edit.val(),
-			Username : $_username_edit.val(),
-			Password : $_password_edit.val(),
-			Email : $_email_edit.val()
+			Id : $id.val(),
+			Username : $username.val(),
+			Password : $password.val(),
+			Email : $email.val()
 		};
 	}
 
 	var fillUserTextFields = function (user) {
 
-		$_id_edit.val(user.Id);
-		$_username_edit.val(user.Username);
-		$_password_edit.val(user.Password);
-		$_email_edit.val(user.Email);
+		$id.val(user.Id);
+		$username.val(user.Username);
+		$password.val(user.Password);
+		$email.val(user.Email);
 	}
 
 	//examples:
@@ -53,13 +52,13 @@ $(document).ready(function() {
             	
         	var counter_start = page.skip;
 			var headers = [
-				"Id<span>(PK)</span>",
-				"Username<span>(R)</span>",
-				"Password<span>(R)</span>",
-				"Email<span>(R)</span>"
+				"Id <span>(PK)</span>",
+				"User Name <span>(R)</span>",
+				"Password <span>(R)</span>",
+				"Email <span>(R)</span>"
 			];
 			var properties = [
-			"Id",
+				"Id",
 				"Username",
 				"Password",
 				"Email"
@@ -69,40 +68,40 @@ $(document).ready(function() {
 		ajaxRequest(url, successCallback);
 	}
 
-	_top = $_table_rows_input.val();
+	_top = $table_rows.val();
 
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
-		$_table_rows_count.val(_count);
+		$table_rows_count.val(_count);
 		getUsers(tableCurrentPage());
 	});
 	
-	$_table_rows_form.submit(function(event) {
+	$table_rows_form.submit(function(event) {
 
 		event.preventDefault();
-		_top = $_table_rows_input.val();
+		_top = $table_rows.val();
 		_skip = 0;
 		getUsers(tableCurrentPage());
 	});
 
-	$_previous_page_form.submit(function(event) {
+	$previous_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getUsers(tablePreviousPage());
 	});
 
-	$_next_page_form.submit(function(event) {
+	$next_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getUsers(tableNextPage());
 	});
 
 	//user by id GET request
-	$_get_by_id_form.submit(function(event) {
+	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/id/" + $_id_field.val();
+		var url = _url + "/id/" + $id_field.val();
 		var successCallback = function(data, textStatus, request) {
 			
 			fillUserTextFields(data);
@@ -112,10 +111,10 @@ $(document).ready(function() {
 	});
 
 	//user by username GET request
-	$_get_by_username_form.submit(function(event) {
+	$get_by_username_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/username/" + $_username_field.val();
+		var url = _url + "/username/" + $get_username.val();
 		var successCallback = function(data, textStatus, request) {
             	
         	fillUserTextFields(data);
@@ -125,7 +124,7 @@ $(document).ready(function() {
 	});
 
 	//POST PUT DELETE request
-	$_edit_form.submit(function(event){
+	$edit_form.submit(function(event){
 
 		event.preventDefault();
 
@@ -136,7 +135,7 @@ $(document).ready(function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
-				$_table_rows_count.val(_count);
+				$table_rows_count.val(_count);
 				getUsers(tableCurrentPage());
 			});
         	printOutput(textStatus, request);
@@ -153,5 +152,4 @@ $(document).ready(function() {
 
 		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
 	});
-});
-
+}

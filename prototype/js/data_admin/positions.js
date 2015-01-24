@@ -1,33 +1,33 @@
 //this code uses jquery so that must be already loaded
 //this code uses functions from "data_admin_functions.js" so that must be already loaded
 
-//this anonymous function (all code of this script is inside this function) is executed after DOM is ready
-$(document).ready(function() {
+//execute only after DOM is ready
+var dataAdminPositionsCode = function() {
 
+	//add path to URL prefix
 	_url += "/api/positions";
 
+	//set common DOM element jquery objects
 	setTableDOMElements();
 
-	var $_get_by_id_form = $("#get_by_id_form");
-	var $_id_field = $("#get_id_input");
-	var $_get_by_name_form = $("#get_by_name_form");
-	var $_name_field = $("#get_name_input");
-	var $_id_edit = $("#id_edit");
-	var $_name_edit = $("#name_edit");
-	var $_edit_form = $("#edit_form");
+	//set specific DOM element jquery objects
+	var $get_by_name_form = $("#get_by_name_form");
+	var $get_name = $("#get_name");
+	var $id = $("#id");
+	var $name = $("#name");
 
 	var readPositionFromFields = function () {
 		
 		return {
-			Id : $_id_edit.val(),
-			Name : $_name_edit.val()
+			Id : $id.val(),
+			Name : $name.val()
 		};
 	}
 
 	var fillPositionFields = function (position) {
 
-		$_id_edit.val(position.Id);
-		$_name_edit.val(position.Name);
+		$id.val(position.Id);
+		$name.val(position.Name);
 	}
 
 	//examples:
@@ -45,8 +45,8 @@ $(document).ready(function() {
             	
         	var counter_start = page.skip;
 			var headers = [
-				"Id<span>(PK)</span>",
-				"Field Position<span>(R)</span>"
+				"Id <span>(PK)</span>",
+				"Field Position <span>(R)</span>"
 			 ];
 			var properties = [
 				"Id", 
@@ -57,40 +57,40 @@ $(document).ready(function() {
 		ajaxRequest(url, successCallback);
 	}
 
-	_top = $_table_rows_input.val();
+	_top = $table_rows.val();
 
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
-		$_table_rows_count.val(_count);
+		$table_rows_count.val(_count);
 		getPositions(tableCurrentPage());
 	});
 
-	$_table_rows_form.submit(function(event) {
+	$table_rows_form.submit(function(event) {
 
 		event.preventDefault();
-		_top = $_table_rows_input.val();
+		_top = $table_rows.val();
 		_skip = 0;
 		getPositions(tableCurrentPage());
 	});
 
-	$_previous_page_form.submit(function(event) {
+	$previous_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getPositions(tablePreviousPage());
 	});
 
-	$_next_page_form.submit(function(event) {
+	$next_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getPositions(tableNextPage());
 	});
 
 	//position by id GET request
-	$_get_by_id_form.submit(function(event) {
+	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/id/" + $_id_field.val();
+		var url = _url + "/id/" + $id_field.val();
 		var successCallback = function(data, textStatus, request) {
 			
 			fillPositionFields(data);
@@ -100,10 +100,10 @@ $(document).ready(function() {
 	});
 
 	//position by name GET request
-	$_get_by_name_form.submit(function(event) {
+	$get_by_name_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/name/" + $_name_field.val();
+		var url = _url + "/name/" + $get_name.val();
 		var successCallback = function (data, textStatus, request) {
             	
         	fillPositionFields(data);
@@ -113,7 +113,7 @@ $(document).ready(function() {
 	});
 
 	//POST PUT DELETE request
-	$_edit_form.submit(function(event){
+	$edit_form.submit(function(event){
 
 		event.preventDefault();
 		var url = _url;
@@ -123,10 +123,10 @@ $(document).ready(function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
-				$_table_rows_count.val(_count);
+				$table_rows_count.val(_count);
 				getPositions(tableCurrentPage());
 			});
-        	printOutput($_text_output, textStatus, request);
+        	printOutput($text_output, textStatus, request);
     	}
 		var type = $("option:checked").val();
 		if (type === "PUT") {
@@ -139,5 +139,5 @@ $(document).ready(function() {
 		var dataType = "json";
 		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, position);
 	});
-});
+}
 

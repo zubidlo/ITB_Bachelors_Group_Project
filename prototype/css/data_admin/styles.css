@@ -77,3 +77,7 @@ legend {
 #forms_article {
   width: 25%;
 }
+
+[placeholder] {
+  width: 170px;
+}

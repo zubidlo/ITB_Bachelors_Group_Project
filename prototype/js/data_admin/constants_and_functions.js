@@ -1,3 +1,27 @@
+//loads parts of the DOM which are common for all pages and then executes given function
+var loadCommonsAndStartProgram = function(callback) {
+
+	//after DOM is ready
+	$(document).ready(function(){
+
+		var req1 = $.get("get_by_id_form.html", function(data) {
+	    $("#get_by_id_form").html(data);
+		});
+		var req2 = $.get("table_article.html", function(data) {
+		    $("#table_article").html(data);
+		});
+		var req3 = $.get("request_select.html", function(data) {
+		    $("#request_div").html(data);
+		});
+		//execute callback only when all requests are successful
+		$.when(req1, req2, req3).then(callback);
+
+		//I don't care when these are loaded
+		$("header").load("header.html");
+    	$("footer").load("footer.html");
+	});
+}
+
 //constants
 //url for development and production
 //var _url = "http://localhost:51642";
@@ -9,24 +33,33 @@ var _skip = 0;
 //items in the table
 var _count = 0;
 
-//DOM element jquery objcets
-var $_table_rows_form;
-var $_table_rows_input;
-var $_previous_page_form;
-var $_next_page_form;
-var $_table_rows_count;
-var $_table_output;
-var $_text_output;
+//DOM element jquery objects common for all html files
+var $table_rows_form;
+var $table_rows;
+var $previous_page_form;
+var $next_page_form;
+var $table_rows_count;
+var $table;
+var $text;
+var $get_by_id_form;
+var $id_field;
+var $edit_form;
+var $id;
 
 //this can be called only after document is ready
 var setTableDOMElements = function() {
-	$_table_rows_form = $("#table_rows_form");
-	$_table_rows_input = $("#table_rows_input");
-	$_previous_page_form = $("#previous_page_form");
-	$_next_page_form = $("#next_page_form");
-	$_table_rows_count = $("#table_rows_count");
-	$_table_output = $("#table_output");
-	$_text_output = $("#text_output");
+	
+	$get_by_id_form = $("#get_by_id_form");
+	$id_field = $("#get_id");
+	$edit_form = $("#edit_form");
+	$id = $("#id");
+	$table_rows_form = $("#table_rows_form");
+	$table_rows = $("#table_rows");
+	$previous_page_form = $("#previous_page_form");
+	$next_page_form = $("#next_page_form");
+	$table_rows_count = $("#rows_count");
+	$table = $("#table");
+	$text = $("#text");
 }
 
 //this can be called only after document is ready
@@ -35,7 +68,7 @@ var setTableDOMElements = function() {
 //request : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
 var printOutput = function(textStatus, request) {
 
-	$_text_output.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
+	$text.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 }
 
 //this can be called only after document is ready
@@ -45,7 +78,7 @@ var printOutput = function(textStatus, request) {
 //errorThrown : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
 var printError = function(request, textStatus, errorThrown) {
 
-	$_text_output.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+	$text.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
 }
 
 //this can be called only after document is ready
@@ -69,7 +102,7 @@ var ajaxRequest = function(url, successCallback, errorCallback, type, dataType, 
 	
 	type = typeof type === "undefined" ? "GET" : type;
 	dataType = typeof dataType === "undefined" ? "json" : dataType;
-	data = typeof data === "undefined" ? "undefined" : data;
+	data = typeof data === "undefined" ? null : data;
 	errorCallback = typeof errorCallback === "undefined" ? function() {} : errorCallback;
 
 	$.ajax({
@@ -150,5 +183,5 @@ var buildTable = function (counter_start, headers, properties, data) {
 		table += buildTableRow(++counter, properties, data);
 	}
 	table += "</table>";
-	$_table_output.empty().append(table);
+	$table.empty().append(table);
 }

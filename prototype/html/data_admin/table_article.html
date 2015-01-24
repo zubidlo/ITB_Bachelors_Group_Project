@@ -1,0 +1,22 @@
+<form id="table_rows_form" action="#">
+	<fieldset>
+		<legend>Rows per page</legend>
+		<input id="table_rows" type="number" value="10" min="1" max="100" placeholder="<1 - 100>">
+		<input type="submit" value="submit">
+	</fieldset>
+</form>
+<fieldset>
+	<legend>Repository</legend>
+	<form id="previous_page_form" action="#">
+		<input type="submit" value="previous page">
+	</form>
+	<div id="table"></div>
+	<form id="next_page_form" action="#">
+		<input type="submit" value="next page">
+	</form>
+	<p><span id="text"></span></p>
+</fieldset>
+<fieldset>
+	<legend>Number of items in the repository</legend>
+	<input id="rows_count" type="number" readonly>
+</fieldset>
