@@ -4,21 +4,18 @@
 	<meta charset="UTF-8">
 	<title>Data_Admin_Leagues</title>
 	<link rel="stylesheet" href="../../css/data_admin/styles.css">
-	<!-- order of loading the scripts is important! See comments in each of those -->
 	<script src="../../js/jquery.min.js"></script>
 	<script src="../../js/data_admin/constants_and_functions.js"></script>
 	<script src="../../js/data_admin/leagues.js"></script>
-	<script>
-		loadTheRestAndStartProgram(dataAdminLeaguesCode);
-	</script>
+	<script> loadCommonsAndStartProgram(dataAdminLeaguesCode); </script>
 </head>
 <body>
-	<header></header>
+	<header><!-- injection "header.html" --></header>
 	<main>
 		<section>
-			<article id="table_article"></article>
+			<article id="table_article"><!-- injection "table_article.html" --></article>
 			<article id="forms_article">
-				<form id="get_by_id_form" action="#"></form>
+				<form id="get_by_id_form" action="#"><!-- injection "get_by_id_form.html" --></form>
 				<form id="edit_form" action="#">
 					<fieldset>
 						<legend>User</legend>
@@ -29,18 +26,12 @@
 						<input id="nextfixtures" type="text" placeholder="yyyy-mm-ddThh:mm:ss" required/>
 						<label for="week">Week:</label>
 						<input id="week" type="number" min="0" max="255" placeholder="<0 - 255>" required/>
-						<label for="request_select">Select the Request</label>
-						<select name="Request" id="request_select">
-							<option value="PUT">Change this user(PUT)</option>
-							<option value="POST">Create new user(POST)</option>
-							<option value="DELETE">Delete this user(DELETE)</option>
-						</select>
-						<input type="submit" value="submit">
+						<div id="request_div"><!-- injection "request_select.html" --></div>
 					</fieldset>
 				</form>
 			</article>			
 		</section>
 	</main>
-	<footer></footer>
+	<footer><!-- injection "footer.html" --></footer>
 </body>
 </html>

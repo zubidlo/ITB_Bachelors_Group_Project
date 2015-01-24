@@ -1,11 +1,22 @@
-//start of the program
-var loadTheRestAndStartProgram = function(callback) {
+//loads parts of the DOM which are common for all pages and then executes given function
+var loadCommonsAndStartProgram = function(callback) {
+
+	//after DOM is ready
 	$(document).ready(function(){
-		//load id form, then table article and then executer javascript
-		$("#get_by_id_form").load("get_by_id_form.html", function() {
-			$("#table_article").load("table_article.html", callback);
+
+		var req1 = $.get("get_by_id_form.html", function(data) {
+	    $("#get_by_id_form").html(data);
 		});
-		//I don't care when header and footer is loaded
+		var req2 = $.get("table_article.html", function(data) {
+		    $("#table_article").html(data);
+		});
+		var req3 = $.get("request_select.html", function(data) {
+		    $("#request_div").html(data);
+		});
+		//execute callback only when all requests are successful
+		$.when(req1, req2, req3).then(callback);
+
+		//I don't care when these are loaded
 		$("header").load("header.html");
     	$("footer").load("footer.html");
 	});

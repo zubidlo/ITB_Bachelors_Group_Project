@@ -7,17 +7,15 @@
 	<script src="../../js/jquery.min.js"></script>
 	<script src="../../js/data_admin/constants_and_functions.js"></script>
 	<script src="../../js/data_admin/positions.js"></script>
-	<script>
-		loadTheRestAndStartProgram(dataAdminPositionsCode);
-	</script>
+	<script> loadCommonsAndStartProgram(dataAdminPositionsCode); </script>
 </head>
 <body>
-	<header></header>
+	<header><!-- injection "header.html" --></header>
 	<main>
 		<section>
-			<article id="table_article"></article>
+			<article id="table_article"><!-- injection "table_article.html" --></article>
 			<article id="forms_article">
-				<form id="get_by_id_form" action="#"></form>
+				<form id="get_by_id_form" action="#"><!-- injection "get_by_id_form.html" --></form>
 				<form id="get_by_name_form" action="#">
 					<fieldset>
 						<legend>Get by Name</legend>
@@ -31,18 +29,12 @@
 						<input id="id" type="hidden" value="0"/>
 						<label for="name">Name:</label>
 						<input id="name" type="text" placeholder="a string" required/>
-						<label for="request">Select the Request</label>
-						<select name="Request" id="request">
-							<option value="PUT">Change this position(PUT)</option>
-							<option value="POST">Create new position(POST)</option>
-							<option value="DELETE">Delete this user(DELETE)</option>
-						</select>
-						<input type="submit" value="submit">
+						<div id="request_div"><!-- injection "request_select.html" --></div>
 					</fieldset>
 				</form>
 			</article>			
 		</section>
 	</main>
-	<footer></footer>
+	<footer><!-- injection "footer.html" --></footer>
 </body>
 </html>
