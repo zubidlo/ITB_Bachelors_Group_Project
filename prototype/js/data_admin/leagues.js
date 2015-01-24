@@ -4,34 +4,34 @@
 //execute only after DOM is ready
 var dataAdminLeaguesCode = function() {
 
+	//add path to URL prefix
 	_url += "/api/leagues";
 
+	//set common DOM element jquery objects
 	setTableDOMElements();
 	
-	var $_get_by_id_form = $("#get_by_id_form");
-	var $_id_field = $("#get_id_input");
-	var $_edit_form = $("#edit_form");
-	var $_id_edit = $("#id_edit");
-	var $_name_edit = $("#name_edit");
-	var $_nextfixtures_edit = $("#nextfixtures_edit");
-	var $_week_edit = $("#week_edit");
+	var $edit_form = $("#edit_form");
+	var $id = $("#id");
+	var $name = $("#name");
+	var $nextfixtures = $("#nextfixtures");
+	var $week = $("#week");
 
 	var readLeagueFromInputFields = function () {
 		
 		return {
-			Id : $_id_edit.val(),
-			Name : $_name_edit.val(),
-			NextFixtures : $_nextfixtures_edit.val(),
-			Week : $_week_edit.val()
+			Id : parseInt($id.val()),
+			Name : $name.val(),
+			NextFixtures : $nextfixtures.val(),
+			Week : $week.val()
 		};
 	}
 
 	var fillLeagueTextFields = function (league) {
 
-		$_id_edit.val(league.Id);
-		$_name_edit.val(league.Name);
-		$_nextfixtures_edit.val(league.NextFixtures);
-		$_week_edit.val(league.Week);
+		$id.val(league.Id);
+		$name.val(league.Name);
+		$nextfixtures.val(league.NextFixtures);
+		$week.val(league.Week);
 	}
 
 	//examples:
@@ -49,10 +49,10 @@ var dataAdminLeaguesCode = function() {
             	
         	var counter_start = page.skip;
 			var headers = [
-				"Id<span>(PK)</span>",
-				"Name<span>(R)</span>",
-				"NextFixtures<span>(R)</span>",
-				"Week<span>(R)</span>"
+				"Id <span>(PK)</span>",
+				"Name <span>(R)</span>",
+				"Next Fixtures <span>(R)</span>",
+				"Week<span> (R)</span>"
 			];
 			var properties = [
 				"Id",
@@ -65,40 +65,40 @@ var dataAdminLeaguesCode = function() {
 		ajaxRequest(url, successCallback);
 	}
 
-	_top = $_table_rows_input.val();
+	_top = $table_rows.val();
 
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
-		$_table_rows_count.val(_count);
+		$table_rows_count.val(_count);
 		getLeagues(tableCurrentPage());
 	});
 	
-	$_table_rows_form.submit(function(event) {
+	$table_rows_form.submit(function(event) {
 
 		event.preventDefault();
-		_top = $_table_rows_input.val();
+		_top = $table_rows.val();
 		_skip = 0;
 		getLeagues(tableCurrentPage());
 	});
 
-	$_previous_page_form.submit(function(event) {
+	$previous_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getLeagues(tablePreviousPage());
 	});
 
-	$_next_page_form.submit(function(event) {
+	$next_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getLeagues(tableNextPage());
 	});
 
 	//user by id GET request
-	$_get_by_id_form.submit(function(event) {
+	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/id/" + $_id_field.val();
+		var url = _url + "/id/" + $id_field.val();
 		var successCallback = function(data, textStatus, request) {
 			
 			fillLeagueTextFields(data);
@@ -108,7 +108,7 @@ var dataAdminLeaguesCode = function() {
 	});
 
 	//POST PUT DELETE request
-	$_edit_form.submit(function(event){
+	$edit_form.submit(function(event){
 
 		event.preventDefault();
 
@@ -119,7 +119,7 @@ var dataAdminLeaguesCode = function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
-				$_table_rows_count.val(_count);
+				$table_rows_count.val(_count);
 				getLeagues(tableCurrentPage());
 			});
         	printOutput(textStatus, request);

@@ -4,56 +4,55 @@
 //execute only after DOM is ready
 var dataAdminPlayersCode = function() {
 
+	//add path to URL prefix
 	_url += "/api/players";
 
+	//set common DOM element jquery objects
 	setTableDOMElements();
 
-	var $_get_by_id_form = $("#get_by_id_form");
-	var $_id_field = $("#get_id_input");
-	var $_edit_form = $("#edit_form");
-	var $_id_edit = $("#id_edit");
-	var $_firstname_edit = $("#firstname_edit");
-	var $_lastname_edit = $("#lastname_edit");
-	var $_gaateam_edit = $("#gaateam_edit");
-	var $_lastweekpoints_edit = $("#lastweekpoints_edit");
-	var $_overallpoints_edit = $("#overallpoints_edit");
-	var $_price_edit = $("#price_edit");
-	var $_rating_edit = $("#rating_edit");
-	var $_injured_checkbox = $(":checkbox");
-	var $_position_id_edit = $("#position_id_edit");
+	var $id = $("#id");
+	var $firstname = $("#firstname");
+	var $lastname = $("#lastname");
+	var $gaateam = $("#gaateam");
+	var $lastweekpoints = $("#lastweekpoints");
+	var $overallpoints = $("#overallpoints");
+	var $price = $("#price");
+	var $rating = $("#rating");
+	var $injured_checkbox = $(":checkbox");
+	var $position_id = $("#position_id");
 
 	var readPlayerFromInputFields = function () {
 		
 		return {
-			Id : $_id_edit.val(),
-			FirstName : $_firstname_edit.val(),
-			LastName : $_lastname_edit.val(),
-			GaaTeam : $_gaateam_edit.val(),
-			LastWeekPoints : $_lastweekpoints_edit.val(),
-			OverallPoints : $_overallpoints_edit.val(),
-			Price : $_price_edit.val(),
-			Rating : $_rating_edit.val(),
-			Injured : $_injured_checkbox.val("checked") === "checked" ? "true" : "false",
-			PositionId : $_position_id_edit.val()
+			Id : $id.val(),
+			FirstName : $firstname.val(),
+			LastName : $lastname.val(),
+			GaaTeam : $gaateam.val(),
+			LastWeekPoints : $lastweekpoints.val(),
+			OverallPoints : $overallpoints.val(),
+			Price : $price.val(),
+			Rating : $rating.val(),
+			Injured : $injured_checkbox.val("checked") === "checked" ? "true" : "false",
+			PositionId : $position_id.val()
 		};
 	}
 
 	var fillPlayerTextFields = function (player) {
 
-		$_id_edit.val(player.Id);
-		$_firstname_edit.val(player.FirstName);
-		$_lastname_edit.val(player.LastName);
-		$_gaateam_edit.val(player.GaaTeam);
-		$_lastweekpoints_edit.val(player.LastWeekPoints);
-		$_overallpoints_edit.val(player.OverallPoints);
-		$_price_edit.val(player.Price);
-		$_rating_edit.val(player.Rating);
+		$id.val(player.Id);
+		$firstname.val(player.FirstName);
+		$lastname.val(player.LastName);
+		$gaateam.val(player.GaaTeam);
+		$lastweekpoints.val(player.LastWeekPoints);
+		$overallpoints.val(player.OverallPoints);
+		$price.val(player.Price);
+		$rating.val(player.Rating);
 		if (player.Injured === "true") {
-			$_injured_checkbox.val("checked", "checked");
+			$injured_checkbox.val("checked", "checked");
 		} else {
-			$_injured_checkbox.removeAttr("checked");
+			$injured_checkbox.removeAttr("checked");
 		}
-		$_position_id_edit.val(player.PositionId);
+		$position_id.val(player.PositionId);
 	}
 
 	//examples:
@@ -73,16 +72,16 @@ var dataAdminPlayersCode = function() {
             	
 	    	var counter_start = page.skip;
 			var headers = [
-				"Id<span>(PK)</span>",
-				"FirstName<span>(R)</span>",
-				"LastName<span>(R)</span>",
-				"GaaTeam<span>(R)</span>",
-				"Last Week Points<span>(R)</span>",
-				"OverallPoints<span>(R)</span>",
-				"Price<span>(R)</span>",
-				"Rating<span>(R)</span>",
-				"Injured<span>(R)</span>",
-				"Position Id<span>(FK)</span>"
+				"Id <span>(PK)</span>",
+				"First Name <span>(R)</span>",
+				"Last Name <span>(R)</span>",
+				"GAA Team <span>(R)</span>",
+				"Last Week Points <span>(R)</span>",
+				"Overall Points <span>(R)</span>",
+				"Price <span>(R)</span>",
+				"Rating <span>(R)</span>",
+				"Injured <span>(R)</span>",
+				"Position Id <span>(FK)</span>"
 			];
 			var properties = [
 				"Id",
@@ -100,40 +99,40 @@ var dataAdminPlayersCode = function() {
 		ajaxRequest(url, successCallback);
 	}
 
-	_top = $_table_rows_input.val();
+	_top = $table_rows.val();
 
 	ajaxRequest(_url, function(data, textStatus, request) {
 
 		_count = parseInt(data.length);
-		$_table_rows_count.val(_count);
+		$table_rows_count.val(_count);
 		getPlayers(tableCurrentPage());
 	});
 
-	$_table_rows_form.submit(function(event) {
+	$table_rows_form.submit(function(event) {
 
 		event.preventDefault();
-		_top = $_table_rows_input.val();
+		_top = $table_rows.val();
 		_skip = 0;
 		getPlayers(tableCurrentPage());
 	});
 
-	$_previous_page_form.submit(function(event) {
+	$previous_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getPlayers(tablePreviousPage());
 	});
 
-	$_next_page_form.submit(function(event) {
+	$next_page_form.submit(function(event) {
 
 		event.preventDefault();
 		getPlayers(tableNextPage());
 	});
 
 	//user by id GET request
-	$_get_by_id_form.submit(function(event) {
+	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/id/" + $_id_field.val();
+		var url = _url + "/id/" + $id_field.val();
 		var successCallback = function(data, textStatus, request) {
 			
 			fillPlayerTextFields(data);
@@ -143,7 +142,7 @@ var dataAdminPlayersCode = function() {
 	});
 
 	//POST PUT DELETE request
-	$_edit_form.submit(function(event){
+	$edit_form.submit(function(event){
 
 		event.preventDefault();
 
@@ -154,7 +153,7 @@ var dataAdminPlayersCode = function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
-				$_table_rows_count.val(_count);
+				$table_rows_count.val(_count);
 				getPlayers(tableCurrentPage());
 			});
         	printOutput(textStatus, request);

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Data_Admin_Players</title>
+	<link rel="stylesheet" href="../../css/data_admin/styles.css">
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/data_admin/constants_and_functions.js"></script>
+	<script src="../../js/data_admin/players.js"></script>
+	<script>
+		loadTheRestAndStartProgram(dataAdminPlayersCode);
+	</script>
+</head>
+<body>
+	<header></header>
+	<main>
+		<section>
+			<article id="table_article"></article>
+			<article id="forms_article">
+				<form id="get_by_id_form" action="#"></form>
+				<form id="edit_form" action="#">
+					<fieldset>
+						<legend>Player</legend>
+						<input id="id" type="hidden" value="0"/>
+						<label for="firstname">First Name:</label>
+						<input id="firstname" type="text" placeholder="first name" required/>
+						<label for="lastname">Last Name:</label>
+						<input id="lastname" type="text" placeholder="last name" required/>
+						<label for="gaateam">GAA Team Name:</label>
+						<input id="gaateam" type="text" placeholder="name" required/>
+						<label for="lastweekpoints">Last Week Points:</label>
+						<input id="lastweekpoints" type="number" step="any" value="0" placeholder="decimal"/>
+						<label for="overallpoints">Overall Points:</label>
+						<input id="overallpoints" type="number" step="any" value="0" placeholder="decimal"/>
+						<label for="price">Price:</label>
+						<input id="price" type="number" step="any" placeholder="decimal" required/>
+						<label for="rating">Rating:</label>
+						<input id="rating" type="number" value="0" min="0" max="255" placeholder="<0 - 255>" required/>
+						<label>Injured:</label>
+						<input type="checkbox" name="injured" value="true"/>
+						<label for="position_id">Position Id:</label>
+						<input id="position_id" type="number" value="1" min="1" placeholder="greater then 0" required/>
+						<label for="request">Select the Request</label>
+						<select name="Request" id="request">
+							<option value="PUT">Change this player(PUT)</option>
+							<option value="POST">Create new player(POST)</option>
+							<option value="DELETE">Delete this player(DELETE)</option>
+						</select>
+						<input type="submit" value="submit">
+					</fieldset>
+				</form>
+			</article>			
+		</section>
+	</main>
+	<footer></footer>
+</body>
+</html>
