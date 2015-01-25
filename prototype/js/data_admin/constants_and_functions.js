@@ -24,8 +24,8 @@ var loadCommonsAndStartProgram = function(callback) {
 
 //constants
 //url for development and production
-//var _url = "http://localhost:51642";
-var _url = "http://hurlingapi.azurewebsites.net";
+var _url = "http://localhost:51642";
+//var _url = "http://hurlingapi.azurewebsites.net";
 //how many rows will table have
 var _top = 10;
 //starting point in the table (0)
@@ -42,7 +42,7 @@ var $table_rows_count;
 var $table;
 var $text;
 var $get_by_id_form;
-var $id_field;
+var $get_id;
 var $edit_form;
 var $id;
 
@@ -50,7 +50,7 @@ var $id;
 var setTableDOMElements = function() {
 	
 	$get_by_id_form = $("#get_by_id_form");
-	$id_field = $("#get_id");
+	$get_id = $("#get_id");
 	$edit_form = $("#edit_form");
 	$id = $("#id");
 	$table_rows_form = $("#table_rows_form");
@@ -91,7 +91,7 @@ var generalErrorCallback = function (request, textStatus, errorThrown) {
 	printError(request, textStatus, errorThrown);
 }
 
-//general ajaxRequest, see http://api.jquery.com/jquery.ajax/
+//general ajax request, see http://api.jquery.com/jquery.ajax/
 //url : string - url of requested resource (mandatory)
 //successCallback : function (mandatory)
 //errorCallback : function

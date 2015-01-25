@@ -27,7 +27,7 @@ var dataAdminLeaguesCode = function() {
 	}
 
 	var fillLeagueTextFields = function (league) {
-
+		console.dir(league);
 		$id.val(league.Id);
 		$name.val(league.Name);
 		$nextfixtures.val(league.NextFixtures);
@@ -98,9 +98,11 @@ var dataAdminLeaguesCode = function() {
 	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/id/" + $id_field.val();
+		var url = _url + "/id/" + $get_id.val();
+		console.log(url);
 		var successCallback = function(data, textStatus, request) {
 			
+			console.log(data);
 			fillLeagueTextFields(data);
             printOutput(textStatus, request);
 		}

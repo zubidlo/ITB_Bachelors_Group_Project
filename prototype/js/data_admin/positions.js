@@ -90,7 +90,7 @@ var dataAdminPositionsCode = function() {
 	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
-		var url = _url + "/id/" + $id_field.val();
+		var url = _url + "/id/" + $get_id.val();
 		var successCallback = function(data, textStatus, request) {
 			
 			fillPositionFields(data);
@@ -126,7 +126,7 @@ var dataAdminPositionsCode = function() {
 				$table_rows_count.val(_count);
 				getPositions(tableCurrentPage());
 			});
-        	printOutput($text_output, textStatus, request);
+        	printOutput(textStatus, request);
     	}
 		var type = $("option:checked").val();
 		if (type === "PUT") {
