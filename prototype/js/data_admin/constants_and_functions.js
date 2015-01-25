@@ -24,8 +24,8 @@ var loadCommonsAndStartProgram = function(callback) {
 
 //constants
 //url for development and production
-var _url = "http://localhost:51642";
-//var _url = "http://hurlingapi.azurewebsites.net";
+//var _url = "http://localhost:51642";
+var _url = "http://hurlingapi.azurewebsites.net";
 //how many rows will table have
 var _top = 10;
 //starting point in the table (0)
