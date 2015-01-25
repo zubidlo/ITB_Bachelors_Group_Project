@@ -105,11 +105,10 @@ alert("Session done");
 }
 
 
-
 function set_table()
 {
 
-
+    var i=1;
     var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=LastWeekPoints";
 
 
@@ -125,16 +124,15 @@ if($.isArray(data)) {
          var tr;
        
             tr = $('<tr/>');
-            
+            tr.append("<td>" + i + "</td>");
             tr.append("<td>" + object.Name + "</td>");
-      
-             tr.append("<td>" + object.LastWeekPoints + "</td>");
-              tr.append("<td>" + object.OverAllPoints + "</td>");
+            tr.append("<td>" + object.LastWeekPoints + "</td>");
+            tr.append("<td>" + object.OverAllPoints + "</td>");
            
 
-      
+            i++;
             $('table').append(tr);
-         $("#myTable").tablesorter();   
+            $("#myTable").tablesorter();   
     });
   }
 
