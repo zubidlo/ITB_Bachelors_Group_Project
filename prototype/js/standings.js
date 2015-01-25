@@ -21,7 +21,8 @@ function set_user()
 {
 
 
-	set_table(1);
+	set_table();
+
 	 
 	var user = sessionStorage.getItem("username");
 	document.getElementById("demo").innerHTML = ("You are logged in as "+user);
@@ -105,39 +106,39 @@ alert("Session done");
 
 
 
-function set_table(i)
+function set_table()
 {
 
-  var _url = "http://hurlingapi.azurewebsites.net/api/users";
+
+    var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=LastWeekPoints";
+
 
 $.ajax({
-        url: _url + "/Id/" + i,
+        url: _url,
         async: true,
        
         success:function(data)
         {
 
-
-
-   
-              var tr;
+if($.isArray(data)) {
+    $.each(data, function(index, object) {
+         var tr;
        
             tr = $('<tr/>');
-            tr.append("<td>" + data.Id + "</td>");
-            tr.append("<td>" + data.Username + "</td>");
-             tr.append("<td>" + data.Username + "</td>");
-              tr.append("<td>" + data.Username + "</td>");
-               tr.append("<td>" + data.Username + "</td>");
-        
-            $('table').append(tr);
-        
-                         	 i++;
+            
+            tr.append("<td>" + object.Name + "</td>");
+      
+             tr.append("<td>" + object.LastWeekPoints + "</td>");
+              tr.append("<td>" + object.OverAllPoints + "</td>");
+           
 
-                         	 if(i <4)
-                         	 {
-                          set_table(i);
-}
-        $("#myTable").tablesorter(); 	
+      
+            $('table').append(tr);
+         $("#myTable").tablesorter();   
+    });
+  }
+
+       
             
            
           
