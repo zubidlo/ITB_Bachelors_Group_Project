@@ -109,7 +109,8 @@ function set_table()
 {
 
     var i=1;
-    var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=LastWeekPoints";
+  //  var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=LastWeekPoints";
+    var _url =  "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints desc&$top=10&$skip=0";
 
 
 $.ajax({

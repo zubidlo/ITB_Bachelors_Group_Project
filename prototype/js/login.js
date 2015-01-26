@@ -103,7 +103,10 @@
 		});
 
 		
-
+function adminLogin()
+{
+	alert("sfgkjbgf");
+}
 
 
 
