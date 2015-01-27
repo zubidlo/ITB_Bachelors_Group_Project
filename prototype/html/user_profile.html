@@ -7,16 +7,19 @@
 <link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
 <script src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
-<script src="../js/transfers.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
+<script src="../js/user_profile.js"></script>
+
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
 
 </head>
 
-<body onload="set_user()">
+<body onload="setStorage()">
 <div class="header">
   <div id="site_title"><a href="../index.html"><img src="../img/icons/logo.png" alt=""></a></div>
   <!-- Dynamic Menu -->
@@ -45,7 +48,20 @@
 <br><br>
 <!-- wrapper -->
 <div id="container">
+ <p id="username">.</p>
+  <p id="password">.</p>
+   <p id="email">.</p>
+   <img src="../img/user_image.png" height="60" width="60">
 
+
+   <form>
+Enter a new Password:<br>
+<input type="text" name="password_change" id ="change_password">
+<br>
+Enter a new Email:<br>
+<input type="text" name="email_change" id="change_email">
+ <input id="update_button" type="submit" onclick="change_details()" value="Update Details">
+</form>
 
  <ul class="ca-menu" style="margin: 40px 0">
     <li> <a href="javascript:;"> <span class="ca-icon">A</span>

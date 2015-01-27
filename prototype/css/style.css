@@ -9,6 +9,7 @@ html {
 	font-size: 100%;
 }
 
+    
 @font-face {
 	font-family: GeosansLight;
 	src: url('fonts/GeosansLight.ttf');
@@ -26,7 +27,8 @@ body {	font-family: Arial, Helvetica, sans-serif;
 		background: #fff;
 		color: #666;
 }
- 
+
+
 #container {
 	font-size: 1em;
 	     border-top: 1px solid #eeeeee;
@@ -1165,3 +1167,4 @@ table.tablesorter thead tr .headerSortDown {
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
 background-color: #e6EEEE;
 }
+

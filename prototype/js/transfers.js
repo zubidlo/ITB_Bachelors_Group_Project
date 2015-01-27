@@ -1,18 +1,14 @@
 
 
 
-        
-
-
-
-
 function set_user()
 {
 
-$("#myTable").tablesorter(); 
+
 	 
 	var user = sessionStorage.getItem("username");
 	document.getElementById("demo").innerHTML = ("You are logged in as "+user);
+
 
 }
 
@@ -33,7 +29,7 @@ function checkSession_home()
  }
 	else {
 		window.location="home.html";
-		alert("checkSession ran and is ok");
+		
 
 	}	
 	
@@ -53,7 +49,7 @@ function checkSession_see_rankings()
  }
 	else {
 		window.location="standings.html";
-		alert("checkSession ran and is ok");
+	
 
 	}	
 	
@@ -74,8 +70,7 @@ function checkSession_view_team()
  }
 	else {
 		window.location="my_team.html";
-		alert("checkSession ran and is ok");
-
+	
 	}	
 	
 }
@@ -89,7 +84,7 @@ function logout_user()
 
 
 sessionStorage.clear();
-alert("Session done");
+	window.location="../index.html";
 
 }
 

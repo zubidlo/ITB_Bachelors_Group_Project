@@ -40,7 +40,7 @@ function checkSession_home()
  }
 	else {
 		window.location="home.html";
-		alert("checkSession ran and is ok");
+	
 
 	}	
 	
@@ -63,7 +63,7 @@ function checkSession_see_rankings()
  }
 	else {
 		window.location="standings.html";
-		alert("checkSession ran and is ok");
+	
 
 	}	
 	
@@ -80,7 +80,7 @@ function checkSession_transfers()
  }
 	else {
 		window.location="transfers.html";
-		alert("checkSession ran and is ok");
+		
 
 	}	
 
@@ -93,6 +93,6 @@ function logout_user()
 
 
 sessionStorage.clear();
-alert("Session done");
+	window.location="../index.html";
 
 }
