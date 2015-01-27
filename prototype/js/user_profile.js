@@ -131,6 +131,7 @@ $.ajax({
         	var username = data.Username;
        		var password = data.Password;
             var email = data.Email;
+            var Id = data.Id;
            
            document.getElementById("username").innerHTML = ("Your username is: "+username);
           
@@ -168,5 +169,20 @@ $.ajax({
    				alert(""+new_password);
    				alert(""+new_email);
 
+          sessionStorage.removeItem("email");
+          sessionStorage.setItem("email", new_email);
 
-		}
+            sessionStorage.removeItem("password");
+          sessionStorage.setItem("password", new_password);
+
+      
+       
+
+
+}
+
+
+
+
+
+

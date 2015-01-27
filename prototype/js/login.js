@@ -88,7 +88,16 @@
 	            	if($_user_password_edit.val() == data.Password)
 	           {
 	           	
-	       
+
+
+	var pass= data.Password ;
+	sessionStorage.setItem("password", pass);
+	var email= data.Email ;
+	sessionStorage.setItem("email", email);
+		var id= data.Id ;
+	sessionStorage.setItem("id", id);
+
+	    
 	             window.location="html/home.html";
 	             setStorage();
 	         }
@@ -102,11 +111,7 @@
 			});
 		});
 
-		
-function adminLogin()
-{
-	alert("sfgkjbgf");
-}
+
 
 
 
@@ -116,6 +121,8 @@ function adminLogin()
 
 	var user= $("#get_user_username_input").val();
 	sessionStorage.setItem("username", user);
+
+
 	  
 	}
 
