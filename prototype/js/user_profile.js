@@ -210,6 +210,12 @@ _url += "/api/users";
 
     ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
 
+alert("details updated");
+ document.getElementById("change_password").value = sessionStorage.getItem("password");
+ document.getElementById("change_email").value =  sessionStorage.getItem("email");
+   document.getElementById("password").innerHTML = ("Your password is :"+sessionStorage.getItem("password"));
+   document.getElementById("email").innerHTML = ("Your email is :"+sessionStorage.getItem("email"));
+
 
 }
 
