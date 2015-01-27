@@ -166,8 +166,6 @@ $.ajax({
    				var new_password = change_password.value;
 
 
-   				alert(""+new_password);
-   				alert(""+new_email);
 
           sessionStorage.removeItem("email");
           sessionStorage.setItem("email", new_email);
@@ -175,8 +173,42 @@ $.ajax({
             sessionStorage.removeItem("password");
           sessionStorage.setItem("password", new_password);
 
-      
+         
+
+        var readUserFromInputFields = function () {
+    
+    return {
+      Id : sessionStorage.getItem("id"),
+      Username : sessionStorage.getItem("username"),
+      Password : sessionStorage.getItem("password"),
+      Email : sessionStorage.getItem("email")
+    };
+  }
        
+_url += "/api/users";
+
+       event.preventDefault();
+
+    var url = _url;
+    var user = readUserFromInputFields();
+    var successCallback = function (data, textStatus, request) {
+            
+          ajaxRequest(_url, function(data, textStatus, request) {
+
+        _count = parseInt(data.length);
+        $table_rows_count.val(_count);
+        getUsers(tableCurrentPage());
+      });
+          printOutput(textStatus, request);
+      }
+    var type = "PUT";
+    if (type === "PUT") {
+      url = url + "/id/" + user.Id;
+    }
+  
+    var dataType = "json";
+
+    ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
 
 
 }
