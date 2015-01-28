@@ -143,10 +143,11 @@ if($.isArray(data)) {
             tr.append("<td>" + object.Name + "</td>");
             tr.append("<td>" + object.LastWeekPoints + "</td>");
             tr.append("<td>" + object.OverAllPoints + "</td>");
-           
+        
 
             i++;
             $('table').append(tr);
+          
             $("#myTable").tablesorter();   
     });
   }

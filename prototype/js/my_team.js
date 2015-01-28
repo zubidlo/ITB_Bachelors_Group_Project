@@ -119,10 +119,10 @@ sessionStorage.clear();
 function set_table()
 {
 
-	//this will be used to pass in the user team id to get each team..
-	//var team_id= sessionStorage.getItem("team_id");
+	var user_id= sessionStorage.getItem("id");
+	var user= (user_id+"/players");
   
-    var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/2/players";
+    var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/"+user;
 
 
 $.ajax({
