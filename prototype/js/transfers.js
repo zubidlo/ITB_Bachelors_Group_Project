@@ -5,9 +5,22 @@ function set_user()
 {
 
 
-	 
-	var user = sessionStorage.getItem("username");
-	document.getElementById("demo").innerHTML = ("You are logged in as "+user);
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+			var user = sessionStorage.getItem("username");
+	
+
+   document.getElementById("demo").innerHTML = ("You are logged in as "+user);
+	
+
+	}	
+ 
+
 
 
 }
