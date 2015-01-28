@@ -28,12 +28,12 @@ function set_user()
 	
 
    document.getElementById("demo").innerHTML = ("You are logged in as "+user);
-	
 
+ set_table();
 	}	
  
 
-	 
+
 
 
 }
@@ -110,3 +110,55 @@ sessionStorage.clear();
 	window.location="../index.html";
 
 }
+
+
+
+
+
+
+function set_table()
+{
+
+  
+    var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/2/players";
+
+
+$.ajax({
+        url: _url,
+        async: true,
+       
+        success:function(data)
+        {
+
+if($.isArray(data)) {
+    $.each(data, function(index, object) {
+         var tr;
+       
+            tr = $('<tr/>');
+            
+            tr.append("<td>" + object.Id + "</td>");
+            tr.append("<td>" + object.FirstName + "</td>");
+            tr.append("<td>" + object.LastName + "</td>");
+           
+
+          
+            $('table').append(tr);
+            //$("#myTable").tablesorter();   
+    });
+  }
+
+       
+            
+           
+          
+           
+        
+
+
+            }
+
+                    
+                
+    });
+
+		}
