@@ -119,6 +119,8 @@ sessionStorage.clear();
 function set_table()
 {
 
+	//this will be used to pass in the user team id to get each team..
+	//var team_id= sessionStorage.getItem("team_id");
   
     var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/2/players";
 
@@ -139,11 +141,17 @@ if($.isArray(data)) {
             tr.append("<td>" + object.Id + "</td>");
             tr.append("<td>" + object.FirstName + "</td>");
             tr.append("<td>" + object.LastName + "</td>");
-           
+            tr.append("<td>" + object.GaaTeam + "</td>");
+            tr.append("<td>" + object.LastWeekPoints + "</td>");
+            tr.append("<td>" + object.OverallPoints + "</td>");
+            tr.append("<td>" + object.Price + "</td>");
+            tr.append("<td>" + object.Rating + "</td>");
+            tr.append("<td>" + object.Injured + "</td>");
+            tr.append("<td>" + object.PositionId + "</td>");
 
           
             $('table').append(tr);
-            //$("#myTable").tablesorter();   
+            $("#myTable").tablesorter();   
     });
   }
 
