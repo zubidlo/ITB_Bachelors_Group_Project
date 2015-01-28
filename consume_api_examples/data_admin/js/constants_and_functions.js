@@ -4,28 +4,28 @@ var loadCommonsAndStartProgram = function(callback) {
 	//after DOM is ready
 	$(document).ready(function(){
 
-		var req1 = $.get("get_by_id_form.html", function(data) {
+		var req1 = $.get("html_include/get_by_id_form.html", function(data) {
 	    $("#get_by_id_form").html(data);
 		});
-		var req2 = $.get("table_article.html", function(data) {
+		var req2 = $.get("html_include/table_article.html", function(data) {
 		    $("#table_article").html(data);
 		});
-		var req3 = $.get("request_select.html", function(data) {
+		var req3 = $.get("html_include/request_select.html", function(data) {
 		    $("#request_div").html(data);
 		});
 		//execute callback only when all requests are successful
 		$.when(req1, req2, req3).then(callback);
 
 		//I don't care when these are loaded
-		$("header").load("header.html");
-    	$("footer").load("footer.html");
+		$("header").load("html_include/header.html");
+    	$("footer").load("html_include/footer.html");
 	});
 }
 
 //constants
 //url for development and production
-var _url = "http://localhost:51642";
-//var _url = "http://hurlingapi.azurewebsites.net";
+//var _url = "http://localhost:51642";
+var _url = "http://hurlingapi.azurewebsites.net";
 //how many rows will table have
 var _top = 10;
 //starting point in the table (0)
