@@ -63,7 +63,7 @@ var dataAdminUsersCode = function() {
 				"Password",
 				"Email"
 			];
-			buildTable(counter_start, headers, properties, data);
+			buildTable(counter_start, headers, properties, data, $table);
     	}
 		ajaxRequest(url, successCallback);
 	}
@@ -139,6 +139,7 @@ var dataAdminUsersCode = function() {
 				getUsers(tableCurrentPage());
 			});
         	printOutput(textStatus, request);
+        	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
     	}
 		var type = $("option:checked").val();
 		if (type === "PUT") {
