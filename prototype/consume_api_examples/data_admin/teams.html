@@ -13,7 +13,15 @@
 	<header><!-- injection "header.html" --></header>
 	<main>
 		<section>
-			<article id="table_article"><!-- injection "table_article.html" --></article>
+			<article id="table_article">
+				<div id="main_table"><!-- injection "table_article.html" --></div>
+				<fieldset>
+					<legend>Player in the team 
+						<span id="team_name"><!-- team name injection --></teamspan>
+						<div id="players_in_team_table"><!-- players in team injection --></div>
+					</legend>
+				</fieldset>
+			</article>
 			<article id="forms_article">
 				<form id="get_by_id_form" action="#"><!-- injection "get_by_id_form.html" --></form>
 				<form id="get_by_name_form" action="#">

@@ -8,7 +8,7 @@ var loadCommonsAndStartProgram = function(callback) {
 	    $("#get_by_id_form").html(data);
 		});
 		var req2 = $.get("html_include/table_article.html", function(data) {
-		    $("#table_article").html(data);
+		    $("#main_table").html(data);
 		});
 		var req3 = $.get("html_include/request_select.html", function(data) {
 		    $("#request_div").html(data);

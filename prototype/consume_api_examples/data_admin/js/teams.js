@@ -81,6 +81,35 @@ var dataAdminTeamsCode = function() {
 		ajaxRequest(url, successCallback);
 	}
 
+	var getPlayersInTeam = function(teamId) {
+
+		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
+		var successCallback = function (data, textStatus, request) {
+            	
+	    	var counter_start = page.skip;
+			var headers = [
+				"Id <span>(PK)</span>",
+				"Name <span>(R)</span>",
+				"Last Week Points <span>(R)</span>",
+				"Overall Points <span>(R)</span>",
+				"Budget <span>(R)</span>",
+				"League Id <span>(FK)</span>",
+				"User Id <span>(FK)</span>"
+			];
+			var properties = [
+				"Id",
+				"Name",
+				"LastWeekPoints",
+				"OverAllPoints",
+				"Budget",
+				"LeagueId",
+				"UserId"
+			];
+			buildTable(counter_start, headers, properties, data);
+		}
+		ajaxRequest(url, successCallback);
+	}
+
 	_top = $table_rows.val();
 
 	ajaxRequest(_url, function(data, textStatus, request) {
@@ -119,6 +148,7 @@ var dataAdminTeamsCode = function() {
 			
 			fillTeamTextFields(data);
             printOutput(textStatus, request);
+            getPlayersInTeam();
 		}
 		ajaxRequest(url, successCallback, generalErrorCallback);
 	});
