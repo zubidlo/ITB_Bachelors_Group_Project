@@ -60,7 +60,7 @@ var dataAdminLeaguesCode = function() {
 				"NextFixtures",
 				"Week"
 			];
-			buildTable(counter_start, headers, properties, data);
+			buildTable(counter_start, headers, properties, data, $table);
     	}
 		ajaxRequest(url, successCallback);
 	}
@@ -124,6 +124,8 @@ var dataAdminLeaguesCode = function() {
 				$table_rows_count.val(_count);
 				getLeagues(tableCurrentPage());
 			});
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
         	printOutput(textStatus, request);
     	}
 		var type = $("option:checked").val();

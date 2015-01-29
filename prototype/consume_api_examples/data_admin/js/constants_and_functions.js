@@ -8,7 +8,7 @@ var loadCommonsAndStartProgram = function(callback) {
 	    $("#get_by_id_form").html(data);
 		});
 		var req2 = $.get("html_include/table_article.html", function(data) {
-		    $("#table_article").html(data);
+		    $("#main_table").html(data);
 		});
 		var req3 = $.get("html_include/request_select.html", function(data) {
 		    $("#request_div").html(data);
@@ -18,7 +18,6 @@ var loadCommonsAndStartProgram = function(callback) {
 
 		//I don't care when these are loaded
 		$("header").load("html_include/header.html");
-    	$("footer").load("html_include/footer.html");
 	});
 }
 
@@ -169,7 +168,7 @@ var buildTableRow = function(rowNumber, properties, object) {
 //properties : string array - example: ['Name', 'Address', 'Email'] data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
 //data : objcet array - objects to put in the table
 //output : DOM element jquery object - to append the table to
-var buildTable = function (counter_start, headers, properties, data) {
+var buildTable = function (counter_start, headers, properties, data, output) {
 	
 	var counter = counter_start;
 	var table = "<table>";
@@ -183,5 +182,15 @@ var buildTable = function (counter_start, headers, properties, data) {
 		table += buildTableRow(++counter, properties, data);
 	}
 	table += "</table>";
-	$table.empty().append(table);
+	output.empty().append(table);
+}
+
+var clearFormFields = function(forms) {
+
+	forms.forEach(function($form){
+
+		$form.each (function(){
+	  		this.reset();
+		});
+	});
 }
