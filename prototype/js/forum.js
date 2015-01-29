@@ -28,6 +28,17 @@ function set_user()
 
 
 
+function clear_text_area()
+{
+
+document.getElementById("forum_post_area").value = "";
+
+set_table();
+
+location.reload();
+}
+
+
 
 
 function checkSession_home()
@@ -177,6 +188,7 @@ if($.isArray(data)) {
 	            	
 	            	
 	            	clear_text_area();
+	            	location.reload();
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
