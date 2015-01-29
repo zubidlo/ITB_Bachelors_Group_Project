@@ -143,7 +143,9 @@ var tableNextPage = function() {
 //headersNamesArray : string array of headers
 var buildTableHeaders = function (headersNamesArray) {
 
-	var headers = "<tr><th>#</th>";
+	var headers = "<ul><li><span>PK</span>:primary key </li><li><span>FK</span>:foreing key </li>" +
+					"<li><span>R</span>:required </li><li><span>N</span>:nullable </li></ul>";
+	headers += "<tr><th>#</th>";
 	for(var i = 0; i < headersNamesArray.length; headers += "<th>" + headersNamesArray[i++] + "</th>");
 	return headers + "</tr>";
 }

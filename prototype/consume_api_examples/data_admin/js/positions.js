@@ -90,32 +90,49 @@ var dataAdminPositionsCode = function() {
 	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
+
 		var url = _url + "/id/" + $get_id.val();
 		var successCallback = function(data, textStatus, request) {
 			
 			fillPositionFields(data);
             printOutput(textStatus, request);
-		}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//position by name GET request
 	$get_by_name_form.submit(function(event) {
 
 		event.preventDefault();
+
 		var url = _url + "/name/" + $get_name.val();
 		var successCallback = function (data, textStatus, request) {
             	
         	fillPositionFields(data);
         	printOutput(textStatus, request);
-    	}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
 	$edit_form.submit(function(event){
 
 		event.preventDefault();
+
 		var url = _url;
 		var position = readPositionFromFields();
 		var successCallback = function (data, textStatus, request) {
@@ -126,9 +143,17 @@ var dataAdminPositionsCode = function() {
 				$table_rows_count.val(_count);
 				getPositions(tableCurrentPage());
 			});
+			
         	printOutput(textStatus, request);
         	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
-    	}
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
 		var type = $("option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + position.Id;
@@ -138,7 +163,7 @@ var dataAdminPositionsCode = function() {
 			position = "undefined";
 		}
 		var dataType = "json";
-		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, position);
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, position);
 	});
 }
 

@@ -124,6 +124,8 @@ var dataAdminTeamsCode = function() {
 		ajaxRequest(url, successCallback);
 	}
 
+	$player_to_team_form.hide();
+
 	_top = $table_rows.val();
 
 	ajaxRequest(_url, function(data, textStatus, request) {
@@ -153,7 +155,7 @@ var dataAdminTeamsCode = function() {
 		getTeams(tableNextPage());
 	});
 
-	//user by id GET request
+	//team by id GET request
 	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
@@ -164,9 +166,18 @@ var dataAdminTeamsCode = function() {
             printOutput(textStatus, request);
             getPlayersInTeam($id.val());
             $team_name_span.empty().append($name.val());
-            
-		}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+            $player_to_team_form.show();
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_form.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//team by name GET request
@@ -180,9 +191,18 @@ var dataAdminTeamsCode = function() {
         	printOutput(textStatus, request);
         	getPlayersInTeam($id.val());
             $team_name_span.empty().append($name.val());
-            
-    	}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+            $player_to_team_form.show();
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_form.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
@@ -203,9 +223,18 @@ var dataAdminTeamsCode = function() {
 
         	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
         	$players_in_team_table_div.empty();
-        	$player_to_team_div.empty();
+        	$player_to_team_form.hide();
         	printOutput(textStatus, request);
-    	}
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_form.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
 		var type = $("#request option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + team.Id;
@@ -214,9 +243,10 @@ var dataAdminTeamsCode = function() {
 			url = url + "/id/" + team.Id;
 			team = "undefined";
 		}
+
 		var dataType = "json";
 
-		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, team );
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, team );
 	});
 
 
@@ -237,7 +267,15 @@ var dataAdminTeamsCode = function() {
 			});
 
         	printOutput(textStatus, request);
-    	}
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_div.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
 
 		var type = $("#player_to_team_request option:checked").val();
 

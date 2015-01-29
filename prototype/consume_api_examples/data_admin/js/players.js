@@ -139,8 +139,15 @@ var dataAdminPlayersCode = function() {
 			
 			fillPlayerTextFields(data);
             printOutput(textStatus, request);
-		}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
@@ -160,7 +167,14 @@ var dataAdminPlayersCode = function() {
 			});
         	printOutput(textStatus, request);
         	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
-    	}
+    	};
+
+    	var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+		
 		var type = $("option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + player.Id;
@@ -171,7 +185,7 @@ var dataAdminPlayersCode = function() {
 		}
 		var dataType = "json";
 
-		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, player );
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, player );
 	});
 }
 
