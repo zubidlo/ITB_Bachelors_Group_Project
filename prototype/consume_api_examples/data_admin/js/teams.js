@@ -258,6 +258,13 @@ var dataAdminTeamsCode = function() {
 
 		var url = _url + "/id/" + $id.val() + "/player/id/" + $player_id.val();
 		var successCallback = function (data, textStatus, request) {
+
+			ajaxRequest(_url, function(data, textStatus, request) {
+
+				_count = parseInt(data.length);
+				$table_rows_count.val(_count);
+				getTeams(tableCurrentPage());
+			});
             
         	ajaxRequest(_url, function(data, textStatus, request) {
 
