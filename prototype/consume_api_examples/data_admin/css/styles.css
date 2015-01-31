@@ -7,7 +7,6 @@
 body {
 	margin-top: 40px;
   font: bold 14px Arial;
-  /*background-color: #dddddd*/;
 }
 
 header {
@@ -36,13 +35,12 @@ table {
 }
 legend {
   padding: 0.2em 0.5em;
-  border:1px solid;
   font-size:90%;
 }
 
 fieldset {
   border: none;
-  background-color: #eeeeee;
+  background-color: #efefef;
 }
 
 label {
@@ -54,7 +52,7 @@ header, footer {
 }
 
 span {
-  color : red;
+  color : #D10000;
 }
 
 ul li {
@@ -82,7 +80,7 @@ input[type="submit"] {
       }
         
 input[type="submit"]:hover {
-  background-color: red; /*#4195fc*/
+  background-color: #D10000; /*#4195fc*/
   border: 1px solid rgba(0,0,0,.1);
   color: rgb(255,255,255);
   cursor: pointer;
