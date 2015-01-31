@@ -7,7 +7,6 @@
 body {
 	margin-top: 40px;
   font: bold 14px Arial;
-  /*background-color: #dddddd*/;
 }
 
 header {
@@ -33,29 +32,19 @@ article {
 
 table {
 	border-collapse: collapse;
-  border-radius: 4px;
 }
 legend {
   padding: 0.2em 0.5em;
-  border:1px solid;
   font-size:90%;
 }
 
 fieldset {
   border: none;
-  background-color: #fafafa;
-  box-shadow: 3px 3px 3px #cccccc;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 10px;
+  background-color: #efefef;
 }
 
 label {
 	display: block;
-}
-
-input {
-  border-radius: 4px;
 }
 
 header, footer {
@@ -63,7 +52,7 @@ header, footer {
 }
 
 span {
-  color : red;
+  color : #D10000;
 }
 
 ul li {
@@ -84,13 +73,14 @@ ul li {
 
 input[type="submit"] {
   background-color: rgb(255,255,255);
+  border-radius: 0;
   border: 1px solid rgb( 186, 186, 186 );
   color: rgb( 186, 186, 186 );
   text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
       }
         
 input[type="submit"]:hover {
-  background-color: red; /*#4195fc*/
+  background-color: #D10000; /*#4195fc*/
   border: 1px solid rgba(0,0,0,.1);
   color: rgb(255,255,255);
   cursor: pointer;
@@ -110,6 +100,7 @@ form input[type="password"],
 form textarea table, th, td{
   background-color: rgb(255,255,255);
   border: 1px solid rgb( 186, 186, 186 );
+  border-radius: 2px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
