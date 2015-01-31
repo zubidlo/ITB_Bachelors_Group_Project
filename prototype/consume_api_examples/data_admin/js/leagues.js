@@ -61,9 +61,9 @@ var dataAdminLeaguesCode = function() {
 
 			var headers = [
 				"Id <span>(PK)</span>",
-				"Name <span>(R)</span>",
-				"Next Fixtures <span>(R)</span>",
-				"Week<span> (R)</span>"
+				"Name",
+				"Next Fixtures",
+				"Week"
 			];
 
 			var properties = [

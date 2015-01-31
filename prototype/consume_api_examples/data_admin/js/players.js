@@ -86,14 +86,14 @@ var dataAdminPlayersCode = function() {
 			var headers = 
 			[
 				"Id <span>(PK)</span>",
-				"First Name <span>(R)</span>",
-				"Last Name <span>(R)</span>",
-				"GAA Team <span>(R)</span>",
-				"Last Week Points <span>(R)</span>",
-				"Overall Points <span>(R)</span>",
-				"Price <span>(R)</span>",
-				"Rating <span>(R)</span>",
-				"Injured <span>(R)</span>",
+				"First Name",
+				"Last Name",
+				"GAA Team",
+				"Last Week Points",
+				"Overall Points",
+				"Price",
+				"Rating",
+				"Injured",
 				"Position Id <span>(FK)</span>"
 			];
 

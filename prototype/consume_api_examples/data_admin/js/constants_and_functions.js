@@ -1,33 +1,46 @@
 //loads parts of the DOM which are common for all pages and then executes given function
 var loadCommonsAndStartProgram = function(callback) {
 
-	//after DOM is ready
-	$(document).ready(function(){
+	if(sessionStorage.getItem("signed") !== "7") {
 
-		setTableDOMElements();
+			//go to login page
+			window.location = "login.html";
+	}
+	else {
 
-		var req1 = $.get("html_include/table_article.html", function(data) {
+		//after DOM is ready
+		$(document).ready(function(){
 
-		    $table_div.html(data);
+			setTableDOMElements();
+
+			var req1 = $.get("html_include/table_article.html", function(data) {
+
+			    $table_div.html(data);
+			});
+
+			var req2 = $.get("html_include/request_select.html", function(data) {
+
+			    $request_div.html(data);
+			});
+
+			var req3 = $.get("html_include/response_fieldset.html", function(data) {
+
+				hideElement($response_div);
+				$response_div.html(data);
+
+			});
+
+			var req4 = $.get("html_include/header.html", function(data) {
+
+				$("header").html(data);
+			});
+			//execute callback only when all requests are successful
+			$.when(req1, req2, req3, req4).then(function () {
+				
+				callback();
+			});
 		});
-
-		var req2 = $.get("html_include/request_select.html", function(data) {
-
-		    $request_div.html(data);
-		});
-
-		var req3 = $.get("html_include/response_fieldset.html", function(data) {
-
-			hideElement($response_div);
-			$response_div.html(data);
-
-		});
-		//execute callback only when all requests are successful
-		$.when(req1, req2, req3).then(callback);
-
-		//I don't care when these are loaded
-		$("header").load("html_include/header.html");
-	});
+	}
 }
 
 //constants
@@ -42,6 +55,7 @@ var _skip = 0;
 var _count = 0;
 
 //DOM element jquery objects common for all html files
+var $logout;
 var $table_div;
 var $request_div;
 var $response_div;
@@ -52,14 +66,13 @@ var $next_page_form;
 var $table_rows_count;
 var $table;
 var $text;
-var $get_by_id_form;
-var $get_id;
 var $edit_form;
 var $id;
 
 //this can be called only after document is ready
 var setTableDOMElements = function() {
 
+	$logout = $("#logout");
 	$table_div = $("#table_div");
 	$request_div = $("#request_div");
 	$response_div = $("#response_div");
@@ -241,4 +254,10 @@ var clearFormFields = function(forms) {
 
 		$form.each (function(){ this.reset(); });
 	});
+}
+
+var clearSessionAndReload = function() {
+
+	sessionStorage.clear();
+	location.reload();
 }

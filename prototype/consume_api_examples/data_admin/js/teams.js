@@ -76,16 +76,18 @@ var dataAdminTeamsCode = function() {
 	    	var counter_start = page.skip;
 
 			var headers = [
+			
 				"Id <span>(PK)</span>",
-				"Name <span>(R)</span>",
-				"Last Week Points <span>(R)</span>",
-				"Overall Points <span>(R)</span>",
-				"Budget <span>(R)</span>",
+				"Name",
+				"Last Week Points",
+				"Overall Points",
+				"Budget",
 				"League Id <span>(FK)</span>",
 				"User Id <span>(FK)</span>"
 			];
 
 			var properties = [
+
 				"Id",
 				"Name",
 				"LastWeekPoints",
@@ -110,19 +112,21 @@ var dataAdminTeamsCode = function() {
 	    	var counter_start = 0;
 
 			var headers = [
+
 				"Id <span>(PK)</span>",
-				"First Name <span>(R)</span>",
-				"Last Name <span>(R)</span>",
-				"GAA Team <span>(R)</span>",
-				"Last Week Points <span>(R)</span>",
-				"Overall Points <span>(R)</span>",
-				"Price <span>(R)</span>",
-				"Rating <span>(R)</span>",
-				"Injured <span>(R)</span>",
-				"Position Id <span>(FK)</span>"
+				"First Name",
+				"Last Name",
+				"GAA Team",
+				"Last Week Points",
+				"Overall Points",
+				"Price",
+				"Rating",
+				"Injured",
+				"Position Id"
 			];
 
 			var properties = [
+
 				"Id",
 				"FirstName",
 				"LastName",

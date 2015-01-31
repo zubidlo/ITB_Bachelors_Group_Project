@@ -56,7 +56,7 @@ var dataAdminPositionsCode = function() {
 
 			var headers = [
 				"Id <span>(PK)</span>",
-				"Field Position <span>(R)</span>"
+				"Position Name"
 			 ];
 
 			var properties = [
