@@ -151,16 +151,21 @@ $.ajax({
 
 if($.isArray(data)) {
     $.each(data, function(index, object) {
+		
+
+		var user = return_username(object.UserId);
          var tr;
-       
+		 return_username(object.UserId);
+		 var user = sessionStorage.getItem("temp");
             tr = $('<tr/>');
          
-      		tr.append("<td>" + object.UserId + "</td>");
+      		tr.append("<td>" + user + "</td>");
+				var user = sessionStorage.getItem("temp");
             tr.append("<td>" + object.Text + "</td>");
             tr.append("<td>" + object.Created + "</td>");
         	
 
-           
+           sessionStorage.removeItem("temp");
             $('table').append(tr);
            
     });
@@ -226,5 +231,31 @@ function clear_text_area()
 {
 
 document.getElementById("forum_post_area").value = "";
+
+
+}
+
+function return_username(userId)
+{
+	
+	
+var _url =  "http://hurlingapi.azurewebsites.net/api/users";
+
+			event.preventDefault();
+			$.ajax({
+				async: false,
+	            url: _url + "/Id/" + userId,
+	            success: function (data, textStatus, request) {
+	            	
+			
+				sessionStorage.setItem("temp",data.Username);
+			
+		
+		
+
+	        	}
+			});
+			
+			
 
 }
