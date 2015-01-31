@@ -4,14 +4,23 @@ var loadCommonsAndStartProgram = function(callback) {
 	//after DOM is ready
 	$(document).ready(function(){
 
-		var req1 = $.get("html_include/get_by_id_form.html", function(data) {
-	    $("#get_by_id_form").html(data);
+		setTableDOMElements();
+
+		var req1 = $.get("html_include/table_article.html", function(data) {
+
+		    $table_div.html(data);
 		});
-		var req2 = $.get("html_include/table_article.html", function(data) {
-		    $("#main_table").html(data);
+
+		var req2 = $.get("html_include/request_select.html", function(data) {
+
+		    $request_div.html(data);
 		});
-		var req3 = $.get("html_include/request_select.html", function(data) {
-		    $("#request_div").html(data);
+
+		var req3 = $.get("html_include/response_fieldset.html", function(data) {
+
+			$response_div.html(data);
+			$response_div.hide();
+
 		});
 		//execute callback only when all requests are successful
 		$.when(req1, req2, req3).then(callback);
@@ -33,6 +42,9 @@ var _skip = 0;
 var _count = 0;
 
 //DOM element jquery objects common for all html files
+var $table_div;
+var $request_div;
+var $response_div;
 var $table_rows_form;
 var $table_rows;
 var $previous_page_form;
@@ -47,9 +59,10 @@ var $id;
 
 //this can be called only after document is ready
 var setTableDOMElements = function() {
-	
-	$get_by_id_form = $("#get_by_id_form");
-	$get_id = $("#get_id");
+
+	$table_div = $("#table_div");
+	$request_div = $("#request_div");
+	$response_div = $("#response_div");
 	$edit_form = $("#edit_form");
 	$id = $("#id");
 	$table_rows_form = $("#table_rows_form");
@@ -67,6 +80,7 @@ var setTableDOMElements = function() {
 //request : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
 var printOutput = function(textStatus, request) {
 
+	$response_div.show();
 	$text.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
 }
 
@@ -77,6 +91,7 @@ var printOutput = function(textStatus, request) {
 //errorThrown : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
 var printError = function(request, textStatus, errorThrown) {
 
+	$response_div.show();
 	$text.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
 }
 
@@ -154,12 +169,23 @@ var buildTableHeaders = function (headersNamesArray) {
 //objcet : object
 var buildTableRow = function(rowNumber, properties, object) {
 
-	var row = "<tr><td>" + rowNumber + "</td>";
+	var row = "<tr class='editable'><td>" + rowNumber + "</td>";
 	for(var i = 0; i < properties.length; i++) {
 		row += "<td>" + object[properties[i]] + "</td>";
 	}	
 	return row + "</tr>";
 }
+
+var mouseEnterCallback = function() {
+				
+	$(this).children().css("background-color", "#D10000").css("color", "white");
+	$response_div.hide();
+};
+
+var mouseLeaveCallback = function() {
+
+	$(this).children().css("background-color", "white").css("color", "black");
+};
 
 //this can be called only after document is ready
 //returns table html string
@@ -168,7 +194,8 @@ var buildTableRow = function(rowNumber, properties, object) {
 //properties : string array - example: ['Name', 'Address', 'Email'] data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
 //data : objcet array - objects to put in the table
 //output : DOM element jquery object - to append the table to
-var buildTable = function (counter_start, headers, properties, data, output) {
+//function to execute if user clicks on table row
+var buildTable = function (counter_start, headers, properties, data, output, rowClickCallback) {
 	
 	var counter = counter_start;
 	var table = "<table><thead>";
@@ -184,6 +211,13 @@ var buildTable = function (counter_start, headers, properties, data, output) {
 	}
 	table += "</tbody></table>";
 	output.empty().append(table);
+
+	if (rowClickCallback !== undefined) {
+
+		$(".editable").mouseenter(this, mouseEnterCallback)
+					  .mouseleave(this, mouseLeaveCallback)
+					  .click(this, rowClickCallback);
+	}
 }
 
 var clearFormFields = function(forms) {

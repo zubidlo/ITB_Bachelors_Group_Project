@@ -10,8 +10,6 @@ var dataAdminLeaguesCode = function() {
 	//set common DOM element jquery objects
 	setTableDOMElements();
 	
-	var $edit_form = $("#edit_form");
-	var $id = $("#id");
 	var $name = $("#name");
 	var $nextfixtures = $("#nextfixtures");
 	var $week = $("#week");
@@ -19,6 +17,7 @@ var dataAdminLeaguesCode = function() {
 	var readLeagueFromInputFields = function () {
 		
 		return {
+
 			Id : $id.val(),
 			Name : $name.val(),
 			NextFixtures : $nextfixtures.val(),
@@ -26,13 +25,23 @@ var dataAdminLeaguesCode = function() {
 		};
 	}
 
-	var fillLeagueTextFields = function (league) {
-		console.dir(league);
-		$id.val(league.Id);
-		$name.val(league.Name);
-		$nextfixtures.val(league.NextFixtures);
-		$week.val(league.Week);
+	var fillLeagueTextFields = function (tableRowData) {
+
+		$id.val(tableRowData[1]);
+		$name.val(tableRowData[2]);
+		$nextfixtures.val(tableRowData[3]);
+		$week.val(tableRowData[4]);
 	}
+
+	var rowClickCallback = function() {
+
+		var data = [];
+		$.each($(this).children(), function(key, value) {
+			data.push(value.textContent);
+		});
+		
+		fillLeagueTextFields(data);
+	};
 
 	//examples:
 	//.../api/leagues?$orderby=Name --> get all leagues ordered by username
@@ -45,23 +54,28 @@ var dataAdminLeaguesCode = function() {
 	var getLeagues = function(page) {
 
 		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
+
 		var successCallback = function (data, textStatus, request) {
             	
         	var counter_start = page.skip;
+
 			var headers = [
 				"Id <span>(PK)</span>",
 				"Name <span>(R)</span>",
 				"Next Fixtures <span>(R)</span>",
 				"Week<span> (R)</span>"
 			];
+
 			var properties = [
 				"Id",
 				"Name",
 				"NextFixtures",
 				"Week"
 			];
-			buildTable(counter_start, headers, properties, data, $table);
+
+			buildTable(counter_start, headers, properties, data, $table, rowClickCallback);
     	}
+
 		ajaxRequest(url, successCallback);
 	}
 
@@ -94,35 +108,16 @@ var dataAdminLeaguesCode = function() {
 		getLeagues(tableNextPage());
 	});
 
-	//user by id GET request
-	$get_by_id_form.submit(function(event) {
-
-		event.preventDefault();
-		var url = _url + "/id/" + $get_id.val();
-		console.log(url);
-		var successCallback = function(data, textStatus, request) {
-			
-			console.log(data);
-			fillLeagueTextFields(data);
-            printOutput(textStatus, request);
-		};
-
-		var errorCallback = function(request, textStatus, errorThrown) {
-
-			clearFormFields([$get_by_id_form, $edit_form]);
-			generalErrorCallback(request, textStatus, errorThrown);
-		};
-		
-		ajaxRequest(url, successCallback, errorCallback);
-	});
-
+	
 	//POST PUT DELETE request
 	$edit_form.submit(function(event){
 
 		event.preventDefault();
 
 		var url = _url;
+
 		var league = readLeagueFromInputFields();
+
 		var successCallback = function (data, textStatus, request) {
             
         	ajaxRequest(_url, function(data, textStatus, request) {
@@ -132,24 +127,28 @@ var dataAdminLeaguesCode = function() {
 				getLeagues(tableCurrentPage());
 			});
 
-			clearFormFields([$get_by_id_form, $edit_form]);
+			clearFormFields([$edit_form]);
         	printOutput(textStatus, request);
     	};
 
     	var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$get_by_id_form, $edit_form]);
+			clearFormFields([$edit_form]);
 			generalErrorCallback(request, textStatus, errorThrown);
 		};
 
 		var type = $("option:checked").val();
+
 		if (type === "PUT") {
+
 			url = url + "/id/" + league.Id;
 		}
 		else if (type === "DELETE") {
+			
 			url = url + "/id/" + league.Id;
 			league = "undefined";
 		}
+
 		var dataType = "json";
 
 		ajaxRequest(url, successCallback, errorCallback, type, dataType, league);

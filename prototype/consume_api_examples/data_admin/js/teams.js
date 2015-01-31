@@ -10,9 +10,6 @@ var dataAdminTeamsCode = function() {
 	//set common DOM element jquery objects
 	setTableDOMElements();
 
-	var $get_by_name_form = $("#get_by_name_form");
-	var $get_name = $("#get_name");
-	var $id = $("#id");
 	var $name = $("#name");
 	var $overallpoints = $("#overallpoints");
 	var $lastweekpoints = $("#lastweekpoints");
@@ -28,6 +25,7 @@ var dataAdminTeamsCode = function() {
 	var readTeamFromInputFields = function () {
 
 		return {
+
 			Id : $id.val(),
 			Name : $name.val(),
 			OverAllPoints : $overallpoints.val(),
@@ -38,16 +36,28 @@ var dataAdminTeamsCode = function() {
 		};
 	}
 
-	var fillTeamTextFields = function (team) {
+	var fillTeamFields = function (tableRowData) {
 
-		$id.val(team.Id);
-		$name.val(team.Name);
-		$overallpoints.val(team.OverAllPoints);
-		$lastweekpoints.val(team.LastWeekPoints);
-		$budget.val(team.Budget);
-		$league_id.val(team.LeagueId);
-		$user_id.val(team.UserId);
+		$id.val(tableRowData[1]);
+		$name.val(tableRowData[2]);
+		$overallpoints.val(tableRowData[3]);
+		$lastweekpoints.val(tableRowData[4]);
+		$budget.val(tableRowData[5]);
+		$league_id.val(tableRowData[6]);
+		$user_id.val(tableRowData[7]);
 	}
+
+	var rowClickCallback = function() {
+
+		var data = [];
+		$.each($(this).children(), function(key, value) {
+			data.push(value.textContent);
+		});
+		
+		fillTeamFields(data);
+		$player_to_team_div.show();
+		getPlayersInTeam(data[1]);
+	};
 
 	//examples:
 	//.../api/teams?$orderby=OverallPoints --> get all teams ordered by OverallPoints
@@ -60,11 +70,12 @@ var dataAdminTeamsCode = function() {
 	var getTeams = function(page) {
 
 		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
+
 		var successCallback = function (data, textStatus, request) {
             	
 	    	var counter_start = page.skip;
-			var headers = 
-			[
+
+			var headers = [
 				"Id <span>(PK)</span>",
 				"Name <span>(R)</span>",
 				"Last Week Points <span>(R)</span>",
@@ -73,8 +84,8 @@ var dataAdminTeamsCode = function() {
 				"League Id <span>(FK)</span>",
 				"User Id <span>(FK)</span>"
 			];
-			var properties = 
-			[
+
+			var properties = [
 				"Id",
 				"Name",
 				"LastWeekPoints",
@@ -83,19 +94,22 @@ var dataAdminTeamsCode = function() {
 				"LeagueId",
 				"UserId"
 			];
-			buildTable(counter_start, headers, properties, data, $table);
+
+			buildTable(counter_start, headers, properties, data, $table, rowClickCallback);
 		}
+
 		ajaxRequest(url, successCallback);
 	}
 
 	var getPlayersInTeam = function(teamId) {
 
 		var url = _url + "/id/" + teamId + "/players";
+
 		var successCallback = function (data, textStatus, request) {
             	
 	    	var counter_start = 0;
-			var headers = 
-			[
+
+			var headers = [
 				"Id <span>(PK)</span>",
 				"First Name <span>(R)</span>",
 				"Last Name <span>(R)</span>",
@@ -107,8 +121,8 @@ var dataAdminTeamsCode = function() {
 				"Injured <span>(R)</span>",
 				"Position Id <span>(FK)</span>"
 			];
-			var properties = 
-			[
+
+			var properties = [
 				"Id",
 				"FirstName",
 				"LastName",
@@ -119,8 +133,10 @@ var dataAdminTeamsCode = function() {
 				"Injured",
 				"PositionId"
 			];
+
 			buildTable(counter_start, headers, properties, data, $players_in_team_table_div);
 		}
+
 		ajaxRequest(url, successCallback);
 	}
 
@@ -155,56 +171,6 @@ var dataAdminTeamsCode = function() {
 		getTeams(tableNextPage());
 	});
 
-	//team by id GET request
-	$get_by_id_form.submit(function(event) {
-
-		event.preventDefault();
-		var url = _url + "/id/" + $get_id.val();
-		var successCallback = function(data, textStatus, request) {
-			
-			fillTeamTextFields(data);
-            printOutput(textStatus, request);
-            getPlayersInTeam($id.val());
-            $team_name_span.empty().append($name.val());
-            $player_to_team_form.show();
-		};
-
-		var errorCallback = function(request, textStatus, errorThrown) {
-
-			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
-			$players_in_team_table_div.empty();
-        	$player_to_team_form.hide();
-			generalErrorCallback(request, textStatus, errorThrown);
-		};
-
-		ajaxRequest(url, successCallback, errorCallback);
-	});
-
-	//team by name GET request
-	$get_by_name_form.submit(function(event) {
-
-		event.preventDefault();
-		var url = _url + "/name/" + $get_name.val();
-		var successCallback = function(data, textStatus, request) {
-            	
-        	fillTeamTextFields(data);
-        	printOutput(textStatus, request);
-        	getPlayersInTeam($id.val());
-            $team_name_span.empty().append($name.val());
-            $player_to_team_form.show();
-    	};
-
-		var errorCallback = function(request, textStatus, errorThrown) {
-
-			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
-			$players_in_team_table_div.empty();
-        	$player_to_team_form.hide();
-			generalErrorCallback(request, textStatus, errorThrown);
-		};
-
-		ajaxRequest(url, successCallback, errorCallback);
-	});
-
 	//POST PUT DELETE request
 	$edit_form.submit(function(event){
 
@@ -221,7 +187,7 @@ var dataAdminTeamsCode = function() {
 				getTeams(tableCurrentPage());
 			});
 
-        	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+        	clearFormFields([$edit_form]);
         	$players_in_team_table_div.empty();
         	$player_to_team_form.hide();
         	printOutput(textStatus, request);
@@ -229,7 +195,7 @@ var dataAdminTeamsCode = function() {
 
 		var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			clearFormFields([$edit_form]);
 			$players_in_team_table_div.empty();
         	$player_to_team_form.hide();
 			generalErrorCallback(request, textStatus, errorThrown);
@@ -257,6 +223,7 @@ var dataAdminTeamsCode = function() {
 		event.preventDefault();
 
 		var url = _url + "/id/" + $id.val() + "/player/id/" + $player_id.val();
+
 		var successCallback = function (data, textStatus, request) {
 
 			ajaxRequest(_url, function(data, textStatus, request) {
@@ -278,7 +245,7 @@ var dataAdminTeamsCode = function() {
 
 		var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			clearFormFields([$edit_form]);
 			$players_in_team_table_div.empty();
         	$player_to_team_div.hide();
 			generalErrorCallback(request, textStatus, errorThrown);
@@ -289,4 +256,3 @@ var dataAdminTeamsCode = function() {
 		ajaxRequest(url, successCallback, generalErrorCallback, type);
 	});
 }
-
