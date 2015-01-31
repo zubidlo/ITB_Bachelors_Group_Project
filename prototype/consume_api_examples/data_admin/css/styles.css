@@ -6,8 +6,8 @@
 
 body {
 	margin-top: 40px;
-	margin-bottom: 40px;
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font: bold 14px Arial;
+  /*background-color: #dddddd*/;
 }
 
 header {
@@ -16,19 +16,8 @@ header {
 	left: 0;
 	height: 40px;
 	width: 100%;
-  
+  background-color: white;
 }
-
-nav {
-  margin-top: 10px;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 40px;
-  width: 100%;
 }
 
 section {
@@ -45,9 +34,15 @@ article {
 table {
 	border-collapse: collapse;
 }
+legend {
+  padding: 0.2em 0.5em;
+  border:1px solid;
+  font-size:90%;
+}
 
-table, th, td {
-	border: 1px solid black;
+fieldset {
+  border: none;
+  background-color: #eeeeee;
 }
 
 label {
@@ -66,10 +61,6 @@ ul li {
   display : inline;
 }
 
-legend {
-  font-weight: bold;
-}
-
 #table_article {
   width: 75%;
 }
@@ -80,4 +71,128 @@ legend {
 
 [placeholder] {
   width: 170px;
+}
+
+input[type="submit"] {
+  background-color: rgb(255,255,255);
+  border-radius: 0;
+  border: 1px solid rgb( 186, 186, 186 );
+  color: rgb( 186, 186, 186 );
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+      }
+        
+input[type="submit"]:hover {
+  background-color: red; /*#4195fc*/
+  border: 1px solid rgba(0,0,0,.1);
+  color: rgb(255,255,255);
+  cursor: pointer;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+input[type="submit"]:active {
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15) inset;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form input[type="search"],
+form input[type="password"],
+form textarea table, th, td{
+  background-color: rgb(255,255,255);
+  border: 1px solid rgb( 186, 186, 186 );
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+  
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form input[type="search"]:focus,
+form input[type="password"]:focus,
+form textarea:focus,
+form select:focus { 
+  border-color: #4195fc;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+  color: rgb(0,0,0);
+}
+  
+form input[type="text"]:invalid:focus,
+form input[type="email"]:invalid:focus,
+form input[type="number"]:invalid:focus,
+form input[type="search"]:invalid:focus,
+form input[type="password"]:invalid:focus,
+form textarea:invalid:focus,
+form select:invalid:focus { 
+  border-color: rgb(248,66,66);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgb(248,66,66);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgb(248,66,66);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgb(248,66,66);
+}
+
+.invertedshiftdown{
+padding: 0;
+width: 100%;
+border-top: 5px solid #D10000; /*Red color theme*/
+background: transparent;
+voice-family: "\"}\"";
+voice-family: inherit;
+}
+
+.invertedshiftdown ul{
+margin:0;
+margin-left: 40px; /*margin between first menu item and left browser edge*/
+padding: 0;
+list-style: none;
+}
+
+.invertedshiftdown li{
+display: inline;
+margin: 0 2px 0 0;
+padding: 0;
+text-transform:uppercase;
+}
+
+.invertedshiftdown a{
+float: left;
+display: block;
+color: black;
+text-decoration: none;
+margin: 0 1px 0 0; /*Margin between each menu item*/
+padding: 5px 10px 9px 10px; /*Padding within each menu item*/
+background-color: white; /*Default menu color*/
+
+/*BELOW 4 LINES add rounded bottom corners to each menu item.
+  ONLY WORKS IN FIREFOX AND FUTURE CSS3 CAPABLE BROWSERS
+  REMOVE IF DESIRED*/
+-moz-border-radius-bottomleft: 5px;
+border-bottom-left-radius: 5px;
+-moz-border-radius-bottomright: 5px;
+border-bottom-right-radius: 5px;
+}
+
+.invertedshiftdown a:hover{
+background-color: #D10000; /*Red color theme*/
+padding-top: 9px; /*Flip default padding-top value with padding-bottom */
+padding-bottom: 5px; /*Flip default padding-bottom value with padding-top*/
+color: white;
+}
+
+.invertedshiftdown .current a{ /** currently selected menu item **/
+background-color: #D10000; /*Red color theme*/
+padding-top: 9px; /*Flip default padding-top value with padding-bottom */
+padding-bottom: 5px; /*Flip default padding-bottom value with padding-top*/
+color: white;
 }

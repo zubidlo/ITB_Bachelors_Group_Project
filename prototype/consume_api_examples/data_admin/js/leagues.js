@@ -60,7 +60,7 @@ var dataAdminLeaguesCode = function() {
 				"NextFixtures",
 				"Week"
 			];
-			buildTable(counter_start, headers, properties, data);
+			buildTable(counter_start, headers, properties, data, $table);
     	}
 		ajaxRequest(url, successCallback);
 	}
@@ -105,8 +105,15 @@ var dataAdminLeaguesCode = function() {
 			console.log(data);
 			fillLeagueTextFields(data);
             printOutput(textStatus, request);
-		}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+		
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
@@ -124,8 +131,17 @@ var dataAdminLeaguesCode = function() {
 				$table_rows_count.val(_count);
 				getLeagues(tableCurrentPage());
 			});
+
+			clearFormFields([$get_by_id_form, $edit_form]);
         	printOutput(textStatus, request);
-    	}
+    	};
+
+    	var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
 		var type = $("option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + league.Id;
@@ -136,7 +152,7 @@ var dataAdminLeaguesCode = function() {
 		}
 		var dataType = "json";
 
-		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, league);
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, league);
 	});
 }
 

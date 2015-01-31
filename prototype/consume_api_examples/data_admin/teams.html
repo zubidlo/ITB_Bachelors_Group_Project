@@ -13,7 +13,13 @@
 	<header><!-- injection "header.html" --></header>
 	<main>
 		<section>
-			<article id="table_article"><!-- injection "table_article.html" --></article>
+			<article id="table_article">
+				<div id="main_table"><!-- injection "table_article.html" --></div>
+				<fieldset>
+					<legend>Players in the team <span class="team_name_span"><!-- team name injection --></span></legend>
+					<div id="players_in_team_table_div"><!-- players in team injection --></div>
+				</fieldset>
+			</article>
 			<article id="forms_article">
 				<form id="get_by_id_form" action="#"><!-- injection "get_by_id_form.html" --></form>
 				<form id="get_by_name_form" action="#">
@@ -30,11 +36,11 @@
 						<label for="name">Name:</label>
 						<input id="name" type="text" placeholder="a string" required/>
 						<label for="overallpoints">Overall Points:</label>
-						<input id="overallpoints" type="number" step="any" placeholder="a decimal"/>
+						<input id="overallpoints" type="number" value="0" step="any" placeholder="a decimal" required/>
 						<label for="lastweekpoints">Last Week Points:</label>
-						<input id="lastweekpoints" type="number" step="any" placeholder="a decimal"/>
+						<input id="lastweekpoints" type="number" value="0" step="any" placeholder="a decimal" required/>
 						<label for="budget">Budget:</label>
-						<input id="budget" type="number" step="any" placeholder="a decimal" required/>
+						<input id="budget" type="number" step="any" value="100000" placeholder="a decimal" required/>
 						<label for="league_id">League Id:</label>
 						<input id="league_id" type="number" min="1" placeholder="integer > 0" required/>
 						<label for="user_id">User Id:</label>
@@ -42,12 +48,21 @@
 						<div id="request_div"><!-- injection "request_select.html" --></div>
 					</fieldset>
 				</form>
+				<form action="#" id="player_to_team_form">
+					<fieldset>
+						<legend>Player in the team <span class="team_name_span"></span></legend>
+						<label for="player_id">Player Id:</label>
+						<input id="player_id" type="number" min="1" value="0" placeholder="integer > 0" required/>
+						<label for="player_to_team_request">Select the Request</label>
+						<select id="player_to_team_request">
+							<option value="PUT">Add player(PUT)</option>
+							<option value="DELETE">Remove player(DELETE)</option>
+						</select>
+						<input type="submit" value="submit">
+					</fieldset>
+				</form>
 			</article>			
 		</section>
-		 <form action="../../index.html">
-        <label for="admin_button">Logout</label>
-    <input type="submit" value="Logout" onclick="">
-</form>
 	</main>
 	<footer><!-- injection "footer.html" --></footer>
 </body>

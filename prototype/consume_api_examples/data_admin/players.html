@@ -13,7 +13,9 @@
 	<header><!-- injection "header.html" --></header>
 	<main>
 		<section>
-			<article id="table_article"><!-- injection "table_article.html" --></article>
+			<article id="table_article">
+				<div id="main_table"><!-- injection "table_article.html" --></div>
+			</article>
 			<article id="forms_article">
 				<form id="get_by_id_form" action="#"><!-- injection "get_by_id_form.html" --></form>
 				<form id="edit_form" action="#">
@@ -27,13 +29,13 @@
 						<label for="gaateam">GAA Team Name:</label>
 						<input id="gaateam" type="text" placeholder="a string" required/>
 						<label for="lastweekpoints">Last Week Points:</label>
-						<input id="lastweekpoints" type="number" step="any" placeholder="a decimal"/>
+						<input id="lastweekpoints" type="number" step="any" value="0" placeholder="a decimal" required/>
 						<label for="overallpoints">Overall Points:</label>
-						<input id="overallpoints" type="number" step="any" placeholder="a decimal"/>
+						<input id="overallpoints" type="number" step="any" value="0" placeholder="a decimal" required/>
 						<label for="price">Price:</label>
-						<input id="price" type="number" step="any" placeholder="a decimal" required/>
+						<input id="price" type="number" step="any" value="0" placeholder="a decimal" required/>
 						<label for="rating">Rating:</label>
-						<input id="rating" type="number" min="0" max="255" placeholder="<0 - 255>" required/>
+						<input id="rating" type="number" min="0" max="255" value="0" placeholder="<0 - 255>" required/>
 						<label>Injured:</label>
 						<input id="injured" type="checkbox" value="false" />
 						<label for="position_id">Position Id:</label>
@@ -43,10 +45,6 @@
 				</form>
 			</article>			
 		</section>
-			 <form action="../../index.html">
-        <label for="admin_button">Logout</label>
-    <input type="submit" value="Logout" onclick="">
-</form>
 	</main>
 	<footer><!-- injection "footer.html" --></footer>
 </body>

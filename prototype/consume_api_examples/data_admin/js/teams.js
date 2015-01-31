@@ -19,6 +19,11 @@ var dataAdminTeamsCode = function() {
 	var $budget = $("#budget");
 	var $league_id = $("#league_id");
 	var $user_id = $("#user_id");
+	var $player_to_team_div = $("#player_to_team_div");
+	var $players_in_team_table_div = $("#players_in_team_table_div");
+	var $player_id = $("#player_id");
+	var $team_name_span = $(".team_name_span");
+	var $player_to_team_form = $("#player_to_team_form");
 
 	var readTeamFromInputFields = function () {
 
@@ -58,7 +63,8 @@ var dataAdminTeamsCode = function() {
 		var successCallback = function (data, textStatus, request) {
             	
 	    	var counter_start = page.skip;
-			var headers = [
+			var headers = 
+			[
 				"Id <span>(PK)</span>",
 				"Name <span>(R)</span>",
 				"Last Week Points <span>(R)</span>",
@@ -67,7 +73,8 @@ var dataAdminTeamsCode = function() {
 				"League Id <span>(FK)</span>",
 				"User Id <span>(FK)</span>"
 			];
-			var properties = [
+			var properties = 
+			[
 				"Id",
 				"Name",
 				"LastWeekPoints",
@@ -76,10 +83,48 @@ var dataAdminTeamsCode = function() {
 				"LeagueId",
 				"UserId"
 			];
-			buildTable(counter_start, headers, properties, data);
+			buildTable(counter_start, headers, properties, data, $table);
 		}
 		ajaxRequest(url, successCallback);
 	}
+
+	var getPlayersInTeam = function(teamId) {
+
+		var url = _url + "/id/" + teamId + "/players";
+		var successCallback = function (data, textStatus, request) {
+            	
+	    	var counter_start = 0;
+			var headers = 
+			[
+				"Id <span>(PK)</span>",
+				"First Name <span>(R)</span>",
+				"Last Name <span>(R)</span>",
+				"GAA Team <span>(R)</span>",
+				"Last Week Points <span>(R)</span>",
+				"Overall Points <span>(R)</span>",
+				"Price <span>(R)</span>",
+				"Rating <span>(R)</span>",
+				"Injured <span>(R)</span>",
+				"Position Id <span>(FK)</span>"
+			];
+			var properties = 
+			[
+				"Id",
+				"FirstName",
+				"LastName",
+				"GaaTeam",
+				"LastWeekPoints",
+				"OverallPoints",
+				"Price", "Rating",
+				"Injured",
+				"PositionId"
+			];
+			buildTable(counter_start, headers, properties, data, $players_in_team_table_div);
+		}
+		ajaxRequest(url, successCallback);
+	}
+
+	$player_to_team_form.hide();
 
 	_top = $table_rows.val();
 
@@ -110,7 +155,7 @@ var dataAdminTeamsCode = function() {
 		getTeams(tableNextPage());
 	});
 
-	//user by id GET request
+	//team by id GET request
 	$get_by_id_form.submit(function(event) {
 
 		event.preventDefault();
@@ -119,8 +164,20 @@ var dataAdminTeamsCode = function() {
 			
 			fillTeamTextFields(data);
             printOutput(textStatus, request);
-		}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+            getPlayersInTeam($id.val());
+            $team_name_span.empty().append($name.val());
+            $player_to_team_form.show();
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_form.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//team by name GET request
@@ -132,8 +189,20 @@ var dataAdminTeamsCode = function() {
             	
         	fillTeamTextFields(data);
         	printOutput(textStatus, request);
-    	}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+        	getPlayersInTeam($id.val());
+            $team_name_span.empty().append($name.val());
+            $player_to_team_form.show();
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_form.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
@@ -151,9 +220,22 @@ var dataAdminTeamsCode = function() {
 				$table_rows_count.val(_count);
 				getTeams(tableCurrentPage());
 			});
+
+        	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+        	$players_in_team_table_div.empty();
+        	$player_to_team_form.hide();
         	printOutput(textStatus, request);
-    	}
-		var type = $("option:checked").val();
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_form.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		var type = $("#request option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + team.Id;
 		}
@@ -161,9 +243,50 @@ var dataAdminTeamsCode = function() {
 			url = url + "/id/" + team.Id;
 			team = "undefined";
 		}
+
 		var dataType = "json";
 
-		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, team );
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, team );
+	});
+
+
+
+	//POST DELETE player to team request
+	$player_to_team_form.submit(function(event){
+
+		event.preventDefault();
+
+		var url = _url + "/id/" + $id.val() + "/player/id/" + $player_id.val();
+		var successCallback = function (data, textStatus, request) {
+
+			ajaxRequest(_url, function(data, textStatus, request) {
+
+				_count = parseInt(data.length);
+				$table_rows_count.val(_count);
+				getTeams(tableCurrentPage());
+			});
+            
+        	ajaxRequest(_url, function(data, textStatus, request) {
+
+				_count = parseInt(data.length);
+				$table_rows_count.val(_count);
+				getPlayersInTeam($id.val());
+			});
+
+        	printOutput(textStatus, request);
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			$players_in_team_table_div.empty();
+        	$player_to_team_div.hide();
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		var type = $("#player_to_team_request option:checked").val();
+
+		ajaxRequest(url, successCallback, generalErrorCallback, type);
 	});
 }
 

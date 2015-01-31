@@ -63,7 +63,7 @@ var dataAdminUsersCode = function() {
 				"Password",
 				"Email"
 			];
-			buildTable(counter_start, headers, properties, data);
+			buildTable(counter_start, headers, properties, data, $table);
     	}
 		ajaxRequest(url, successCallback);
 	}
@@ -106,8 +106,15 @@ var dataAdminUsersCode = function() {
 			
 			fillUserTextFields(data);
             printOutput(textStatus, request);
-		}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//user by username GET request
@@ -119,8 +126,15 @@ var dataAdminUsersCode = function() {
             	
         	fillUserTextFields(data);
         	printOutput(textStatus, request);
-    	}
-		ajaxRequest(url, successCallback, generalErrorCallback);
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
 	});
 
 	//POST PUT DELETE request
@@ -138,8 +152,17 @@ var dataAdminUsersCode = function() {
 				$table_rows_count.val(_count);
 				getUsers(tableCurrentPage());
 			});
+
         	printOutput(textStatus, request);
-    	}
+        	clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
 		var type = $("option:checked").val();
 		if (type === "PUT") {
 			url = url + "/id/" + user.Id;
@@ -150,6 +173,6 @@ var dataAdminUsersCode = function() {
 		}
 		var dataType = "json";
 
-		ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
+		ajaxRequest(url, successCallback, errorCallback, type, dataType, user);
 	});
 }
