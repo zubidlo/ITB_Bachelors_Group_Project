@@ -1,7 +1,7 @@
 //loads parts of the DOM which are common for all pages and then executes given function
 var loadCommonsAndStartProgram = function(callback) {
 
-	if(sessionStorage.getItem("signed") !== "7") {
+	if(sessionStorage.getItem("signed") !== "Administrator") {
 
 			//go to login page
 			window.location = "login.html";

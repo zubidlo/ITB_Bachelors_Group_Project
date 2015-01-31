@@ -33,7 +33,7 @@
 							if ($password.val() === user.Password) {
 								
 								//put user Id into session storage
-								sessionStorage.setItem("signed", user.Id);
+								sessionStorage.setItem("signed", user.Username);
 
 								//go to index.html
 								window.location = "users.html";
