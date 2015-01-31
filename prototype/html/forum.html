@@ -7,7 +7,10 @@
 <link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
 <script src="../js/forum.js"></script>
 <script src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
 
 
 
@@ -34,68 +37,36 @@
 <!-- end header -->
 <div class="wrapper">
 <div class="box_highlight">
-    <h1 style="font-size:32px; letter-spacing: 16px; text-align:center; text-transform: uppercase; color: #a7a7a7">Welcome to the Forum</h1>
-  </div>
+ 
+  </div>  
 <!-- wrapper -->
 <div id="container">
 
 
-<table id="myTable" class="tablesorter"> 
-<thead> 
-<tr> 
-   
-    <th>Username</th> 
-     <th>Text</th> 
-    <th>Created</th> 
-   
-    
-</tr> 
-</thead> 
-<tbody> 
-<tr> 
-    <td></td> 
-    <td></td> 
-    <td></td> 
-
-</tr> 
-</tbody> 
+<table id="myTable" class="myTable"> 
+    <tr>
+                        <td>
+                            User
+                        </td>
+                        <td >
+                            Message
+                        </td>
+                        <td>
+                            Time
+                        </td>
+                    </tr>
+                  
+                </table>
 </table> 
 
+</br></br>
 
-
-<textarea rows="4" cols="50" id = "forum_post_area">
-At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+<textarea rows="20" cols="20" id = "forum_post_area" onmouseover="clear_text_area()">
+Enter your message here...
 </textarea>
+
   <input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
 
- <ul class="ca-menu" style="margin: 40px 0">
-    <li> <a href="javascript:;"> <span class="ca-icon">A</span>
-      <div class="ca-content">
-        <h2 class="ca-main" onclick="checkSession_view_team()">View my Team</h2>
-        <h3 class="ca-sub">Take a look at how you're doing</h3>
-      </div>
-      </a> </li>
-    <li> <a href="javascript:;"> <span class="ca-icon">I</span>
-      <div class="ca-content">
-        <h2 class="ca-main" onclick="checkSession_transfers()">Make transfers</h2>
-        <h3 class="ca-sub">Use your transfers to optimise team</h3>
-      </div>
-      </a> </li>
-    <li> <a href="http://www.gaa.ie/gaa-news-and-videos/daily-news/1/0910142311-2014-football-and-hurling-championship-draws/"> <span class="ca-icon">C</span>
-      <div class="ca-content">
-        <h2 class="ca-main">See fixtures</h2>
-        <h3 class="ca-sub">View upcoming hurling fixtures</h3>
-      </div>
-      </a> </li>
-    <li> <a href="javascript:;"> <span class="ca-icon">S</span>
-      <div class="ca-content">
-        <h2 class="ca-main" onclick="checkSession_see_rankings()">See Rankings</h2>
-        <h3 class="ca-sub">View the top 10 players overall</h3>
-      </div>
-      </a> </li>
-      
-  </ul>
-    
 
   <div style="clear:both; height: 40px"></div>
   </div>

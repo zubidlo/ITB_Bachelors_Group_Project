@@ -16,6 +16,8 @@ function set_user()
 	
 
    document.getElementById("demo").innerHTML = ("You are logged in as "+user);
+   
+   
 	
 	set_table();
 
@@ -156,12 +158,11 @@ if($.isArray(data)) {
       		tr.append("<td>" + object.UserId + "</td>");
             tr.append("<td>" + object.Text + "</td>");
             tr.append("<td>" + object.Created + "</td>");
-        
+        	
 
            
             $('table').append(tr);
-          
-            $("#myTable").tablesorter();   
+           
     });
   }
 
@@ -189,6 +190,7 @@ if($.isArray(data)) {
 	            	
 	            	clear_text_area();
 	            	location.reload();
+			
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
