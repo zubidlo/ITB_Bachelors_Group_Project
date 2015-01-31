@@ -208,8 +208,7 @@ if($.isArray(data)) {
 			
 			var text =  document.getElementById("forum_post_area").value;
 			var now = new Date();
-			
-
+		now=new Date().toLocaleString();
 
 			var user = {
 				Id : id,
