@@ -11,6 +11,8 @@ var dataAdminUsersCode = function() {
 	setTableDOMElements();
 	
 	//set specific DOM element jquery objects
+	var $get_by_username_form = $("#get_by_username_form");
+	var $get_username = $("#get_username");
 	var $username = $("#username");
 	var $password = $("#password");
 	var $email = $("#email");
@@ -18,31 +20,20 @@ var dataAdminUsersCode = function() {
 	var readUserFromInputFields = function () {
 		
 		return {
-
 			Id : $id.val(),
 			Username : $username.val(),
 			Password : $password.val(),
 			Email : $email.val()
 		};
-	};
+	}
 
-	var fillUserTextFields = function (tableRowData) {
+	var fillUserTextFields = function (user) {
 
-		$id.val(tableRowData[1]);
-		$username.val(tableRowData[2]);
-		$password.val(tableRowData[3]);
-		$email.val(tableRowData[4]);
-	};
-
-	var rowClickCallback = function() {
-
-		var data = [];
-		$.each($(this).children(), function(key, value) {
-			data.push(value.textContent);
-		});
-		
-		fillUserTextFields(data);
-	};
+		$id.val(user.Id);
+		$username.val(user.Username);
+		$password.val(user.Password);
+		$email.val(user.Email);
+	}
 
 	//examples:
 	//.../api/users?$orderby=Username --> get all user ordered by username
@@ -57,30 +48,25 @@ var dataAdminUsersCode = function() {
 	var getUsers = function(page) {
 
 		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
-
 		var successCallback = function (data, textStatus, request) {
             	
         	var counter_start = page.skip;
-        	
 			var headers = [
 				"Id <span>(PK)</span>",
-				"Username",
-				"Password",
-				"Email"
+				"User Name <span>(R)</span>",
+				"Password <span>(R)</span>",
+				"Email <span>(R)</span>"
 			];
-
 			var properties = [
 				"Id",
 				"Username",
 				"Password",
 				"Email"
 			];
-
-			buildTable(counter_start, headers, properties, data, $table, rowClickCallback);
+			buildTable(counter_start, headers, properties, data, $table);
     	}
-
 		ajaxRequest(url, successCallback);
-	};
+	}
 
 	_top = $table_rows.val();
 
@@ -111,15 +97,53 @@ var dataAdminUsersCode = function() {
 		getUsers(tableNextPage());
 	});
 
+	//user by id GET request
+	$get_by_id_form.submit(function(event) {
+
+		event.preventDefault();
+		var url = _url + "/id/" + $get_id.val();
+		var successCallback = function(data, textStatus, request) {
+			
+			fillUserTextFields(data);
+            printOutput(textStatus, request);
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
+	});
+
+	//user by username GET request
+	$get_by_username_form.submit(function(event) {
+
+		event.preventDefault();
+		var url = _url + "/username/" + $get_username.val();
+		var successCallback = function(data, textStatus, request) {
+            	
+        	fillUserTextFields(data);
+        	printOutput(textStatus, request);
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
+	});
+
 	//POST PUT DELETE request
 	$edit_form.submit(function(event){
 
 		event.preventDefault();
 
 		var url = _url;
-
 		var user = readUserFromInputFields();
-
 		var successCallback = function (data, textStatus, request) {
             
         	ajaxRequest(_url, function(data, textStatus, request) {
@@ -130,12 +154,12 @@ var dataAdminUsersCode = function() {
 			});
 
         	printOutput(textStatus, request);
-        	clearFormFields([$edit_form]);
+        	clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
     	};
 
 		var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$edit_form]);
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_username_form]);
 			generalErrorCallback(request, textStatus, errorThrown);
 		};
 
@@ -147,7 +171,6 @@ var dataAdminUsersCode = function() {
 			url = url + "/id/" + user.Id;
 			user = "undefined";
 		}
-
 		var dataType = "json";
 
 		ajaxRequest(url, successCallback, errorCallback, type, dataType, user);
