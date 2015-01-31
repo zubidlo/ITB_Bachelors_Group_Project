@@ -11,32 +11,24 @@ var dataAdminPositionsCode = function() {
 	setTableDOMElements();
 
 	//set specific DOM element jquery objects
+	var $get_by_name_form = $("#get_by_name_form");
+	var $get_name = $("#get_name");
+	var $id = $("#id");
 	var $name = $("#name");
 
 	var readPositionFromFields = function () {
 		
 		return {
-
 			Id : $id.val(),
 			Name : $name.val()
 		};
 	}
 
-	var fillPositionFields = function (tableRowData) {
+	var fillPositionFields = function (position) {
 
-		$id.val(tableRowData[1]);
-		$name.val(tableRowData[2]);
+		$id.val(position.Id);
+		$name.val(position.Name);
 	}
-
-	var rowClickCallback = function() {
-
-		var data = [];
-		$.each($(this).children(), function(key, value) {
-			data.push(value.textContent);
-		});
-		
-		fillPositionFields(data);
-	};
 
 	//examples:
 	//.../api/positions?$orderby=Name --> get all position ordered by name
@@ -49,24 +41,19 @@ var dataAdminPositionsCode = function() {
 	var getPositions = function(page) {
 
 		var url = _url + "?$top=" + page.top + "&$skip=" + page.skip;
-
 		var successCallback = function (data, textStatus, request) {
             	
         	var counter_start = page.skip;
-
 			var headers = [
 				"Id <span>(PK)</span>",
-				"Position Name"
+				"Field Position <span>(R)</span>"
 			 ];
-
 			var properties = [
 				"Id", 
 				"Name"
 			];
-
-			buildTable(counter_start, headers, properties, data, $table, rowClickCallback);
+			buildTable(counter_start, headers, properties, data, $table);
     	}
-
 		ajaxRequest(url, successCallback);
 	}
 
@@ -99,15 +86,55 @@ var dataAdminPositionsCode = function() {
 		getPositions(tableNextPage());
 	});
 
+	//position by id GET request
+	$get_by_id_form.submit(function(event) {
+
+		event.preventDefault();
+
+		var url = _url + "/id/" + $get_id.val();
+		var successCallback = function(data, textStatus, request) {
+			
+			fillPositionFields(data);
+            printOutput(textStatus, request);
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
+	});
+
+	//position by name GET request
+	$get_by_name_form.submit(function(event) {
+
+		event.preventDefault();
+
+		var url = _url + "/name/" + $get_name.val();
+		var successCallback = function (data, textStatus, request) {
+            	
+        	fillPositionFields(data);
+        	printOutput(textStatus, request);
+    	};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
+	});
+
 	//POST PUT DELETE request
 	$edit_form.submit(function(event){
 
 		event.preventDefault();
 
 		var url = _url;
-
 		var position = readPositionFromFields();
-
 		var successCallback = function (data, textStatus, request) {
             
         	ajaxRequest(_url, function(data, textStatus, request) {
@@ -118,17 +145,16 @@ var dataAdminPositionsCode = function() {
 			});
 			
         	printOutput(textStatus, request);
-        	clearFormFields([$edit_form]);
+        	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
     	};
 
 		var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$edit_form]);
+			clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
 			generalErrorCallback(request, textStatus, errorThrown);
 		};
 
 		var type = $("option:checked").val();
-
 		if (type === "PUT") {
 			url = url + "/id/" + position.Id;
 		}
@@ -136,9 +162,8 @@ var dataAdminPositionsCode = function() {
 			url = url + "/id/" + position.Id;
 			position = "undefined";
 		}
-
 		var dataType = "json";
-
 		ajaxRequest(url, successCallback, errorCallback, type, dataType, position);
 	});
 }
+
