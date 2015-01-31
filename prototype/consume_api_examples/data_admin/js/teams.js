@@ -16,7 +16,7 @@ var dataAdminTeamsCode = function() {
 	var $budget = $("#budget");
 	var $league_id = $("#league_id");
 	var $user_id = $("#user_id");
-	var $player_to_team_div = $("#player_to_team_div");
+	var $player_to_team_form = $("#player_to_team_div");
 	var $players_in_team_table_div = $("#players_in_team_table_div");
 	var $player_id = $("#player_id");
 	var $team_name_span = $(".team_name_span");
@@ -55,7 +55,7 @@ var dataAdminTeamsCode = function() {
 		});
 		
 		fillTeamFields(data);
-		$player_to_team_div.show();
+		$player_to_team_form.show();
 		getPlayersInTeam(data[1]);
 	};
 
@@ -140,7 +140,7 @@ var dataAdminTeamsCode = function() {
 		ajaxRequest(url, successCallback);
 	}
 
-	$player_to_team_form.hide();
+	hideElement($player_to_team_form);
 
 	_top = $table_rows.val();
 
@@ -187,17 +187,17 @@ var dataAdminTeamsCode = function() {
 				getTeams(tableCurrentPage());
 			});
 
-        	clearFormFields([$edit_form]);
+        	clearFormFields([$edit_form, $player_to_team_form]);
         	$players_in_team_table_div.empty();
-        	$player_to_team_form.hide();
+        	hideElement($player_to_team_form);
         	printOutput(textStatus, request);
     	};
 
 		var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$edit_form]);
+			clearFormFields([$edit_form, $player_to_team_form]);
 			$players_in_team_table_div.empty();
-        	$player_to_team_form.hide();
+        	hideElement($player_to_team_form);
 			generalErrorCallback(request, textStatus, errorThrown);
 		};
 
@@ -236,6 +236,7 @@ var dataAdminTeamsCode = function() {
         	ajaxRequest(_url, function(data, textStatus, request) {
 
 				_count = parseInt(data.length);
+				clearFormFields([$edit_form, $player_to_team_form]);
 				$table_rows_count.val(_count);
 				getPlayersInTeam($id.val());
 			});
@@ -245,9 +246,9 @@ var dataAdminTeamsCode = function() {
 
 		var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$edit_form]);
+			clearFormFields([$edit_form, $player_to_team_form]);
 			$players_in_team_table_div.empty();
-        	$player_to_team_div.hide();
+        	hideElement($player_to_team_form);
 			generalErrorCallback(request, textStatus, errorThrown);
 		};
 

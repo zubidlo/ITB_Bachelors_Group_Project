@@ -18,8 +18,8 @@ var loadCommonsAndStartProgram = function(callback) {
 
 		var req3 = $.get("html_include/response_fieldset.html", function(data) {
 
+			hideElement($response_div);
 			$response_div.html(data);
-			$response_div.hide();
 
 		});
 		//execute callback only when all requests are successful
@@ -74,14 +74,27 @@ var setTableDOMElements = function() {
 	$text = $("#text");
 }
 
+var hideElement = function($element, time_ms) {
+
+	time_ms = typeof time_ms === "undefined" ? 0 : time_ms;
+	setTimeout(function() { $element.hide(); }, time_ms);
+}
+
+var showElement = function($element, time_ms) {
+
+	time_ms = typeof time_ms === "undefined" ? 0 : time_ms;
+	setTimeout(function() { $element.show(); }, time_ms);
+}
+
 //this can be called only after document is ready
 //prints a message when ajax request is successfull
 //textStatus : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
 //request : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
 var printOutput = function(textStatus, request) {
 
-	$response_div.show();
 	$text.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
+	showElement($response_div);
+	hideElement($response_div, 3000);
 }
 
 //this can be called only after document is ready
@@ -91,8 +104,9 @@ var printOutput = function(textStatus, request) {
 //errorThrown : passed by jquer ajax success function , see http://api.jquery.com/jquery.ajax/
 var printError = function(request, textStatus, errorThrown) {
 
-	$response_div.show();
 	$text.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+	showElement($response_div);
+	hideElement($response_div, 3000);
 }
 
 //this can be called only after document is ready
@@ -179,7 +193,6 @@ var buildTableRow = function(rowNumber, properties, object) {
 var mouseEnterCallback = function() {
 				
 	$(this).children().css("background-color", "#D10000").css("color", "white");
-	$response_div.hide();
 };
 
 var mouseLeaveCallback = function() {
@@ -212,7 +225,7 @@ var buildTable = function (counter_start, headers, properties, data, output, row
 	table += "</tbody></table>";
 	output.empty().append(table);
 
-	if (rowClickCallback !== undefined) {
+	if (typeof rowClickCallback !== "undefined") {
 
 		$(".editable").mouseenter(this, mouseEnterCallback)
 					  .mouseleave(this, mouseLeaveCallback)
@@ -220,12 +233,12 @@ var buildTable = function (counter_start, headers, properties, data, output, row
 	}
 }
 
+//clear form fields to default value
+//forms = array of form elemenet jquery objects
 var clearFormFields = function(forms) {
 
 	forms.forEach(function($form){
 
-		$form.each (function(){
-	  		this.reset();
-		});
+		$form.each (function(){ this.reset(); });
 	});
 }
