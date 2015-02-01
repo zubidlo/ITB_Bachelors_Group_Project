@@ -28,6 +28,7 @@ function set_user()
 	
 
    document.getElementById("demo").innerHTML = ("You are logged in as "+user);
+     
 
  set_table();
 	}	
@@ -118,12 +119,13 @@ sessionStorage.clear();
 
 function set_table()
 {
-
+	var i=1;
 	var user_id= sessionStorage.getItem("id");
 	var user= (user_id+"/players");
-  
+   
     var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/"+user;
-
+ 
+	
 
 $.ajax({
         url: _url,
@@ -134,8 +136,9 @@ $.ajax({
 
 if($.isArray(data)) {
     $.each(data, function(index, object) {
+		
          var tr;
-       
+		
             tr = $('<tr/>');
             
             tr.append("<td>" + object.Id + "</td>");
@@ -149,19 +152,22 @@ if($.isArray(data)) {
             tr.append("<td>" + object.Injured + "</td>");
             tr.append("<td>" + object.PositionId + "</td>");
 
-          
+        
             $('table').append(tr);
-            $("#myTable").tablesorter();   
+            $("#myTable").tablesorter();  
+			var img = document.createElement("img");	
+			
+		
+			img.src = "../img/"+ object.GaaTeam+".png";
+			var src = document.getElementById(""+object.PositionId);
+			src.appendChild(img);
+			document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
+		
+		
+			
+			i=i+1;
     });
   }
-
-       
-            
-           
-          
-           
-        
-
 
             }
 
@@ -170,3 +176,12 @@ if($.isArray(data)) {
     });
 
 		}
+		
+
+
+
+		
+
+		
+		
+		

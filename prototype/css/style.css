@@ -1328,6 +1328,8 @@ transition:All 1s ease;
 }
 
 
+
+
 .wrapper
 {
 
@@ -1449,3 +1451,20 @@ text-align: center;
   
   
   }
+  
+img{
+      width:50px;
+      height:50px;
+      display:block;
+      margin: 0 auto;
+     margin-top:15px;
+   
+    }
+	
+	#player_specific_info
+	{
+	border:dashed 5px #000000;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+	}

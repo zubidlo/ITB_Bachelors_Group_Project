@@ -5,14 +5,27 @@
 <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 <link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
 <link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
+  
 
 <script src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
+
 <script src="../js/my_team.js"></script>
-
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
-
+ <style>
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 1000px; }
+  #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 105px; height: 90px; font-size: 1em; text-align: center; -moz-border-radius: 35px;
+border-radius: 35px; }
+  </style>
+<script>
+  $(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  });
+  </script>
 </head>
 <body onload="set_user()">
 <div class="header">
@@ -43,6 +56,25 @@
 
 <!-- wrapper -->
 <div id="container">
+
+    <ul id="sortable">
+	 
+  <li class="ui-state-default" id="1" onclick="get_player(1)"> <label for="1" id ="player_name1"></label>
+  <li class="ui-state-default" id="2" onclick="get_player(2)"><label for="2" id ="player_name2"></label>
+  <li class="ui-state-default" id="3" onclick="get_player(3)"><label for="3" id ="player_name3"></label>
+  <li class="ui-state-default" id="4" onclick="get_player(4)"><label for="4" id ="player_name4"></label>
+  <li class="ui-state-default" id="5" onclick="get_player(5)"><label for="5" id ="player_name5"></label>
+  <li class="ui-state-default" id="6" onclick="get_player(6)"><label for="6" id ="player_name6"></label>
+  <li class="ui-state-default" id="7" onclick="get_player(7)"><label for="7" id ="player_name7"></label>
+  <li class="ui-state-default" id="8" onclick="get_player(8)"><label for="8" id ="player_name8"></label>
+
+</ul>
+
+  
+<div id="dialog" title="Basic dialog">
+  <p></p>
+</div>   
+</br></br></br></br></br></br>
 <table id="myTable" class="tablesorter"> 
 <thead> 
 <tr> 
@@ -75,8 +107,8 @@
 </tr> 
 </tbody> 
 </table> 
-    
-    
+
+
 
  <ul class="ca-menu" style="margin: 40px 0">
     <li> <a href="javascript:;"> <span class="ca-icon">A</span>
