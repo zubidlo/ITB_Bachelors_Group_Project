@@ -1,24 +1,46 @@
 //loads parts of the DOM which are common for all pages and then executes given function
 var loadCommonsAndStartProgram = function(callback) {
 
-	//after DOM is ready
-	$(document).ready(function(){
+	if(sessionStorage.getItem("signed") !== "Administrator") {
 
-		var req1 = $.get("html_include/get_by_id_form.html", function(data) {
-	    $("#get_by_id_form").html(data);
-		});
-		var req2 = $.get("html_include/table_article.html", function(data) {
-		    $("#main_table").html(data);
-		});
-		var req3 = $.get("html_include/request_select.html", function(data) {
-		    $("#request_div").html(data);
-		});
-		//execute callback only when all requests are successful
-		$.when(req1, req2, req3).then(callback);
+			//go to login page
+			window.location = "login.html";
+	}
+	else {
 
-		//I don't care when these are loaded
-		$("header").load("html_include/header.html");
-	});
+		//after DOM is ready
+		$(document).ready(function(){
+
+			setTableDOMElements();
+
+			var req1 = $.get("html_include/table_article.html", function(data) {
+
+			    $table_div.html(data);
+			});
+
+			var req2 = $.get("html_include/request_select.html", function(data) {
+
+			    $request_div.html(data);
+			});
+
+			var req3 = $.get("html_include/response_fieldset.html", function(data) {
+
+				hideElement($response_div);
+				$response_div.html(data);
+
+			});
+
+			var req4 = $.get("html_include/header.html", function(data) {
+
+				$("header").html(data);
+			});
+			//execute callback only when all requests are successful
+			$.when(req1, req2, req3, req4).then(function () {
+				
+				callback();
+			});
+		});
+	}
 }
 
 //constants
@@ -33,6 +55,10 @@ var _skip = 0;
 var _count = 0;
 
 //DOM element jquery objects common for all html files
+var $logout;
+var $table_div;
+var $request_div;
+var $response_div;
 var $table_rows_form;
 var $table_rows;
 var $previous_page_form;
@@ -40,16 +66,16 @@ var $next_page_form;
 var $table_rows_count;
 var $table;
 var $text;
-var $get_by_id_form;
-var $get_id;
 var $edit_form;
 var $id;
 
 //this can be called only after document is ready
 var setTableDOMElements = function() {
-	
-	$get_by_id_form = $("#get_by_id_form");
-	$get_id = $("#get_id");
+
+	$logout = $("#logout");
+	$table_div = $("#table_div");
+	$request_div = $("#request_div");
+	$response_div = $("#response_div");
 	$edit_form = $("#edit_form");
 	$id = $("#id");
 	$table_rows_form = $("#table_rows_form");
@@ -61,6 +87,18 @@ var setTableDOMElements = function() {
 	$text = $("#text");
 }
 
+var hideElement = function($element, time_ms) {
+
+	time_ms = typeof time_ms === "undefined" ? 0 : time_ms;
+	setTimeout(function() { $element.hide(); }, time_ms);
+}
+
+var showElement = function($element, time_ms) {
+
+	time_ms = typeof time_ms === "undefined" ? 0 : time_ms;
+	setTimeout(function() { $element.show(); }, time_ms);
+}
+
 //this can be called only after document is ready
 //prints a message when ajax request is successfull
 //textStatus : passed by jquer ajax success function , see: http://api.jquery.com/jquery.ajax/
@@ -68,6 +106,8 @@ var setTableDOMElements = function() {
 var printOutput = function(textStatus, request) {
 
 	$text.empty().append(textStatus + ": " + request.status + "/" + request.responseText);
+	showElement($response_div);
+	hideElement($response_div, 3000);
 }
 
 //this can be called only after document is ready
@@ -78,6 +118,8 @@ var printOutput = function(textStatus, request) {
 var printError = function(request, textStatus, errorThrown) {
 
 	$text.empty().append(textStatus + ": " + request.status + "/" + errorThrown + ": " + request.responseText);
+	showElement($response_div);
+	hideElement($response_div, 3000);
 }
 
 //this can be called only after document is ready
@@ -154,12 +196,22 @@ var buildTableHeaders = function (headersNamesArray) {
 //objcet : object
 var buildTableRow = function(rowNumber, properties, object) {
 
-	var row = "<tr><td>" + rowNumber + "</td>";
+	var row = "<tr class='editable'><td>" + rowNumber + "</td>";
 	for(var i = 0; i < properties.length; i++) {
 		row += "<td>" + object[properties[i]] + "</td>";
 	}	
 	return row + "</tr>";
 }
+
+var mouseEnterCallback = function() {
+				
+	$(this).children().css("background-color", "#D10000").css("color", "white");
+};
+
+var mouseLeaveCallback = function() {
+
+	$(this).children().css("background-color", "white").css("color", "black");
+};
 
 //this can be called only after document is ready
 //returns table html string
@@ -168,7 +220,8 @@ var buildTableRow = function(rowNumber, properties, object) {
 //properties : string array - example: ['Name', 'Address', 'Email'] data[i].Name, data[i].Address, data[i].Email will be put in each table row in that order
 //data : objcet array - objects to put in the table
 //output : DOM element jquery object - to append the table to
-var buildTable = function (counter_start, headers, properties, data, output) {
+//function to execute if user clicks on table row
+var buildTable = function (counter_start, headers, properties, data, output, rowClickCallback) {
 	
 	var counter = counter_start;
 	var table = "<table><thead>";
@@ -184,14 +237,27 @@ var buildTable = function (counter_start, headers, properties, data, output) {
 	}
 	table += "</tbody></table>";
 	output.empty().append(table);
+
+	if (typeof rowClickCallback !== "undefined") {
+
+		$(".editable").mouseenter(this, mouseEnterCallback)
+					  .mouseleave(this, mouseLeaveCallback)
+					  .click(this, rowClickCallback);
+	}
 }
 
+//clear form fields to default value
+//forms = array of form elemenet jquery objects
 var clearFormFields = function(forms) {
 
 	forms.forEach(function($form){
 
-		$form.each (function(){
-	  		this.reset();
-		});
+		$form.each (function(){ this.reset(); });
 	});
+}
+
+var clearSessionAndReload = function() {
+
+	sessionStorage.clear();
+	location.reload();
 }
