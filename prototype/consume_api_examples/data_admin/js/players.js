@@ -10,6 +10,7 @@ var dataAdminPlayersCode = function() {
 	//set common DOM element jquery objects
 	setTableDOMElements();
 
+	var $id = $("#id");
 	var $firstname = $("#firstname");
 	var $lastname = $("#lastname");
 	var $gaateam = $("#gaateam");
@@ -23,7 +24,6 @@ var dataAdminPlayersCode = function() {
 	var readPlayerFromInputFields = function () {
 
 		return {
-
 			Id : $id.val(),
 			FirstName : $firstname.val(),
 			LastName : $lastname.val(),
@@ -37,34 +37,23 @@ var dataAdminPlayersCode = function() {
 		};
 	}
 
-	var fillPlayerTextFields = function (tableRowData) {
+	var fillPlayerTextFields = function (player) {
 
-		$id.val(tableRowData[1]);
-		$firstname.val(tableRowData[2]);
-		$lastname.val(tableRowData[3]);
-		$gaateam.val(tableRowData[4]);
-		$lastweekpoints.val(tableRowData[5]);
-		$overallpoints.val(tableRowData[6]);
-		$price.val(tableRowData[7]);
-		$rating.val(tableRowData[8]);
-		if (tableRowData[9] === "true") {
+		$id.val(player.Id);
+		$firstname.val(player.FirstName);
+		$lastname.val(player.LastName);
+		$gaateam.val(player.GaaTeam);
+		$lastweekpoints.val(player.LastWeekPoints);
+		$overallpoints.val(player.OverallPoints);
+		$price.val(player.Price);
+		$rating.val(player.Rating);
+		if (player.Injured === "true") {
 			$injured_checkbox.attr("checked", "checked");
 		} else {
 			$injured_checkbox.removeAttr("checked");
 		}
-		$position_id.val(tableRowData[10]);
+		$position_id.val(player.PositionId);
 	}
-
-	var rowClickCallback = function() {
-
-		var data = [];
-		$.each($(this).children(), function(key, value) {
-			data.push(value.textContent);
-		});
-		
-		fillPlayerTextFields(data);
-	};
-
 
 	//examples:
 	//.../api/players?$orderby=OverallPoints --> get all players ordered by OverallPoints
@@ -82,21 +71,19 @@ var dataAdminPlayersCode = function() {
 		var successCallback = function (data, textStatus, request) {
             	
 	    	var counter_start = page.skip;
-
 			var headers = 
 			[
 				"Id <span>(PK)</span>",
-				"First Name",
-				"Last Name",
-				"GAA Team",
-				"Last Week Points",
-				"Overall Points",
-				"Price",
-				"Rating",
-				"Injured",
+				"First Name <span>(R)</span>",
+				"Last Name <span>(R)</span>",
+				"GAA Team <span>(R)</span>",
+				"Last Week Points <span>(R)</span>",
+				"Overall Points <span>(R)</span>",
+				"Price <span>(R)</span>",
+				"Rating <span>(R)</span>",
+				"Injured <span>(R)</span>",
 				"Position Id <span>(FK)</span>"
 			];
-
 			var properties = 
 			[
 				"Id",
@@ -109,10 +96,8 @@ var dataAdminPlayersCode = function() {
 				"Injured",
 				"PositionId"
 			];
-
-			buildTable(counter_start, headers, properties, data, $table, rowClickCallback);
+			buildTable(counter_start, headers, properties, data, $table);
 		}
-
 		ajaxRequest(url, successCallback);
 	}
 
@@ -145,15 +130,33 @@ var dataAdminPlayersCode = function() {
 		getPlayers(tableNextPage());
 	});
 
+	//user by id GET request
+	$get_by_id_form.submit(function(event) {
+
+		event.preventDefault();
+		var url = _url + "/id/" + $get_id.val();
+		var successCallback = function(data, textStatus, request) {
+			
+			fillPlayerTextFields(data);
+            printOutput(textStatus, request);
+		};
+
+		var errorCallback = function(request, textStatus, errorThrown) {
+
+			clearFormFields([$get_by_id_form, $edit_form]);
+			generalErrorCallback(request, textStatus, errorThrown);
+		};
+
+		ajaxRequest(url, successCallback, errorCallback);
+	});
+
 	//POST PUT DELETE request
 	$edit_form.submit(function(event){
 
 		event.preventDefault();
 
 		var url = _url;
-
 		var player = readPlayerFromInputFields();
-
 		var successCallback = function (data, textStatus, request) {
             
         	ajaxRequest(_url, function(data, textStatus, request) {
@@ -162,19 +165,17 @@ var dataAdminPlayersCode = function() {
 				$table_rows_count.val(_count);
 				getPlayers(tableCurrentPage());
 			});
-
         	printOutput(textStatus, request);
-        	clearFormFields([$edit_form]);
+        	clearFormFields([$get_by_id_form, $edit_form, $get_by_name_form]);
     	};
 
     	var errorCallback = function(request, textStatus, errorThrown) {
 
-			clearFormFields([$edit_form]);
+			clearFormFields([$get_by_id_form, $edit_form]);
 			generalErrorCallback(request, textStatus, errorThrown);
 		};
 		
 		var type = $("option:checked").val();
-
 		if (type === "PUT") {
 			url = url + "/id/" + player.Id;
 		}
@@ -182,7 +183,6 @@ var dataAdminPlayersCode = function() {
 			url = url + "/id/" + player.Id;
 			player = "undefined";
 		}
-		
 		var dataType = "json";
 
 		ajaxRequest(url, successCallback, errorCallback, type, dataType, player );

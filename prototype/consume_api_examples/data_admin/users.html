@@ -14,9 +14,17 @@
 	<main>
 		<section>
 			<article id="table_article">
-				<div id="table_div"><!-- injection "table_article.html" --></div>
+				<div id="main_table"><!-- injection "table_article.html" --></div>
 			</article>
 			<article id="forms_article">
+				<form id="get_by_id_form" action="#"><!-- injection "get_by_id_form.html" --></form>
+				<form id="get_by_username_form" action="#">
+					<fieldset>
+						<legend>Get by Username</legend>
+						<input id="get_username" type="text" value="" placeholder="a string" required/>
+						<input type="submit" value="submit"/>
+					</fieldset>
+				</form>
 				<form id="edit_form" action="#">
 					<fieldset>
 						<legend>User</legend>
@@ -30,10 +38,9 @@
 						<div id="request_div"><!-- injection "request_select.html" --></div>
 					</fieldset>
 				</form>
-				<div id="response_div"><!-- injection "response_fieldset.html" --></div>
 			</article>			
 		</section>
 	</main>
-	<footer></footer>
+	<footer><!-- injection "footer.html" --></footer>
 </body>
 </html>
