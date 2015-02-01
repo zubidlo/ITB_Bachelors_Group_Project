@@ -80,13 +80,6 @@ function checkSession_see_rankings()
 	
 }
 
-function jump_to_user_page()
-{
-
-  	window.location="user_profile.html";
-}
-
-
 
 function checkSession_transfers()
 {
