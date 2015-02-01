@@ -162,6 +162,7 @@ if($.isArray(data)) {
 			var src = document.getElementById(""+object.PositionId);
 			src.appendChild(img);
 			document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
+	
 		
 		
 			

@@ -1461,10 +1461,3 @@ img{
    
     }
 	
-	#player_specific_info
-	{
-	border:dashed 5px #000000;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
-border-radius: 5px;
-	}

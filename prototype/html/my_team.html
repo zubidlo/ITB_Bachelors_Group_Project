@@ -17,8 +17,8 @@
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
  <style>
   #sortable { list-style-type: none; margin: 0; padding: 0; width: 1000px; }
-  #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 105px; height: 90px; font-size: 1em; text-align: center; -moz-border-radius: 35px;
-border-radius: 35px; }
+  #sortable li { margin: 3px 3px 3px 0;  padding: 1px; float: left; width: 105px; height: 90px; font-size: 1em; text-align: center; -moz-border-radius: 35px;
+border-radius: 35px; background-image: url("../css/backgrounds/grass3.png");}
   </style>
 <script>
   $(function() {
@@ -57,7 +57,7 @@ border-radius: 35px; }
 <!-- wrapper -->
 <div id="container">
 
-    <ul id="sortable">
+    <ul id="sortable" font color="red">
 	 
   <li class="ui-state-default" id="1" onclick="get_player(1)"> <label for="1" id ="player_name1"></label>
   <li class="ui-state-default" id="2" onclick="get_player(2)"><label for="2" id ="player_name2"></label>
@@ -70,10 +70,7 @@ border-radius: 35px; }
 
 </ul>
 
-  
-<div id="dialog" title="Basic dialog">
-  <p></p>
-</div>   
+
 </br></br></br></br></br></br>
 <table id="myTable" class="tablesorter"> 
 <thead> 
