@@ -26,19 +26,19 @@ body {	font-family: Arial, Helvetica, sans-serif;
 	    line-height: 1.6em;
 		background: #fff;
 		color: #666;
-		    background-image: url("backgrounds/grass5.png");
+		  
 }
 
 
 #container {
 	font-size: 1em;
 	     border-top: 1px solid #eeeeee;
-	width:960px;
+	width:1060px;
 	padding: 15px 0;
 	margin: auto;
 	position: relative;
 	text-align: center;
-	clear: both
+	clear: both;
 }
 
 .header{
@@ -1012,10 +1012,12 @@ div.dark_rounded #pp_full_res .pp_inline,div.dark_square #pp_full_res .pp_inline
 /* tables */
 table.tablesorter {
 	font-family:arial;
-	
+	-moz-box-shadow:10px 10px 5px #000000;
+-webkit-box-shadow:10px 10px 5px #000000;
+box-shadow:10px 10px 5px #000000;
 	margin:5px 0pt 10px;
 	font-size: 8pt;
-	width: 70%;
+	width: 50%;
 	text-align: left;
 	border: 1px solid white;
 	font-size: 8pt;
@@ -1023,6 +1025,8 @@ table.tablesorter {
 	text-align: center;
 	 margin-left: auto;
     margin-right: auto;
+	position:absolute;left:0px;top:300px;
+
 }
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 	background-color: #13325c;
@@ -1060,7 +1064,7 @@ background-color: #13325c;
 	margin:0px;padding:0px;
 	width:100%;
 	border:1px solid #000000;
-	
+	   float:left;
 	-moz-border-radius-bottomleft:0px;
 	-webkit-border-bottom-left-radius:0px;
 	border-bottom-left-radius:0px;
@@ -1079,6 +1083,7 @@ background-color: #13325c;
 }.myTable table{
     border-collapse: collapse;
         border-spacing: 0;
+		   float:left;
 	width:100%;
 	height:100%;
 	margin:0px;padding:0px;
@@ -1086,6 +1091,7 @@ background-color: #13325c;
 	-moz-border-radius-bottomright:0px;
 	-webkit-border-bottom-right-radius:0px;
 	border-bottom-right-radius:0px;
+	   float:left;
 }
 .myTable table tr:first-child td:first-child {
 	-moz-border-radius-topleft:0px;
@@ -1482,11 +1488,22 @@ color: black;
 
   text-align: center;
   
-
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
 
 
 
 	}
+	
+	#player_info_box:hover{
+transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-webkit-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-moz-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-o-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-ms-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+}
 #player_image_box
 	{
 	
@@ -1497,7 +1514,10 @@ color: black;
  -moz-box-shadow:10px 10px 5px #13325c;
     -webkit-box-shadow:10px 10px 5px #13325c;
     box-shadow:10px 10px 5px #13325c;
- 
+ transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
 
 	width:25%;
 	height:80px;
@@ -1515,6 +1535,13 @@ color: black;
 
 
 	}
+		#player_image_box:hover{
+transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-webkit-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-moz-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-o-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-ms-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+}
 	
 	#player_team_box
 	{
@@ -1531,7 +1558,10 @@ color: black;
     border-radius: 5px;
  display:block;
       margin: 0 auto;
-
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
   text-align: center;
   
 
@@ -1541,6 +1571,13 @@ color: black;
 
 
 	}
+		#player_team_box:hover{
+transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-webkit-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-moz-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-o-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-ms-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+}
 	#player_week_points_box
 	{
 	
@@ -1561,18 +1598,28 @@ color: black;
 
   text-align: center;
   
-
+transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
 
 
 
 	}
-	
+		#player_week_points_box:hover{
+transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-webkit-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-moz-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-o-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+-ms-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+}
 	
 #info_container
 	{
 	
-
-
+-moz-box-shadow:10px 10px 5px #000000;
+-webkit-box-shadow:10px 10px 5px #000000;
+box-shadow:10px 10px 5px #000000;
 
 -moz-border-radius: 15px;
 border-radius: 15px;
@@ -1580,13 +1627,36 @@ border-radius: 15px;
 	width:400px;
 	height:400px;
     border:solid 1px #000000;
-   display:block;
-      margin: 0 auto;
-background-image: url("backgrounds/pop.png");
-  text-align: center;
-  
 
+background-image: url("backgrounds/pop.png");
+   float:right;
+  
+position:absolute;left:600px;top:160px;
 
 
 
 	}
+	
+	#team_info_box
+	{
+	
+
+
+-moz-border-radius: 15px;
+border-radius: 15px;
+
+	width:525px;
+	height:100px;
+    border:solid 1px #000000;
+-moz-box-shadow:10px 10px 5px #000000;
+-webkit-box-shadow:10px 10px 5px #000000;
+box-shadow:10px 10px 5px #000000;
+
+   float:right;
+  
+position:absolute;left:0px;top:160px;
+
+background-image: url("backgrounds/pop.png");
+
+	}
+
