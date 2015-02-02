@@ -141,16 +141,17 @@ if($.isArray(data)) {
 		
             tr = $('<tr/>');
             
-            tr.append("<td>" + object.Id + "</td>");
+            tr.append("<td>" + object.PositionId + "</td>");
             tr.append("<td>" + object.FirstName + "</td>");
             tr.append("<td>" + object.LastName + "</td>");
             tr.append("<td>" + object.GaaTeam + "</td>");
             tr.append("<td>" + object.LastWeekPoints + "</td>");
             tr.append("<td>" + object.OverallPoints + "</td>");
+			tr.append("<td>" + object.Rating + "</td>");
             tr.append("<td>" + object.Price + "</td>");
-            tr.append("<td>" + object.Rating + "</td>");
-            tr.append("<td>" + object.Injured + "</td>");
-            tr.append("<td>" + object.PositionId + "</td>");
+
+          
+            
 
         
             $('table').append(tr);
@@ -165,8 +166,13 @@ if($.isArray(data)) {
 	
 		
 		
-			
+			sessionStorage.setItem(""+i,""+object.Id);
+			var item = sessionStorage.getItem(""+i);
+			//item 1 will be the player id in that position
+			//item 2 player id in that position...so on
+		
 			i=i+1;
+			
     });
   }
 
@@ -180,9 +186,48 @@ if($.isArray(data)) {
 		
 
 
+		function get_player(position)
+		{
+			var player_id =sessionStorage.getItem(""+position);
+		
+			display_player(""+player_id);
+		
+		
+		
+		}
 
 		
+function display_player(player_id)
+{
+	
 
+   $('#player_image_box').empty();
+
+
+	var img = document.createElement("img");	
+	
+    var _url =  "http://hurlingapi.azurewebsites.net/api/players/Id/"+player_id;
+
+				
+			$.ajax({
+	            url: _url,
+	            success: function (data) {
+				        
+			
 		
-		
-		
+			img.src = "../img/user_image.png";
+			var src = document.getElementById("player_image_box");
+			
+			src.appendChild(img);
+			
+		    document.getElementById("player_info_box").innerHTML = (data.FirstName+" "+data.LastName);
+			document.getElementById("player_team_box").innerHTML = (" "+data.GaaTeam);
+			document.getElementById("player_week_points_box").innerHTML = (" " +data.LastWeekPoints);
+			
+	        	}
+	        	
+			});
+	        
+
+}
+	

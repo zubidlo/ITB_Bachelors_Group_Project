@@ -94,7 +94,7 @@
 	sessionStorage.setItem("password", pass);
 	var email= data.Email ;
 	sessionStorage.setItem("email", email);
-		var id= data.Id ;
+	var id= data.Id ;
 	sessionStorage.setItem("id", id);
 
 	    

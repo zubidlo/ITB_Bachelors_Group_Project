@@ -26,6 +26,17 @@ border-radius: 35px; background-image: url("../css/backgrounds/grass3.png");}
     $( "#sortable" ).disableSelection();
   });
   </script>
+   <script>
+$(function() {
+$( document ).tooltip();
+});
+</script>
+<style>
+label {
+display: inline-block;
+width: 5em;
+}
+</style>
 </head>
 <body onload="set_user()">
 <div class="header">
@@ -71,20 +82,33 @@ border-radius: 35px; background-image: url("../css/backgrounds/grass3.png");}
 </ul>
 
 
+
+
 </br></br></br></br></br></br>
+<div id="info_container"></br>
+ <p id="player_info_box" title ="Player Name">.</p> </br>
+ <p id="player_image_box" title ="Mugshot">.</p></br>
+ <p id="player_team_box" title ="Player Team">.</p></br>
+  <p id="player_week_points_box" title ="Points This Week">.</p><br>
+
+   
+</div>
+
+</br></br></br></br> 
 <table id="myTable" class="tablesorter"> 
 <thead> 
 <tr> 
-    <th>Id</th> 
+    <th>Position</th> 
     <th>First Name</th> 
     <th>Last Name</th> 
     <th>Team</th> 
     <th>Last Week Points</th> 
     <th>Overall Points</th> 
+	 <th>Rating</th> 
     <th>Price</th> 
-    <th>Rating</th> 
-    <th>Injured</th> 
-    <th>Position</th> 
+   
+    
+   
     
     
 </tr> 
@@ -99,13 +123,14 @@ border-radius: 35px; background-image: url("../css/backgrounds/grass3.png");}
     <td></td> 
     <td></td> 
       <td></td> 
-    <td></td> 
-    <td></td> 
+   
 </tr> 
 </tbody> 
 </table> 
 
-
+<div id="dialog" title="Player Info">
+<p></p>
+</div>
 
  <ul class="ca-menu" style="margin: 40px 0">
     <li> <a href="javascript:;"> <span class="ca-icon">A</span>
