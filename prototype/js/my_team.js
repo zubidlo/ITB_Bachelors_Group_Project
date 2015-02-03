@@ -142,7 +142,7 @@ if($.isArray(data)) {
             tr = $('<tr/>');
             
             tr.append("<td>" + object.PositionId + "</td>");
-            tr.append("<td>" + object.FirstName + "</td>");
+        
             tr.append("<td>" + object.LastName + "</td>");
             tr.append("<td>" + object.GaaTeam + "</td>");
             tr.append("<td>" + object.LastWeekPoints + "</td>");
@@ -164,7 +164,7 @@ if($.isArray(data)) {
 			src.appendChild(img);
 			document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
 			
-			document.getElementById("team_info_box").innerHTML = ("Team Points = "+overall_points);
+			document.getElementById("team_info_box").innerHTML = ("Overall Points "+overall_points);
 			document.getElementById("points_week_info_box").innerHTML = ("Week Points = "+week_points);
 		
 			sessionStorage.setItem(""+i,""+object.Id);
@@ -216,7 +216,7 @@ function display_player(player_id)
 				        
 			
 		
-			img.src = "../img/user_image.png";
+				img.src = "../img/"+ data.GaaTeam+".png";
 			var src = document.getElementById("player_image_box");
 			
 			src.appendChild(img);
