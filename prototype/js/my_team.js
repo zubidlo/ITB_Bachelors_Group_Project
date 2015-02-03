@@ -124,8 +124,8 @@ function set_table()
 	var user= (user_id+"/players");
    
     var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/"+user;
- 
-	
+ 	var overall_points=0;
+	var week_points=0;
 
 $.ajax({
         url: _url,
@@ -152,8 +152,8 @@ if($.isArray(data)) {
 
           
             
-
-        
+			week_points = week_points+object.LastWeekPoints;
+			overall_points = overall_points+object.OverallPoints;
             $('table').append(tr);
             $("#myTable").tablesorter();  
 			var img = document.createElement("img");	
@@ -163,8 +163,9 @@ if($.isArray(data)) {
 			var src = document.getElementById(""+object.PositionId);
 			src.appendChild(img);
 			document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
-	
-		
+			
+			document.getElementById("team_info_box").innerHTML = ("Team Points = "+overall_points);
+			document.getElementById("points_week_info_box").innerHTML = ("Week Points = "+week_points);
 		
 			sessionStorage.setItem(""+i,""+object.Id);
 			var item = sessionStorage.getItem(""+i);
@@ -223,6 +224,7 @@ function display_player(player_id)
 		    document.getElementById("player_info_box").innerHTML = (data.FirstName+" "+data.LastName);
 			document.getElementById("player_team_box").innerHTML = (" "+data.GaaTeam);
 			document.getElementById("player_week_points_box").innerHTML = (" " +data.LastWeekPoints);
+			
 			
 	        	}
 	        	

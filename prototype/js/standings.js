@@ -37,6 +37,7 @@ function set_user()
    document.getElementById("demo").innerHTML = ("You are logged in as "+user);
 	
 set_table();
+show_team();
 	}	
  
 
@@ -152,13 +153,6 @@ if($.isArray(data)) {
     });
   }
 
-       
-            
-           
-          
-           
-        
-
 
             }
 
@@ -170,5 +164,61 @@ if($.isArray(data)) {
 
 
 
+function show_team()
+{
+var user_id= sessionStorage.getItem("id");
+var i =0;
+
+  var _url =  "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints desc&$top=10&$skip=0";
+
+ 
+
+
+$.ajax({
+        url: _url,
+        async: true,
+       
+        success:function(data)
+        {
+if($.isArray(data)) {
+    $.each(data, function(index, object) {
+		
+         var tr;
+			i++;
+			
+			if(object.UserId==user_id)
+			{
+				
+				var my_position=i;
+		
+				document.getElementById("team_position").innerHTML = ("Your Position "+my_position);
+			
+			}
+			
+				
+			
+       
+           
+
+          
+         
+		
+		
+		
+		
+			
+    });
+  }
+
+
+
+
+            }
+
+                    
+                
+    });
+
+		}
 
 	

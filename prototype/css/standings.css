@@ -26,7 +26,14 @@ body {	font-family: Arial, Helvetica, sans-serif;
 	    line-height: 1.6em;
 		background: #fff;
 		color: #666;
-		    background-image: url("backgrounds/grass5.png");
+		   
+	 background-image: url("backgrounds/body_background.png");
+		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:13px;
+	color:#000000;
+	font-weight:normal;
+	line-height:24px;
+
 }
 
 
@@ -1330,10 +1337,21 @@ transition:All 1s ease;
 
 
 
+
+
 .wrapper
 {
-
+-moz-border-radius: 15px;
+border-radius: 15px;
 text-align: center;
+margin:2px auto;
+	padding:1px;
+	 border-color: red;
+	overflow:hidden;
+	  width: 1020px;
+    margin: 0 auto;
+background-image: url("backgrounds/grass5.png");
+  
 }
 
 
@@ -1444,10 +1462,18 @@ text-align: center;
  
  
  
+ 
   #demo{
   
   text-align: center;
-  
+  border:solid 3px #fff7ff;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+width:20%;
+ display:block;
+      margin: 0 auto;
+background:white;
   
   
   }
@@ -1586,6 +1612,26 @@ background-image: url("backgrounds/pop.png");
   text-align: center;
   
 
+
+
+
+	}
+		#team_position
+	{
+	
+
+  text-align: center;
+-moz-border-radius: 15px;
+border-radius: 15px;
+
+	width:425px;
+	height:30px;
+    border:solid 1px #000000;
+
+
+ 
+     display:block;
+      margin: 0 auto;
 
 
 
