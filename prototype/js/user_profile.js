@@ -23,6 +23,44 @@ function setStorage()
 }
 
 
+function checkSession_standings()
+{
+
+
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="standings.html";
+	
+
+	}	
+	
+}
+
+
+function checkSession_forum()
+{
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="forum.html";
+
+
+	}	
+
+}
+
+
 
 
 

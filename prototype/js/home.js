@@ -99,6 +99,42 @@ function checkSession_transfers()
 }
 
 
+function checkSession_forum()
+{
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="forum.html";
+
+
+	}	
+
+}
+
+
+function checkSession_user_profile()
+{
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="user_profile.html";
+
+
+	}	
+
+}
+
+
 function logout_user()
 {
 

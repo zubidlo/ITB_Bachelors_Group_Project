@@ -8,7 +8,22 @@
 */
 
 
+function checkSession_forum()
+{
 
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="forum.html";
+
+
+	}	
+
+}
 
 
 
@@ -186,6 +201,23 @@ if($.isArray(data)) {
 		}
 		
 
+
+function checkSession_user_profile()
+{
+
+  if(sessionStorage.getItem("username") === null)
+ {
+
+  	window.location="../index.html";
+
+ }
+	else {
+		window.location="user_profile.html";
+
+
+	}	
+
+}
 
 		function get_player(position)
 		{

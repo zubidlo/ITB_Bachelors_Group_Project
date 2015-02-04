@@ -7,22 +7,28 @@
 <link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
 <script src="../js/forum.js"></script>
 <script src="../js/jquery.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
 
+<link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$(".loader").fadeOut("slow");
+})
+</script>
 </head>
 <body onload="set_user()">
 <div class="header">
   <div id="site_title"><a href="../index.html"><img src="../img/icons/logo.gif" alt=""></a></div>
   <!-- Dynamic Menu -->
   <ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-    <li><a href="javascript:;" onclick="checkSession_home()">Home</a></li>
-    <li><a href="http://www.gaa.ie/">GAA Official Site</a></li>
-    <li><a href="http://www.gaa.ie/fixtures-and-results/club-results/">Recent Results</a></li>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input id="logout_button" type="submit" onclick="logout_user()" value="Log out">
+  <li class="last"><a href="home.html" onclick="checkSession_home()">Home</a></li>
+    <li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
+    <li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
+	 <li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
+	<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
+    
+
+
 
   </ol></div>
   <div class="clr">
@@ -30,16 +36,14 @@
   
   </div>
 
-  
+  <div class="loader"></div>
   <!-- menu 2 -->
  
 
 
 <!-- end header -->
 <div class="wrapper">
-<div class="box_highlight">
- 
-  </div>  
+
 <!-- wrapper -->
 <div id="container">
 
@@ -60,12 +64,12 @@
                 </table>
 </table> 
 
-</br></br>
+<br>
+
 
 <textarea rows="20" cols="20" id = "forum_post_area" onClick="clear_text_area()">
 Enter your message here...
 </textarea>
-
 
 
 

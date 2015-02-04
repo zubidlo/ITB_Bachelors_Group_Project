@@ -9,7 +9,8 @@ html {
 	font-size: 100%;
 }
 
-    
+
+	
 @font-face {
 	font-family: GeosansLight;
 	src: url('fonts/GeosansLight.ttf');
@@ -59,7 +60,7 @@ border-radius: 15px;
 	position: relative;
 	text-align: center;
 	clear: both;
-	 background-image: url("backgrounds/grass5.png");
+	 background-image: url("backgrounds/container_back.png");
 
 }
 
@@ -756,18 +757,26 @@ a.nivo-prevNav {background:url(../img/slide-next-prev.png) left no-repeat;left:5
 
 /* boxes */
 
-.box_highlight {background: #f8f8f8; padding: 15px; margin: 20px 0; border: 1px solid #CCC; border-radius: 5px; clear: both}
+.box_highlight {background: white; padding: 15px; margin: 20px 0; border: 5px solid black; border-radius: 5px; clear: both}
 
+#rss
+{
 
+position:absolute;left:680px;top:40px;
+width:290px;
+height: 800px;
+
+}
 
 /* ei slider */
 
 
 .ei-slider{
 	position: relative;
-	width: 100%;
-	max-width: 1920px;
-	border-bottom: 1px solid #EAEAEA;
+	width: 1400px;
+-moz-border-radius: 15px;
+border-radius: 15px;
+
 	height: 400px;
 	margin: 0 auto;
 }
@@ -1260,16 +1269,30 @@ table.tablesorter tr:hover td{
 
 }
 
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('../img/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
 
 .myTable {
 	margin:0px;padding:0px;
-	width:100%;
+	width:70%;
+	height:400px;
 	box-shadow: 10px 10px 5px #888888;
-	border:1px solid #f9f9f9;
-	
- margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+	border:1px solid #000000;
+-moz-border-radius: 15px;
+border-radius: 15px;
+      margin: 0 auto;
+
+  text-align: center;
+
+
 	-moz-border-radius-bottomleft:0px;
 	-webkit-border-bottom-left-radius:0px;
 	border-bottom-left-radius:0px;
@@ -1295,13 +1318,11 @@ table.tablesorter tr:hover td{
 	-moz-border-radius-bottomright:0px;
 	-webkit-border-bottom-right-radius:0px;
 	border-bottom-right-radius:0px;
-
 }
 .myTable table tr:first-child td:first-child {
 	-moz-border-radius-topleft:0px;
 	-webkit-border-top-left-radius:0px;
 	border-top-left-radius:0px;
-	
 }
 .myTable table tr:first-child td:last-child {
 	-moz-border-radius-topright:0px;
@@ -1312,12 +1333,14 @@ table.tablesorter tr:hover td{
 	-webkit-border-bottom-left-radius:0px;
 	border-bottom-left-radius:0px;
 }.myTable tr:hover td{
-	background-color:#acd3f9;
-		transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
--webkit-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
--moz-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
--o-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
--ms-transform: rotate(0deg) scale(1.45) skew(1deg) translate(0px);
+background-color:	#ECF0FC;
+		
+
+transform: rotate(360deg) scale(1.5) skew(1deg) translate(0px);
+-webkit-transform: rotate(360deg) scale(1.5) skew(1deg) translate(0px);
+-moz-transform: rotate(360deg) scale(1.5) skew(1deg) translate(0px);
+-o-transform: rotate(360deg) scale(1.5) skew(1deg) translate(0px);
+-ms-transform: rotate(360deg) scale(1.5) skew(1deg) translate(0px);
 
 }
 .myTable td{
@@ -1325,10 +1348,10 @@ table.tablesorter tr:hover td{
 	
 	background-color:#ffffff;
 
-	border:1px solid #f9f9f9;
+	border:1px solid #000000;
 	border-width:0px 1px 1px 0px;
 	text-align:left;
-	padding:5px;
+	padding:10px;
 	font-size:10px;
 	font-family:Arial;
 	font-weight:normal;
@@ -1341,25 +1364,25 @@ table.tablesorter tr:hover td{
 	border-width:0px 0px 0px 0px;
 }
 .myTable tr:first-child td{
-		background:-o-linear-gradient(bottom, #0057af 5%, #007fff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0057af), color-stop(1, #007fff) );
-	background:-moz-linear-gradient( center top, #0057af 5%, #007fff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#0057af", endColorstr="#007fff");	background: -o-linear-gradient(top,#0057af,007fff);
+		background:-o-linear-gradient(bottom, #ffffff 5%, #ffffff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#ffffff");	background: -o-linear-gradient(top,#ffffff,ffffff);
 
-	background-color:#0057af;
-	border:0px solid #f9f9f9;
+	background-color:#ffffff;
+	border:0px solid #000000;
 	text-align:center;
 	border-width:0px 0px 1px 1px;
 	font-size:14px;
-	font-family:Arial;
+	font-family:Times New Roman;
 	font-weight:bold;
-	color:#ffffff;
+	color:#000000;
 }
 .myTable tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #0057af 5%, #007fff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0057af), color-stop(1, #007fff) );
-	background:-moz-linear-gradient( center top, #0057af 5%, #007fff 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#0057af", endColorstr="#007fff");	background: -o-linear-gradient(top,#0057af,007fff);
+	background:-o-linear-gradient(bottom, #ffffff 5%, #ffffff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #ffffff 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#ffffff");	background: -o-linear-gradient(top,#ffffff,ffffff);
 
-	background-color:#0057af;
+background-color:#0057af;
 }
 .myTable tr:first-child td:first-child{
 	border-width:0px 0px 1px 0px;
@@ -1371,15 +1394,10 @@ table.tablesorter tr:hover td{
 
 
 
-
-
-
 #forum_post_area
 {
 
- margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+    width: 40%;
  resize: none;
 	border:solid 1px #000000;
 -moz-border-radius: 5px;
@@ -1507,7 +1525,7 @@ width: 40%;
     margin-right: auto;
 
 
-
+	
 }
 
 #change_email {
@@ -1560,10 +1578,13 @@ margin:2px auto;
 	overflow:hidden;
 	  width: 1020px;
     margin: 0 auto;
-background-image: url("backgrounds/grass5.png");
+background-image: url("backgrounds/container_back.png");
   
 }
-
+.login-card
+{
+background-image: url("css/backgrounds/container_back.png");
+}
 #wrapper2
 {
 -moz-border-radius: 15px;
@@ -1858,7 +1879,7 @@ border-radius: 15px;
 	background-color:#0057af;
 
    float:right;
-  
+   background-image: url("backgrounds/container_back.png");
 position:absolute;left:730px;top:50px;
 
 
