@@ -9,6 +9,48 @@ html {
 	font-size: 100%;
 }
 
+#admin_login {
+   border-top: 1px solid #f2f2f2;
+   background: #000000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+   background: -webkit-linear-gradient(top, #000000, #000000);
+   background: -moz-linear-gradient(top, #000000, #000000);
+   background: -ms-linear-gradient(top, #000000, #000000);
+   background: -o-linear-gradient(top, #000000, #000000);
+   padding: 2px 4px;
+   -webkit-border-radius: 30px;
+   -moz-border-radius: 30px;
+   border-radius: 30px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+     margin-left: auto;
+    margin-right: auto;
+   vertical-align: middle;
+   }
+   
+   #logout{
+    display:block;
+      margin: 0 auto;
+
+  text-align: center;
+        margin-left: auto;
+    margin-right: auto;
+   }
+#admin_login:hover {
+   border-top-color: #ffffff;
+   background: #ffffff;
+   color: #030303;
+   }
+#admin_login:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
 
 	
 @font-face {
@@ -757,7 +799,7 @@ a.nivo-prevNav {background:url(../img/slide-next-prev.png) left no-repeat;left:5
 
 /* boxes */
 
-.box_highlight {background: white; padding: 15px; margin: 20px 0; border: 5px solid black; border-radius: 5px; clear: both}
+.box_highlight {background: white; padding: 15px; margin: 20px 0;border-radius: 5px; clear: both}
 
 #rss
 {
