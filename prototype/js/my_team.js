@@ -141,6 +141,8 @@ function set_table()
     var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/"+user;
  	var overall_points=0;
 	var week_points=0;
+	var most_expensive=0;
+	var overall_best =0;
 
 $.ajax({
         url: _url,
@@ -184,8 +186,20 @@ if($.isArray(data)) {
 		
 			sessionStorage.setItem(""+i,""+object.Id);
 			var item = sessionStorage.getItem(""+i);
-			//item 1 will be the player id in that position
-			//item 2 player id in that position...so on
+	
+			if(object.Price>most_expensive)
+			{
+				most_expensive=object.Price;
+			    document.getElementById("top_value_player_info_box").innerHTML = ("Most Expensive: £"+most_expensive+"  "+object.FirstName+" "+object.LastName);
+			}
+			
+			if(object.OverallPoints>overall_best)
+			{
+				overall_best=object.OverallPoints;
+				document.getElementById("top_player_info_box").innerHTML = ("Top Player: "+overall_best+" Points "+object.FirstName+" "+object.LastName);
+			}
+			
+	
 		
 			i=i+1;
 			
@@ -234,7 +248,6 @@ function display_player(player_id)
 {
 	
 
-   $('#player_image_box').empty();
 
 
 	var img = document.createElement("img");	
@@ -246,7 +259,7 @@ function display_player(player_id)
 	            url: _url,
 	            success: function (data) {
 				        
-			
+			   $('#player_image_box').empty();
 		
 				img.src = "../img/"+ data.GaaTeam+".png";
 			var src = document.getElementById("player_image_box");
@@ -256,12 +269,22 @@ function display_player(player_id)
 		    document.getElementById("player_info_box").innerHTML = (data.FirstName+" "+data.LastName);
 			document.getElementById("player_team_box").innerHTML = (" "+data.GaaTeam);
 			document.getElementById("player_week_points_box").innerHTML = (" " +data.LastWeekPoints);
-			
-			
+	
+			document.getElementById('info_container').style.top="-100px";
+			document.getElementById('info_container').style.left="450px";
 	        	}
 	        	
 			});
 	        
 
 }
+
+function return_container()
+{
 	
+		document.getElementById('info_container').style.top="60px";
+			document.getElementById('info_container').style.left="760px";
+	
+	
+}
+

@@ -16,7 +16,11 @@
 <script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
 <link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
 
-
+ <script>
+  $(function() {
+    $( document ).tooltip();
+  });
+  </script>
   <script>
   $(function() {
     $( "#1" ).draggable({ revert: "invalid" });
@@ -47,6 +51,8 @@
 label {
 display: inline-block;
 width: 5em;
+color: white;
+font-size: 160%;
 }
 </style>
 </head>
@@ -126,7 +132,7 @@ width: 5em;
 
 
 </ul>
- <p id="points_week_info_box" title ="Team Info">.</p> </br>
+
 
 </div>
   
@@ -172,7 +178,12 @@ width: 5em;
 
 
  <p id="team_info_box" title ="Team Info"></p> </br>
+ <p id="top_value_player_info_box" title ="Top Player"></p> </br>
+ <p id="top_player_info_box" title ="Top Player"></p> </br>
+   <p id="points_week_info_box" title ="Team Info">.</p> </br>
 
+
+<div id = "info_container_handler" title = "Bring card back " onClick="return_container()"></div>
 
 <div id="info_container" >
 
@@ -186,8 +197,6 @@ width: 5em;
 
 
 </div>
-
-
 
 
 <div id="dialog" title="Player Info">
