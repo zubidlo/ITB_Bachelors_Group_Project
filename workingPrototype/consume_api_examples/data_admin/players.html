@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Data_Admin_Players</title>
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script src="js/constants_and_functions.js"></script>
+	<script src="js/players.js"></script>
+	<script> loadCommonsAndStartProgram(dataAdminPlayersCode); </script>
+</head>
+<body>
+	<header><!-- injection "header.html" --></header>
+	<main>
+		<section>
+			<article id="table_article">
+				<div id="table_div"><!-- injection "table_article.html" --></div>
+			</article>
+			<article id="forms_article">
+				<form id="edit_form" action="#">
+					<fieldset>
+						<legend>Player</legend>
+						<input id="id" type="hidden" value="0"/>
+						<label for="firstname">First Name:</label>
+						<input id="firstname" type="text" placeholder="a string" required/>
+						<label for="lastname">Last Name:</label>
+						<input id="lastname" type="text" placeholder="a string" required/>
+						<label for="gaateam">GAA Team Name:</label>
+						<input id="gaateam" type="text" placeholder="a string" required/>
+						<label for="lastweekpoints">Last Week Points:</label>
+						<input id="lastweekpoints" type="number" step="any" value="0" placeholder="a decimal" required/>
+						<label for="overallpoints">Overall Points:</label>
+						<input id="overallpoints" type="number" step="any" value="0" placeholder="a decimal" required/>
+						<label for="price">Price:</label>
+						<input id="price" type="number" step="any" value="0" placeholder="a decimal" required/>
+						<label for="rating">Rating:</label>
+						<input id="rating" type="number" min="0" max="255" value="0" placeholder="<0 - 255>" required/>
+						<label>Injured:</label>
+						<input id="injured" type="checkbox" value="false" />
+						<label for="position_id">Position Id:</label>
+						<input id="position_id" type="number" min="1" placeholder="integer > 0" required/>
+						<div id="request_div"><!-- injection "request_select.html" --></div>
+					</fieldset>
+				</form>
+				<div id="response_div"><!-- injection "response_fieldset.html" --></div>
+			</article>			
+		</section>
+	</main>
+	<footer></footer>
+</body>
+</html>
