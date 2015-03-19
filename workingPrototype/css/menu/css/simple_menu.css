@@ -226,7 +226,7 @@
         left: 0;
         z-index: 9999;
 		border: 1px solid #525c67;
-        background: url(../../../img/dropmenu_bg.png) repeat;
+        background: url(../../../images/dropmenu_bg.png) repeat;
         -webkit-box-shadow: 3px 3px 3px rgba(0,0,0,.5);
         box-shadow: 0 3px 10px rgba(0,0,0,.7);
         -moz-border-radius: 5px;

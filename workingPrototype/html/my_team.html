@@ -1,52 +1,49 @@
 <!DOCTYPE HTML>
 <head>
-<title>Fantasy Hurling</title>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
-<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
-<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
-  
-
-<script src="../js/jquery.min.js"></script>
-
-<script src="../js/my_team.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
-<link rel="shortcut icon" id="favicon" href="../img/icons/hurling.png">
+	<title>Fantasy Hurling</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
+	<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/my_team.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
+	<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
 
  <script>
   $(function() {
     $( document ).tooltip();
   });
   </script>
+  
   <script>
   $(function() {
-    $( "#1" ).draggable({ revert: "invalid" });
-	   $( "#2" ).draggable({ revert: "invalid" });
-	
-	    $( "#3" ).draggable({ revert: "invalid" });
-     $( "#4" ).draggable({ revert: "invalid" });
-	
-	    $( "#5" ).draggable({ revert: "invalid" });
-      $( "#6" ).draggable({ revert: "invalid" });
-     $( "#7" ).draggable({ revert: "invalid" });
-	
-	    $( "#8" ).draggable({ revert: "invalid" });
- 
-    $( "#droppable" ).droppable({
-      activeClass: "ui-state-default",
-      hoverClass: "ui-state-hover",
-      drop: function( event, ui ) {
-        $( this )
-          .addClass( "ui-state-highlight" )
-          .find( "p" )
-            .html( "Dropped!" );
-      }
-    });
-  });
+	$( "#1" ).draggable({ revert: "invalid" });
+	$( "#2" ).draggable({ revert: "invalid" });
+	$( "#3" ).draggable({ revert: "invalid" });
+	$( "#4" ).draggable({ revert: "invalid" });
+	$( "#5" ).draggable({ revert: "invalid" });
+	$( "#6" ).draggable({ revert: "invalid" });
+	$( "#7" ).draggable({ revert: "invalid" });
+	$( "#8" ).draggable({ revert: "invalid" });
+
+		$( "#droppable" ).droppable({
+			activeClass: "ui-state-default",
+			hoverClass: "ui-state-hover",
+			
+			drop: function( event, ui ) {
+			$( this )
+				.addClass( "ui-state-highlight" )
+				.find( "p" )
+				.html( "Dropped!" );
+			}
+		});
+	});
   </script>
+
 <style>
 label {
 display: inline-block;
@@ -55,165 +52,115 @@ color: white;
 font-size: 160%;
 }
 </style>
+
 </head>
+
 <body onload="set_user()">
-<div class="header">
-  <div id="site_title"><a href="../index.html"><img src="../img/icons/logo.gif" alt=""></a></div>
-  <!-- Dynamic Menu -->
-  <ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-   
-    <li><a href="home.html" onclick="checkSession_home()">Home</a></li>
-    <li><a href="forum.html" onclick="checkSession_forum()">Forum</a></li>
-    <li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
-	 <li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
-	<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
-  </ol>
- 
-    
-  <!-- menu 2 -->
- 
+	<div class="header">
+		<div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
+	  <!-- Dynamic Menu -->
+		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
+			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
+			<li><a href="forum.html" onclick="checkSession_forum()">Forum</a></li>
+			<li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
+			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
+			<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
+		</ol>
+	  <!-- menu 2 -->
+	</div>
 
-</div>
+	<div class="clr">
+		<p id="demo">.</p>
+	</div>
+	<!-- end header -->
 
- <div class="clr">
+	<div id="wrapper2">
+		<ul id="sortable1" font color="red">
+		<class="ui-widget-content"  id="1" onmouseover="get_player(1)"><label for="1" id ="player_name1"></label>
+		</ul>
+		<ul id="sortable2" font color="red">
+		<class="ui-widget-content" id="2" onmouseover="get_player(2)"> <label for="2" id ="player_name2"></label>
+		</ul>
+		<ul id="sortable3"  font color="red">
+		<class="ui-widget-content" id="3" onmouseover="get_player(3)"> <label for="3" id ="player_name3"></label>
+		</ul>
+		<ul id="sortable4"  font color="red">
+		<class="ui-widget-content" id="4" onmouseover="get_player(4)"> <label for="4" id ="player_name4"></label>
+		</ul>
+		<ul id="sortable5"  font color="red">
+		<class="ui-widget-content" id="5" onmouseover="get_player(5)"> <label for="5" id ="player_name5"></label>
+		</ul>
+		<ul id="sortable6"  font color="red">
+		<class="ui-widget-content" id="6" onmouseover="get_player(6)"> <label for="6" id ="player_name6"></label>
+		</ul>
+		<ul id="sortable7"  font color="red">
+		<class="ui-widget-content" id="7" onmouseover="get_player(7)"> <label for="7" id ="player_name7"></label>
+		</ul>
+		<ul id="sortable8"  font color="red">
+		<class="ui-widget-content" id="8" onmouseover="get_player(8)"> <label for="8" id ="player_name8"></label>
+		</ul>
+	</div>
   
-     <p id="demo">.</p>
-  </div>
-
-<!-- end header -->
-<div id="wrapper2">
-
-    <ul id="sortable1" font color="red">
-	 
-  <class="ui-widget-content"  id="1" onmouseover="get_player(1)"><label for="1" id ="player_name1"></label>
-
-
-</ul>
-   <ul id="sortable2" font color="red">
-	 
-  <class="ui-widget-content" id="2" onmouseover="get_player(2)"> <label for="2" id ="player_name2"></label>
-
-
-</ul>
-  <ul id="sortable3"  font color="red">
-	 
-  <class="ui-widget-content" id="3" onmouseover="get_player(3)"> <label for="3" id ="player_name3"></label>
-
-
-</ul>
- <ul id="sortable4"  font color="red">
-	 
-  <class="ui-widget-content" id="4" onmouseover="get_player(4)"> <label for="4" id ="player_name4"></label>
-
-
-</ul>
-
- <ul id="sortable5"  font color="red">
-	 
-  <class="ui-widget-content" id="5" onmouseover="get_player(5)"> <label for="5" id ="player_name5"></label>
-
-
-</ul>
- <ul id="sortable6"  font color="red">
-	 
-  <class="ui-widget-content" id="6" onmouseover="get_player(6)"> <label for="6" id ="player_name6"></label>
-
-
-</ul>
- <ul id="sortable7"  font color="red">
-	 
-  <class="ui-widget-content" id="7" onmouseover="get_player(7)"> <label for="7" id ="player_name7"></label>
-
-
-</ul>
- <ul id="sortable8"  font color="red">
-	 
-  <class="ui-widget-content" id="8" onmouseover="get_player(8)"> <label for="8" id ="player_name8"></label>
-
-
-</ul>
-
-
-</div>
-  
-<!-- wrapper -->
-<div id="container2">
-
-<br><br><br><br><br><br><br>
-
-
-  <table id="myTable" class = "tablesorter"> 
-<thead> 
-<tr> 
-    <th>Position</th> 
-    <th>Name</th> 
+	<!-- wrapper -->
+	<div id="container2">
+	<br><br><br><br><br><br><br>
+		<table id="myTable" class = "tablesorter"> 
+			<thead> 
+				<tr> 
+					<th>Position</th> 
+					<th>Name</th> 
+					<th>Team</th> 
+					<th>Last Week</th> 
+					<th>Overall</th> 
+					<th>Rating</th> 
+					<th>Price</th> 
+				</tr> 
+			</thead> 
+			<tbody> 
+				<tr> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+					<td></td> 
+				</tr> 
+			</tbody> 
+		</table> 
  
-    <th>Team</th> 
-    <th>Last Week</th> 
-    <th>Overall</th> 
-	 <th>Rating</th> 
-    <th>Price</th> 
-   
-    
-   
-    
-    
-</tr> 
-</thead> 
-<tbody> 
-<tr > 
-    <td ></td> 
-
-    <td></td> 
-     <td></td> 
-       <td></td> 
-    <td></td> 
-    <td></td> 
-      <td></td> 
-   
-</tr> 
-</tbody> 
-</table> 
- 
+		<p id="team_info_box" title ="Team Info"></p> </br>
+		<p id="top_value_player_info_box" title ="Top Player"></p> </br>
+		<p id="top_player_info_box" title ="Top Player"></p> </br>
+		<p id="points_week_info_box" title ="Team Info">.</p> </br>
 
 
- <p id="team_info_box" title ="Team Info"></p> </br>
- <p id="top_value_player_info_box" title ="Top Player"></p> </br>
- <p id="top_player_info_box" title ="Top Player"></p> </br>
-   <p id="points_week_info_box" title ="Team Info">.</p> </br>
+		<div id = "info_container_handler" title = "Bring card back " onClick="return_container()"></div>
+
+		<div id="info_container">
+			<br>
+			<p id="player_info_box" title ="Player Name"></p> 
+			<p id="player_image_box" title ="Mugshot"></p>
+			<p id="player_team_box" title ="Player Team"></p>
+			<p id="player_week_points_box" title ="Points This Week"></p>
+		</div>
 
 
-<div id = "info_container_handler" title = "Bring card back " onClick="return_container()"></div>
+		<div id="dialog" title="Player Info">
+		<p></p>
+		</div>
 
-<div id="info_container" >
+		<div style="clear:both; height: 40px"></div>
+		</div>
+	</div>
+	<!-- close container -->
 
+	<div id = "logout">
+	<input type="submit" id = "admin_login" value="Logout" onclick="logout_user()">
+	</div>
 
-<br>
-
- <p id="player_info_box" title ="Player Name"></p> 
- <p id="player_image_box" title ="Mugshot"></p>
- <p id="player_team_box" title ="Player Team"></p>
-  <p id="player_week_points_box" title ="Points This Week"></p>
-
-
-</div>
-
-
-<div id="dialog" title="Player Info">
-<p></p>
-</div>
-
-  <div style="clear:both; height: 40px"></div>
-  </div>
-</div>
-<!-- close container -->
-<div id = "logout">
-<input type="submit" id = "admin_login" value="Logout" onclick="logout_user()">
-
-</div>
-<div id="footer">
-
-</div>
+	<div id="footer">
+	</div>
 
 </body>
 </html>

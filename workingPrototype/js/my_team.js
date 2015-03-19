@@ -176,7 +176,7 @@ if($.isArray(data)) {
 			var img = document.createElement("img");	
 			
 		
-			img.src = "../img/"+ object.GaaTeam+".png";
+			img.src = "../images/jerseys/"+ object.GaaTeam+".png";
 			var src = document.getElementById(""+object.PositionId);
 			src.appendChild(img);
 			document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
@@ -261,7 +261,7 @@ function display_player(player_id)
 				        
 			   $('#player_image_box').empty();
 		
-				img.src = "../img/"+ data.GaaTeam+".png";
+				img.src = "../images/jerseys/"+ data.GaaTeam+".png";
 			var src = document.getElementById("player_image_box");
 			
 			src.appendChild(img);
