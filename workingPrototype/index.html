@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <head>
-	<title>Fantasy Hurling</title>
+	<title>FH | Index</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" media="screen" href="css/menu/css/simple_menu.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
@@ -13,47 +13,48 @@
 </head>
 
 <body>
-<div class="header">
-	<div id="site_title"><a href="#"><img src="images/icons/logo.gif" alt=""></a></div>
-	<!-- Dynamic Menu -->
-	<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-		<li><a href="http://www.gaa.ie/">GAA Official Site</a></li>
-		<li><a href="http://www.gaa.ie/fixtures-and-results/club-results/">Recent Results</a></li>
-	</ol>
-	<div class="clr"></div>
-	<!-- menu 2 -->
-	<div class="clr"></div>
-</div>
-<!-- end header -->
+	<div class="header">
+		<div id="site_title"><a href="#"><img src="images/icons/logo.gif" alt=""></a></div>
+		<!-- Dynamic Menu -->
+		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
+			<li><a href="http://www.gaa.ie/">GAA Official Site</a></li>
+			<li><a href="http://www.gaa.ie/fixtures-and-results/club-results/">Recent Results</a></li>
+		</ol>
+		<div class="clr"></div>
+		<!-- menu 2 -->
+		<div class="clr"></div>
+	</div>
+	<!-- end header -->
 
-<div class="wrapper">
-<!-- wrapper -->
-<div id="container">
-	<div class="login-card">
-		<form id="get_user_by_username_form" method="get" action="#">
-			<label for="get_user_username_input">Enter Username</label></br>
-			<input id="get_user_username_input" type="text"  placeholder="Enter your username here" required>
-			<label for="user_password_edit">Enter Password</label>
-			<input id="user_password_edit" type="password"  placeholder="Enter your password here" required/></br>
-			<input id="get_user_by_username_button" type="submit" onclick="retrieve_username()" value="Login">
-		</form>
-		
-		<div class="login-help">
-			<form action="html/register.html">
-				<label for="register_button">Not Registered? Click Here!</label>
-				<input type="submit" value="Register" id="register_button">
-			</form>
+	<div class="wrapper">
+	<!-- wrapper -->
+		<div id="container">
+			<div class="login-card">
+				<form id="get_user_by_username_form" method="get" action="#">
+					<label for="get_user_username_input">Enter Username</label></br>
+					<input id="get_user_username_input" type="text"  placeholder="Enter your username here" required>
+					<label for="user_password_edit">Enter Password</label>
+					<input id="user_password_edit" type="password"  placeholder="Enter your password here" required/></br>
+					<input id="get_user_by_username_button" type="submit" onclick="retrieve_username()" value="Login">
+				</form>
+	
+				<div class="login-help">
+					<form action="html/register.html">
+						<label for="register_button">Not Registered? Click Here!</label>
+						<input type="submit" value="Register" id="register_button">
+					</form>
+				</div>
+			</div>
+
+			<div style="clear:both; height: 40px"> 
+				<form action="consume_api_examples/data_admin/players.html">
+					<input type="submit" id = "admin_login" value="Admin Login" onclick="adminLogin()">
+				</form>
+			</div>
 		</div>
 	</div>
-  
-	<div style="clear:both; height: 40px"> 
-		<form action="consume_api_examples/data_admin/players.html">
-		<input type="submit" id = "admin_login" value="Admin Login" onclick="adminLogin()">
-		</form>
-	</div>
-	</div>
-	</div>
-<!-- close container -->
-<div style="clear:both; height: 40px"></div>
+	<!-- close container -->
+	
+	<div style="clear:both; height: 40px"></div>
 </body>
 </html>

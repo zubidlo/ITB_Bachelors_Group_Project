@@ -1,103 +1,96 @@
 <!DOCTYPE HTML>
 <head>
-<title>Fantasy Hurling</title>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
-<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
-<link rel="stylesheet" href="../css/nivo-slider.css" type="text/css" media="screen">
-<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/jquery.eislideshow.js"></script>
-<script src="../js/custom.js"></script>
-<script src="../js/slides_main.js"></script>
-<script src="../js/slides/slides.min.jquery.js"></script>
-<script src="../js/home.js"></script>
-
-<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
+	<title>FH | Home</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
+	<link rel="stylesheet" href="../css/nivo-slider.css" type="text/css" media="screen">
+	<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery.eislideshow.js"></script>
+	<script src="../js/custom.js"></script>
+	<script src="../js/slides_main.js"></script>
+	<script src="../js/slides/slides.min.jquery.js"></script>
+	<script src="../js/home.js"></script>
+	<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
 </head>
+
 <body onload="setStorage()">
-<div class="header">
-  <div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
-  <!-- Dynamic Menu -->
-  <ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
- 
-    <li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
-    <li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
-	 <li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
-	 	 <li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
-    <li class="last"><a href="forum.html" onclick="checkSession_forum()">Forum</a></li>
-
-
-
-  </ol>	
-    
-</div>
-  <div class="clr">
+	<div class="header">
+		<div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
+		
+		<!-- Dynamic Menu -->
+		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
+			<li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
+			<li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
+			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
+			<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
+			<li class="last"><a href="forum.html" onclick="checkSession_forum()">Forum</a></li>
+		</ol>	
+	</div>
   	
-<p id="demo">.</p> 
+  	<div class="clr">
+		<p id="demo">.</p> 
+	<!-- menu 2 -->
+	</div>
+	<!-- end header -->
+	
+	<div class="wrapper">
+		<div id="ei-slider" class="ei-slider">
+			<ul class="ei-slider-large">
+				<li> <img src="../images/large/1.png" alt="">
+					<div class="ei-title">
+						<h2>Choose your</h2>
+						<h3>Team</h3>
+					</div>
+				</li>
+				<li> <img src="../images/large/2.jpg" alt="">
+					<div class="ei-title">
+						<h2>Watch the </h2>
+						<h3>Games</h3>
+					</div>
+				</li>
+				<li> 
+					<img src="../images/large/3.jpg" alt="">
+					<div class="ei-title">
+						<h2>Check your</h2>
+						<h3>Points</h3>
+					</div>
+				</li>
+			</ul>
+		
+			<!-- ei-slider-large -->
+			<ul class="ei-slider-thumbs">
+				<li class="ei-slider-element">Current</li>
+				<li><a href="#">Choose</a><img src="../images/thumbs/1.png" alt=""></li>
+				<li><a href="#">Croke Park</a><img src="../images/thumbs/2.jpg" alt=""></li>
+				<li><a href="#">Hurler</a><img src="../images/thumbs/3.jpg" alt=""></li>
+			</ul>
+			<!-- ei-slider-thumbs -->
+		
+		</div>
+		<!-- ei-slider -->
+	</div>
+	<!-- wrapper -->
 
-      
-
-
-  <!-- menu 2 -->
+	<div id="container" >
  
-
-</div>
-<!-- end header -->
-<div class="wrapper">
-
-  <div id="ei-slider" class="ei-slider">
-    <ul class="ei-slider-large">
-      <li> <img src="../images/large/1.png" alt="">
-        <div class="ei-title">
-          <h2>Choose your</h2>
-          <h3>Team</h3>
-        </div>
-      </li>
-      <li> <img src="../images/large/2.jpg" alt="">
-        <div class="ei-title">
-          <h2>Watch the </h2>
-          <h3>Games</h3>
-        </div>
-      </li>
-      <li> <img src="../images/large/3.jpg" alt="">
-        <div class="ei-title">
-          <h2>Check your</h2>
-          <h3>Points</h3>
-        </div>
-      </li>
-
+		<div style="clear:both; height: 40px"></div>
  
-    </ul>
-    <!-- ei-slider-large -->
-    <ul class="ei-slider-thumbs">
-      <li class="ei-slider-element">Current</li>
-      <li><a href="#">Choose</a><img src="../images/thumbs/1.png" alt=""></li>
-      <li><a href="#">Croke Park</a><img src="../images/thumbs/2.jpg" alt=""></li>
-      <li><a href="#">Hurler</a><img src="../images/thumbs/3.jpg" alt=""></li>
- 
-    </ul>
-    <!-- ei-slider-thumbs -->
-  </div>
-  <!-- ei-slider -->
-</div>
-<!-- wrapper -->
-<div id="container" >
- 
-  <div style="clear:both; height: 40px"></div>
- 
-  <div class="box_highlight" > 
-<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://www.gaa.ie/rss/hurling/",rssmikle_frame_width: "930",rssmikle_frame_height: "400",frame_height_by_article: "",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "off",autoscroll: "on",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "Hurling News Latest",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "55",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "150",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M:%S %p",item_description_style: "html",item_thumbnail: "full",article_num: "15",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:980px;"><a href="http://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->  
-  </div>
-</div>
+		<div class="box_highlight" > 
+		<!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://www.gaa.ie/rss/hurling/",rssmikle_frame_width: "930",rssmikle_frame_height: "400",frame_height_by_article: "",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "off",autoscroll: "on",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "Hurling News Latest",rssmikle_title_link: "",rssmikle_title_bgcolor: "#0066FF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "55",rssmikle_item_title_color: "#0066FF",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "150",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl1",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M:%S %p",item_description_style: "html",item_thumbnail: "full",article_num: "15",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:980px;"><a href="http://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code -->  
+		</div>
+		
+	</div>
 <!-- close container -->
-<div id = "logout">
-<input type="submit" id = "admin_login" value="Logout" onclick="logout_user()">
 
-</div>
-<div id="footer">
 
-</div>
+	<div id = "logout">
+		<input type="submit" id = "admin_login" value="Logout" onclick="logout_user()">
+	</div>
+
+	<div id="footer">
+	</div>
 
 </body>
 </html>
