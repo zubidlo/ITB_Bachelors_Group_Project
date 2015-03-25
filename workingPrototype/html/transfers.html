@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<head>
+	<title>FH | Team</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
+		<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/transfers.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
+		<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
+
+		<script>
+		$(function() {
+		$( document ).tooltip();
+		});
+		</script>
+  
+		<script>
+		$(function() {
+		$( "#1" ).draggable({ revert: "invalid" });
+		$( "#2" ).draggable({ revert: "invalid" });
+		$( "#3" ).draggable({ revert: "invalid" });
+		$( "#4" ).draggable({ revert: "invalid" });
+		$( "#5" ).draggable({ revert: "invalid" });
+		$( "#6" ).draggable({ revert: "invalid" });
+		$( "#7" ).draggable({ revert: "invalid" });
+		$( "#8" ).draggable({ revert: "invalid" });
+
+			$( "#droppable" ).droppable({
+				activeClass: "ui-state-default",
+				hoverClass: "ui-state-hover",
+	
+				drop: function( event, ui ) {
+				$( this )
+					.addClass( "ui-state-highlight" )
+					.find( "p" )
+					.html( "Dropped!" );
+				}
+			});
+		});
+		</script>
+
+		<style>
+		label {
+		display: inline-block;
+		width: 5em;
+		color: white;
+		font-size: 160%;
+		}
+		</style>
+</head>
+
+<body onload="set_user()">
+	<div class="header">
+		<div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
+	  <!-- Dynamic Menu -->
+		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
+			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
+			<li><a href="#" >My Team</a></li>
+			<li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
+			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
+			<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
+		</ol>
+	  <!-- menu 2 -->
+	</div>
+
+	<div class="clr">
+		<p id="demo">.</p>
+	</div>
+	<!-- end header -->
+
+	<div id="wrapper2">
+		<ul id="sortable1" font color="red">
+		<class="ui-widget-content" title="Goalkeeper"  id="1" onClick= "show_message(1)"><label for="1" id ="player_name1"></label>
+		</ul>
+		<ul id="sortable2" font color="red">
+		<class="ui-widget-content" id="2" title="Corner-Back"  onClick= "show_message(2)"> <label for="2" id ="player_name2"></label>
+		</ul>
+		<ul id="sortable3"  font color="red">
+		<class="ui-widget-content" id="3" title="Full-Back" onClick= "show_message(3)"> <label for="3" id ="player_name3"></label>
+		</ul>
+		<ul id="sortable4"  font color="red">
+		<class="ui-widget-content" id="4" title="Half-Back"  onClick= "show_message(4)"> <label for="4" id ="player_name4"></label>
+		</ul>
+		<ul id="sortable5"  font color="red">
+		<class="ui-widget-content" id="5" title="Midfielder"  onClick= "show_message(5)"> <label for="5" id ="player_name5"></label>
+		</ul>
+		<ul id="sortable6"  font color="red">
+		<class="ui-widget-content" id="6" title="Half-Forward"  onClick= "show_message(6)"> <label for="6" id ="player_name6"></label>
+		</ul>
+		<ul id="sortable7"  font color="red">
+		<class="ui-widget-content" id="7" title="Corner-Forward"  onClick= "show_message(7)"> <label for="7" id ="player_name7"></label>
+		</ul>
+		<ul id="sortable8"  font color="red">
+		<class="ui-widget-content" id="8" title="Full-Forward"  onClick= "show_message(8)"> <label for="8" id ="player_name8"></label>
+		</ul>
+	</div>
+  
+	<!-- wrapper -->
+	<div id="container2">
+	<br><br><br><br><br><br><br>
+	
+ 
+	
+
+
+	
+
+
+
+		<div style="clear:both; height: 40px">
+		
+		
+		</div>
+		
+		</div>
+<table id="table_2" class="myTable"> 
+				<tr>
+					<td>
+						User
+					</td>
+					<td >
+						Message
+					</td>
+					<td>
+						Time
+					</td>
+				</tr>
+			</table> 
+				<textarea rows="2" cols="5" id = "forum_post_area" onClick="clear_text_area()">
+			Please Enter a message
+			</textarea>
+
+			<div style="clear:both; height: 40px">
+				<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+			</div>
+	
+	<!-- close container -->
+
+	<div id = "logout">
+		<input type="submit" id = "admin_login" value="Logout" onclick="logout_user()">
+	</div>
+
+	<div id="footer">
+	</div>
+
+</body>
+</html>
