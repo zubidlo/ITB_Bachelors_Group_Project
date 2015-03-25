@@ -52,7 +52,7 @@ if($.isArray(data)) {
       		tr.append("<td>" + user + "</td>");
 				var user = sessionStorage.getItem("temp");
             tr.append("<td>" + object.Text + "</td>");
-            tr.append("<td>" + object.Created + "</td>");
+       
         	
 
            sessionStorage.removeItem("temp");

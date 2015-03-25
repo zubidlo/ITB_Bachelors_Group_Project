@@ -183,11 +183,11 @@ function return_container()
 		
 function set_table2()
 {
-
+       	
 	var user = sessionStorage.getItem("username");
 
 
-    var _url =  "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=5&$skip=0";
+    var _url =  "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=3&$skip=0";
 
 
 $.ajax({
@@ -210,7 +210,7 @@ if($.isArray(data)) {
       		tr.append("<td>" + user + "</td>");
 				var user = sessionStorage.getItem("temp");
             tr.append("<td>" + object.Text + "</td>");
-            tr.append("<td>" + object.Created + "</td>");
+       
         	
 
            sessionStorage.removeItem("temp");
@@ -283,19 +283,22 @@ function checkSession_forum()
 
 }
 
+
 	function post_message() {
-		
+			
 				$.ajax({
 	            type: "POST",
 	            url: "http://hurlingapi.azurewebsites.net/api/messages",
 	            data: readUserFromInputFields(),
 	            dataType: "json",
 	            success: function (data) {
-	            	
-	            	
+	      
+	     
 	            	clear_text_area();
 	            	location.reload();
-			
+
+	
+			set_table2();
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {

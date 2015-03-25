@@ -81,7 +81,7 @@ body {	font-family: Arial, Helvetica, sans-serif;
 		background: #fff;
 		color: #666;
 		   
-	 background-image: url("backgrounds/container_back.png");
+		background-image: url("backgrounds/new.png");
 		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size:13px;
 	color:#000000;
@@ -1119,9 +1119,14 @@ background-color: #13325c;
 }
 .myTable {
 	margin:0px;padding:0px;
-	width:100%;
+	width:40%;
+	box-shadow: 10px 10px 5px #888888;
 	border:1px solid #000000;
-	
+	margin-left: auto;
+    margin-right: auto;
+	position: relative;
+	text-align: center;
+	   vertical-align: middle;
 	-moz-border-radius-bottomleft:0px;
 	-webkit-border-bottom-left-radius:0px;
 	border-bottom-left-radius:0px;
@@ -1169,13 +1174,13 @@ background-color: #13325c;
 .myTable td{
 	vertical-align:middle;
 	
-	background-color:#e5e5e5;
+	background-color:#ffffff;
 
 	border:1px solid #000000;
 	border-width:0px 1px 1px 0px;
 	text-align:left;
-	padding:7px;
-	font-size:10px;
+	padding:2px;
+	font-size:8px;
 	font-family:Arial;
 	font-weight:normal;
 	color:#000000;
@@ -1187,25 +1192,25 @@ background-color: #13325c;
 	border-width:0px 0px 0px 0px;
 }
 .myTable tr:first-child td{
-		background:-o-linear-gradient(bottom, #4c4c4c 5%, #000000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4c4c4c), color-stop(1, #000000) );
-	background:-moz-linear-gradient( center top, #4c4c4c 5%, #000000 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#4c4c4c", endColorstr="#000000");	background: -o-linear-gradient(top,#4c4c4c,000000);
+		background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,003f7f);
 
-	background-color:#4c4c4c;
+	background-color:#005fbf;
 	border:0px solid #000000;
 	text-align:center;
 	border-width:0px 0px 1px 1px;
-	font-size:14px;
+	font-size:9px;
 	font-family:Arial;
 	font-weight:bold;
 	color:#ffffff;
 }
 .myTable tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #4c4c4c 5%, #000000 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #4c4c4c), color-stop(1, #000000) );
-	background:-moz-linear-gradient( center top, #4c4c4c 5%, #000000 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#4c4c4c", endColorstr="#000000");	background: -o-linear-gradient(top,#4c4c4c,000000);
+	background:-o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
+	background:-moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");	background: -o-linear-gradient(top,#005fbf,003f7f);
 
-	background-color:#4c4c4c;
+	background-color:#005fbf;
 }
 .myTable tr:first-child td:first-child{
 	border-width:0px 0px 1px 0px;
@@ -1215,13 +1220,11 @@ background-color: #13325c;
 }
 
 
-
 #forum_post_area
 {
 
- margin-left: auto;
-    margin-right: auto;
-    width: 99%;
+    width: 20%;
+	height: 40%;
  resize: none;
 	border:solid 1px #000000;
 -moz-border-radius: 5px;
@@ -1254,6 +1257,15 @@ border-radius: 5px;
    font-family: Georgia, serif;
    text-decoration: none;
    vertical-align: middle;
+   }
+#post_new_message_button:hover {
+   border-top-color: #28447d;
+   background: #28447d;
+   color: #ffffff;
+   }
+#post_new_message_button:active {
+   border-top-color: #0040ff;
+   background: #0040ff;
    }
 #post_new_message_button:hover {
    border-top-color: #28447d;
@@ -1404,7 +1416,7 @@ margin:2px auto;
 	overflow:hidden;
 	  width: 1020px;
     margin: 0 auto;
-background-image: url("backgrounds/container_back.png");
+	
   
 }
 

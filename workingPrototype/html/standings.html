@@ -54,7 +54,9 @@
 				</tbody> 
 			</table>  
 		<p id="team_position" title ="Team Position">.</p> </br>
-		</div>	<table id="table_2" class="myTable"> 
+		</div>	
+			<div id="table_holder">
+<table id="table_2" class="myTable"> 
 				<tr>
 					<td>
 						User
@@ -62,9 +64,7 @@
 					<td >
 						Message
 					</td>
-					<td>
-						Time
-					</td>
+					
 				</tr>
 			</table> 
 				<textarea rows="2" cols="5" id = "forum_post_area" onClick="clear_text_area()">
@@ -73,6 +73,8 @@
 
 			<div style="clear:both; height: 40px">
 				<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+			</div>
+			
 			</div>
 	</div>
 
