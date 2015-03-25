@@ -60,7 +60,7 @@
 	  <!-- Dynamic Menu -->
 		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
 			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
-			<li><a href="forum.html" onclick="checkSession_forum()">Forum</a></li>
+			<li><a href="#" >My Team</a></li>
 			<li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
 			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
 			<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
@@ -103,7 +103,7 @@
 	<!-- wrapper -->
 	<div id="container2">
 	<br><br><br><br><br><br><br>
-		<table id="myTable" class = "tablesorter"> 
+		<table id="table_1" class = "tablesorter"> 
 			<thead> 
 				<tr> 
 					<th>Position</th> 
@@ -149,9 +149,33 @@
 			<p></p>
 		</div>
 
-		<div style="clear:both; height: 40px"></div>
+		<div style="clear:both; height: 40px">
+		
+		
 		</div>
-	</div>
+		
+		</div>
+<table id="table_2" class="myTable"> 
+				<tr>
+					<td>
+						User
+					</td>
+					<td >
+						Message
+					</td>
+					<td>
+						Time
+					</td>
+				</tr>
+			</table> 
+				<textarea rows="2" cols="5" id = "forum_post_area" onClick="clear_text_area()">
+			Please Enter a message
+			</textarea>
+
+			<div style="clear:both; height: 40px">
+				<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+			</div>
+	
 	<!-- close container -->
 
 	<div id = "logout">

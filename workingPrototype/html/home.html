@@ -12,6 +12,7 @@
 	<script src="../js/slides_main.js"></script>
 	<script src="../js/slides/slides.min.jquery.js"></script>
 	<script src="../js/home.js"></script>
+
 	<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
 </head>
 
@@ -21,11 +22,12 @@
 		
 		<!-- Dynamic Menu -->
 		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
+		<li><a href="#" >Home</a></li>
 			<li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
 			<li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
 			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
 			<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
-			<li class="last"><a href="forum.html" onclick="checkSession_forum()">Forum</a></li>
+			
 		</ol>	
 	</div>
   	
@@ -75,6 +77,8 @@
 
 	<div id="container" >
  
+
+		
 		<div style="clear:both; height: 40px"></div>
  
 		<div class="box_highlight" > 
@@ -82,8 +86,8 @@
 		</div>
 		
 	</div>
+		
 <!-- close container -->
-
 
 	<div id = "logout">
 		<input type="submit" id = "admin_login" value="Logout" onclick="logout_user()">

@@ -9,6 +9,60 @@ html {
 	font-size: 100%;
 }
 
+#forum_post_area
+{
+
+    width: 20%;
+	height: 40%;
+ resize: none;
+	border:solid 1px #000000;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+
+#post_new_message_button{
+   border-top: 1px solid #fff0ff;
+   background: #13325c;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e619c), to(#13325c));
+   background: -webkit-linear-gradient(top, #3e619c, #13325c);
+   background: -moz-linear-gradient(top, #3e619c, #13325c);
+   background: -ms-linear-gradient(top, #3e619c, #13325c);
+   background: -o-linear-gradient(top, #3e619c, #13325c);
+   padding: 6px 12px;
+   -webkit-border-radius: 16px;
+   -moz-border-radius: 16px;
+   border-radius: 16px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #f5fff7;
+   margin-left: auto;
+    margin-right: auto;
+	  position: absolute:top: 50%;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+#post_new_message_button:hover {
+   border-top-color: #28447d;
+   background: #28447d;
+   color: #ffffff;
+   }
+#post_new_message_button:active {
+   border-top-color: #0040ff;
+   background: #0040ff;
+   }
+
+#forum_head {
+   width: 49%;
+
+   margin-left: auto;
+    margin-right: auto;
+}
     
 @font-face {
 	font-family: GeosansLight;

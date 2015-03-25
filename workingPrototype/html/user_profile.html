@@ -20,11 +20,15 @@
 		<div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
 		<!-- Dynamic Menu -->
 		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-			<li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
-			<li><a href="standings.html" onclick="checkSession_standings()">Standings</a></li>
 			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
+			
+			<li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
+				<li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
+			<li><a href="standings.html" onclick="checkSession_standings()">Standings</a></li>
 			<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
-			<li><a href="forum.html" onclick="checkSession_forum()">Forum</a></li>
+		
+			
+			
 		</ol>
 	</div>
   
@@ -54,6 +58,26 @@
 
 			<div style="clear:both; height: 40px"></div>
 		</div>
+		<table id="myTable" class="myTable"> 
+				<tr>
+					<td>
+						User
+					</td>
+					<td >
+						Message
+					</td>
+					<td>
+						Time
+					</td>
+				</tr>
+			</table> 
+				<textarea rows="2" cols="5" id = "forum_post_area" onClick="clear_text_area()">
+			Please Enter a message
+			</textarea>
+
+			<div style="clear:both; height: 40px">
+				<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+			</div>
 	</div>
 	<!-- close container -->
 	
