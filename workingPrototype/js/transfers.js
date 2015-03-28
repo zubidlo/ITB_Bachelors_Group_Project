@@ -7,7 +7,21 @@
 
 */
 
-
+$(function() {
+    $( "#dialog-confirm" ).dialog({
+      resizable: false,
+      height:140,
+      modal: true,
+      buttons: {
+        "Delete all items": function() {
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
 function checkSession_forum()
 {
 	if(sessionStorage.getItem("username") === null)	{
@@ -26,6 +40,7 @@ function set_user()
 	else {
 		var user = sessionStorage.getItem("username");
 		document.getElementById("demo").innerHTML = ("You are logged in as "+user);
+	
 		set_table();
 		set_table2();
 	}	
@@ -69,7 +84,77 @@ function checkSession_view_team()
 	
 }
 
+function combo()
+{
+    var element = document.getElementById("combo");
+    var ob = element.options[element.selectedIndex].value;
 
+	if(ob == "All")
+	{
+	
+		 document.getElementById("sortable1").style.opacity = 100;
+		  document.getElementById("sortable2").style.opacity = 100;
+		   document.getElementById("sortable3").style.opacity = 100;
+		    document.getElementById("sortable4").style.opacity = 100;
+			 document.getElementById("sortable5").style.opacity = 100;
+			  document.getElementById("sortable6").style.opacity = 100;
+			   document.getElementById("sortable7").style.opacity = 100;
+			    document.getElementById("sortable8").style.opacity = 100;
+	}
+	
+	else if(ob == "Attackers")
+	{
+
+
+		 document.getElementById("sortable1").style.opacity = -100;
+		  document.getElementById("sortable2").style.opacity = -100;
+		   document.getElementById("sortable3").style.opacity = -100;
+		    document.getElementById("sortable4").style.opacity = -100;
+			 document.getElementById("sortable5").style.opacity = -100;
+			  document.getElementById("sortable6").style.opacity = 100;
+			   document.getElementById("sortable7").style.opacity = 100;
+			    document.getElementById("sortable8").style.opacity = 100;
+	}
+	
+	else if(ob == "Midfielders")
+	{
+		
+		 document.getElementById("sortable1").style.opacity = -100;
+		  document.getElementById("sortable2").style.opacity = -100;
+		   document.getElementById("sortable3").style.opacity = -100;
+		    document.getElementById("sortable4").style.opacity = -100;
+			 document.getElementById("sortable5").style.opacity = 100;
+			  document.getElementById("sortable6").style.opacity = -100;
+			   document.getElementById("sortable7").style.opacity = -100;
+			    document.getElementById("sortable8").style.opacity = -100;
+	}
+		else if(ob == "Defenders")
+	{
+		 document.getElementById("sortable1").style.opacity = -100;
+		  document.getElementById("sortable2").style.opacity = 100;
+		   document.getElementById("sortable3").style.opacity = 100;
+		    document.getElementById("sortable4").style.opacity = 100;
+			 document.getElementById("sortable5").style.opacity = -100;
+			  document.getElementById("sortable6").style.opacity = -100;
+			   document.getElementById("sortable7").style.opacity = -100;
+			    document.getElementById("sortable8").style.opacity = -100;
+		  
+	}
+		else
+	{
+		 document.getElementById("sortable1").style.opacity = 100;
+		  document.getElementById("sortable2").style.opacity = -100;
+		   document.getElementById("sortable3").style.opacity = -100;
+		    document.getElementById("sortable4").style.opacity = -100;
+			 document.getElementById("sortable5").style.opacity = -100;
+			  document.getElementById("sortable6").style.opacity = -100;
+			   document.getElementById("sortable7").style.opacity = -100;
+			    document.getElementById("sortable8").style.opacity = -100;
+	}
+ 
+ 
+
+}
 
 function logout_user()
 {
@@ -79,6 +164,9 @@ function logout_user()
 
 function set_table()
 {
+	
+   
+ 
 	var i=1;
 	var user_id= sessionStorage.getItem("id");
 	var user= (user_id+"/players");
@@ -135,6 +223,7 @@ function set_table()
 }
 		
 		
+	
 
 
 function checkSession_user_profile()
@@ -158,7 +247,7 @@ function set_table2()
 	var user = sessionStorage.getItem("username");
 
 
-    var _url =  "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=5&$skip=0";
+    var _url =  "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=3&$skip=0";
 
  
 $.ajax({
@@ -317,6 +406,8 @@ function show_message(player_postion_id)
 
 function delete_player(player_postion_id)
 {
+	
+
 
 var type = "DELETE";
 var user_id= sessionStorage.getItem("id");

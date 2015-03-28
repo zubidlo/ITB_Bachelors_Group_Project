@@ -265,7 +265,7 @@ function set_table2()
 	var user = sessionStorage.getItem("username");
 
 
-    var _url =  "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=5&$skip=0";
+    var _url =  "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=3&$skip=0";
 
 
 $.ajax({

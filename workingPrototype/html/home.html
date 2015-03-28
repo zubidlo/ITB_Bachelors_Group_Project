@@ -24,16 +24,17 @@
 		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
 		<li><a href="#" >Home</a></li>
 			<li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
-			<li><a href="user_profile.html" onclick="checkSession_user_profile()">My Account</a></li>
+			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Account</a></li>
 			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
-			<li><a href="transfers.html" onclick="checkSession_transfers()">Make Changes</a></li>
+			<li><a href="transfers.html" onclick="checkSession_transfers()">Transfers</a></li>
+			<li><a href="#" onclick="logout_user()">Logout</a></li>
 			
 		</ol>	
 	</div>
   	
-  	<div class="clr">
-		<p id="demo">.</p> 
-	<!-- menu 2 -->
+  		<div class="clr">
+		<p id="demo">.</p>
+	
 	</div>
 	<!-- end header -->
 	
@@ -89,9 +90,7 @@
 		
 <!-- close container -->
 
-	<div id = "logout">
-		<input type="submit" id = "admin_login" value="Logout" onclick="logout_user()">
-	</div>
+
 
 	<div id="footer">
 	</div>

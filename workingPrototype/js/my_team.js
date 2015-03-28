@@ -28,6 +28,7 @@ function set_user()
 		document.getElementById("demo").innerHTML = ("You are logged in as "+user);
 		set_table();
 		set_table2();
+		set_team();
 	}	
 }
 
@@ -109,11 +110,10 @@ function set_table()
 					src.appendChild(img);
 					document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
 
-					document.getElementById("team_info_box").innerHTML = ("Overall Points "+overall_points);
-					document.getElementById("points_week_info_box").innerHTML = ("Week Points = "+week_points);
+	
 
-					sessionStorage.setItem(""+i,""+object.Id);
-					var item = sessionStorage.getItem(""+i);
+					sessionStorage.setItem(""+object.Position,""+i);
+					
 
 					if(object.Price>most_expensive){
 					most_expensive=object.Price;
@@ -128,6 +128,32 @@ function set_table()
 					i=i+1;
 				});
 			}
+		}
+	});
+}
+
+
+function set_team()
+{
+	var i=1;
+	var user_id= sessionStorage.getItem("id");
+	
+
+	var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/"+user_id;
+
+
+	$.ajax({
+		url: _url,
+		async: true,
+
+		success:function(data)
+		{
+			
+
+					document.getElementById("team_info_box").innerHTML = ("Overall Points "+data.OverAllPoints);
+					document.getElementById("points_week_info_box").innerHTML = ("Week Points = "+data.LastWeekPoints);
+
+				
 		}
 	});
 }
@@ -307,7 +333,9 @@ function checkSession_forum()
 	        	}
 			});
 		}
-
+$( "#table_2" ).draggable({
+  appendTo: "body"
+});
 
 function clear_text_area()
 {
