@@ -25,7 +25,7 @@
 		label {
 		display: inline-block;
 		width: 5em;
-		color: black;
+		color: white;
 		font-size: 130%;
 		}
 		</style>
@@ -52,7 +52,8 @@
 
 	</div>
 	<!-- end header -->
-
+	<p id="details">.</p>
+			
 	<div id="wrapper3">
 		<ul id="sortable1" font color="red">
 		<class="ui-widget-content"   id="1" onClick= "show_message(1)"><label for="1" id ="player_name1"></label>
@@ -78,29 +79,8 @@
 		<ul id="sortable8"  font color="red">
 		<class="ui-widget-content" id="8"   onClick= "show_message(8)"> <label for="8" id ="player_name8"></label>
 		</ul>
-		 		<p id="details">.</p>
-				<p id="details2">.</p>
-	
-	</div>
-
-	
-
-	
-	<!-- wrapper -->
-	<div id="container2">
-	
-	<select id = "combo" onchange="combo();">
-	 <option value="All">All</option>
-  <option value="Goalkeeper" >Goalkeeper</option>
-  <option value="Defenders">Defenders</option>
-  <option value="Midfielders">Midfielders</option>
-  <option value="Attackers">Attackers</option>
- 
-
-</select>
-
-
-		
+		 	
+			
 		<table id="table_3" style="cursor: pointer;" class="tablesorter1"> 
 			<thead> 
 				<tr> 
@@ -124,15 +104,44 @@
 					<td></td> 
 				</tr> 
 			</tbody> 
+						<select id = "combo" onchange="combo();">
+	 <option value="All">All</option>
+  <option value="Goalkeeper" >Goalkeeper</option>
+  <option value="Defenders">Defenders</option>
+  <option value="Midfielders">Midfielders</option>
+  <option value="Attackers">Attackers</option>
+ 
+
+</select>
+<br>
+
 		</table>
-	
 
-	
+	</div>
 
-		</div>
 	<!-- close container -->
 
-	
+		<div id="table_holder">
+<table id="table_2" class="myTable"> 
+				<tr>
+					<td>
+						User
+					</td>
+					<td >
+						Message
+					</td>
+					
+				</tr>
+			</table> 
+				<textarea rows="2" cols="5" id = "forum_post_area" onClick="clear_text_area()">
+			Please Enter a message
+			</textarea>
+
+			<div style="clear:both; height: 40px">
+				<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+			</div>
+			
+			</div>
 
 	<div id="footer">
 	</div>

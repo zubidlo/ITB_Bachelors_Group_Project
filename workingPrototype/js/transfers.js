@@ -232,8 +232,8 @@ function set_table()
 					src.appendChild(img);
 					document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
 				var budget_left = 100000-overall_cost;
-				document.getElementById("details").innerHTML = ("Team  Value: $"+overall_cost);
-				document.getElementById("details2").innerHTML = ("Budget Left: $"+budget_left);
+			
+				document.getElementById("details").innerHTML = ("Budget Left: $"+budget_left+" Team Value: $ "+overall_cost);
 				
 
 				

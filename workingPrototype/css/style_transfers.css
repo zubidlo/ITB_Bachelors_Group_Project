@@ -20,20 +20,22 @@ html
     margin-right:10px;
 }
 
-#details{
-position:absolute;left:390px;top:380px;
 
-
- font:17px bold italic SouciSansRegular;
-
-}
 #details2{
-position:absolute;left:190px;top:380px;
 
 
+width: 170px;
+border:solid 5px #ffffff;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+   position: absolute;
+    left: 50px;
  font:17px bold italic SouciSansRegular;
 
+
 }
+
 #pagin li a {
     display:block;
     color:#717171;
@@ -300,6 +302,7 @@ body
 	margin: 0 auto;
 	height: 700px;
 	background-image: url("backgrounds/gaa.png");	
+
 }
 
 #demo
@@ -877,9 +880,9 @@ dd {margin-bottom: 30px; font-size: 1em; color: gray; border-bottom: 1px dotted 
 
 .p_forms {margin: 0;}
 
-fieldset {border: 1px solid gray; padding: 20px;}
+fieldset {  border: 3px solid white; padding: 20px;}
 
-legend {padding: 0px 10px; border: 1px solid gray; font-weight: 700}
+legend {padding: 0px 10px;   border: 3px solid white; font-weight: 700}
 
 label {font-family: Arial, Helvetica, sans-serif; font-size: .9em; color: #666}
 
@@ -2140,12 +2143,19 @@ transform: rotate(0deg) scale(0.80) skew(1deg) translate(0px);
 box-shadow:10px 10px 5px #000000;
 	margin:5px 0pt 10px;
 	font-size: 8pt;
-	width: 45%;
+	width: 25%;
 	text-align: left;
 	border: 1px solid white;
 	font-size: 8pt;
 	padding: 4px;
+   position: absolute;
+    right: 0px;
+}
 
+#combo 
+{
+  position: absolute;
+    right: 130px;
 }
 table.tablesorter1 thead tr th, table.tablesorter tfoot tr th {
 		background-color:#0057af;
@@ -2243,7 +2253,7 @@ transform: rotate(0deg) scale(1.60) skew(1deg) translate(0px);
 }
 #sortable1 {
 
-position:absolute;left:200px;top:220px;
+position:absolute;left:640px;top:190px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2253,8 +2263,11 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-  border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
+ border-radius: 50%;
+  border: 2px solid white;
+
+  
+
 }
 #sortable1:hover{
 
@@ -2278,7 +2291,7 @@ transform: rotate(0deg) scale(1.60) skew(1deg) translate(0px);
 
 #sortable2 {
 
-position:absolute;left:310px;top:220px;
+position:absolute;left:410px;top:310px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2288,14 +2301,15 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-  border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
+border-radius: 50%;
+  border: 2px solid white;
+
 
 }
 
 #sortable3 {
 
-position:absolute;left:420px;top:220px;
+position:absolute;left:610px;top:310px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2305,16 +2319,16 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-  border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
-
+ border-radius: 50%;
+  border: 2px solid white;
+	
 }
 
 
 
 #sortable4 {
 
-position:absolute;left:530px;top:220px;
+position:absolute;left:810px;top:310px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2324,12 +2338,13 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-  border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
+border-radius: 50%;
+  border: 2px solid white;
+
 }
 
 #sortable5 {
-position:absolute;left:640px;top:220px;
+position:absolute;left:410px;top:510px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2339,12 +2354,13 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-  border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
+ border-radius: 50%;
+  border: 2px solid white;
+
 }
 
 #sortable6 {
-position:absolute;left:750px;top:220px;
+position:absolute;left:610px;top:510px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2354,11 +2370,12 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-  border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
+border-radius: 50%;
+  border: 2px solid white;
+
 }
 #sortable7 {
-position:absolute;left:860px;top:220px;
+position:absolute;left:810px;top:510px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2368,11 +2385,12 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-  border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
+border-radius: 50%;
+    border: 2px solid white;
+
 }
 #sortable8 {
-position:absolute;left:970px;top:220px;
+position:absolute;left:610px;top:710px;
 transition:All 1s ease;
 -webkit-transition:All 1s ease;
 -moz-transition:All 1s ease;
@@ -2382,30 +2400,10 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-   border-radius: 5px 20px 5px;
-  border: 1px solid #a1a1a1;
+border-radius: 50%;
+      border: 2px solid white;
+
+   
 }
 
-#pitch{
 
-border: 5px #000000;
--moz-border-radius-topleft: 5px;
--moz-border-radius-topright:5px;
--moz-border-radius-bottomleft:5px;
--moz-border-radius-bottomright:5px;
--webkit-border-top-left-radius:5px;
--webkit-border-top-right-radius:5px;
--webkit-border-bottom-left-radius:5px;
--webkit-border-bottom-right-radius:5px;
-border-top-left-radius:5px;
-border-top-right-radius:5px;
-border-bottom-left-radius:5px;
-border-bottom-right-radius:5px;
-width: 50%;
- position: absolute;
-    right: 0px;
-    width: 450px;
-	height: 500px;
-	background-image: url("backgrounds/gaa.png");	
-    background-color: #b0e0e6;
-}
