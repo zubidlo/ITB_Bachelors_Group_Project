@@ -79,6 +79,7 @@ function combo()
 {
     var element = document.getElementById("combo");
     var ob = element.options[element.selectedIndex].value;
+	var selected;
 
 	if(ob == "All")
 	{
@@ -91,6 +92,7 @@ function combo()
 			  document.getElementById("sortable6").style.opacity = 100;
 			   document.getElementById("sortable7").style.opacity = 100;
 			    document.getElementById("sortable8").style.opacity = 100;
+				selected=0;
 	}
 	
 	else if(ob == "Attackers")
@@ -105,6 +107,7 @@ function combo()
 			  document.getElementById("sortable6").style.opacity = 100;
 			   document.getElementById("sortable7").style.opacity = 100;
 			    document.getElementById("sortable8").style.opacity = 100;
+				selected=6;
 	}
 	
 	else if(ob == "Midfielders")
@@ -118,6 +121,7 @@ function combo()
 			  document.getElementById("sortable6").style.opacity = -100;
 			   document.getElementById("sortable7").style.opacity = -100;
 			    document.getElementById("sortable8").style.opacity = -100;
+				selected=5;
 	}
 		else if(ob == "Defenders")
 	{
@@ -129,6 +133,7 @@ function combo()
 			  document.getElementById("sortable6").style.opacity = -100;
 			   document.getElementById("sortable7").style.opacity = -100;
 			    document.getElementById("sortable8").style.opacity = -100;
+				selected=2;
 		  
 	}
 		else
@@ -141,9 +146,31 @@ function combo()
 			  document.getElementById("sortable6").style.opacity = -100;
 			   document.getElementById("sortable7").style.opacity = -100;
 			    document.getElementById("sortable8").style.opacity = -100;
+				selected=1;
 	}
- 
- 
+$("#table_3").find("tr:gt(0)").remove();
+ get_players(selected);
+ if(selected==6)
+ {
+	 get_players(selected+1);
+	 get_players(selected+2);
+ }
+  if(selected==2)
+ {
+	 get_players(selected+1);
+	 get_players(selected+2);
+ }
+ if(selected==0)
+ {
+	 get_players(selected+1);
+	 get_players(selected+2);
+	  get_players(selected+3);
+	 get_players(selected+4);
+	  get_players(selected+5);
+	 get_players(selected+6);
+	  get_players(selected+7);
+	 get_players(selected+8);
+ }
 
 }
 
@@ -152,6 +179,8 @@ function logout_user()
 	sessionStorage.clear();
 	window.location="../index.html";
 }
+
+
 
 function set_table()
 {
@@ -216,12 +245,14 @@ function set_table()
 		
 	
 
-function get_players()
+function get_players(selected)
 {
 
 
+var element = document.getElementById("combo");
+    var ob = element.options[element.selectedIndex].value;
 	var _url =  "http://hurlingapi.azurewebsites.net/api/players";
- 
+	
 
 	$.ajax({
 		url: _url,
@@ -229,8 +260,11 @@ function get_players()
 
 		success:function(data)
 		{
+			
 			if($.isArray(data)) {
 				$.each(data, function(index, object) {
+				if(object.PositionId ==selected)
+				{
 					var tr;
 				var removeRow=document.createElement("BUTTON");
 				 
@@ -247,13 +281,14 @@ function get_players()
 					removeRow.innerHTML = "Add";
 					$('#table_3').append(tr);
 					tr.append(removeRow);
-					$("#table_3").tablesorter();  
+					    $('#table_3').tablesorter;
+				
+			
 removeRow.setAttribute('onclick', 'button("'+id+'")');
 				
-
-
+				}
 				
-	
+
 
 
 	 
@@ -266,6 +301,7 @@ removeRow.setAttribute('onclick', 'button("'+id+'")');
 	});
 	 
 }
+
 
 function button(id)
 {

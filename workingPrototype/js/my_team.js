@@ -111,8 +111,8 @@ function set_table()
 					document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
 
 	
-
-					sessionStorage.setItem(""+object.PositionId,""+object.Id);
+	
+					
 					
 
 					if(object.Price>most_expensive){
@@ -124,7 +124,7 @@ function set_table()
 					overall_best=object.OverallPoints;
 					document.getElementById("top_player_info_box").innerHTML = ("Top Player: "+overall_best+" Points "+object.FirstName+" "+object.LastName);
 					}
-
+					sessionStorage.setItem(""+object.PositionId,""+object.Id);
 					i=i+1;
 				});
 			}
