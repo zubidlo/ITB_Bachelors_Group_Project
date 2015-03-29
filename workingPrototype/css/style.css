@@ -2044,3 +2044,61 @@ transform: rotate(0deg) scale(0.80) skew(1deg) translate(0px);
  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=49); 
  filter: alpha(opacity=49); 
  }
+ 
+ table.tablesorter1 {
+	font-family:arial;
+	-moz-box-shadow:10px 10px 5px #000000;
+-webkit-box-shadow:10px 10px 5px #000000;
+box-shadow:10px 10px 5px #000000;
+	margin:5px 0pt 10px;
+	font-size: 8pt;
+	width: 65%;
+	text-align: left;
+	border: 1px solid white;
+	font-size: 8pt;
+	padding: 4px;
+	text-align: center;
+	 margin-left: auto;
+    margin-right: auto;
+
+-moz-border-radius: 15px;
+border-radius: 15px;
+}
+table.tablesorter1 thead tr th, table.tablesorter tfoot tr th {
+		background-color:#0057af;
+	border:0px solid #f9f9f9;
+	
+	font-size: 9pt;
+	color: white;
+	
+}
+table.tablesorter1 thead tr .header {
+	background-image: url(gifs/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	height: 10%;
+}
+table.tablesorter1 tbody td {
+	
+	padding: 1px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.tablesorter1 tbody tr.odd td {
+	
+}
+table.tablesorter1 thead tr .headerSortUp {
+	background-image: url(gifs/desc.gif);
+}
+table.tablesorter1 thead tr .headerSortDown {
+	background-image: url(gifs/desc.gif);
+}
+table.tablesorter1 thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #13325c;
+}
+table.tablesorter1 tr:hover td{
+	background-color:#acd3f9;
+		
+
+}

@@ -112,7 +112,7 @@ function set_table()
 
 	
 
-					sessionStorage.setItem(""+object.Position,""+i);
+					sessionStorage.setItem(""+object.PositionId,""+object.Id);
 					
 
 					if(object.Price>most_expensive){

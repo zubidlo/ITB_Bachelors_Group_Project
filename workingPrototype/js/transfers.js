@@ -7,21 +7,8 @@
 
 */
 
-$(function() {
-    $( "#dialog-confirm" ).dialog({
-      resizable: false,
-      height:140,
-      modal: true,
-      buttons: {
-        "Delete all items": function() {
-          $( this ).dialog( "close" );
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  });
+  
+
 function checkSession_forum()
 {
 	if(sessionStorage.getItem("username") === null)	{
@@ -43,9 +30,11 @@ function set_user()
 	
 		set_table();
 		set_table2();
-	}	
-}
+		get_players();
 
+	
+}
+}
 function checkSession_home()
 {
 	if(sessionStorage.getItem("username") === null)	{
@@ -65,6 +54,8 @@ function checkSession_see_rankings()
 		window.location="standings.html";
 	}	
 }
+
+
 function checkSession_view_team()
 {
 
@@ -200,7 +191,7 @@ function set_table()
 					week_points = week_points+object.LastWeekPoints;
 					overall_points = overall_points+object.OverallPoints;
 					$('#table_1').append(tr);
-					$("#table_1").tablesorter();  
+				
 					var img = document.createElement("img");	
 
 					img.src = "../images/jerseys/"+ object.GaaTeam+".png";
@@ -225,6 +216,85 @@ function set_table()
 		
 	
 
+function get_players()
+{
+
+
+	var _url =  "http://hurlingapi.azurewebsites.net/api/players";
+ 
+
+	$.ajax({
+		url: _url,
+		async: true,
+
+		success:function(data)
+		{
+			if($.isArray(data)) {
+				$.each(data, function(index, object) {
+					var tr;
+				var removeRow=document.createElement("BUTTON");
+				 
+					tr = $('<tr/>');
+					tr.append("<td>" + object.PositionId + "</td>");
+					tr.append("<td >" + object.LastName + "</td>");
+					tr.append("<td>" + object.GaaTeam + "</td>");
+					tr.append("<td>" + object.LastWeekPoints + "</td>");
+					tr.append("<td>" + object.OverallPoints + "</td>");
+					tr.append("<td>" + object.Rating + "</td>");
+					tr.append("<td>" + object.Price + "</td>");
+
+ var id = object.Id;
+					removeRow.innerHTML = "Add";
+					$('#table_3').append(tr);
+					tr.append(removeRow);
+					$("#table_3").tablesorter();  
+removeRow.setAttribute('onclick', 'button("'+id+'")');
+				
+
+
+				
+	
+
+
+	 
+				});
+			}
+			
+		}
+		
+			
+	});
+	 
+}
+
+function button(id)
+{
+var type = "PUT";
+var user_id= sessionStorage.getItem("id");
+
+		
+
+	var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/"+user_id+"/player/id/"+id;
+	
+		
+		$.ajax({
+		type: type,
+		url: _url,
+		async: true,
+
+		success:function(data)
+		{
+			   alert("Added");
+			location.reload();
+		},
+   error: function() {
+           alert("Could not add player");
+          }
+		
+		
+	});
+
+}
 
 function checkSession_user_profile()
 {
@@ -400,7 +470,7 @@ var _url =  "http://hurlingapi.azurewebsites.net/api/users";
 
 function show_message(player_postion_id)
 {
-	alert("Clicked "+player_postion_id);
+	
 	delete_player(player_postion_id);
 }
 
@@ -413,7 +483,7 @@ var type = "DELETE";
 var user_id= sessionStorage.getItem("id");
 
 		var item = sessionStorage.getItem(""+player_postion_id);
-		alert("Player Id " +item);
+		
 
 	var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/"+user_id+"/player/id/"+item;
 	
@@ -425,7 +495,7 @@ var user_id= sessionStorage.getItem("id");
 
 		success:function(data)
 		{
-			alert("deleted player id "+sessionStorage.getItem(""+player_postion_id));
+			alert("deleted player");
 			sessionStorage.removeItem(""+player_postion_id);
 			location.reload();
 		}
