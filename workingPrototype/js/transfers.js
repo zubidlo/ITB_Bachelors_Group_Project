@@ -19,6 +19,8 @@ function checkSession_forum()
 	}	
 }
 
+
+
 function set_user()
 {
   	if(sessionStorage.getItem("username") === null)	{
@@ -81,6 +83,7 @@ function combo()
     var ob = element.options[element.selectedIndex].value;
 	var selected;
 
+
 	if(ob == "All")
 	{
 	
@@ -136,6 +139,7 @@ function combo()
 				selected=2;
 		  
 	}
+
 		else
 	{
 		 document.getElementById("sortable1").style.opacity = 100;
@@ -196,7 +200,7 @@ function set_table()
 	var week_points=0;
 	var most_expensive=0;
 	var overall_best =0;
-
+	var overall_cost=0;
 	$.ajax({
 		url: _url,
 		async: true,
@@ -215,8 +219,8 @@ function set_table()
 					tr.append("<td>" + object.OverallPoints + "</td>");
 					tr.append("<td>" + object.Rating + "</td>");
 					tr.append("<td>" + object.Price + "</td>");
-			
-
+				
+					overall_cost= overall_cost+object.Price;
 					week_points = week_points+object.LastWeekPoints;
 					overall_points = overall_points+object.OverallPoints;
 					$('#table_1').append(tr);
@@ -227,9 +231,12 @@ function set_table()
 					var src = document.getElementById(""+object.PositionId);
 					src.appendChild(img);
 					document.getElementById("player_name"+object.PositionId).innerHTML = (""+object.LastName);
-
+				var budget_left = 100000-overall_cost;
+				document.getElementById("details").innerHTML = ("Team  Value: $"+overall_cost);
+				document.getElementById("details2").innerHTML = ("Budget Left: $"+budget_left);
 				
 
+				
 					sessionStorage.setItem(""+object.PositionId,""+object.Id);
 				
 
@@ -251,8 +258,14 @@ function get_players(selected)
 
 var element = document.getElementById("combo");
     var ob = element.options[element.selectedIndex].value;
-	var _url =  "http://hurlingapi.azurewebsites.net/api/players";
 	
+	
+
+	
+	 var _url =  "http://hurlingapi.azurewebsites.net/api/players";
+
+	
+
 
 	$.ajax({
 		url: _url,
@@ -282,7 +295,7 @@ var element = document.getElementById("combo");
 					$('#table_3').append(tr);
 					tr.append(removeRow);
 					    $('#table_3').tablesorter;
-				
+					
 			
 removeRow.setAttribute('onclick', 'button("'+id+'")');
 				
