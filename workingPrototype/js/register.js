@@ -109,10 +109,13 @@
 		$("#post_new_user_button").on("click", function(event){
 			
 			add_user();
+			
 		
 		});
 
 
 
 	});
+	
+	
 

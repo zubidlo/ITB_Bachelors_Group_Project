@@ -27,7 +27,7 @@ function set_user()
 		var user = sessionStorage.getItem("username");
 		document.getElementById("demo").innerHTML = ("You are logged in as "+user);
 				get_team();
-		
+		set_team();
 		
 
 	
@@ -410,7 +410,16 @@ var user = sessionStorage.getItem("id");
 				
 				sessionStorage.setItem("teamid",""+object.Id);
 						set_table2();
-	set_table();
+						set_table();
+			}
+			
+			else if (object.UserId != user){
+				if(sessionStorage.getItem("teamid") ==null)
+				{
+					window.alert = function() {};
+					
+				put_new_team();
+				}
 			}
 		
 				
@@ -428,4 +437,44 @@ var user = sessionStorage.getItem("id");
 	});
 	 
 }
+
+
+			function put_new_team() {
+				
+			
+		
+		window.alert = function() {};
+				$.ajax({
+	            type: "POST",
+	            url: "http://hurlingapi.azurewebsites.net/api/teams",
+	            data: readUserFromInputFields(),
+	            dataType: "json",
+	            success: function (data) {
+	            	
+	            alert("created new team");
+					
+
+	        	},
+	        	error : function (request, textStatus, errorThrown) {
+	        		
+	        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        	}
+			});
+		}
+
+				function readUserFromInputFields() {
+			var name = sessionStorage.getItem("username");
+			var name2 = name+''+sessionStorage.getItem("id"); 
+			var user = {
+				Id : sessionStorage.getItem("id"),
+				Name : name2,
+				OverAllPoints : 0,
+				LastWeekPoints : 0,
+				Budget : 100000,
+				LeagueId : 1,
+				UserId : sessionStorage.getItem("id")
+			};
+
+			return user;
+		}
 
