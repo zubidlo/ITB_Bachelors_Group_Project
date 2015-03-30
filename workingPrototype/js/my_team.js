@@ -392,7 +392,7 @@ var user = sessionStorage.getItem("id");
 	 var _url =  "http://hurlingapi.azurewebsites.net/api/teams";
 
 	
-
+var i=0;
 
 	$.ajax({
 		url: _url,
@@ -411,19 +411,20 @@ var user = sessionStorage.getItem("id");
 				sessionStorage.setItem("teamid",""+object.Id);
 						set_table2();
 						set_table();
+						i++;
 			}
 			
 			else if (object.UserId != user){
 				if(sessionStorage.getItem("teamid") ==null)
 				{
-					window.alert = function() {};
 					
-				put_new_team();
+					
+				
 				}
 			}
 		
 				
-
+				alert(i);
 
 
 	 
@@ -433,9 +434,14 @@ var user = sessionStorage.getItem("id");
 		}
 		
 		
+		
+		
 			
 	});
-	 
+	 if(i ==0)
+		{
+			put_new_team();
+		}
 }
 
 
