@@ -39,6 +39,7 @@
 	            	
 	            	getAllUsers();
 	            	clearUserTextFields();
+					
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {

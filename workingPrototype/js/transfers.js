@@ -30,8 +30,9 @@ function set_user()
 		var user = sessionStorage.getItem("username");
 		document.getElementById("demo").innerHTML = ("You are logged in as "+user);
 	
-		set_table();
-		set_table2();
+	get_team();
+	
+		
 		get_players();
 
 	
@@ -192,7 +193,7 @@ function set_table()
    
  
 	var i=1;
-	var user_id= sessionStorage.getItem("id");
+	var user_id= sessionStorage.getItem("teamid");
 	var user= (user_id+"/players");
 
 	var _url =  "http://hurlingapi.azurewebsites.net/api/teams/id/"+user;
@@ -319,7 +320,7 @@ removeRow.setAttribute('onclick', 'button("'+id+'")');
 function button(id)
 {
 var type = "PUT";
-var user_id= sessionStorage.getItem("id");
+var user_id= sessionStorage.getItem("teamid");
 
 		
 
@@ -551,3 +552,45 @@ var user_id= sessionStorage.getItem("id");
 	});
 }
 
+function get_team()
+{
+	
+var user = sessionStorage.getItem("id");
+	
+	 var _url =  "http://hurlingapi.azurewebsites.net/api/teams";
+
+	
+
+
+	$.ajax({
+		url: _url,
+		async: true,
+
+		success:function(data)
+		{
+			
+			if($.isArray(data)) {
+				$.each(data, function(index, object) {
+		
+		
+			if(object.UserId == user)
+			{
+				
+				sessionStorage.setItem("teamid",""+object.Id);
+				set_table();
+		set_table2();
+			}
+				
+
+
+
+	 
+				});
+			}
+			
+		}
+		
+			
+	});
+	 
+}

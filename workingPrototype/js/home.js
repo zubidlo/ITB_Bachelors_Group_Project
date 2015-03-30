@@ -21,10 +21,10 @@ function setStorage()
  }
 	else {
 			var user = sessionStorage.getItem("username");
-	
+
 
    document.getElementById("demo").innerHTML = ("You are logged in as "+user);
-	
+
 
 	}	
  
@@ -144,10 +144,3 @@ sessionStorage.clear();
  
 
 }
-
-
-
-
-
-
-		
