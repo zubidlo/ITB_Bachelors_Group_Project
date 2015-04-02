@@ -88,14 +88,7 @@ function combo()
 	if(ob == "All")
 	{
 	
-		 document.getElementById("sortable1").style.opacity = 100;
-		  document.getElementById("sortable2").style.opacity = 100;
-		   document.getElementById("sortable3").style.opacity = 100;
-		    document.getElementById("sortable4").style.opacity = 100;
-			 document.getElementById("sortable5").style.opacity = 100;
-			  document.getElementById("sortable6").style.opacity = 100;
-			   document.getElementById("sortable7").style.opacity = 100;
-			    document.getElementById("sortable8").style.opacity = 100;
+		
 				selected=0;
 	}
 	
@@ -103,54 +96,26 @@ function combo()
 	{
 
 
-		 document.getElementById("sortable1").style.opacity = -100;
-		  document.getElementById("sortable2").style.opacity = -100;
-		   document.getElementById("sortable3").style.opacity = -100;
-		    document.getElementById("sortable4").style.opacity = -100;
-			 document.getElementById("sortable5").style.opacity = -100;
-			  document.getElementById("sortable6").style.opacity = 100;
-			   document.getElementById("sortable7").style.opacity = 100;
-			    document.getElementById("sortable8").style.opacity = 100;
+	
 				selected=6;
 	}
 	
 	else if(ob == "Midfielders")
 	{
 		
-		 document.getElementById("sortable1").style.opacity = -100;
-		  document.getElementById("sortable2").style.opacity = -100;
-		   document.getElementById("sortable3").style.opacity = -100;
-		    document.getElementById("sortable4").style.opacity = -100;
-			 document.getElementById("sortable5").style.opacity = 100;
-			  document.getElementById("sortable6").style.opacity = -100;
-			   document.getElementById("sortable7").style.opacity = -100;
-			    document.getElementById("sortable8").style.opacity = -100;
+		
 				selected=5;
 	}
 		else if(ob == "Defenders")
 	{
-		 document.getElementById("sortable1").style.opacity = -100;
-		  document.getElementById("sortable2").style.opacity = 100;
-		   document.getElementById("sortable3").style.opacity = 100;
-		    document.getElementById("sortable4").style.opacity = 100;
-			 document.getElementById("sortable5").style.opacity = -100;
-			  document.getElementById("sortable6").style.opacity = -100;
-			   document.getElementById("sortable7").style.opacity = -100;
-			    document.getElementById("sortable8").style.opacity = -100;
+
 				selected=2;
 		  
 	}
 
 		else
 	{
-		 document.getElementById("sortable1").style.opacity = 100;
-		  document.getElementById("sortable2").style.opacity = -100;
-		   document.getElementById("sortable3").style.opacity = -100;
-		    document.getElementById("sortable4").style.opacity = -100;
-			 document.getElementById("sortable5").style.opacity = -100;
-			  document.getElementById("sortable6").style.opacity = -100;
-			   document.getElementById("sortable7").style.opacity = -100;
-			    document.getElementById("sortable8").style.opacity = -100;
+	
 				selected=1;
 	}
 $("#table_3").find("tr:gt(0)").remove();
@@ -259,11 +224,12 @@ function get_players(selected)
 
 var element = document.getElementById("combo");
     var ob = element.options[element.selectedIndex].value;
-	
-	
+var element = document.getElementById("amount");
+    var oz = element.options[element.selectedIndex].value;
 
 	
-	 var _url =  "http://hurlingapi.azurewebsites.net/api/players";
+	var _url =  "http://hurlingapi.azurewebsites.net/api/players";
+	    
 
 	
 
@@ -277,7 +243,7 @@ var element = document.getElementById("combo");
 			
 			if($.isArray(data)) {
 				$.each(data, function(index, object) {
-				if(object.PositionId ==selected)
+				if(object.PositionId ==selected && object.GaaTeam ==oz)
 				{
 					var tr;
 				var removeRow=document.createElement("BUTTON");
@@ -408,13 +374,13 @@ if($.isArray(data)) {
 
 		}
 		
-			function readUserFromInputFields() {
+			function readUserFromInputFields2() {
 			
 			var id = sessionStorage.getItem("id");
 			
 			var text =  document.getElementById("forum_post_area").value;
 			var now = new Date();
-		now=new Date().toLocaleString();
+		    now=new Date().toLocaleString();
 
 			var user = {
 				Id : id,
@@ -454,7 +420,7 @@ function checkSession_standings()
 				$.ajax({
 	            type: "POST",
 	            url: "http://hurlingapi.azurewebsites.net/api/messages",
-	            data: readUserFromInputFields(),
+	            data: readUserFromInputFields2(),
 	            dataType: "json",
 	            success: function (data) {
 	            	
@@ -465,8 +431,7 @@ function checkSession_standings()
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
-	        		
-	        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        	
 	        	}
 			});
 		}
@@ -558,7 +523,7 @@ var user_id= sessionStorage.getItem("teamid");
 				
 			
 		
-		window.alert = function() {};
+	
 				$.ajax({
 	            type: "POST",
 	            url: "http://hurlingapi.azurewebsites.net/api/teams",
@@ -567,12 +532,13 @@ var user_id= sessionStorage.getItem("teamid");
 	            success: function (data) {
 	            	
 	            alert("created new team");
+				location.reload();
 					
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
 	        		
-	        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        	
 	        	}
 			});
 		}
@@ -633,7 +599,7 @@ var i=0;
 			}
 		
 				
-				alert(i);
+			
 
 
 	 

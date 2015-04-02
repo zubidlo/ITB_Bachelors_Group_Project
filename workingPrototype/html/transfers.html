@@ -37,7 +37,7 @@
 	  <!-- Dynamic Menu -->
 		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
 			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
-			<li><a href="#" >My Team</a></li>
+			<li><a href="my_team.html" >My Team</a></li>
 			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Account</a></li>
 			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
 			<li><a href="transfers.html" onclick="checkSession_transfers()">Transfers</a></li>
@@ -84,13 +84,13 @@
 		<table id="table_3" style="cursor: pointer;" class="tablesorter1"> 
 			<thead> 
 				<tr> 
-					<th>Position</th> 
+					<th>Pos</th> 
 					<th>Name</th> 
 					<th>Team</th> 
-					<th>Last Week</th> 
+					<th>Week</th> 
 					<th>Overall</th> 
-					<th>Rating</th> 
-					<th>Price</th> 
+					<th>Rated</th> 
+					<th>Cost</th> 
 				</tr> 
 			</thead> 
 			<tbody> 
@@ -105,18 +105,35 @@
 				</tr> 
 			</tbody> 
 						<select id = "combo" onchange="combo();">
-	 <option value="All">All</option>
+	
   <option value="Goalkeeper" >Goalkeeper</option>
   <option value="Defenders">Defenders</option>
   <option value="Midfielders">Midfielders</option>
   <option value="Attackers">Attackers</option>
+
+</select>
+ 			<select id = "amount" onchange="combo();" >
+	 <option value="Antrim">Antrim</option>
+  <option value="Carlow" >Carlow</option>
+  <option value="Cork">Cork</option>
+  <option value="Dublin">Dublin</option>
+  <option value="Galway">Galway</option>
+  	 <option value="Kilkenny">Kilkenny</option>
+  <option value="Kildare" >Kildare</option>
+  <option value="Laois">Laois</option>
+  <option value="Louth">Louth</option>
+  <option value="Sligo">Sligo</option>
+  	 <option value="Waterford">Waterford</option>
+  <option value="Wexford" >Wexford</option>
+  
  
 
 </select>
+
 <br>
-
+	
 		</table>
-
+			
 	</div>
 
 	<!-- close container -->
