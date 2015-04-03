@@ -364,7 +364,7 @@ function checkSession_forum()
 }
 
 	function post_message() {
-		
+		$("#table_2").find("tr:gt(0)").remove();
 				$.ajax({
 	            type: "POST",
 	            url: "http://hurlingapi.azurewebsites.net/api/messages",
@@ -375,7 +375,7 @@ function checkSession_forum()
 	            	
 	            	clear_text_area();
 	            	location.reload();
-			
+			document.getElementById("forum_post_area").value = "Please Enter a Message";
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
@@ -393,7 +393,7 @@ document.getElementById("forum_post_area").value = "";
 
 set_table();
 
-location.reload();
+
 }
 
 function clear_text_area()

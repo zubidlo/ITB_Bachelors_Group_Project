@@ -20,6 +20,7 @@ function checkSession_forum()
 
 function set_user()
 {
+	
   	if(sessionStorage.getItem("username") === null)	{
 		window.location="../index.html";
 	}
@@ -136,8 +137,17 @@ function set_table()
 					i=i+1;
 				});
 			}
+			if( i <9)
+		{
+			alert("You need to fill the vacant spots");
+			window.location="transfers.html";
 		}
+		}
+		
+		
 	});
+	
+	
 }
 
 
@@ -320,6 +330,9 @@ function checkSession_forum()
 
 
 	function post_message() {
+		
+		$("#table_2").find("tr:gt(0)").remove();
+
 			
 				$.ajax({
 	            type: "POST",
@@ -330,8 +343,8 @@ function checkSession_forum()
 	      
 	     
 	            	clear_text_area();
-	            	location.reload();
-
+	          
+document.getElementById("forum_post_area").value = "Please Enter a Message";
 	
 			set_table2();
 
@@ -353,7 +366,7 @@ document.getElementById("forum_post_area").value = "";
 
 set_table();
 
-location.reload();
+
 }
 
 function clear_text_area()

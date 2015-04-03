@@ -8,6 +8,7 @@
 html {
 	font-size: 100%;
 }
+.ui-dialog,.ui-widget{background:white !important}
 #forum_post_area
 {
 

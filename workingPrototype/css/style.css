@@ -4,6 +4,7 @@
 /*Import Custom Styles */
 
 /**************************** Site Structure *****************************/
+.ui-dialog,.ui-widget{background:white !important}
 
 html 
 {

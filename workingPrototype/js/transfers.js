@@ -31,13 +31,12 @@ function set_user()
 		document.getElementById("demo").innerHTML = ("You are logged in as "+user);
 	
 	get_team();
-	
-		
-		get_players();
+	get_players();
 
 	
 }
 }
+
 function checkSession_home()
 {
 	if(sessionStorage.getItem("username") === null)	{
@@ -211,6 +210,12 @@ function set_table()
 					i=i+1;
 				});
 			}
+						if( i <9)
+		{
+			
+			displayInfo2();
+			
+		}
 		}
 	});
 }
@@ -257,7 +262,7 @@ var element = document.getElementById("amount");
 					tr.append("<td>" + object.Rating + "</td>");
 					tr.append("<td>" + object.Price + "</td>");
 
- var id = object.Id;
+					var id = object.Id;
 					removeRow.innerHTML = "Add";
 					$('#table_3').append(tr);
 					tr.append(removeRow);
@@ -265,8 +270,10 @@ var element = document.getElementById("amount");
 					
 			
 removeRow.setAttribute('onclick', 'button("'+id+'")');
+				player_count++;
 				
 				}
+				
 				
 
 
@@ -319,6 +326,13 @@ function displayInfo()
 	$("#dialog").text("Click a player to remove from your team, then add a new player in from the table on the right!");
 	  $( "#dialog" ).dialog();
 }
+function displayInfo2()
+{
+	
+	$("#dialog").text("You need to fill the vacant spots!!");
+	  $( "#dialog" ).dialog();
+}
+
 function checkSession_user_profile()
 {
 	if(sessionStorage.getItem("username") === null)	{
@@ -424,6 +438,8 @@ function checkSession_standings()
 
 	function post_message() {
 		
+		$("#table_2").find("tr:gt(0)").remove();
+		
 				$.ajax({
 	            type: "POST",
 	            url: "http://hurlingapi.azurewebsites.net/api/messages",
@@ -433,8 +449,9 @@ function checkSession_standings()
 	            	
 	            	
 	            	clear_text_area();
-	            	location.reload();
+	            	set_table2();
 			
+document.getElementById("forum_post_area").value = "Please Enter a Message";
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
@@ -449,15 +466,7 @@ function clear_text_area()
 
 document.getElementById("forum_post_area").value = "";
 
-set_table();
 
-location.reload();
-}
-
-function clear_text_area()
-{
-
-document.getElementById("forum_post_area").value = "";
 
 
 }
@@ -518,9 +527,11 @@ var user_id= sessionStorage.getItem("teamid");
 
 		success:function(data)
 		{
-			alert("deleted player");
-			sessionStorage.removeItem(""+player_postion_id);
 			location.reload();
+			delete_player(object.Name);
+			sessionStorage.removeItem(""+player_postion_id);
+			
+		
 		}
 	});
 }
@@ -605,13 +616,11 @@ var i=0;
 				}
 			}
 		
-				
-			
-
-
+		
 	 
 				});
 			}
+		
 			
 		}
 		

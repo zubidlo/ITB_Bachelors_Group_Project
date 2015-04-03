@@ -27,6 +27,12 @@ function displayInfo()
 	$("#dialog").text("Change your current user details including password and username on this page");
 	  $( "#dialog" ).dialog();
 }
+function displayInfo2()
+{
+	
+	$("#dialog").text("Your details have been updated");
+	  $( "#dialog" ).dialog();
+}
 function set_table()
 {
 
@@ -130,6 +136,7 @@ function checkSession_forum()
 }
 
 	function post_message() {
+		$("#table_2").find("tr:gt(0)").remove();
 		
 				$.ajax({
 	            type: "POST",
@@ -140,7 +147,8 @@ function checkSession_forum()
 	            	
 	            	
 	            	clear_text_area();
-	            	location.reload();
+					set_table();
+	            document.getElementById("forum_post_area").value = "Please Enter a Message";
 			
 
 	        	},
@@ -159,7 +167,7 @@ document.getElementById("forum_post_area").value = "";
 
 set_table();
 
-location.reload();
+
 }
 
 function clear_text_area()
@@ -397,7 +405,7 @@ _url += "/api/users";
 
     ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
 
-alert("details updated");
+displayInfo2();
  document.getElementById("change_password").value = sessionStorage.getItem("password");
  document.getElementById("change_email").value =  sessionStorage.getItem("email");
    document.getElementById("password").innerHTML = ("Your password is :"+sessionStorage.getItem("password"));

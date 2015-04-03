@@ -9,6 +9,7 @@ html
 {
 	font-size: 100%;
 }
+.ui-dialog,.ui-widget{background:white !important}
 #pagin {
     clear: both;
     padding:0;
