@@ -129,3 +129,9 @@
 
 	});
 
+function displayInfo()
+{
+	
+	$("#dialog").text("sdjf");
+	  $( "#dialog" ).dialog();
+}

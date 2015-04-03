@@ -14,6 +14,7 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
 		<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
+	
 
 		<script>
 		$(function() {
@@ -63,12 +64,14 @@
 		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
 			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
 			<li><a href="#" >My Team</a></li>
-			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Account</a></li>
+			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Acc</a></li>
 			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
 			<li><a href="transfers.html" onclick="checkSession_transfers()">Transfers</a></li>
 				<li><a href="#" onclick="logout_user()">Logout</a></li>
+					<li><img src="../images/info.png" style="width:18px;height:18px;border:0" onClick="displayInfo();"></li>
 		</ol>
 	  <!-- menu 2 -->
+	  
 	</div>
 
 	<div class="clr">
@@ -76,7 +79,9 @@
 
 	</div>
 	<!-- end header -->
-
+		<div id="dialog">
+  <p></p>
+</div>
 	<div id="wrapper2">
 		<ul id="sortable1" font color="red">
 		<class="ui-widget-content"  id="1" onmouseover="get_player(1)"><label for="1" id ="player_name1"></label>
@@ -159,7 +164,15 @@
 		</div>
 		
 		</div>
-		<div id="table_holder">
+
+	
+	<!-- close container -->
+		<div id = "forum_holder">
+	<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+	<textarea rows="3" cols="7" id = "forum_post_area" onClick="clear_text_area()">
+			Please Enter a message
+			</textarea>
+			<div id="table_holder">
 <table id="table_2" class="myTable"> 
 				<tr>
 					<td>
@@ -170,22 +183,21 @@
 					</td>
 					
 				</tr>
+				
 			</table> 
-				<textarea rows="2" cols="5" id = "forum_post_area" onClick="clear_text_area()">
-			Please Enter a message
-			</textarea>
+			
 
 			<div style="clear:both; height: 40px">
-				<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+				
 			</div>
 			
 			</div>
-	
-	<!-- close container -->
 
-
+</div>
 
 	<div id="footer">
+
+
 	</div>
 
 </body>

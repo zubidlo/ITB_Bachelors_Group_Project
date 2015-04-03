@@ -39,12 +39,13 @@
 	            	
 	            	getAllUsers();
 	            	clearUserTextFields();
-					
+					alert("New User Created");
+					window.location="../index.html";
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
 	        		
-	        		window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+	        		
 	        	}
 			});
 		}
@@ -110,6 +111,7 @@
 			
 			add_user();
 			
+			
 		
 		});
 
@@ -118,4 +120,9 @@
 	});
 	
 	
-
+function displayInfo()
+{
+	
+	$("#dialog").text("You can register on this page if you are not a current user");
+	  $( "#dialog" ).dialog();
+}

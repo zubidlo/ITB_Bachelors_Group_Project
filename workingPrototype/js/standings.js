@@ -161,7 +161,7 @@ function set_table()
 
     var i=1;
   //  var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=LastWeekPoints";
-    var _url =  "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints desc&$top=10&$skip=0";
+    var _url =  "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints";
 
 
 $.ajax({
@@ -175,12 +175,14 @@ if($.isArray(data)) {
     $.each(data, function(index, object) {
          var tr;
        
+	   if(i <11)
+	   {
             tr = $('<tr/>');
             tr.append("<td>" + i + "</td>");
             tr.append("<td>" + object.Name + "</td>");
             tr.append("<td>" + object.LastWeekPoints + "</td>");
             tr.append("<td>" + object.OverAllPoints + "</td>");
-        
+	   }
 
             i++;
             $('#table_1').append(tr);
@@ -205,8 +207,8 @@ function show_team()
 var user_id= sessionStorage.getItem("id");
 var i =0;
 
-  var _url =  "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints desc&$top=10&$skip=0";
-
+ 
+ var _url =  "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints";
  
 
 
@@ -219,7 +221,7 @@ $.ajax({
 if($.isArray(data)) {
     $.each(data, function(index, object) {
 		
-         var tr;
+         
 			i++;
 			
 			if(object.UserId==user_id)
@@ -227,7 +229,7 @@ if($.isArray(data)) {
 				
 				var my_position=i;
 		
-				document.getElementById("team_position").innerHTML = ("Your Position "+my_position);
+				document.getElementById("team_position").innerHTML = ("Your Position "+i);
 			
 			}
 			
@@ -430,4 +432,9 @@ var _url =  "http://hurlingapi.azurewebsites.net/api/users";
 }
 
 
+	function displayInfo()
+{
 	
+	$("#dialog").text("This page shows the current top 10 user teams in the game");
+	  $( "#dialog" ).dialog();
+}

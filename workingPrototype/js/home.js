@@ -33,6 +33,12 @@ function setStorage()
 
  
 }
+function displayInfo()
+{
+	
+	$("#dialog").text("This is your home page, showing latest hurling news and links to other pages");
+	  $( "#dialog" ).dialog();
+}
 
 
 

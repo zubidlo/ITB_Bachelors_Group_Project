@@ -33,6 +33,12 @@ function set_user()
 	
 	}	
 }
+function displayInfo()
+{
+	
+	$("#dialog").text("Use this page to view your current team and info about it!");
+	  $( "#dialog" ).dialog();
+}
 
 function checkSession_home()
 {
@@ -256,7 +262,7 @@ if($.isArray(data)) {
 
 		}
 		
-			function readUserFromInputFields() {
+			function readUserFromInputFields2() {
 			
 			var id = sessionStorage.getItem("id");
 			
@@ -318,7 +324,7 @@ function checkSession_forum()
 				$.ajax({
 	            type: "POST",
 	            url: "http://hurlingapi.azurewebsites.net/api/messages",
-	            data: readUserFromInputFields(),
+	            data: readUserFromInputFields2(),
 	            dataType: "json",
 	            success: function (data) {
 	      

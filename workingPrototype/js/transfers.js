@@ -300,8 +300,9 @@ var user_id= sessionStorage.getItem("teamid");
 
 		success:function(data)
 		{
-			   alert("Added");
+			
 			location.reload();
+			 
 		},
    error: function() {
            alert("Could not add player");
@@ -312,6 +313,12 @@ var user_id= sessionStorage.getItem("teamid");
 
 }
 
+function displayInfo()
+{
+	
+	$("#dialog").text("Click a player to remove from your team, then add a new player in from the table on the right!");
+	  $( "#dialog" ).dialog();
+}
 function checkSession_user_profile()
 {
 	if(sessionStorage.getItem("username") === null)	{

@@ -21,8 +21,12 @@ function setStorage()
 
 
 }
-
-
+function displayInfo()
+{
+	
+	$("#dialog").text("Change your current user details including password and username on this page");
+	  $( "#dialog" ).dialog();
+}
 function set_table()
 {
 

@@ -1764,27 +1764,45 @@ margin-left: auto;
 	text-align: center;
 	   vertical-align: middle;
 	   
-}.myTable {
+}
+#forum_holder
+{
+ border: 2px solid blue;
+ width: 500px;
+ background: white;
+}
+
+.myTable {
 	margin:0px;padding:0px;
-	width:40%;
+		width:500px;
+	height: 100px;
 	box-shadow: 10px 10px 5px #888888;
-	border:1px solid #3f7f00;
-	margin-left: auto;
-    margin-right: auto;
-	position: relative;
+	border: 2px solid blue;
+	
+    margin-right: 200px;
+	position: absolute;
 	text-align: center;
 	   vertical-align: middle;
 
+	  -moz-border-radius: 15px;
+        border-radius: 15px;
+     border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;
 }.myTable table{
     border-collapse: collapse;
         border-spacing: 0;
 	width:100%;
 	height:100%;
 	margin:0px;padding:0px;
+	 -moz-border-radius: 15px;
+        border-radius: 15px;
+     border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;
 }.myTable tr:last-child td:last-child {
 	-moz-border-radius-bottomright:25px;
 	-webkit-border-bottom-right-radius:25px;
 	border-bottom-right-radius:25px;
+	 -moz-border-radius: 15px;
+        border-radius: 15px;
+     border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;
 }
 .myTable table tr:first-child td:first-child {
 	-moz-border-radius-topleft:25px;
@@ -1800,22 +1818,26 @@ margin-left: auto;
 	-webkit-border-bottom-left-radius:25px;
 	border-bottom-left-radius:25px;
 }.myTable tr:hover td{
-	background-color:#ffffff;
-		
-
+	 -moz-border-radius: 15px;
+        border-radius: 15px;
+     border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;
 }
-.myTable td{
+.myTable tr:nth-child(odd){ -moz-border-radius: 15px;
+        border-radius: 15px;
+     border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px; background-color:#ffffff; }
+.myTable tr:nth-child(even)    {  -moz-border-radius: 15px;
+        border-radius: 15px;
+     border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;background-color:#ffffff; }.myTable td{
 	vertical-align:middle;
 	
-	background-color:#ffffff;
-
-	border:1px solid #3f7f00;
+	
+	border:1px solid #000000;
 	border-width:0px 1px 1px 0px;
 	text-align:left;
 	padding:3px;
-	font-size:12px;
+	font-size:10px;
 	font-family:Arial;
-	font-weight:bold;
+	font-weight:normal;
 	color:#000000;
 }.myTable tr:last-child td{
 	border-width:0px 1px 0px 0px;
@@ -1825,25 +1847,25 @@ margin-left: auto;
 	border-width:0px 0px 0px 0px;
 }
 .myTable tr:first-child td{
-		background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
-	background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");	background: -o-linear-gradient(top,#5fbf00,3f7f00);
+		background:-o-linear-gradient(bottom, #0061ff 5%, #ffffff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0061ff), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #0061ff 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#0061ff", endColorstr="#ffffff");	background: -o-linear-gradient(top,#0061ff,ffffff);
 
-	background-color:#5fbf00;
-	border:0px solid #3f7f00;
+	background-color:#0061ff;
+	border:0px solid #000000;
 	text-align:center;
 	border-width:0px 0px 1px 1px;
-	font-size:11px;
+	font-size:14px;
 	font-family:Arial;
 	font-weight:bold;
 	color:#ffffff;
 }
 .myTable tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5fbf00), color-stop(1, #3f7f00) );
-	background:-moz-linear-gradient( center top, #5fbf00 5%, #3f7f00 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00", endColorstr="#3f7f00");	background: -o-linear-gradient(top,#5fbf00,3f7f00);
+	background:-o-linear-gradient(bottom, #0061ff 5%, #ffffff 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0061ff), color-stop(1, #ffffff) );
+	background:-moz-linear-gradient( center top, #0061ff 5%, #ffffff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#0061ff", endColorstr="#ffffff");	background: -o-linear-gradient(top,#0061ff,ffffff);
 
-	background-color:#5fbf00;
+	background-color:#0061ff;
 }
 .myTable tr:first-child td:first-child{
 	border-width:0px 0px 1px 0px;
@@ -1854,13 +1876,19 @@ margin-left: auto;
 #forum_post_area
 {
 
-    width: 20%;
-	height: 40%;
+    width: 28%;
+	height: 4%;
  resize: none;
 	border:solid 1px #000000;
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
-border-radius: 5px;
+
+	
+    margin-right: 50px;
+	position: absolute;
+	text-align: center;
+	   vertical-align: middle;
+	
 }
 
 
@@ -1872,7 +1900,7 @@ border-radius: 5px;
    background: -moz-linear-gradient(top, #3e619c, #13325c);
    background: -ms-linear-gradient(top, #3e619c, #13325c);
    background: -o-linear-gradient(top, #3e619c, #13325c);
-   padding: 6px 12px;
+   padding: 3px 6px;
    -webkit-border-radius: 16px;
    -moz-border-radius: 16px;
    border-radius: 16px;
@@ -2176,3 +2204,18 @@ table.tablesorter1 tr:hover td{
 
 }
 
+#forum_area
+{
+background: white;
+width: 1349px;
+height: 120px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	
+	margin: auto;
+	position: relative;
+	text-align: center;
+	  margin-right: 0px;
+	position: relative;
+	clear: both;
+}

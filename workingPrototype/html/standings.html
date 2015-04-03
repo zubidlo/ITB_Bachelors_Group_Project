@@ -6,8 +6,12 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
 		<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
 		<script src="../js/jquery.min.js"></script>
+			<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
 		<script src="../js/standings.js"></script>
+		
 		<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
 </head>
 
@@ -18,15 +22,18 @@
 		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
 			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
 			<li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
-			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Account</a></li>
+			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Acc</a></li>
 		<li><a href="#">Standings</a></li>
 			<li><a href="transfers.html" onclick="checkSession_transfers()">Transfers</a></li>
 			<li><a href="#" onclick="logout_user()">Logout</a></li>
+			<li><img src="../images/info.png" style="width:18px;height:18px;border:0" onClick="displayInfo();"></li>
 			
 		</ol> 
 	  <!-- menu 2 -->
 	</div>
-	
+			<div id="dialog">
+  <p></p>
+</div>
 	<div class="clr">
 		<p id="demo">.</p>
 	
@@ -57,6 +64,19 @@
 			</table>  
 		<p id="team_position" title ="Team Position">.</p> </br>
 		</div>	
+
+
+			<div style="clear:both; height: 40px">
+			
+			</div>
+			
+		
+	</div>
+		<div id = "forum_holder">
+	<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+	<textarea rows="3" cols="4" id = "forum_post_area" onClick="clear_text_area()">
+			Please Enter a message
+			</textarea>
 			<div id="table_holder">
 <table id="table_2" class="myTable"> 
 				<tr>
@@ -68,19 +88,20 @@
 					</td>
 					
 				</tr>
+				
 			</table> 
-				<textarea rows="2" cols="5" id = "forum_post_area" onClick="clear_text_area()">
-			Please Enter a message
-			</textarea>
-
-			<div style="clear:both; height: 40px">
-				<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
+			
+				<div style="clear:both; height: 40px">
+				
 			</div>
 			
 			</div>
-	</div>
+
+</div>
 
 	<div id="footer">
+
+
 	</div>
-</body>
+	</body>
 </html>
