@@ -1,0 +1,5 @@
+1.Look up a documentation template
+2.write research / literature review on web api and backend development frameworks and technologies
+3.write research on CORS (start with "wiki Cross-origin resource sharing")
+4.learn, do and then write about testing in c# .net web api 2
+5.learn to deploy front end and back end on the same server on azure (MVC/Razor)
