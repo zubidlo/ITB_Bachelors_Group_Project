@@ -1,10 +1,7 @@
 
 /*
-
-
  HTML files used in:
  my_team.html
-
 */
 
   
@@ -31,12 +28,13 @@ function set_user()
 		document.getElementById("demo").innerHTML = ("You are logged in as "+user);
 	
 	get_team();
-	get_players();
+	
+		
+		get_players();
 
 	
 }
 }
-
 function checkSession_home()
 {
 	if(sessionStorage.getItem("username") === null)	{
@@ -210,7 +208,7 @@ function set_table()
 					i=i+1;
 				});
 			}
-						if( i <9)
+									if( i <9)
 		{
 			
 			displayInfo2();
@@ -222,11 +220,40 @@ function set_table()
 		
 		
 	
-
+function displayInfo()
+{
+	
+	$("#dialog").text("Click a player to remove from your team, then add a new player in from the table on the right!");
+	  $( "#dialog" ).dialog();
+}
+function displayInfo2()
+{
+	
+	$("#dialog").text("You need to fill the vacant spots!!");
+	  $( "#dialog" ).dialog();
+}
+function displayInfo3()
+{
+	
+	$("#dialog").text("Cannot add player to team");
+	  $( "#dialog" ).dialog();
+}
+function displayInfo4()
+{
+	
+	$("#dialog").text("Player added to team");
+	  $( "#dialog" ).dialog();
+}
+function displayInfo5()
+{
+	
+	$("#dialog").text("Player deleted from the team");
+	  $( "#dialog" ).dialog();
+}
 function get_players(selected)
 {
 
-
+	
 var element = document.getElementById("combo");
     var ob = element.options[element.selectedIndex].value;
 var element = document.getElementById("amount");
@@ -262,7 +289,7 @@ var element = document.getElementById("amount");
 					tr.append("<td>" + object.Rating + "</td>");
 					tr.append("<td>" + object.Price + "</td>");
 
-					var id = object.Id;
+ var id = object.Id;
 					removeRow.innerHTML = "Add";
 					$('#table_3').append(tr);
 					tr.append(removeRow);
@@ -270,10 +297,11 @@ var element = document.getElementById("amount");
 					
 			
 removeRow.setAttribute('onclick', 'button("'+id+'")');
-				player_count++;
-				
+		
+			
+			removeRow.className = "button";
+
 				}
-				
 				
 
 
@@ -307,30 +335,16 @@ var user_id= sessionStorage.getItem("teamid");
 
 		success:function(data)
 		{
-			
-			location.reload();
-			 
+			   displayInfo4();
+			setTimeout(function() { location.reload() },600);
 		},
    error: function() {
-           alert("Could not add player");
+           displayInfo4();
           }
 		
 		
 	});
 
-}
-
-function displayInfo()
-{
-	
-	$("#dialog").text("Click a player to remove from your team, then add a new player in from the table on the right!");
-	  $( "#dialog" ).dialog();
-}
-function displayInfo2()
-{
-	
-	$("#dialog").text("You need to fill the vacant spots!!");
-	  $( "#dialog" ).dialog();
 }
 
 function checkSession_user_profile()
@@ -437,9 +451,7 @@ function checkSession_standings()
 
 
 	function post_message() {
-		
-		$("#table_2").find("tr:gt(0)").remove();
-		
+			$("#table_2").find("tr:gt(0)").remove();
 				$.ajax({
 	            type: "POST",
 	            url: "http://hurlingapi.azurewebsites.net/api/messages",
@@ -448,10 +460,9 @@ function checkSession_standings()
 	            success: function (data) {
 	            	
 	            	
-	            	clear_text_area();
+	            	 	clear_text_area();
 	            	set_table2();
 			
-document.getElementById("forum_post_area").value = "Please Enter a Message";
 
 	        	},
 	        	error : function (request, textStatus, errorThrown) {
@@ -459,6 +470,7 @@ document.getElementById("forum_post_area").value = "Please Enter a Message";
 	        	}
 			});
 		}
+
 
 
 function clear_text_area()
@@ -470,7 +482,6 @@ document.getElementById("forum_post_area").value = "";
 
 
 }
-
 
 
 function return_username(userId)
@@ -527,11 +538,10 @@ var user_id= sessionStorage.getItem("teamid");
 
 		success:function(data)
 		{
-			location.reload();
-			delete_player(object.Name);
-			sessionStorage.removeItem(""+player_postion_id);
-			
 		
+			sessionStorage.removeItem(""+player_postion_id);
+			   displayInfo5();
+			setTimeout(function() { location.reload() },600);
 		}
 	});
 }
@@ -616,11 +626,13 @@ var i=0;
 				}
 			}
 		
-		
+				
+			
+
+
 	 
 				});
 			}
-		
 			
 		}
 		
