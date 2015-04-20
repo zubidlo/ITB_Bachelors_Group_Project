@@ -21,7 +21,12 @@ html
     margin-right:10px;
 }
 
-
+#progressbar
+{
+width:270px;
+  position: absolute;
+    left: 20px;
+}
 
 #details2{
 
@@ -2290,8 +2295,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
- border-radius: 50%;
-  border: 2px solid white;
+
 
   
 
@@ -2328,8 +2332,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-border-radius: 50%;
-  border: 2px solid white;
+
 
 
 }
@@ -2346,9 +2349,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
- border-radius: 50%;
-  border: 2px solid white;
-	
+
 }
 
 
@@ -2365,8 +2366,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-border-radius: 50%;
-  border: 2px solid white;
+
 
 }
 
@@ -2381,8 +2381,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
- border-radius: 50%;
-  border: 2px solid white;
+
 
 }
 
@@ -2397,8 +2396,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-border-radius: 50%;
-  border: 2px solid white;
+
 
 }
 #sortable7 {
@@ -2412,8 +2410,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-border-radius: 50%;
-    border: 2px solid white;
+
 
 }
 #sortable8 {
@@ -2427,8 +2424,7 @@ transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
 -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
-border-radius: 50%;
-      border: 2px solid white;
+
 
    
 }
