@@ -10,8 +10,8 @@ email: martin.zuber.77@ gmail.com
 ITB student num:B00066378
 
 Michael James
-email:
-ITB student num:
+email: michaelcjames10@gmail.com
+ITB student num: B00019330
 
 Davi Kelly 
 email:
