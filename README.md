@@ -14,8 +14,8 @@ email: michaelcjames10@gmail.com
 ITB student num: B00019330
 
 Davi Kelly 
-email:
-ITB student num:
+email: hellodavidkelly@gmail.com
+ITB student num: B00060572
 
 Fantasy Hurling deployed at: 
 http://fantasyhurling.azurewebsites.net
