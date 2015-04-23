@@ -152,7 +152,8 @@ body
 	line-height: 1.6em;
 	background: #fff;
 	color: #666;
-	background-image: url("backgrounds/new.png");
+	background-color: #E6FCF8;
+	/*background-image: url("backgrounds/new.png");*/
 	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size:13px;
 	color:#000000;
