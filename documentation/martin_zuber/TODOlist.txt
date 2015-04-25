@@ -1,9 +1,0 @@
-2.literature review :
-http protocol
-web services /rest
-ajax
-cors
-
-
-4.learn, do and then write about testing in c# .net web api 2
-5.learn to deploy front end and back end on the same server on azure (MVC/Razor)
