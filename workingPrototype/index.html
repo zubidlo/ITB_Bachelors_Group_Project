@@ -32,15 +32,17 @@
 		<div id="container">
 			<div class="login-card">
 				<form id="get_user_by_username_form" method="get" action="#">
-					<input id="get_user_username_input" type="text"  placeholder="Username" required>
-					<input id="user_password_edit" type="password"  placeholder="Password" required/><br>
+					<label for="get_user_username_input">Enter Username</label><br>
+					<input id="get_user_username_input" type="text"  placeholder="Enter your username here" required>
+					<label for="user_password_edit">Enter Password</label>
+					<input id="user_password_edit" type="password"  placeholder="Enter your password here" required/><br>
 					<input id="get_user_by_username_button" type="submit" onclick="retrieve_username()" value="Login">
 				</form>
 	
 				<div class="login-help">
 					<form action="html/register.html">
 						<label for="register_button">Not Registered? Click Here!</label>
-						<input id="register_button" type="submit" value="Register">
+						<input type="submit" value="Register" id="register_button">
 					</form>
 				</div>
 			</div>

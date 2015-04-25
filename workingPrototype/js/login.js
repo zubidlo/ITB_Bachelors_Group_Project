@@ -38,6 +38,8 @@ $(document).ready(function() {
     var skip = 0;
     var user_count;
 
+
+
     //this method returns new user object build from web form fields
     var readUserFromInputFields = function() {
 
@@ -49,6 +51,9 @@ $(document).ready(function() {
         };
         return user;
     }
+
+
+
 
     var getUsers = function(top, skip) {
 
@@ -63,6 +68,9 @@ $(document).ready(function() {
             }
         });
     }
+
+
+
 
     //user by username GET request
     $_get_user_by_username_form.submit(function(event) {
@@ -99,11 +107,23 @@ $(document).ready(function() {
         });
     });
 
+
+
+
     function setStorage() {
+
+
+
         var user = $("#get_user_username_input").val();
         sessionStorage.setItem("username", user);
+
+
+
     }
+
+
 });
+
 function displayInfo() {
 
     $("#dialog").text("sdjf");
