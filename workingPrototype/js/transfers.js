@@ -24,7 +24,7 @@ function set_user() {
 
 
         get_players();
-
+		
 
     }
 }
@@ -163,16 +163,11 @@ function set_table() {
                     src.appendChild(img);
                     document.getElementById("player_name" + object.PositionId).innerHTML = ("" + object.LastName);
                     var budget_left = 100000 - overall_cost;
-
-                    document.getElementById("details").innerHTML = ("Budget Left: $" + budget_left + " Team Value: $ " + overall_cost);
-
-
-
+                    document.getElementById("budget_details1").innerHTML = ("Team Value: $ " + overall_cost);
+					 document.getElementById("budget_details2").innerHTML = ("Budget Left: $" + budget_left);
                     sessionStorage.setItem("" + object.PositionId, "" + object.Id);
 
-
-
-
+					
                     i = i + 1;
                 });
             }
@@ -181,10 +176,7 @@ function set_table() {
                 displayInfo2();
 
             }
-            $("#progressbar").progressbar({
-
-                value: i * 12
-            });
+        
 
         }
     });
@@ -560,6 +552,7 @@ function get_team() {
                         set_table2();
                         set_table();
                         i++;
+						   document.getElementById("team_name_details").innerHTML = (""+object.Name);
                     } else if (object.UserId != user) {
                         if (sessionStorage.getItem("teamid") == null) {
 
@@ -578,3 +571,5 @@ function get_team() {
         put_new_team();
     }
 }
+
+
