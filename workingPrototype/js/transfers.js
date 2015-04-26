@@ -166,7 +166,7 @@ function set_table() {
                     document.getElementById("budget_details1").innerHTML = ("Team Value: $ " + overall_cost);
 					 document.getElementById("budget_details2").innerHTML = ("Budget Left: $" + budget_left);
                     sessionStorage.setItem("" + object.PositionId, "" + object.Id);
-
+			
 					
                     i = i + 1;
                 });
@@ -553,6 +553,8 @@ function get_team() {
                         set_table();
                         i++;
 						   document.getElementById("team_name_details").innerHTML = (""+object.Name);
+						   		document.getElementById("league_details").innerHTML = ("League: " + object.LeagueId);
+								document.getElementById("manager_details").innerHTML = ("Manager: " + sessionStorage.getItem("username"));
                     } else if (object.UserId != user) {
                         if (sessionStorage.getItem("teamid") == null) {
 

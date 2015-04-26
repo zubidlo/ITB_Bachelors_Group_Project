@@ -10,6 +10,12 @@ html
 {
 	font-size: 100%;
 }
+
+#message_holder
+{
+background:white;
+ text-align:center;
+}
 #pagin {
     clear: both;
     padding:0;
@@ -186,6 +192,41 @@ body
 -moz-border-radius: 75px;
 -webkit-border-radius: 75px;
 border-radius: 75px;
+background-color: #ffffff;
+border: 2px solid #999999;
+-moz-border-radius: 50px;
+-webkit-border-radius: 50px;
+border-radius: 50px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 20px #000000;
+-webkit-box-shadow: 0px 0px 20px #000000;
+box-shadow: 0px 0px 20px #000000;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4a57ff', endColorstr = '#fffdf5');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4a57ff', endColorstr = '#fffdf5')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: -ms-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: -o-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#4a57ff), to(#fffdf5));
+background-image: -webkit-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: linear-gradient(top, #4a57ff, #fffdf5);
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+/*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+opacity: 0.83;
+-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 83);
+/*-ms-filter must come before filter*/
+filter: alpha(opacity = 83);
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*All filters must be placed together*/
+
 }
 
 #container2 
@@ -201,6 +242,40 @@ border-radius: 75px;
 	position: relative;
 	text-align: center;
 	clear: both;
+background-color: #ffffff;
+border: 2px solid #999999;
+-moz-border-radius: 50px;
+-webkit-border-radius: 50px;
+border-radius: 50px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 20px #000000;
+-webkit-box-shadow: 0px 0px 20px #000000;
+box-shadow: 0px 0px 20px #000000;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4a57ff', endColorstr = '#fffdf5');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#4a57ff', endColorstr = '#fffdf5')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: -ms-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: -o-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#4a57ff), to(#fffdf5));
+background-image: -webkit-linear-gradient(top, #4a57ff, #fffdf5);
+background-image: linear-gradient(top, #4a57ff, #fffdf5);
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+/*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+opacity: 0.83;
+-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 83);
+/*-ms-filter must come before filter*/
+filter: alpha(opacity = 83);
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*All filters must be placed together*/
 
 }
 
@@ -1774,21 +1849,13 @@ table.tablesorter tr:hover td{
 	z-index: 9999;
 	background: url('../img/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
 }
-#table_holder
-{
-margin-left: auto;
-    margin-right: auto;
-	position: relative;
-	text-align: center;
-	   vertical-align: middle;
-	   
-}
+
 
 .myTable {
 	margin:0px;padding:0px;
 		width:500px;
 	border:1px black;
-	    margin-right: 200px;
+	   
 	position: absolute;
 	text-align: center;
 	   vertical-align: middle;
@@ -1807,6 +1874,7 @@ margin-left: auto;
 	-moz-border-radius-topleft:0px;
 	-webkit-border-top-left-radius:0px;
 	border-top-left-radius:0px;
+	 text-align:center;
 }.myTable table{
     border-collapse: collapse;
         border-spacing: 0;
