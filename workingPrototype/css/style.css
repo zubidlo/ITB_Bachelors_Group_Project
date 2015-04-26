@@ -1344,11 +1344,10 @@ height: 800px;
 
 .ei-slider{
 	position: relative;
-	width: 1400px;
--moz-border-radius: 15px;
-border-radius: 15px;
-
-	height: 400px;
+	width: 960px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	height: 640px;
 	margin: 0 auto;
 }
 .ei-slider-loading{

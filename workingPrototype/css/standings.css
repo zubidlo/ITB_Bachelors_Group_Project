@@ -13,9 +13,7 @@ html {
 #forum_post_area
 {
  	text-align: left;
-    width: 39%;
-	height: 5%;
- 	resize: none;
+ 	width: 0%;
 	border:solid 1px #000000;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
