@@ -177,6 +177,12 @@ body
 	position: relative;
 	text-align: center;
 	clear: both;
+	     	display:block;
+     	float:left;
+     	margin-left:1em;
+     	width:8em;
+     	color:black;
+    	height:2em;
 }
 #container_user
 {	background: white;
