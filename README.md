@@ -1,27 +1,16 @@
-Fantasy_Hurling
-===============
-
-Group Project
-
-Created by:
-
-Martin Zuber
-email: martin.zuber.77@ gmail.com
-ITB student num:B00066378
-
-Michael James
-email: michaelcjames10@gmail.com
-ITB student num: B00019330
-
-Davi Kelly 
-email: hellodavidkelly@gmail.com
-ITB student num: B00060572
-
-Fantasy Hurling deployed at: 
-http://fantasyhurling.azurewebsites.net
-
-Admin Pages:
-http://fantasyhurling.azurewebsites.net/consume_api_examples/data_admin/login.html
-
-Hurling API deployed at:
-http://hurlingapi.azurewebsites.net
+GROUP PROJECT: Fantasy_Hurling  
+================  
+Created by:  
+Martin Zuber, email: martin.zuber.77@ gmail.com, ITB student num:B00066378  
+Michael James, email: michaelcjames10@gmail.com, ITB student num: B00019330  
+Davi Kelly, email: hellodavidkelly@gmail.com, ITB student num: B00060572  
+================  
+Fantasy Hurling and Admin Pages deployed at:   
+http://fantasyhurling.azurewebsites.net  
+================  
+Hurling API deployed at:  
+http://hurlingapi.azurewebsites.net  
+================  
+project available at:  
+https://github.com/Michaelcj10/Fantasy_Hurling  
+================  

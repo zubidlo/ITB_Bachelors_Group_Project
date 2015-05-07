@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="HurlingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="HurlingModelContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Positions" EntityType="HurlingModel.Position" />
+    <EntitySet Name="Users" EntityType="HurlingModel.User" />
+    <EntitySet Name="Leagues" EntityType="HurlingModel.League" />
+    <EntitySet Name="Teams" EntityType="HurlingModel.Team" />
+    <EntitySet Name="Players" EntityType="HurlingModel.Player" />
+    <EntitySet Name="Messages" EntityType="HurlingModel.Message" />
+    <AssociationSet Name="UserMessage" Association="HurlingModel.UserMessage">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="PositionPlayer" Association="HurlingModel.PositionPlayer">
+      <End Role="Position" EntitySet="Positions" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+    <AssociationSet Name="TeamLeague" Association="HurlingModel.TeamLeague">
+      <End Role="Team" EntitySet="Teams" />
+      <End Role="League" EntitySet="Leagues" />
+    </AssociationSet>
+    <AssociationSet Name="UserTeam" Association="HurlingModel.UserTeam">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Team" EntitySet="Teams" />
+    </AssociationSet>
+    <AssociationSet Name="TeamPlayer" Association="HurlingModel.TeamPlayer">
+      <End Role="Team" EntitySet="Teams" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Position">
+    <Documentation>
+      <Summary>GAA Hurling field position type, example: goalkeeper, defender etc...</Summary>
+    </Documentation>
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false">
+      <Documentation>
+        <Summary>GAA hurling field position, can't be omitted.</Summary>
+      </Documentation>
+    </Property>
+    <NavigationProperty Name="Players" Relationship="HurlingModel.PositionPlayer" FromRole="Position" ToRole="Player" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <NavigationProperty Name="Messages" Relationship="HurlingModel.UserMessage" FromRole="User" ToRole="Message" />
+    <NavigationProperty Name="Teams" Relationship="HurlingModel.UserTeam" FromRole="User" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="League">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false">
+      <Documentation>
+        <Summary>A name, can't be omitted.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="NextFixtures" Type="DateTime" Nullable="false" />
+    <Property Name="Week" Type="Byte" Nullable="false">
+      <Documentation>
+        <Summary>Current week the League is in.</Summary>
+      </Documentation>
+    </Property>
+    <NavigationProperty Name="Teams" Relationship="HurlingModel.TeamLeague" FromRole="League" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="OverAllPoints" Type="Decimal" Nullable="false">
+      <Documentation>
+        <Summary>Summary of all points acquired each week</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="LastWeekPoints" Type="Decimal" Nullable="false">
+      <Documentation>
+        <Summary>Summary of all points acquired by this team players in last week</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Budget" Type="Decimal" Nullable="false" />
+    <NavigationProperty Name="League" Relationship="HurlingModel.TeamLeague" FromRole="Team" ToRole="League" />
+    <Property Name="LeagueId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="HurlingModel.UserTeam" FromRole="Team" ToRole="User" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Players" Relationship="HurlingModel.TeamPlayer" FromRole="Team" ToRole="Player" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false">
+      <Documentation>
+        <Summary>First name, can't be omitted</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="LastName" Type="String" Nullable="false">
+      <Documentation>
+        <Summary>Last name, can't be omitted.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="GaaTeam" Type="String" Nullable="false">
+      <Documentation>
+        <Summary>Real GAA team name this player plays for, can't be omitted.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="LastWeekPoints" Type="Decimal" Nullable="false">
+      <Documentation>
+        <Summary>Point acquired in real matches last week, can be omitted.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="OverallPoints" Type="Decimal" Nullable="false">
+      <Documentation>
+        <Summary>Summary of all weekly points, can be omitted.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Price" Type="Decimal" Nullable="false">
+      <Documentation>
+        <Summary>Price in euros, can't be omitted.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Rating" Type="Byte" Nullable="false">
+      <Documentation>
+        <Summary>Some rank system, for example from 1 to 10, can't be omitted</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Injured" Type="Boolean" Nullable="false">
+      <Documentation>
+        <Summary>If injured the player is not going to play this week GAA matches</Summary>
+      </Documentation>
+    </Property>
+    <NavigationProperty Name="Position" Relationship="HurlingModel.PositionPlayer" FromRole="Player" ToRole="Position" />
+    <Property Name="PositionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Teams" Relationship="HurlingModel.TeamPlayer" FromRole="Player" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Documentation>
+      <Summary>Messages for chat arrea</Summary>
+    </Documentation>
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="HurlingModel.UserMessage" FromRole="Message" ToRole="User" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <Association Name="UserMessage">
+    <End Type="HurlingModel.User" Role="User" Multiplicity="1" />
+    <End Type="HurlingModel.Message" Role="Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PositionPlayer">
+    <End Type="HurlingModel.Position" Role="Position" Multiplicity="1" />
+    <End Type="HurlingModel.Player" Role="Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeamLeague">
+    <End Type="HurlingModel.Team" Role="Team" Multiplicity="*" />
+    <End Type="HurlingModel.League" Role="League" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="League">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Team">
+        <PropertyRef Name="LeagueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTeam">
+    <End Type="HurlingModel.User" Role="User" Multiplicity="1" />
+    <End Type="HurlingModel.Team" Role="Team" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Team">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeamPlayer">
+    <End Type="HurlingModel.Team" Role="Team" Multiplicity="*" />
+    <End Type="HurlingModel.Player" Role="Player" Multiplicity="*" />
+  </Association>
+</Schema>
