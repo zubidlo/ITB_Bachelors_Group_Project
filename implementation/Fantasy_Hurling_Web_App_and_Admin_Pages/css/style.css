@@ -182,6 +182,8 @@ body
      	margin-left:1em;
      	width:8em;
      	color:black;
+		   margin-left: auto;
+	margin-right: auto;
     	height:2em;
 }
 #container_user
@@ -1334,7 +1336,7 @@ a.nivo-prevNav {background:url(../img/slide-next-prev.png) left no-repeat;left:5
 
 /* boxes */
 
-.box_highlight {background: white; padding: 15px; margin: 20px 0;border-radius: 5px; clear: both}
+
 
 #rss
 {
