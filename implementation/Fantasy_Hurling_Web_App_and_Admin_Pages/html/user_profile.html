@@ -1,115 +1,123 @@
 <!DOCTYPE HTML>
 <head>
-	<title>FH | Profile</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
-		<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
-		<script src="../js/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
-		<script src="../js/user_profile.js"></script>
-		<script src="../consume_api_examples/data_admin/js/constants_and_functions.js"></script>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
+   <title>FH | Profile</title>
+   <meta charset="utf-8">
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <link href="http://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet" type="text/css">
+   <!-- jQuery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <!-- Latest compiled JavaScript -->
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <script src="../js/post-message.js"></script>
+   <script src="../js/user_profile.js"></script>
+   <script src="../consume_api_examples/data_admin/js/constants_and_functions.js"></script>
+   <link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
+   <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 </head>
-
-<body onload="setStorage()">
-	<div class="header">
-		<div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
-		<!-- Dynamic Menu -->
-		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
-			
-			<li><a href="my_team.html" onclick="checkSession_view_team()">My Team</a></li>
-				<li><a href="user_profile.html" onclick="checkSession_user_profile()">Acc</a></li>
-			<li><a href="standings.html" onclick="checkSession_standings()">Standings</a></li>
-			<li><a href="transfers.html" onclick="checkSession_transfers()">Transfers</a></li>
-		<li><a href="#" onclick="logout_user()">Logout</a></li>
-			<li><img src="../images/info.png" alt = "" style="width:18px;height:18px;border:0" onClick="displayInfo();"></li>
-			
-		</ol>
-	</div>
-			<div id="dialog" title = "Info">
-  <p></p>
-</div>
- 	<div class="clr">
-		<p id="demo">.</p>
-	
-	</div>
-	<!-- end header -->
-	
-	<div class="wrapper">
-	<!-- wrapper -->
-		<br><br>
-		<div id="container_user">
-			<p id="username">.</p>
-			<p id="password">.</p>
-			<p id="email">.</p>
-			
-			<br>
-		
-			<form id="details">
-				Enter a new Password:<br>
-				<input type="text" name="password_change" id ="change_password">
-				<br>
-				Enter a new Email:<br>
-				<input type="text" name="email_change" id="change_email"><br>
-				<input id="update_button" type="submit" onclick="change_details()" value="Update Details">
-			</form>
-
-			<div style="clear:both; height: 40px"></div>
-		</div>
-		
-			
-	</div>
-	<!-- close container -->
-	
-
-	<div style="clear:both; height: 40px">
-		
-	</div>
-
-	<div class="chat_feature">
-		<table id="table_2" class="myTable"> 
-			<tr>
-				<td>
-					User
-				</td>
-				<td >
-					Message
-				</td>	
-			</tr>	
-		</table> 
-			
-		<div style="clear:both; height: 40px">
-	
-		</div>
-				
-		<textarea rows="9" cols="10" id = "forum_post_area" onClick="clear_text_area()" class = "textarea">
-		
-				</textarea>  <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
-	</div>
-<br>
-	
-	<div id="footer">
-			<li align ="center">
-Application by Michael James, David Kelly, Martin Zuber<br>2015</li>
-
-	
-		
-	</div>
-
+<body >
+   <nav class="navbar navbar-inverse" style="opacity:0.9;">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand white-heading-fancy-smallest" href="#" ><img src="../images/logo.png" class="img" alt="Cinque Terre" width="65" height="26"></a>
+         </div>
+         <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav" >
+               <li ><a href="home.html"  class="white-heading-fancy-smallest"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+               <li><a href="user_profile.html"  class="white-heading-fancy-smallest" >My Profile</a></li>
+               <li><a href="my_team.html"  class="white-heading-fancy-smallest" >My Team</a></li>
+               <li><a href="transfers.html"  class="white-heading-fancy-smallest" >Transfers</a></li>
+               <li><a href="standings.html"  class="white-heading-fancy-smallest" >Standings</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="" id="team-budget-left" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="" id="team-name" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="" id="team-value" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="#" onclick="logout_user();" class="black-heading-fancy-smallest" ><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-sm-3 visible-md visible-lg  " id="side-bar">
+            <ul class="nav nav-pills nav-stacked black  " id="side-options">
+               <li  ><a href="#" id="home" ><span class="glyphicon glyphicon-home"></span>  Home <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li><a href="#" id="user_profile"><span class="glyphicon glyphicon-user" ></span> My Profile <span class="glyphicon glyphicon-chevron-left" style="float:right;" ></span></a></li>
+               <li ><a href="#" id="my_team"><span class="glyphicon glyphicon-euro" ></span> My Team <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li class="active"><a href="#" id="transfers"><span class="glyphicon glyphicon-pencil" ></span> Transfers <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li><a href="#" id="standings"><span class="glyphicon glyphicon-list-alt" ></span> Standings <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li ><a href="http://www.gaa.ie/"  target="_blank" style="color:white; text-decoration:none "><span class="glyphicon glyphicon-star-empty" ></span> GAA Site</a></li>
+               <li><a href="http://www.rte.ie/sport/" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span> Rte Sport</a></li>
+               <li><a href="http://www.rte.ie/sport/gaa/hurling/" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span> Fixtures</a></li>
+               <li><a href="https://en.wikipedia.org/wiki/All-Ireland_Senior_Hurling_Championship_records_and_statistics" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span>Records</a></li>
+            </ul>
+         </div>
+         <div class="col-sm-9 main-content"  >
+            <div id="home-container">
+               <h2>Dashboard</h2>
+               <div id = "welcome-banner" class="black" > </div>
+               <br>
+               <div id = "time-panel" class="black" > </div>
+               <hr>
+            </div>
+            <br><br>
+            <div class="col-sm-6" >
+               <div class="panel panel-default">
+                  <div class="panel-body " >
+                     <div class="black"> My username: </div>
+                     <p id="username"></p>
+                     <div class="black"> My password: </div>
+                     <p id="password"></p>
+                     <div class="black"> My email: </div>
+                     <p id="email"></p>
+                  </div>
+               </div>
+               <div class="well"  id="user-profile-well">
+                  <div class="white-heading-fancy-smallest ">Enter New Details</div>
+               </div>
+               <form id="details">
+                  <div class="form-group">
+                     <label for="change_email" class="black">Email address:</label>
+                     <input type="text" class="form-control" name="email_change" id="change_email">
+                  </div>
+                  <div class="form-group">
+                     <label for="change_password" class="black" >Password:</label>
+                     <input type="text" class="form-control" name="password_change" id ="change_password">
+                  </div>
+                  <button type="submit" class="btn btn-default" onclick="change_details()" value="Update Details">Submit</button>
+               </form>
+               <br><br>
+            </div>
+            <div class="col-sm-6">
+               <div class="panel panel-primary ">
+                  <div class="panel-heading">Messages</div>
+                  <div class="panel-body">
+                     <table class="table table-bordered" id="message-table">
+                        <thead>
+                           <tr>
+                              <th>User</th>
+                              <th>Said</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                     </table>
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="message" value="Enter Message" onmouseover="clearTextField();">
+                     </div>
+                     <button type="button" class="btn btn-default" id="post-new-message">Submit</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <br><br>
+      </div>
+   </div>
 </body>
 </html>
-
-
-
-
-
-

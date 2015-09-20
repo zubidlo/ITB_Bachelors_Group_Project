@@ -1,17 +1,3 @@
-/*
-	.
-	This is the register page script , it is used to register
-	a user if he clicks the register button on the login page
-	It simply takes the users username, password and email
-	from the form fields he has filled in and enters the new
-	user into the database, the database will not accept duplicate
-	user names
-
-
-	 HTML files used in:
-	register.html
-
-	*/
 $(document).ready(function() {
 
     //dom elements
@@ -21,23 +7,31 @@ $(document).ready(function() {
     var $_user_username_edit = $("#user_username_edit");
     var $_user_password_edit = $("#user_password_edit");
     var $_user_email_edit = $("#user_email_edit");
+    var $_user_team_edit = $("#user_team_edit");
 
 
 
 
-    function add_user() {
+    function add_user(user, password, email, team) {
+
+        var user = {
+            Id: $_user_id_edit.val(),
+            Username: $_user_username_edit.val(),
+            Password: $_user_password_edit.val(),
+            Email: $_user_email_edit.val()
+        };
 
         $.ajax({
             type: "POST",
             url: "http://hurlingapi.azurewebsites.net/api/users",
-            data: readUserFromInputFields(),
+            data: user,
             dataType: "json",
             success: function(data) {
 
-                getAllUsers();
-                clearUserTextFields();
-                alert("New User Created");
-                window.location = "../index.html";
+
+                getUserID(user.Username, user.Password, user.Email, team);
+
+
 
             },
             error: function(request, textStatus, errorThrown) {
@@ -48,13 +42,6 @@ $(document).ready(function() {
     }
 
 
-    function clearUserTextFields() {
-
-        $_user_id_edit.val("0");
-        $_user_username_edit.val('');
-        $_user_password_edit.val('');
-        $_user_email_edit.val('');
-    }
 
     function fillUserTextFields(object) {
 
@@ -66,49 +53,19 @@ $(document).ready(function() {
     }
 
 
-    function readUserFromInputFields() {
-
-        var user = {
-            Id: $_user_id_edit.val(),
-            Username: $_user_username_edit.val(),
-            Password: $_user_password_edit.val(),
-            Email: $_user_email_edit.val()
-        };
-
-        return user;
-    }
-
-
-    //get all users GET request
-    function getAllUsers() {
-
-        $.ajax({
-            type: "GET",
-            url: "http://hurlingapi.azurewebsites.net/api/users",
-            dataType: "json",
-            success: function(data) {
-
-                putUsersInTable(data);
-            },
-            error: function(request, textStatus, errorThrown) {
-
-                window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-                clearUserTextFields();
-            }
-        });
-    }
-
-    getAllUsers();
-
-
 
 
     //create new user POST request
     $("#post_new_user_button").on("click", function(event) {
 
-        add_user();
+
+        var user = $_user_username_edit.val();
+        var password = $_user_password_edit.val();
+        var email = $_user_email_edit.val();
+        var team = $_user_team_edit.val();
 
 
+        add_user(user, password, email, team);
 
     });
 
@@ -117,8 +74,93 @@ $(document).ready(function() {
 });
 
 
-function displayInfo() {
 
-    $("#dialog").text("You can register on this page if you are not a current user");
-    $("#dialog").dialog();
+function createNewTeam(user, password, email, team, userID) {
+
+    var name = $("#user_username_edit").val();
+    var team = $("#user_team_edit").val();
+    var userWithTeam = {
+        Id: 11,
+        Name: team,
+        OverAllPoints: 0,
+        LastWeekPoints: 0,
+        Budget: 100000,
+        LeagueId: 1,
+        UserId: userID
+    };
+
+
+
+
+    $.ajax({
+        type: "POST",
+        url: "http://hurlingapi.azurewebsites.net/api/teams",
+        data: userWithTeam,
+        dataType: "json",
+        success: function(data) {
+
+
+            alert("Team Created");
+            window.location = "../index.html";
+        },
+        error: function(request, textStatus, errorThrown) {
+
+
+        }
+    });
+
+
+
+
+}
+
+function getUserID(user, password, email, team) {
+
+
+
+
+    var _url = "http://hurlingapi.azurewebsites.net/api/users";
+
+
+
+    var request = $.ajax({
+        url: _url,
+        async: true,
+
+        success: function(data) {
+
+            if ($.isArray(data)) {
+                $.each(data, function(index, object) {
+
+
+                    if (object.Username === user) {
+
+
+                        createNewTeam(user, password, email, team, object.Id);
+                        sessionStorage.setItem("tempID", object.Id);
+
+
+                    } else {
+
+                    }
+
+
+
+
+                });
+
+
+
+            }
+
+        }
+
+
+
+
+    });
+
+
+
+
 }

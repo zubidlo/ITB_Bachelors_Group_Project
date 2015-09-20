@@ -1,33 +1,38 @@
-function setStorage() {
+//stop the user logging in by pressing enter to correct issue with setting session vars
+$(document).ready(function() {
 
-    if (sessionStorage.getItem("username") === null) {
-
+    if (sessionStorage.getItem("username") == null) {
         window.location = "../index.html";
-
-    } else {
-        var user = sessionStorage.getItem("username");
-        document.getElementById("demo").innerHTML = ("You are logged in as " + user);
-        retrieve_details();
-        set_table();
 
     }
 
 
+    retrieve_details();
+    $('#team-budget-left').text("Budget: " + sessionStorage.getItem("teamBudget"));
+    $('#team-value').text("Team Value: " + sessionStorage.getItem("teamValue"));
+    $('#team-name').text("" + sessionStorage.getItem("teamName"));
+    var user = sessionStorage.getItem("username");
+    document.getElementById("welcome-banner").innerHTML = ("Welcome " + user);
+    $('#time-panel').text("" + sessionStorage.getItem("loginTime"));
+    $('a').click(function() {
 
 
-}
 
-function displayInfo() {
 
-    $("#dialog").text("Change your current user details including password and username on this page");
-    $("#dialog").dialog();
-}
+        if (sessionStorage.getItem("username") === null) {
 
-function displayInfo2() {
+        } else {
+            window.location = "" + this.id + ".html";
+        }
 
-    $("#dialog").text("Your details have been updated");
-    $("#dialog").dialog();
-}
+    });
+
+
+
+});
+
+
+
 
 function set_table() {
 
@@ -73,194 +78,7 @@ function set_table() {
 
 }
 
-function readUserFromInputFields() {
 
-    var id = sessionStorage.getItem("id");
-
-    var text = document.getElementById("forum_post_area").value;
-    var now = new Date();
-    now = new Date().toLocaleString();
-
-    var user = {
-        Id: id,
-        Text: text,
-        UserId: id,
-        Created: now
-
-    };
-
-    return user;
-}
-
-function checkSession_standings() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "standings.html";
-
-
-    }
-
-}
-
-
-function checkSession_forum() {
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "forum.html";
-
-
-    }
-
-}
-
-function post_message() {
-    $("#table_2").find("tr:gt(0)").remove();
-
-    $.ajax({
-        type: "POST",
-        url: "http://hurlingapi.azurewebsites.net/api/messages",
-        data: readUserFromInputFields(),
-        dataType: "json",
-        success: function(data) {
-
-
-            clear_text_area();
-            set_table();
-            document.getElementById("forum_post_area").value = "Please Enter a Message";
-
-
-        },
-        error: function(request, textStatus, errorThrown) {
-
-            window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-        }
-    });
-}
-
-
-function clear_text_area() {
-
-    document.getElementById("forum_post_area").value = "";
-
-    set_table();
-
-
-}
-
-function clear_text_area() {
-
-    document.getElementById("forum_post_area").value = "";
-
-
-}
-
-
-
-function return_username(userId) {
-
-
-    var _url = "http://hurlingapi.azurewebsites.net/api/users";
-
-    event.preventDefault();
-    $.ajax({
-        async: false,
-        url: _url + "/Id/" + userId,
-        success: function(data, textStatus, request) {
-
-
-            sessionStorage.setItem("temp", data.Username);
-
-
-
-
-        }
-    });
-
-
-
-}
-
-
-
-function checkSession_view_team() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "my_team.html";
-
-
-    }
-
-}
-
-
-
-
-function checkSession_see_rankings() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "standings.html";
-
-
-    }
-
-}
-
-
-
-
-function checkSession_home() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "home.html";
-
-
-    }
-
-}
-
-
-
-function checkSession_transfers() {
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "transfers.html";
-
-
-    }
-
-}
 
 
 function logout_user() {
@@ -291,16 +109,17 @@ function retrieve_details() {
 
         success: function(data) {
 
+
             var username = data.Username;
             var password = data.Password;
             var email = data.Email;
             var Id = data.Id;
 
-            document.getElementById("username").innerHTML = ("Your username is: " + username);
+            document.getElementById("username").innerHTML = ("" + username);
 
-            document.getElementById("password").innerHTML = ("Your password is: " + password);
+            document.getElementById("password").innerHTML = ("" + password);
 
-            document.getElementById("email").innerHTML = ("Your email is: " + email);
+            document.getElementById("email").innerHTML = ("" + email);
 
             document.getElementById("change_password").value = password;
             document.getElementById("change_email").value = email;
@@ -319,6 +138,8 @@ function retrieve_details() {
 
 function change_details() {
 
+
+
     var current_mail = document.getElementById("change_email");
     var new_email = change_email.value;
 
@@ -326,7 +147,6 @@ function change_details() {
 
     var current_password = document.getElementById("change_password");
     var new_password = change_password.value;
-
 
 
     sessionStorage.removeItem("email");
@@ -347,7 +167,11 @@ function change_details() {
         };
     }
 
-    _url += "/api/users";
+
+
+
+    var _url = "http://hurlingapi.azurewebsites.net/api/users";
+    //_url += "/api/users";
 
     event.preventDefault();
 
@@ -357,11 +181,8 @@ function change_details() {
 
         ajaxRequest(_url, function(data, textStatus, request) {
 
-            _count = parseInt(data.length);
-            $table_rows_count.val(_count);
-            getUsers(tableCurrentPage());
         });
-        printOutput(textStatus, request);
+
     }
     var type = "PUT";
     if (type === "PUT") {
@@ -372,11 +193,11 @@ function change_details() {
 
     ajaxRequest(url, successCallback, generalErrorCallback, type, dataType, user);
 
-    displayInfo2();
+
     document.getElementById("change_password").value = sessionStorage.getItem("password");
     document.getElementById("change_email").value = sessionStorage.getItem("email");
-    document.getElementById("password").innerHTML = ("Your password is :" + sessionStorage.getItem("password"));
-    document.getElementById("email").innerHTML = ("Your email is :" + sessionStorage.getItem("email"));
+    document.getElementById("password").innerHTML = ("" + sessionStorage.getItem("password"));
+    document.getElementById("email").innerHTML = ("" + sessionStorage.getItem("email"));
 
 
 }

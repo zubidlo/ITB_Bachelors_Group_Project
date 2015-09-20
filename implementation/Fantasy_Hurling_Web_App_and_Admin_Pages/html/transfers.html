@@ -1,200 +1,275 @@
 <!DOCTYPE HTML>
 <head>
-	<title>FH | Team</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" media="screen" href="../css/style_transfers.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
-		<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
-		<script src="../js/jquery.min.js"></script>
-		<script src="../js/transfers.js"></script>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
-	
-		<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
-
-		<script>
-		$(function() {
-		$( document ).tooltip();
-		});
-		</script>
-
-
-
-		<style>
-		label {
-		display: inline-block;
-		width: 5em;
-		color: white;
-		font-size: 130%;
-		}
-		</style>
+   <title>FH | Transfers</title>
+   <meta charset="utf-8">
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <link href="http://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet" type="text/css">
+   <!-- jQuery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="../js/post-message.js"></script>
+   <!-- Latest compiled JavaScript -->
+   <script src="../js/transfers.js"></script>
+   <link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
+   <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 </head>
-
-<body onload="set_user()">
-	<div class="header">
-		<div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
-	  <!-- Dynamic Menu -->
-		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
-			<li><a href="my_team.html" >My Team</a></li>
-			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Acc</a></li>
-			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
-			<li><a href="transfers.html" onclick="checkSession_transfers()">Transfers</a></li>
-			<li><a href="#" onclick="logout_user()">Logout</a></li>
-			<li><img src="../images/info.png" alt = " " style="width:18px;height:18px;border:0" onClick="displayInfo();"></li>
-			 
-  
-
-		</ol>
-	  <!-- menu 2 -->
-	
-	</div>
-
-	<div class="clr">
-		<p id="demo">.</p>
-
-	</div>
-	<!-- end header -->
-	
-	<div id="wrapper3">	 
-	
-		<ul id="sortable1">
-		<class="ui-widget-content"   id="1" onClick= "show_message(1)"><label for="1" id ="player_name1"></label>
-		</ul>
-		<ul id="sortable2" >
-		<class="ui-widget-content" id="2" onClick= "show_message(2)"> <label for="2" id ="player_name2"></label>
-		</ul>
-		<ul id="sortable3" >
-		<class="ui-widget-content" id="3"  onClick= "show_message(3)"> <label for="3" id ="player_name3"></label>
-		</ul>
-		<ul id="sortable4" >
-		<class="ui-widget-content" id="4"  onClick= "show_message(4)"> <label for="4" id ="player_name4"></label>
-		</ul>
-		<ul id="sortable5" >
-		<class="ui-widget-content" id="5"   onClick= "show_message(5)"> <label for="5" id ="player_name5"></label>
-		</ul>
-		<ul id="sortable6">
-		<class="ui-widget-content" id="6"  onClick= "show_message(6)"> <label for="6" id ="player_name6"></label>
-		</ul>
-		<ul id="sortable7"  >
-		<class="ui-widget-content" id="7"   onClick= "show_message(7)"> <label for="7" id ="player_name7"></label>
-		</ul>
-		<ul id="sortable8"  >
-		<class="ui-widget-content" id="8"   onClick= "show_message(8)"> <label for="8" id ="player_name8"></label>
-		</ul>
-		 	
-			<div id="dialog" title = "Info">
-  <p></p>
-</div>
-		<div id ="holder">
-		<table id="table_3" style="cursor: pointer;" class="tablesorter1"> 
-			<thead> 
-				<tr> 
-					<th>P</th> 
-					<th>N</th> 
-					<th>T</th> 
-					<th>W</th> 
-					<th>O</th> 
-					<th>R</th> 
-					<th>V</th> 
-					<th>+</th>
-				</tr> 
-			</thead> 
-			<tbody> 
-				<tr> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-				</tr> 
-			</tbody> 
-			</br>
-						<select id = "combo" onchange="combo();">
-	
-  <option value="Goalkeeper" >Goalkeeper</option>
-  <option value="Defenders">Defenders</option>
-  <option value="Midfielders">Midfielders</option>
-  <option value="Attackers">Attackers</option>
-
-</select>
-<select id = "amount" onchange="combo();" >
-  <option value="Antrim">Antrim</option>
-  <option value="Carlow" >Carlow</option>
-  <option value="Cork">Cork</option>
-  <option value="Dublin">Dublin</option>
-  <option value="Galway">Galway</option>
-  <option value="Kilkenny">Kilkenny</option>
-  <option value="Kildare" >Kildare</option>
-  <option value="Laois">Laois</option>
-  <option value="Louth">Louth</option>
-  <option value="Sligo">Sligo</option>
-  <option value="Waterford">Waterford</option>
-  <option value="Wexford" >Wexford</option>
-</select>
-
-<br>
-		
-		</table></div>
-		<div id="picture">
-		
-		<div id="team_name_details"> </div>
-		<div id="jersey_details"> <img src="../images/jerseys/Tyrone.png" alt="" style="width:304px;height:228px"></div>
-		<div id="budget_details1"> </div>
-		<div id="budget_details2"> </div>
-		<div id="league_details"> </div>
-		<div id="manager_details"> </div>
-		
-			
-		</div>	
-</div>
-
-	<!-- close container -->
-	
-		
-
-	<div style="clear:both; height: 40px">
-		
-	</div>
-
-	<div class="chat_feature">
-		<table id="table_2" class="myTable"> 
-			<tr>
-				<td>
-					User
-				</td>
-				<td >
-					Message
-				</td>	
-			</tr>	
-		</table> 
-			
-		<div style="clear:both; height: 40px">
-	
-		</div>
-				
-		<textarea rows="9" cols="10" id = "forum_post_area" onClick="clear_text_area()" class = "textarea">
-				
-				</textarea>  <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
-	</div>
-<br>
-
-	<div id="footer">
-			<li align ="center">
-Application by Michael James, David Kelly, Martin Zuber<br>2015</li>
-
-	
-		
-	</div>
-
+<body >
+   <nav class="navbar navbar-inverse" style="opacity:0.9;">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand white-heading-fancy-smallest" href="#" ><img src="../images/logo.png" class="img" alt="Cinque Terre" width="65" height="26"></a>
+         </div>
+         <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav" >
+               <li ><a href="home.html"  class="white-heading-fancy-smallest"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+               <li><a href="user_profile.html"  class="white-heading-fancy-smallest" >My Profile</a></li>
+               <li><a href="my_team.html"  class="white-heading-fancy-smallest" >My Team</a></li>
+               <li><a href="transfers.html"  class="white-heading-fancy-smallest" >Transfers</a></li>
+               <li><a href="standings.html"  class="white-heading-fancy-smallest" >Standings</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="" id="team-budget-left" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="" id="team-name" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="" id="team-value" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="#" onclick="logout_user();" class="black-heading-fancy-smallest" ><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-sm-3 visible-md visible-lg  " id="side-bar">
+            <ul class="nav nav-pills nav-stacked black  " id="side-options">
+               <li  ><a href="#" id="home" ><span class="glyphicon glyphicon-home"></span>  Home <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li><a href="#" id="user_profile"><span class="glyphicon glyphicon-user" ></span> My Profile <span class="glyphicon glyphicon-chevron-left" style="float:right;" ></span></a></li>
+               <li ><a href="#" id="my_team"><span class="glyphicon glyphicon-euro" ></span> My Team <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li class="active"><a href="#" id="transfers"><span class="glyphicon glyphicon-pencil" ></span> Transfers <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li><a href="#" id="standings"><span class="glyphicon glyphicon-list-alt" ></span> Standings <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li ><a href="http://www.gaa.ie/"  target="_blank" style="color:white; text-decoration:none "><span class="glyphicon glyphicon-star-empty" ></span> GAA Site</a></li>
+               <li><a href="http://www.rte.ie/sport/" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span> Rte Sport</a></li>
+               <li><a href="http://www.rte.ie/sport/gaa/hurling/" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span> Fixtures</a></li>
+               <li><a href="https://en.wikipedia.org/wiki/All-Ireland_Senior_Hurling_Championship_records_and_statistics" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span>Records</a></li>
+            </ul>
+         </div>
+         <div class="col-sm-9 main-content" >
+            <div id="home-container">
+               <h2>Dashboard</h2>
+               <div id = "welcome-banner" class="black" > </div>
+               <br>
+               <div id = "time-panel" class="black" > </div>
+            </div>
+            <hr>
+            <br><br>
+            <div class="row centered">
+               <div class="col-sm-6">
+                  <div class=" panel-top black">
+                     <div class="panel-heading " style="background:#3366CC;opacity:0.7; color:white;">
+                        <p>Best Player: <span class="glyphicon glyphicon-asterisk"></span></p>
+                     </div>
+                     <div class="panel-body " style="background:#85A3E0;opacity:0.7; color:white;">
+                        <p id="best-player-panel"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class=" panel-top black">
+                     <div class="panel-heading " style="background:#009933;opacity:0.7; color:white;">
+                        <p>Free Positions<span class="glyphicon glyphicon-euro"></span></p>
+                     </div>
+                     <div class="panel-body" style="background:#33AD5C;opacity:0.7; color:white;">
+                        <p id="free-positions-panel"></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br><br>
+            <div class="col-sm-6" >
+               <div class="panel panel-default">
+                  <div class="panel-heading">
+                     <div class="black-heading-fancy-smallest">My Team </div>
+                  </div>
+                  <div class="panel-body">
+                     <div class="panel panel-default  "  id="my-team-panel">
+                        <div class="panel-body">
+                           <div class ="row" >
+                              <div class="col-sm-2"></div>
+                              <div class="col-sm-8" >
+                                 <br>
+                                 <br><br>
+                                 <div id="Goalkeeper"  >
+                                    <div id="Goalkeeper-Name" class="white" >
+                                    </div>
+                                 </div>
+                                 <br><br><br>
+                              </div>
+                              <div class="col-sm-2"></div>
+                           </div>
+                           <br>
+                           <div class ="row">
+                              <div class="col-sm-4">
+                                 <div id="Corner-Back"  >
+                                    <div id="Corner-Back-Name" class="white" >
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div id="Full-Back"  >
+                                    <div id="Full-Back-Name" class="white" >
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div id="Half-Back"  >
+                                    <div id="Half-Back-Name" class="white" >
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <br><br>
+                           <div class ="row">
+                              <div class="col-sm-4">
+                                 <div id="Midfielder"  >
+                                    <div id="Midfielder-Name" class="white" >
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div id="Half-Forward"  >
+                                    <div id="Half-Forward-Name" class="white" >
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div id="Corner-Forward"  >
+                                    <div id="Corner-Forward-Name" class="white" >
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <br><br>
+                           <div class ="row">
+                              <div class="col-sm-2"></div>
+                              <div class="col-sm-8">
+                                 <div id="Full-Forward"  >
+                                    <div id="Full-Forward-Name" class="white" >
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-2"></div>
+                           </div>
+                        </div>
+                        <br><br><br><br>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-6">
+               <div class="panel panel-default " id="compact">
+                  <div class="panel-heading" style="background:#3366CC;opacity:0.7; color:white;"><button type="button" class="btn btn-default" id="table-view">Table View</button></div>
+                  <div class="panel-body">
+                     <label>Name|County|Position|Points|Price</label>
+                     <div class="form-group">
+                        <label for="Goalkeepers-select-box">Goalkeepers</label>
+                        <select class="form-control" id="Goalkeepers-select-box">
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="Defenders-select-box">Defenders</label>
+                        <select class="form-control" id="Defenders-select-box">
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="Midfielders-select-box">Midfielders</label>
+                        <select class="form-control" id="Midfielders-select-box">
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="Attackers-select-box">Attackers</label>
+                        <select class="form-control" id="Attackers-select-box">
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="panel panel-default hidden" id="table-view-container">
+                  <div class="panel-heading" style="background:#3366CC;opacity:0.7; color:white;"><button type="button" class="btn btn-default" id="compact-view">Compact View</button></div>
+                  <div class="panel-body">
+                     <div class="table-responsive ">
+                        <table class="table table-bordered table-hover"  id="player-list-table">
+                           <thead>
+                              <tr>
+                                 <th>Position</th>
+                                 <th>Name</th>
+                                 <th>Team</th>
+                                 <th> Week</th>
+                                 <th> Overall</th>
+                                 <th>Price</th>
+                              </tr>
+                           </thead>
+                           <tbody> 
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="panel-footer centered">
+                     <div class="btn-group " id="player-table-buttons">
+                        <button type="button" class="btn btn-default" id="previous-ten-transfers">Prev</button>
+                        <button type="button" class="btn btn-default" id="next-ten-transfers">Next</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-12">
+                  <div class="panel panel-success" id="player-in-container">
+                     <div class="panel-heading centered white-heading-fancy-smallest" style="background:#3366CC; color:white; text-align:left;">Player Information</div>
+                     <div class="panel-body centered" id="player-in-panel">
+                        <div class="row">
+                           <div class="col-sm-3">
+                              <div  id ="player-in-name-info"> </div>
+                           </div>
+                           <div class="col-sm-3">
+                              <div  id ="player-in-jersey-info"> </div>
+                           </div>
+                           <div class="col-sm-3">
+                              <div  id ="player-in-team-info"> </div>
+                           </div>
+                           <div class="col-sm-3">
+                              <div  id ="player-in-price"> </div>
+                           </div>
+                        </div>
+                     </div>
+                     <button type="button" class="btn btn-default" id="confirm-buy-button">Buy</button>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-12">
+               <div class="panel panel-primary ">
+                  <div class="panel-heading">Messages</div>
+                  <div class="panel-body">
+                     <table class="table table-bordered" id="message-table">
+                        <thead>
+                           <tr>
+                              <th>User</th>
+                              <th>Said</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                     </table>
+                     <div class="form-group">
+                        <input type="text" class="form-control" id="message" value="Enter Message" onmouseover="clearTextField();">
+                     </div>
+                     <button type="button" class="btn btn-default" id="post-new-message">Submit</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <br><br><br>
+   <br><br><br>
 </body>
 </html>
-	

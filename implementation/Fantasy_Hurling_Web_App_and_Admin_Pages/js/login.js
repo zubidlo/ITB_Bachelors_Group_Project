@@ -1,17 +1,3 @@
-/*
-	.
-	This file is for the login page
-	The user enters a username and password,
-	a function checks the username exists,
-	if it does, then it checks to see you have 
-	the corresponding password.
-	If you do, the session storage is set and you 
-	are taken to the home page, you are logged in. 
-
-	 HTML files used in:
-	login.html
-
-	*/
 $(document).ready(function() {
 
     //needed DOM elements
@@ -33,10 +19,6 @@ $(document).ready(function() {
     var _url = "http://hurlingapi.azurewebsites.net/api/users";
     //var _url = "http://localhost:51642/api/users";
 
-    //global variables
-    var top = 10;
-    var skip = 0;
-    var user_count;
 
 
 
@@ -50,24 +32,7 @@ $(document).ready(function() {
             Email: $_user_email_edit.val()
         };
         return user;
-    }
-
-
-
-
-    var getUsers = function(top, skip) {
-
-        $.ajax({
-            url: _url + "?$orderby=Username&$top=" + top + "&$skip=" + skip,
-            success: function(data) {
-
-                var counter_start = skip;
-                var headers = ['id', 'username', 'password', 'e-mail'];
-                var properties = ['Id', 'Username', 'Password', 'Email'];
-                buildTable(counter_start, headers, properties, data, $_table_output);
-            }
-        });
-    }
+    };
 
 
 
@@ -102,7 +67,7 @@ $(document).ready(function() {
             },
             error: function(request, textStatus, errorThrown) {
 
-                $alert("Not found");
+                alert("Not found");
             }
         });
     });
@@ -117,15 +82,14 @@ $(document).ready(function() {
         var user = $("#get_user_username_input").val();
         sessionStorage.setItem("username", user);
 
+        var currentdate = new Date();
+        var datetime = "Last Login " + currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " at " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
+        sessionStorage.setItem("loginTime", "" + datetime);
 
     }
 
 
+
+
 });
-
-function displayInfo() {
-
-    $("#dialog").text("sdjf");
-    $("#dialog").dialog();
-}

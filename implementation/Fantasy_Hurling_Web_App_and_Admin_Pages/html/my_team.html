@@ -1,201 +1,248 @@
 <!DOCTYPE HTML>
 <head>
-	<title>FH | Team</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="../css/menu/css/simple_menu.css">
-		<link rel="stylesheet" type="text/css" href="../css/boxes/css/style5.css">
-		<script src="../js/jquery.min.js"></script>
-		<script src="../js/my_team.js"></script>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<script type="text/javascript" src="../js/jquery.tablesorter.js"></script> 
-		<link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
-	
-
-		<script>
-		$(function() {
-		$( document ).tooltip();
-		});
-		</script>
-  
-		<script>
-		$(function() {
-		$( "#1" ).draggable({ revert: "invalid" });
-		$( "#2" ).draggable({ revert: "invalid" });
-		$( "#3" ).draggable({ revert: "invalid" });
-		$( "#4" ).draggable({ revert: "invalid" });
-		$( "#5" ).draggable({ revert: "invalid" });
-		$( "#6" ).draggable({ revert: "invalid" });
-		$( "#7" ).draggable({ revert: "invalid" });
-		$( "#8" ).draggable({ revert: "invalid" });
-
-			$( "#droppable" ).droppable({
-				activeClass: "ui-state-default",
-				hoverClass: "ui-state-hover",
-	
-				drop: function( event, ui ) {
-				$( this )
-					.addClass( "ui-state-highlight" )
-					.find( "p" )
-					.html( "Dropped!" );
-				}
-			});
-		});
-		</script>
-
-		<style>
-		label {
-		display: inline-block;
-		width: 5em;
-		color: white;
-		font-size: 160%;
-		}
-		</style>
+   <title>FH | Team</title>
+   <meta charset="utf-8">
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <link href="http://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet" type="text/css">
+   <!-- jQuery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="../js/post-message.js"></script>
+   <!-- Latest compiled JavaScript -->
+   <script src="../js/Chart.js"></script>
+   <script src="../js/Chart.Core.js"></script>
+   <script src="../js/Chart.Doughnut.js"></script>
+   <script src="../js/my_team.js"></script>
+   <link rel="shortcut icon" id="favicon" href="../images/icons/hurling.png">
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css">
 </head>
-
-<body onload="set_user()">
-	<div class="header">
-		<div id="site_title"><a href="../index.html"><img src="../images/icons/logo.gif" alt=""></a></div>
-	  <!-- Dynamic Menu -->
-		<ol id="menu" class="simple_menu simple_menu_css horizontal black_menu">
-			<li><a href="home.html" onclick="checkSession_home()">Home</a></li>
-			<li><a href="#" >My Team</a></li>
-			<li><a href="user_profile.html" onclick="checkSession_user_profile()">Acc</a></li>
-			<li><a href="standings.html" onclick="checkSession_see_rankings()">Standings</a></li>
-			<li><a href="transfers.html" onclick="checkSession_transfers()">Transfers</a></li>
-				<li><a href="#" onclick="logout_user()">Logout</a></li>
-					<li><img src="../images/info.png" alt = "" style="width:18px;height:18px;border:0" onClick="displayInfo();"></li>
-		</ol>
-	  <!-- menu 2 -->
-	  
-	</div>
-
-	<div class="clr">
-		<p id="demo">.</p>
-
-	</div>
-	<!-- end header -->
-		<div id="dialog">
-  <p></p>
-</div>
-	<div id="wrapper2">
-		<ul id="sortable1">
-		<class="ui-widget-content"  id="1" onmouseover="get_player(1)"><label for="1" id ="player_name1"></label>
-		</ul>
-		<ul id="sortable2" >
-		<class="ui-widget-content" id="2" onmouseover="get_player(2)"> <label for="2" id ="player_name2"></label>
-		</ul>
-		<ul id="sortable3" >
-		<class="ui-widget-content" id="3" onmouseover="get_player(3)"> <label for="3" id ="player_name3"></label>
-		</ul>
-		<ul id="sortable4"  >
-		<class="ui-widget-content" id="4" onmouseover="get_player(4)"> <label for="4" id ="player_name4"></label>
-		</ul>
-		<ul id="sortable5"  >
-		<class="ui-widget-content" id="5" onmouseover="get_player(5)"> <label for="5" id ="player_name5"></label>
-		</ul>
-		<ul id="sortable6"  >
-		<class="ui-widget-content" id="6" onmouseover="get_player(6)"> <label for="6" id ="player_name6"></label>
-		</ul>
-		<ul id="sortable7"  >
-		<class="ui-widget-content" id="7" onmouseover="get_player(7)"> <label for="7" id ="player_name7"></label>
-		</ul>
-		<ul id="sortable8"  >
-		<class="ui-widget-content" id="8" onmouseover="get_player(8)"> <label for="8" id ="player_name8"></label>
-		</ul>
-	</div>
-  
-	<!-- wrapper -->
-	<div id="container2">
-	<br><br><br><br><br><br><br>
-		<table id="table_1" class = "tablesorter"> 
-			<thead> 
-				<tr> 
-					<th>Position</th> 
-					<th>Name</th> 
-					<th>Team</th> 
-					<th>Last Week</th> 
-					<th>Overall</th> 
-					<th>Rating</th> 
-					<th>Price</th> 
-				</tr> 
-			</thead> 
-			<tbody> 
-				<tr> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-					<td></td> 
-				</tr> 
-			</tbody> 
-		</table> 
- 
-		<p id="team_info_box" title ="Team Info"></p> </br>
-		<p id="top_value_player_info_box" title ="Top Player"></p> </br>
-		<p id="top_player_info_box" title ="Top Player"></p> </br>
-		<p id="points_week_info_box" title ="Team Info">.</p> </br>
-
-
-		<div id = "info_container_handler" title = "Bring card back " onClick="return_container()"></div>
-
-		<div id="info_container">
-			<br>
-			<p id="player_info_box" title ="Player Name"></p> 
-			<p id="player_image_box" title ="Mugshot"></p>
-			<p id="player_team_box" title ="Player Team"></p>
-			<p id="player_week_points_box" title ="Points This Week"></p>
-		</div>
-
-
-		<div id="dialog" title="Player Info">
-			<p></p>
-		</div>
-
-	<div style="clear:both; height: 40px">
-		
-	</div>
-</div>
-
-	<div class="chat_feature">
-		<table id="table_2" class="myTable"> 
-			<tr>
-				<td>
-					User
-				</td>
-				<td >
-					Message
-				</td>	
-			</tr>	
-		</table> 
-			
-		<div style="clear:both; height: 40px">
-	
-		</div>
-				
-		<textarea rows="9" cols="10" id = "forum_post_area" onClick="clear_text_area()" class = "textarea">
-				
-				</textarea>  <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input id="post_new_message_button" type="submit" value="Post Message" onClick="post_message()">
-	</div>
-<br>
-	
-	<div id="footer">
-			<li align ="center">
-Application by Michael James, David Kelly, Martin Zuber<br>2015</li>
-
-	
-		
-	</div>
-
+<body >
+   <div id="dialog" class="centered" title="Basic dialog">
+      <div id = "player-info" > sdf</div>
+      <br><br>
+      <div id = "player-team" class="fancy-text-black"> sdf</div>
+      <div id = "player-points" class="fancy-text-black"> sdf</div>
+   </div>
+   <nav class="navbar navbar-inverse" style="opacity:0.9;">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+            </button>
+            <a class="navbar-brand white-heading-fancy-smallest" href="#" ><img src="../images/logo.png" class="img" alt="Cinque Terre" width="65" height="26"></a>
+         </div>
+         <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav" >
+               <li ><a href="home.html"  class="white-heading-fancy-smallest"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+               <li><a href="user_profile.html"  class="white-heading-fancy-smallest" >My Profile</a></li>
+               <li><a href="my_team.html"  class="white-heading-fancy-smallest" >My Team</a></li>
+               <li><a href="transfers.html"  class="white-heading-fancy-smallest" >Transfers</a></li>
+               <li><a href="standings.html"  class="white-heading-fancy-smallest" >Standings</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="" id="team-budget-left" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="" id="team-name" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="" id="team-value" class="black-heading-fancy-smallest" >b</a></li>
+               <li><a href="#" onclick="logout_user();" class="black-heading-fancy-smallest" ><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-sm-3 visible-md visible-lg  " id="side-bar">
+            <ul class="nav nav-pills nav-stacked black  " id="side-options">
+               <li  ><a href="#" id="home" ><span class="glyphicon glyphicon-home"></span>  Home <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li><a href="#" id="user_profile"><span class="glyphicon glyphicon-user" ></span> My Profile <span class="glyphicon glyphicon-chevron-left" style="float:right;" ></span></a></li>
+               <li ><a href="#" id="my_team"><span class="glyphicon glyphicon-euro" ></span> My Team <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li class="active"><a href="#" id="transfers"><span class="glyphicon glyphicon-pencil" ></span> Transfers <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li><a href="#" id="standings"><span class="glyphicon glyphicon-list-alt" ></span> Standings <span class="glyphicon glyphicon-chevron-left" style="float:right;"></span></a></li>
+               <li ><a href="http://www.gaa.ie/"  target="_blank" style="color:white; text-decoration:none "><span class="glyphicon glyphicon-star-empty" ></span> GAA Site</a></li>
+               <li><a href="http://www.rte.ie/sport/" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span> Rte Sport</a></li>
+               <li><a href="http://www.rte.ie/sport/gaa/hurling/" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span> Fixtures</a></li>
+               <li><a href="https://en.wikipedia.org/wiki/All-Ireland_Senior_Hurling_Championship_records_and_statistics" style="color:white" target="_blank"><span class="glyphicon glyphicon-star-empty" ></span>Records</a></li>
+            </ul>
+         </div>
+         <div class="col-sm-9 main-content"  >
+            <div id="home-container">
+               <h2>Dashboard</h2>
+               <div id = "welcome-banner" class="black" > </div>
+               <br>
+               <div id = "time-panel" class="black" > </div>
+               <hr>
+            </div>
+            <div class="row centered">
+               <br><br>
+               <div class="col-sm-3">
+                  <div class=" panel-top black">
+                     <div class="panel-heading " style="background:#3366CC;opacity:0.7; color:white;">
+                        <p>Team Name: <span class="glyphicon glyphicon-asterisk"></span></p>
+                     </div>
+                     <div class="panel-body " style="background:#85A3E0;opacity:0.7; color:white;">
+                        <p id="team-name-panel"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-3">
+                  <div class=" panel-top black">
+                     <div class="panel-heading " style="background:#800000;opacity:0.7; color:white;">
+                        <p>Team Points: <span class="glyphicon glyphicon-plus"></span></p>
+                     </div>
+                     <div class="panel-body" style="background:#993333;opacity:0.7; color:white;">
+                        <p id="team-points-panel"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-3">
+                  <div class=" panel-top black">
+                     <div class="panel-heading " style="background:#009933;opacity:0.7; color:white;">
+                        <p>Team Budget <span class="glyphicon glyphicon-euro"></span></p>
+                     </div>
+                     <div class="panel-body" style="background:#33AD5C;opacity:0.7; color:white;">
+                        <p id="team-budget-panel"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-3">
+                  <div class=" panel-top black">
+                     <div class="panel-heading " style="background:#FF6600;opacity:0.7; color:white;">
+                        <p>Week Points <span class="glyphicon glyphicon-star"></span></p>
+                     </div>
+                     <div class="panel-body" style="background:#FF944D;opacity:0.7; color:white;"  >
+                        <p id="team-week-points-panel"></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <br><br>
+            <div class="row">
+               <div class="col-sm-6 main-content">
+                  <div class="panel panel-default full-width  ">
+                     <div class="panel-heading black-heading-fancy-smallest" >How am I doing?</div>
+                     <div class="panel-body centered">
+                        <div id="canvas-holder2">
+                           <canvas id="chart-area2" ></canvas>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-6 main-content">
+                  <div class="panel panel-default full-width  ">
+                     <div class="panel-heading black-heading-fancy-smallest" >Who's getting my points?</div>
+                     <div class="panel-body centered">
+                        <div id="canvas-holder">
+                           <canvas id="chart-area"> </canvas>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row centered padded main-content">
+               <div class="col-sm-6 main-content">
+                  <div class="panel panel-default full-width  ">
+                     <div class="panel-heading black-heading-fancy-smallest" >This weeks points</div>
+                     <div class="panel-body centered">
+                        <div class="well col-sm-12 hidden-sm  " id="myTeamView" >
+                           <div class="well panel-top black" style="background:white;">
+                              <div class="panel-heading " >
+                                 <div class="black-heading-fancy">My Team </div>
+                              </div>
+                              <div class="panel-body" >
+                                 <div class="row centered">
+                                    <div class="col-sm-12" id="player1">
+                                       <h3 id="player1-text" class="hidden">.</h3>
+                                       <h3 id="player1-points" class="hidden">.</h3>
+                                    </div>
+                                 </div>
+                                 <div class="row centered">
+                                    <div class="col-sm-4" id="player2" >
+                                       <h3 id="player2-text" class="hidden">.</h3>
+                                       <h3 id="player2-points" class="hidden">.</h3>
+                                    </div>
+                                    <div class="col-sm-4" id="player3" >
+                                       <h3 id="player3-text" class="hidden">.</h3>
+                                       <h3 id="player3-points" class="hidden">.</h3>
+                                    </div>
+                                    <div class="col-sm-4" id="player4" >
+                                       <h3 id="player4-text" class="hidden">.</h3>
+                                       <h3 id="player4-points" class="hidden">.</h3>
+                                    </div>
+                                 </div>
+                                 <div class="row centered">
+                                    <div class="col-sm-4" id="player5" >
+                                       <h3 id="player5-text" class="hidden">.</h3>
+                                       <h3 id="player5-points" class="hidden">.</h3>
+                                    </div>
+                                    <div class="col-sm-4" id="player6" >
+                                       <h3 id="player6-text" class="hidden">.</h3>
+                                       <h3 id="player6-points" class="hidden">.</h3>
+                                    </div>
+                                    <div class="col-sm-4" id="player7" >
+                                       <h3 id="player7-text" class="hidden">.</h3>
+                                       <h3 id="player7-points" class="hidden">.</h3>
+                                    </div>
+                                 </div>
+                                 <div class="row centered">
+                                    <div class="col-sm-12" id="player8" >
+                                       <h3 id="player8-text" class="hidden">.</h3>
+                                       <h3 id="player8-points" class="hidden">.</h3>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="table-responsive">
+                     <table class="table table-hover" id="my-team-table">
+                        <thead >
+                           <tr>
+                              <th>Position</th>
+                              <th> Name</th>
+                              <th>Team </th>
+                              <th>Week</th>
+                              <th>Overall</th>
+                              <th class="visible-lg ">Rating</th>
+                              <th>Price</th>
+                           </tr>
+                        </thead>
+                        <tbody> 
+                        </tbody>
+                     </table>
+                  </div>
+                  <br>
+               </div>
+               <div class="col-sm-6">
+                  <div class="panel panel-primary ">
+                     <div class="panel-heading">Messages</div>
+                     <div class="panel-body">
+                        <table class="table table-bordered" id="message-table">
+                           <thead>
+                              <tr>
+                                 <th>User</th>
+                                 <th>Said</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                           </tbody>
+                        </table>
+                        <div class="form-group">
+                           <input type="text" class="form-control" id="message" value="Enter Message" onmouseover="clearTextField();">
+                        </div>
+                        <button type="button" class="btn btn-default" id="post-new-message">Submit</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <br><br><br>
 </body>
 </html>

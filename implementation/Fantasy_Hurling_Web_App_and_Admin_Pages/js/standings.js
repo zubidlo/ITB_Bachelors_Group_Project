@@ -1,21 +1,81 @@
-/*
+var whatToSkip = 0;
+var totalTeamsAmount = sessionStorage.getItem("teamsInDatabaseCount");
+//stop the user logging in by pressing enter to correct issue with setting session vars
 
-Standings will first load up the username 
-It will show up the top 10 users based on points
-It will check each time a user tries to navigate away that a session
-is stored in session storage
-If it is not, it brings you back to the login page
+$(document).ready(function() {
 
- HTML files used in:
- standings.html
 
-*/
+
+    var user = sessionStorage.getItem("username");
+    document.getElementById("welcome-banner").innerHTML = ("Welcome " + user);
+    $('#time-panel').text("" + sessionStorage.getItem("loginTime"));
+
+    $("#previous-ten-standings").on("click", function(event) {
+
+
+
+        if (whatToSkip > 9) {
+            whatToSkip -= 10;
+            setStandingsTable(whatToSkip);
+
+        } else {
+            alert("Nobody");
+        }
+
+
+
+    });
+
+    $("#next-ten-standings").on("click", function(event) {
+
+
+        if (whatToSkip < totalTeamsAmount - 10) {
+            whatToSkip += 10;
+
+            setStandingsTable(whatToSkip);
+        } else {
+            alert("Nobody");
+        }
+
+
+
+
+    });
+
+
+    if (sessionStorage.getItem("username") == null) {
+        window.location = "../index.html";
+
+    }
+    set_user();
+
+    $('#team-budget-left').text("Budget: " + sessionStorage.getItem("teamBudget"));
+    $('#team-value').text("Team Value: " + sessionStorage.getItem("teamValue"));
+    $('#team-name').text("" + sessionStorage.getItem("teamName"));
+    $('a').click(function() {
+
+
+
+
+        if (sessionStorage.getItem("username") == null) {
+            alert("null");
+        } else {
+            window.location = "" + this.id + ".html";
+        }
+
+    });
+
+
+
+});
+
+
 function set_user() {
 
 
 
 
-    if (sessionStorage.getItem("username") === null) {
+    if (sessionStorage.getItem("username") == null) {
 
         window.location = "../index.html";
 
@@ -23,11 +83,11 @@ function set_user() {
         var user = sessionStorage.getItem("username");
 
 
-        document.getElementById("demo").innerHTML = ("You are logged in as " + user);
 
-        set_table();
-        show_team();
-        set_table2();
+
+        setStandingsTable(0);
+
+
     }
 
 
@@ -35,89 +95,6 @@ function set_user() {
 
 }
 
-
-function checkSession_transfers() {
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "transfers.html";
-
-
-    }
-
-}
-
-
-
-
-function checkSession_home() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "home.html";
-
-
-    }
-
-}
-
-
-
-
-function checkSession_view_team() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "my_team.html";
-
-
-    }
-
-}
-
-
-
-function checkSession_user_profile() {
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "user_profile.html";
-
-
-    }
-
-}
-
-
-function checkSession_forum() {
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "forum.html";
-
-
-    }
-
-}
 
 
 
@@ -129,13 +106,14 @@ function logout_user() {
 }
 
 
-function set_table() {
+function setStandingsTable(skip) {
 
     var i = 1;
+    $("#table_1").find("tr:gt(0)").remove();
 
-    var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints";
+    var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints desc&$top=10&$skip=" + skip + "  ";
 
-
+    var userPosition = i + skip;
     $.ajax({
         url: _url,
         async: true,
@@ -146,18 +124,21 @@ function set_table() {
                 $.each(data, function(index, object) {
                     var tr;
 
-                    if (i < 11) {
-                        tr = $('<tr/>');
-                        tr.append("<td>" + i + "</td>");
-                        tr.append("<td>" + object.Name + "</td>");
-                        tr.append("<td>" + object.LastWeekPoints + "</td>");
-                        tr.append("<td>" + object.OverAllPoints + "</td>");
-                    }
 
-                    i++;
+
+
+                    tr = $('<tr/>');
+                    tr.append("<td id=" + object.Id + " onclick='getUserTeam(" + object.Id + ")' >" + userPosition + "</td>");
+                    tr.append("<td id=" + object.Id + " onclick='getUserTeam(" + object.Id + ")'>" + object.Name + "</td>");
+                    tr.append("<td id=" + object.Id + " onclick='getUserTeam(" + object.Id + ")'>" + object.LastWeekPoints + "</td>");
+                    tr.append("<td id=" + object.Id + " onclick='getUserTeam(" + object.Id + ")'>" + object.OverAllPoints + "</td>");
+
+
+
+                    userPosition++;
                     $('#table_1').append(tr);
 
-                    $("#table_1").tablesorter();
+
                 });
             }
 
@@ -172,13 +153,13 @@ function set_table() {
 
 
 
-function show_team() {
-    var user_id = sessionStorage.getItem("id");
-    var i = 0;
+
+function getUserTeam(id) {
 
 
-    var _url = "http://hurlingapi.azurewebsites.net/api/teams?$orderby=OverAllPoints";
 
+
+    var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/" + id;
 
 
     $.ajax({
@@ -186,25 +167,14 @@ function show_team() {
         async: true,
 
         success: function(data) {
-            if ($.isArray(data)) {
-                $.each(data, function(index, object) {
-
-
-                    i++;
-
-                    if (object.UserId == user_id) {
-
-                        var my_position = i;
-
-                        document.getElementById("team_position").innerHTML = ("Your Position " + i);
-
-                    }
 
 
 
 
-                });
-            }
+            $('#team-name-holder').text("" + data.Name);
+
+
+            populateUserPlayersTable(data.UserId);
 
 
 
@@ -215,17 +185,16 @@ function show_team() {
 
     });
 
+
+
+
 }
 
 
+function populateUserPlayersTable(userID) {
 
-function set_table2() {
-
-    var user = sessionStorage.getItem("username");
-
-
-    var _url = "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=3&$skip=0";
-
+    var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/" + userID + "/players";
+    $("#user-players").find("tr:gt(0)").remove();
 
     $.ajax({
         url: _url,
@@ -235,152 +204,37 @@ function set_table2() {
 
             if ($.isArray(data)) {
                 $.each(data, function(index, object) {
-
-
-                    var user = return_username(object.UserId);
                     var tr;
-                    return_username(object.UserId);
-                    var user = sessionStorage.getItem("temp");
+
+
+
                     tr = $('<tr/>');
-
-                    tr.append("<td>" + user + "</td>");
-                    var user = sessionStorage.getItem("temp");
-                    tr.append("<td>" + object.Text + "</td>");
-
+                    tr.append("<td  style='background:white; color:black;'>" + object.FirstName + " " + object.LastName + "</td>");
+                    tr.append("<td style='background:white; color:black;'>" + object.LastWeekPoints + "</td>");
+                    tr.append("<td style='background:white; color:black;'>" + object.OverallPoints + "</td>");
 
 
-                    sessionStorage.removeItem("temp");
-                    $('#table_2').append(tr);
+
+
+                    $('#user-players').append(tr);
+
+
 
                 });
             }
 
-        }
-
-
-
-    });
-
-}
-
-function readUserFromInputFields() {
-
-    var id = sessionStorage.getItem("id");
-
-    var text = document.getElementById("forum_post_area").value;
-    var now = new Date();
-    now = new Date().toLocaleString();
-
-    var user = {
-        Id: id,
-        Text: text,
-        UserId: id,
-        Created: now
-
-    };
-
-    return user;
-}
-
-function checkSession_standings() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "standings.html";
-
-
-    }
-
-}
-
-
-function checkSession_forum() {
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "forum.html";
-
-
-    }
-
-}
-
-function post_message() {
-    $("#table_2").find("tr:gt(0)").remove();
-    $.ajax({
-        type: "POST",
-        url: "http://hurlingapi.azurewebsites.net/api/messages",
-        data: readUserFromInputFields(),
-        dataType: "json",
-        success: function(data) {
-
-
-            clear_text_area();
-            location.reload();
-            document.getElementById("forum_post_area").value = "Please Enter a Message";
 
         },
-        error: function(request, textStatus, errorThrown) {
-
-            window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+        error: function(jqXHR, textStatus, ex) {
+            console.log("User has no players to show");
+            alert("User has no players?!");
         }
-    });
-}
-
-
-function clear_text_area() {
-
-    document.getElementById("forum_post_area").value = "";
-
-    set_table();
-
-
-}
-
-function clear_text_area() {
-
-    document.getElementById("forum_post_area").value = "";
-
-
-}
-
-
-
-function return_username(userId) {
-
-
-    var _url = "http://hurlingapi.azurewebsites.net/api/users";
-
-    event.preventDefault();
-    $.ajax({
-        async: false,
-        url: _url + "/Id/" + userId,
-        success: function(data, textStatus, request) {
-
-
-            sessionStorage.setItem("temp", data.Username);
 
 
 
 
-        }
     });
 
 
 
-}
-
-
-function displayInfo() {
-
-    $("#dialog").text("This page shows the current top 10 user teams in the game");
-    $("#dialog").dialog();
 }

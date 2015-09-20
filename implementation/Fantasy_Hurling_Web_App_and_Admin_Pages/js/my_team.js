@@ -1,78 +1,220 @@
-/*
+var playerPositions = ["Never Used", "Goalkeeper", "Corner-Back", "Full-Back", "Half-Back", "Midfielder", "Half-Forward", "Corner-Forward", "Full-Forward"];
+var myPosition = sessionStorage.getItem("TeamPosition");
+var teamsInDatabaseCount = sessionStorage.getItem("teamsInDatabaseCount");
+var percentile = myPosition / teamsInDatabaseCount * 100;
+var GoalkeeperPoints = sessionStorage.getItem("GoalkeeperPoints");
+var GoalkeeperName = sessionStorage.getItem("GoalkeeperName");
+var CornerBackPoints = sessionStorage.getItem("Corner-BackPoints");
+var CornerBackName = sessionStorage.getItem("Corner-BackName");
+var FullBackPoints = sessionStorage.getItem("Full-BackPoints");
+var FullBackName = sessionStorage.getItem("Full-BackName");
+var HalfBackPoints = sessionStorage.getItem("Half-BackPoints");
+var HalfBackName = sessionStorage.getItem("Half-BackName");
+var MidfielderPoints = sessionStorage.getItem("MidfielderPoints");
+var MidfielderName = sessionStorage.getItem("MidfielderName");
+var HalfForwardPoints = sessionStorage.getItem("Half-ForwardPoints");
+var HalfForwardName = sessionStorage.getItem("Half-ForwardName");
+var CornerForwardPoints = sessionStorage.getItem("Corner-ForwardPoints");
+var CornerForwardName = sessionStorage.getItem("Corner-ForwardName");
+var FullForwardPoints = sessionStorage.getItem("Full-ForwardPoints");
+var FullForwardName = sessionStorage.getItem("Full-ForwardName");
+
+function loadChartData() {
 
 
- HTML files used in:
- my_team.html
+    var pieData = [{
+            value: GoalkeeperPoints,
+            color: "pink",
+            highlight: "#FF5A5E",
+            label: GoalkeeperName
+        }, {
+            value: CornerBackPoints,
+            color: "purple",
+            highlight: "#5AD3D1",
+            label: CornerBackName
+        }, {
+            value: FullBackPoints,
+            color: "gray",
+            highlight: "#FF5A5E",
+            label: FullBackName
+        }, {
+            value: HalfBackPoints,
+            color: "black",
+            highlight: "#5AD3D1",
+            label: HalfBackName
+        }, {
 
-*/
-function checkSession_forum() {
+
+            value: MidfielderPoints,
+            color: "orange",
+            highlight: "#5AD3D1",
+            label: MidfielderName
+        },
+
+        {
+            value: HalfForwardPoints,
+            color: "yellow",
+            highlight: "#FF5A5E",
+            label: HalfForwardName
+        }, {
+            value: CornerForwardPoints,
+            color: "blue",
+            highlight: "#5AD3D1",
+            label: CornerForwardName
+        }, {
+
+
+            value: FullForwardPoints,
+            color: "green",
+            highlight: "#5AD3D1",
+            label: FullForwardName
+        },
+
+
+
+
+    ];
+
+
+    var pieData2 = [{
+            value: percentile,
+            color: "#3366CC",
+            highlight: "#85A3E0",
+            label: "Behind %"
+        }, {
+            value: 100 - percentile,
+            color: "#85A3E0",
+            highlight: "#3366CC",
+            label: "Ahead of %"
+        }
+
+
+    ];
+
+
+
+
+    var ctx = document.getElementById("chart-area").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(pieData);
+
+    var ctx2 = document.getElementById("chart-area2").getContext("2d");
+    window.myPie = new Chart(ctx2).Doughnut(pieData2);
+
+
+
+
+}
+
+
+
+
+$(document).ready(function() {
+
+
+
+
     if (sessionStorage.getItem("username") === null) {
         window.location = "../index.html";
-    } else {
-        window.location = "forum.html";
-    }
-}
-
-function set_user() {
-
-    if (sessionStorage.getItem("username") === null) {
-        window.location = "../index.html";
-    } else {
-        var user = sessionStorage.getItem("username");
-        document.getElementById("demo").innerHTML = ("You are logged in as " + user);
-        get_team();
-        set_team();
-
-
 
     }
-}
+    var user = sessionStorage.getItem("username");
+    document.getElementById("welcome-banner").innerHTML = ("Welcome " + user);
+    $('#time-panel').text("" + sessionStorage.getItem("loginTime"));
+    setMyTeamTable();
+    setMyTeamDetails();
 
-function displayInfo() {
 
-    $("#dialog").text("Use this page to view your current team and info about it!");
-    $("#dialog").dialog();
-}
+    $('#team-budget-left').text("Budget: " + sessionStorage.getItem("teamBudget"));
+    $('#team-value').text("Team Value: " + sessionStorage.getItem("teamValue"));
+    $('#team-name').text("" + sessionStorage.getItem("teamName"));
 
-function checkSession_home() {
-    if (sessionStorage.getItem("username") === null) {
-        window.location = "../index.html";
-    } else {
-        window.location = "home.html";
+    loadChartData();
+    $('a').click(function() {
+
+
+
+
+        if (sessionStorage.getItem("username") === null) {
+            window.location = "../index.html";
+
+        } else {
+            window.location = "" + this.id + ".html";
+        }
+
+    });
+
+
+
+
+    //add an onclick function to each player
+    for (var count = 1; count < 9; count++) {
+        $("#player" + count).click(function() {
+
+            var player = $(this).attr('id');
+
+            populateContentPopoverForPlayer(player);
+
+        });
+
+
     }
-}
 
-function checkSession_see_rankings() {
-    if (sessionStorage.getItem("username") === null) {
-        window.location = "../index.html";
-    } else {
-        window.location = "standings.html";
+
+
+
+});
+
+
+function populateContentPopoverForPlayer(playerID) {
+
+
+    for (var count = 1; count < 9; count++) {
+
+        if (playerID == "player" + count) {
+
+            $("#player-info").empty();
+            //count is now player position id
+
+            var playerName = sessionStorage.getItem("" + playerPositions[count] + "Name");
+            var playerTeam = sessionStorage.getItem("" + playerPositions[count] + "Jersey");
+            var playerPoints = sessionStorage.getItem("" + playerPositions[count] + "Points");
+            $("#dialog").dialog("open");
+
+
+            //set dialog title to player name
+            $("#dialog").dialog({
+                title: "" + playerName
+            });
+            //set up an image and append to dialog body div
+            var img = document.createElement("img");
+            img.src = "../images/hurler" + count + ".png";
+            img.style.width = "90px";
+            var src = document.getElementById("player-info");
+            src.appendChild(img);
+            $("#player-team").html("Team: " + playerTeam);
+            $("#player-points").html("Week Points: " + playerPoints);
+        }
+
+
+
     }
+
+
+
+
 }
 
-function checkSession_transfers() {
-    if (sessionStorage.getItem("username") === null) {
-        window.location = "../index.html";
-    } else {
-        window.location = "transfers.html";
-    }
-}
-
-function logout_user() {
-    sessionStorage.clear();
-    window.location = "../index.html";
-}
-
-function set_table() {
+function setMyTeamTable() {
     var i = 1;
     var user_id = sessionStorage.getItem("teamid");
     var user = (user_id + "/players");
 
-    var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/" + user;
+    var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/" + user + "?$orderby=PositionId";
     var overall_points = 0;
     var week_points = 0;
     var most_expensive = 0;
-    var overall_best = 0;
+
+
 
     $.ajax({
         url: _url,
@@ -83,49 +225,63 @@ function set_table() {
                 $.each(data, function(index, object) {
                     var tr;
 
-                    tr = $('<tr/>');
-                    tr.append("<td>" + object.PositionId + "</td>");
+
+
+
+                    //  var img = document.createElement("img");
+
+                    // img.src = "../images/icons/hurling.png";
+                    // img.style.width = "45px";
+
+                    tr = $("<tr class='black' onclick='showPlayerInfo(" + object.Id + "    )''>");
+
+
+
+                    //tr.append("<td>" + object.PositionId + "</td>");
+                    tr.append("<td>" + playerPositions[object.PositionId] + "</td>");
                     tr.append("<td>" + object.LastName + "</td>");
                     tr.append("<td>" + object.GaaTeam + "</td>");
                     tr.append("<td>" + object.LastWeekPoints + "</td>");
                     tr.append("<td>" + object.OverallPoints + "</td>");
-                    tr.append("<td>" + object.Rating + "</td>");
+                    tr.append("<td class='visible-lg '>" + object.Rating + "</td>");
                     tr.append("<td>" + object.Price + "</td>");
 
-                    week_points = week_points + object.LastWeekPoints;
-                    overall_points = overall_points + object.OverallPoints;
-                    $('#table_1').append(tr);
-                    $("#table_1").tablesorter();
-                    var img = document.createElement("img");
-                    if (object.PositionId == 1) {
-                        img.src = "../images/jerseys/Cavan.png";
-                    } else if (object.PositionId > 1) {
-                        img.src = "../images/jerseys/Tyrone.png";
-                    }
-                    var src = document.getElementById("" + object.PositionId);
-                    src.appendChild(img);
-                    document.getElementById("player_name" + object.PositionId).innerHTML = ("" + object.LastName);
+
+                    var src = document.getElementById("player" + object.PositionId);
+                    //  src.appendChild(img);
+                    //all player divs set to hidden by default , remove hidden from all players
+                    //where a player exists in the team, leave all others hidden
+                    $('#player' + object.PositionId + '-text').removeClass("hidden");
+                    //set text of last name under jersey icon 
+                    $('#player' + object.PositionId + '-text').text(object.LastName);
+                    //set css on this text
+                    $('#player' + object.PositionId + '-text').css({
+                        'color': 'black',
+                        'font-size': '60%'
+                    });
+
+
+                    $('#player' + object.PositionId + '-points').removeClass("hidden");
+                    //set text of last name under jersey icon 
+                    $('#player' + object.PositionId + '-points').text(object.LastWeekPoints);
+                    //set css on this text
+                    $('#player' + object.PositionId + '-points').css({
+                        'color': 'black',
+                        'font-size': '100%'
+                    });
 
 
 
+                    $('#my-team-table').append(tr);
 
-                    if (object.Price > most_expensive) {
-                        most_expensive = object.Price;
-                        document.getElementById("top_value_player_info_box").innerHTML = ("Most Expensive: £" + most_expensive + "  " + object.FirstName + " " + object.LastName);
-                    }
-
-                    if (object.OverallPoints > overall_best) {
-                        overall_best = object.OverallPoints;
-                        document.getElementById("top_player_info_box").innerHTML = ("Top Player: " + overall_best + " Points " + object.FirstName + " " + object.LastName);
-                    }
-                    sessionStorage.setItem("" + object.PositionId, "" + object.Id);
+                    sessionStorage.setItem("" + playerPositions[object.PositionId] + "Points", "" + object.OverallPoints);
                     i = i + 1;
+
+
                 });
+
             }
-            if (i < 9) {
-                alert("You need to fill the vacant spots");
-                window.location = "transfers.html";
-            }
+
         }
 
 
@@ -134,82 +290,22 @@ function set_table() {
 
 }
 
+function showPlayerInfo(id) {
+    //alert("Player ID : "+id);
+    var sessionForPop = sessionStorage.getItem("PlayerPositionWithID" + id);
 
-function set_team() {
+    var forPopulate = "player" + sessionForPop;
+
+    populateContentPopoverForPlayer(forPopulate);
+
+}
+
+function setMyTeamDetails() {
     var i = 1;
-    var user_id = sessionStorage.getItem("teamid");
+    var team_id = sessionStorage.getItem("teamid");
 
 
-    var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/" + user_id;
-
-
-    $.ajax({
-        url: _url,
-        async: true,
-
-        success: function(data) {
-
-
-            document.getElementById("team_info_box").innerHTML = ("Overall Points " + data.OverAllPoints);
-            document.getElementById("points_week_info_box").innerHTML = ("Week Points = " + data.LastWeekPoints);
-            return_team(user_id);
-
-        }
-    });
-}
-
-
-
-function checkSession_user_profile() {
-    if (sessionStorage.getItem("username") === null) {
-        window.location = "../index.html";
-    } else {
-        window.location = "user_profile.html";
-    }
-}
-
-function get_player(position) {
-    var player_id = sessionStorage.getItem("" + position);
-    display_player("" + player_id);
-}
-
-
-function display_player(player_id) {
-    var img = document.createElement("img");
-    var _url = "http://hurlingapi.azurewebsites.net/api/players/Id/" + player_id;
-
-    $.ajax({
-        url: _url,
-        success: function(data) {
-
-            $('#player_image_box').empty();
-            img.src = "../images/jerseys/" + data.GaaTeam + ".png";
-            var src = document.getElementById("player_image_box");
-            src.appendChild(img);
-            document.getElementById("player_info_box").innerHTML = (data.FirstName + " " + data.LastName);
-            document.getElementById("player_team_box").innerHTML = (" " + data.GaaTeam);
-            document.getElementById("player_week_points_box").innerHTML = (" " + data.LastWeekPoints);
-            document.getElementById('info_container').style.top = "-100px";
-            document.getElementById('info_container').style.left = "450px";
-            document.getElementById("info_container").style.backgroundImage = "url('../images/jerseys/Kildare.png')";
-
-        }
-
-    });
-}
-
-function return_container() {
-    document.getElementById('info_container').style.top = "60px";
-    document.getElementById('info_container').style.left = "760px";
-}
-
-
-function set_table2() {
-
-    var user = sessionStorage.getItem("username");
-
-
-    var _url = "http://hurlingapi.azurewebsites.net/api/messages?$orderby=Created desc&$top=3&$skip=0";
+    var _url = "http://hurlingapi.azurewebsites.net/api/teams/id/" + team_id;
 
 
     $.ajax({
@@ -218,248 +314,44 @@ function set_table2() {
 
         success: function(data) {
 
-            if ($.isArray(data)) {
-                $.each(data, function(index, object) {
 
-
-                    var user = return_username(object.UserId);
-                    var tr;
-                    return_username(object.UserId);
-                    var user = sessionStorage.getItem("temp");
-                    tr = $('<tr/>');
-
-                    tr.append("<td>" + user + "</td>");
-                    var user = sessionStorage.getItem("temp");
-                    tr.append("<td>" + object.Text + "</td>");
-
-
-
-                    sessionStorage.removeItem("temp");
-                    $('#table_2').append(tr);
-
-
-                });
-            }
-
+            $("#team-name-panel").html("" + data.Name);
+            $("#team-points-panel").html("" + data.OverAllPoints);
+            $("#team-week-points-panel").html("" + data.LastWeekPoints);
+            $("#team-budget-panel").html("" + data.Budget);
         }
 
 
-
     });
-
-}
-
-function readUserFromInputFields2() {
-
-    var id = sessionStorage.getItem("id");
-
-    var text = document.getElementById("forum_post_area").value;
-    var now = new Date();
-    now = new Date().toLocaleString();
-
-    var user = {
-        Id: id,
-        Text: text,
-        UserId: id,
-        Created: now
-
-    };
-
-    return user;
-}
-
-function checkSession_standings() {
-
-
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "standings.html";
-
-
-    }
-
 }
 
 
-function checkSession_forum() {
-
-    if (sessionStorage.getItem("username") === null) {
-
-        window.location = "../index.html";
-
-    } else {
-        window.location = "forum.html";
-
-
-    }
-
-}
-
-
-function post_message() {
-
-    $("#table_2").find("tr:gt(0)").remove();
-
-
-    $.ajax({
-        type: "POST",
-        url: "http://hurlingapi.azurewebsites.net/api/messages",
-        data: readUserFromInputFields2(),
-        dataType: "json",
-        success: function(data) {
-
-
-            clear_text_area();
-
-            document.getElementById("forum_post_area").value = "Please Enter a Message";
-
-            set_table2();
-
+$(function() {
+    $("#dialog").dialog({
+        resizable: false,
+        autoOpen: false,
+        show: {
+            resizable: false,
+            duration: 300,
+            my: "center",
+            at: "center",
+            of: window
         },
-        error: function(request, textStatus, errorThrown) {
+        hide: {
 
-            window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
+            duration: 300
         }
     });
-}
-$("#table_2").draggable({
-    appendTo: "body"
+
+
 });
 
-function clear_text_area() {
 
-    document.getElementById("forum_post_area").value = "";
-
-    set_table();
+function logout_user() {
 
 
-}
-
-function clear_text_area() {
-
-    document.getElementById("forum_post_area").value = "";
+    sessionStorage.clear();
+    window.location = "../index.html";
 
 
-}
-
-
-
-function return_username(userId) {
-
-
-    var _url = "http://hurlingapi.azurewebsites.net/api/users";
-
-    event.preventDefault();
-    $.ajax({
-        async: false,
-        url: _url + "/Id/" + userId,
-        success: function(data, textStatus, request) {
-
-
-            sessionStorage.setItem("temp", data.Username);
-
-
-
-
-        }
-    });
-
-
-
-}
-
-function get_team() {
-
-    var user = sessionStorage.getItem("id");
-
-    var _url = "http://hurlingapi.azurewebsites.net/api/teams";
-
-
-    var i = 0;
-
-    $.ajax({
-        url: _url,
-        async: true,
-
-        success: function(data) {
-
-            if ($.isArray(data)) {
-                $.each(data, function(index, object) {
-
-
-                    if (object.UserId == user) {
-
-                        sessionStorage.setItem("teamid", "" + object.Id);
-                        set_table2();
-                        set_table();
-                        i++;
-                    } else if (object.UserId != user) {
-                        if (sessionStorage.getItem("teamid") == null) {
-
-
-
-                        }
-                    }
-
-
-                    alert(i);
-
-
-
-                });
-            }
-
-        }
-
-
-
-
-    });
-    if (i == 0) {
-        put_new_team();
-    }
-}
-
-
-function put_new_team() {
-
-
-
-    window.alert = function() {};
-    $.ajax({
-        type: "POST",
-        url: "http://hurlingapi.azurewebsites.net/api/teams",
-        data: readUserFromInputFields(),
-        dataType: "json",
-        success: function(data) {
-
-            alert("created new team");
-
-
-        },
-        error: function(request, textStatus, errorThrown) {
-
-            window.alert(textStatus + ": " + errorThrown + ": " + request.responseText);
-        }
-    });
-}
-
-function readUserFromInputFields() {
-    var name = sessionStorage.getItem("username");
-    var name2 = name + '' + sessionStorage.getItem("id");
-    var user = {
-        Id: sessionStorage.getItem("id"),
-        Name: name2,
-        OverAllPoints: 0,
-        LastWeekPoints: 0,
-        Budget: 100000,
-        LeagueId: 1,
-        UserId: sessionStorage.getItem("id")
-    };
-
-    return user;
 }
