@@ -56,11 +56,39 @@ $(document).ready(function() {
 
 
 
-
-        if (sessionStorage.getItem("username") == null) {
-            alert("null");
+        if (sessionStorage.getItem("username") === null) {
+            window.location = "../index.html";
         } else {
-            window.location = "" + this.id + ".html";
+
+            if(this.id === "gaa")
+            {
+            console.log("Navigating to External site");
+            }
+             else if(this.id === "rte")
+            {
+             console.log("Navigating to External site");
+            }
+
+               else  if(this.id === "fixtures")
+            {
+                     console.log("Navigating to External site");
+            }
+               else if(this.id === "records")
+            {
+                  console.log("Navigating to External site");   
+            }
+                 else if(this.id === "logo")
+            {
+                  console.log("Navigating to External site"); 
+
+            }
+
+
+            else
+            {
+                  window.location = "" + this.id + ".html";
+            }
+          
         }
 
     });

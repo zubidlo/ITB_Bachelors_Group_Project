@@ -1,7 +1,10 @@
 var playerPositions = ["Never Used", "Goalkeeper", "Corner-Back", "Full-Back", "Half-Back", "Midfielder", "Half-Forward", "Corner-Forward", "Full-Forward"];
 var myPosition = sessionStorage.getItem("TeamPosition");
 var teamsInDatabaseCount = sessionStorage.getItem("teamsInDatabaseCount");
+
+
 var percentile = myPosition / teamsInDatabaseCount * 100;
+percentile =Math.round(percentile * 100) / 100;
 var GoalkeeperPoints = sessionStorage.getItem("GoalkeeperPoints");
 var GoalkeeperName = sessionStorage.getItem("GoalkeeperName");
 var CornerBackPoints = sessionStorage.getItem("Corner-BackPoints");
@@ -129,16 +132,43 @@ $(document).ready(function() {
     $('#team-name').text("" + sessionStorage.getItem("teamName"));
 
     loadChartData();
-    $('a').click(function() {
-
+     $('a').click(function() {
 
 
 
         if (sessionStorage.getItem("username") === null) {
             window.location = "../index.html";
-
         } else {
-            window.location = "" + this.id + ".html";
+
+            if(this.id === "gaa")
+            {
+            console.log("Navigating to External site");
+            }
+             else if(this.id === "rte")
+            {
+             console.log("Navigating to External site");
+            }
+
+               else  if(this.id === "fixtures")
+            {
+                     console.log("Navigating to External site");
+            }
+               else if(this.id === "records")
+            {
+                  console.log("Navigating to External site");   
+            }
+                 else if(this.id === "logo")
+            {
+                  console.log("Navigating to External site"); 
+
+            }
+
+
+            else
+            {
+                  window.location = "" + this.id + ".html";
+            }
+          
         }
 
     });

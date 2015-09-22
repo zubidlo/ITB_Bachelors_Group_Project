@@ -14,19 +14,46 @@ $(document).ready(function() {
     var user = sessionStorage.getItem("username");
     document.getElementById("welcome-banner").innerHTML = ("Welcome " + user);
     $('#time-panel').text("" + sessionStorage.getItem("loginTime"));
-    $('a').click(function() {
-
+      $('a').click(function() {
 
 
 
         if (sessionStorage.getItem("username") === null) {
-
+            window.location = "../index.html";
         } else {
-            window.location = "" + this.id + ".html";
+
+            if(this.id === "gaa")
+            {
+            console.log("Navigating to External site");
+            }
+             else if(this.id === "rte")
+            {
+             console.log("Navigating to External site");
+            }
+
+               else  if(this.id === "fixtures")
+            {
+                     console.log("Navigating to External site");
+            }
+               else if(this.id === "records")
+            {
+                  console.log("Navigating to External site");   
+            }
+                 else if(this.id === "logo")
+            {
+                  console.log("Navigating to External site"); 
+
+            }
+
+
+            else
+            {
+                  window.location = "" + this.id + ".html";
+            }
+          
         }
 
     });
-
 
 
 });

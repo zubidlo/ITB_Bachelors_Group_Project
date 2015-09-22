@@ -275,6 +275,12 @@ h5
 background: white;
 	 font-style: italic; 
 color:black;
+
+
+}
+.panel-top:hover
+{
+	border: 3px solid white; 
 }
 
 .white-background
@@ -425,10 +431,9 @@ opacity: 0.8;
 #side-options
 {
 	
-    background: white;
+
 background: #3366CC  ;
-  
- 
+
 }
 
 
@@ -444,23 +449,24 @@ background: #3366CC  ;
 
 }
 
-#standings, #transfers, #home, #user_profile,#my_team
+#standings, #transfers, #home, #user_profile,#my_team,#gaa,#fixtures,#records,#rte
 {
 
 color: white;
 
-}
-
-.side-links
-{
 
 }
 
-#standings:hover, #transfers:hover, #home:hover, #user_profile:hover,#my_team:hover
+#standings:hover, #transfers:hover, #home:hover, #user_profile:hover,#my_team:hover,#rte:hover,#records:hover,#gaa:hover,#fixtures:hover
 {
 
 background: #85A3E0;
 
+}
+
+#gaa:active
+{
+	color:blue;
 }
 
 #canvas-holder
@@ -533,3 +539,4 @@ footer ul.quicklinks {
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 40px;
 }
+
